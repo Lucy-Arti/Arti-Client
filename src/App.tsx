@@ -21,9 +21,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           클릭하면 숫자가 올라가용 {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <p>Lucy의 Arti 프로젝트 시작</p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
