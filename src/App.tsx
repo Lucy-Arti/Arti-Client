@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
 	const style = css`
-		color: green;
+		color: #ff8c00;
     font-size: 40px;
     text-align: center;
 	`;
