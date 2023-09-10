@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
-import './App.css';
+import './styles/commonStyle.css'
+import NavBar from './components/common/NavBar';
 
 function App() {
 	const style = css`
 		color: #ff8c00;
-    font-size: 40px;
+    font-size: 5rem;
     text-align: center;
 	`;
 	return (
 		<div className="App">
-			<div css={style}>arti-client</div>
+			<div css={style} className='headerLayout'>arti-client</div>
+			<NavBar/>
 		</div>
 	);
 }
