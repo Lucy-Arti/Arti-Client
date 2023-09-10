@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
 	const layout = css`
@@ -13,19 +14,25 @@ const NavBar = () => {
 		/* gap: 5%; */
 	`;
 	const wrapper = css`
-		background-color: aqua;
+		/* background-color: aqua; */
 		width: 90%;
         display: flex;
         align-items: center;
         justify-content: space-between;
 	`;
+	const handleClick = (page:string) => {
+		const navigate = useNavigate();
+		return () => {
+			navigate(page);
+		};
+	}
 	return (
 		<div css={layout}>
 			<div css={wrapper}>
-				<div>홈</div>
-				<div>투표</div>
-				<div>둘러보기</div>
-				<div>마이페이지</div>
+				<div onClick={handleClick('/')} >홈</div>
+				<div onClick={handleClick('/vote')}>투표</div>
+				<div onClick={handleClick('/productlist')}>둘러보기</div>
+				<div onClick={handleClick('/mypage')}>마이페이지</div>
 			</div>
 		</div>
 	);
