@@ -5,7 +5,7 @@ const NavBar = () => {
 	const layout = css`
 		width: 100%;
 		height: 40px;
-		font-size: 2rem;
+		font-size: 1.5rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -14,7 +14,7 @@ const NavBar = () => {
 	`;
 	const wrapper = css`
 		/* background-color: aqua; */
-		width: 90%;
+		width: 86%;
         display: flex;
         align-items: center;
         justify-content: space-between;

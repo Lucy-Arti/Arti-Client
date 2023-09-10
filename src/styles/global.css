@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 html {
     -webkit-text-size-adjust​: none;
     width: 100%;
@@ -12,6 +19,7 @@ html {
     display: flex;
     justify-content: center;
     background-color: black;
+    font-family: 'Pretendard-Regular';
 }
 
 html::-webkit-scrollbar {
@@ -30,10 +38,16 @@ body {
     user-select: none;
   }
 
+  @media (min-width:0px) {
+    html {
+      font-size: 8px;
+    }
+  }
+
 /* 타블렛) 화면 너비: 576 ~  */
   @media (min-width:576px) {
     html {
-      font-size: 8px;
+      font-size: 10px;
     }
     body {
         width: 576px;
@@ -43,9 +57,10 @@ body {
   /* 데스크톱) 화면 너비: 1024 ~ */
   @media (min-width: 1024px) {
     html {
-        font-size: 8px;
+        font-size: 10px;
       }
       body {
           width: 576px;
       }
   }
+
