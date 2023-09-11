@@ -1,7 +1,7 @@
-import '../styles/commonStyle.css';
-import NavBar from '../components/common/NavBar';
+import '@styles/commonStyle.css';
+import NavBar from '@common/NavBar';
 import { css } from '@emotion/react';
-import RankingSection from '../components/ranking/RankingSection';
+import RankingSection from '@ranking/RankingSection';
 
 const Voting = () => {
     const spaceBetween = css`
