@@ -13,7 +13,19 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    /* 절대경로 세팅 */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@pages/*": ["src/pages/*"],
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"],
+      "@constant/*": ["src/utils/constant/*"],
+      "@styles/*": ["src/styles/*"],
+      "@components/*": ["src/components/*"],
+      "@common/*": ["src/components/common/*"],
+      "@ranking/*": ["src/components/ranking/*"],
+    },
     "jsxImportSource": "@emotion/react",
 
     /* Linting */
