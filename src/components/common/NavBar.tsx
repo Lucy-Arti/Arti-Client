@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { TABS } from '../../utils/constant/index.ts';
+import { TABS } from '@constant/index.ts';
 
 const NavBar = () => {
 	const { pathname } = useLocation();

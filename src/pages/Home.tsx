@@ -1,5 +1,5 @@
-import '../styles/commonStyle.css';
-import NavBar from '../components/common/NavBar';
+import '@styles/commonStyle.css';
+import NavBar from '@common/NavBar';
 import { css } from '@emotion/react';
 
 const Home = () => {
