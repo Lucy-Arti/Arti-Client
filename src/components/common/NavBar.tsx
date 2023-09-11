@@ -1,37 +1,64 @@
 import { css } from '@emotion/react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { TABS } from '../../utils/constant/index.ts';
 
 const NavBar = () => {
+	const { pathname } = useLocation();
+	const [tab, setTab] = useState(TABS.HOME);
+
+	const tabLabels = [
+		{ label: '홈', route: '' },
+		{ label: '투표', route: 'vote' },
+		{ label: '둘러보기', route: 'productlist' },
+		{ label: '마이페이지', route: 'mypage' },
+	];
+
+	useEffect(() => {
+		if (pathname.includes('vote')) {
+			setTab(TABS.VOTE);
+		} else if (pathname.includes('productlist')) {
+			setTab(TABS.PRODUCT_LIST);
+		} else if (pathname.includes('mypage')) {
+			setTab(TABS.MY_PAGE);
+		}
+	}, [pathname]);
+
 	const layout = css`
 		width: 100%;
 		height: 40px;
-		font-size: 1.5rem;
+		font-size: 2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-        background-color: aliceblue;
-		/* gap: 5%; */
 	`;
+
 	const wrapper = css`
-		/* background-color: aqua; */
 		width: 86%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		color: #c6c6c6;
 	`;
-	const handleClick = (page:string) => {
+
+	const active = css`
+		color: #6bda01;
+	`;
+
+	const handleClick = (page: string) => {
 		const navigate = useNavigate();
 		return () => {
 			navigate(page);
 		};
-	}
+	};
 	return (
 		<div css={layout}>
 			<div css={wrapper}>
-				<div onClick={handleClick('/')} >홈</div>
-				<div onClick={handleClick('/vote')}>투표</div>
-				<div onClick={handleClick('/productlist')}>둘러보기</div>
-				<div onClick={handleClick('/mypage')}>마이페이지</div>
+				{tabLabels.map((tabs, index) => (
+					<div key={index} onClick={handleClick(`/${tabs.route}`)} css={tab === index ? active : ''}>
+						{tabs.label}
+					</div>
+				))}
 			</div>
 		</div>
 	);
