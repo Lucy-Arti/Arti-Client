@@ -29,6 +29,7 @@ const RankingSection = () => {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		margin-bottom: 4rem;
 	`;
 	const bannerSection = css`
 		width: 100%;
@@ -62,10 +63,9 @@ const RankingSection = () => {
 		font-size: 2rem;
 		font-weight: 600;
 		color: #c6c6c6;
-
 		align-items: center;
 		justify-content: center;
-		margin-top: 1rem;
+		margin-top: 2.5rem;
 	`;
 
 	const rankingBtn = css`
@@ -74,7 +74,7 @@ const RankingSection = () => {
 		font-size: 2rem;
 		justify-content: center;
 		padding: 1rem;
-		border-bottom: 1px solid #c6c6c6;;
+		border-bottom: 1px solid #c6c6c6;
 		text-align: center;
 	`;
 
@@ -103,7 +103,7 @@ const RankingSection = () => {
 					</div>
 				))}
 			</div>
-			{tab===RANKING_TABS.TOTAL ? <TotalRank/> : <TodayRank/>}
+			{tab === RANKING_TABS.TOTAL ? <TotalRank /> : <TodayRank />}
 		</div>
 	);
 };
