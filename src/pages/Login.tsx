@@ -1,9 +1,14 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import '@styles/commonStyle.css';
-import NavBar from '@/components/common/NavBar';
+// import NavBar from '@/components/common/NavBar';
 
-const Login: React.FC = () => {
+interface LoginProps {
+	// props 타입을 지정
+	content: string;
+}
+
+const Login: React.FC<LoginProps> = ({ content }) => {
 	const loginSection = css`
 		width: 100%;
 		height: 60vh;
@@ -38,8 +43,9 @@ const Login: React.FC = () => {
 					<img src="/img/search.svg" />
 				</div>
 			</div>
-			<NavBar />
+			{/* <NavBar /> */}
 			<div css={loginSection}>
+				<div>{content}</div>
 				<img src={'/img/voteBanner.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
