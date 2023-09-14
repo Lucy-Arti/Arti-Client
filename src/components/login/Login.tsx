@@ -2,7 +2,7 @@
 // import { css } from '@emotion/react';
 // import '@styles/commonStyle.css';
 // import NavBar from '@/components/common/NavBar';
-
+// 브랜치 삭제 확인용 주석
 // const Login: React.FC = () => {
 // 	const loginSection = css`
 // 		width: 100%;
