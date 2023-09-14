@@ -5,7 +5,8 @@ import Mypage from "@pages/Mypage";
 import Voting from "@pages/Voting";
 import { createBrowserRouter } from "react-router-dom";
 import TodayRank from "@ranking/TodayRank";
-
+import Login from '@pages/Login';
+        
 const router = createBrowserRouter([
     {
         path: "/",
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: "/mypage",
         element: <Mypage />,
     },
+    {
+		path: '/login',
+		element: <Login />,
+  },
 ])
 
 export default router;
