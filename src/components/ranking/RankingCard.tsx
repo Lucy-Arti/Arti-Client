@@ -38,9 +38,14 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 		font-size: 1.5rem;
 		font-weight: 500;
 		position: absolute;
-		top: 9%; /* Center the text vertically */
-		left: 30%; /* Center the text horizontally */
+		top: 4%;
 		z-index: 2;
+		width: 100%;
+		height: 25%;
+		display: flex;
+		justify-content: flex-start;
+		padding-left: 1.2rem;
+		align-items: center;
 	`;
 
 	const box = css`
