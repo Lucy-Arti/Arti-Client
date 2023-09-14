@@ -25,6 +25,7 @@
       "@components/*": ["src/components/*"],
       "@common/*": ["src/components/common/*"],
       "@ranking/*": ["src/components/ranking/*"],
+      "@login/*": ["src/components/login/*"],
     },
     "jsxImportSource": "@emotion/react",
 

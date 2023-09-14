@@ -27,6 +27,7 @@ export default defineConfig({
 			{ find: '@components', replacement: path.resolve(__dirname, 'src/components') },
 			{ find: '@common', replacement: path.resolve(__dirname, 'src/components/common') },
 			{ find: '@ranking', replacement: path.resolve(__dirname, 'src/components/ranking') },
+			{ find: '@login', replacement: path.resolve(__dirname, 'src/components/login') },
 		],
 	},
 });
