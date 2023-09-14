@@ -9,7 +9,7 @@ const NavBar = () => {
 
 	const tabLabels = [
 		{ label: '홈', route: '' },
-		{ label: '투표', route: 'vote' },
+		{ label: '투표', route: 'vote/total' },
 		{ label: '둘러보기', route: 'productlist' },
 		{ label: '마이페이지', route: 'mypage' },
 	];

@@ -1,8 +1,10 @@
-import Home from "./pages/Home";
-import List from "./pages/List";
-import Mypage from "./pages/Mypage";
-import Voting from "./pages/Voting";
+import TotalRank from "@ranking/TotalRank";
+import Home from "@pages/Home";
+import List from "@pages/List";
+import Mypage from "@pages/Mypage";
+import Voting from "@pages/Voting";
 import { createBrowserRouter } from "react-router-dom";
+import TodayRank from "@ranking/TodayRank";
 
 const router = createBrowserRouter([
     {
@@ -12,6 +14,16 @@ const router = createBrowserRouter([
     {
         path: "/vote",
         element: <Voting />,
+        children:[
+            {
+                path:"total",
+                element:<TotalRank/>
+            },
+            {
+                path:"today",
+                element:<TodayRank/>
+            },
+        ],
     },
     {
         path: "/productlist",
