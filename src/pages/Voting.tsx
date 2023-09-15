@@ -2,6 +2,7 @@ import '@styles/commonStyle.css';
 import NavBar from '@common/NavBar';
 import { css } from '@emotion/react';
 import RankingSection from '@ranking/RankingSection';
+import Footer from '@/components/common/Footer';
 
 const Voting = () => {
     const spaceBetween = css`
@@ -22,6 +23,7 @@ const Voting = () => {
             </div>
 			<NavBar />
 			<RankingSection/>
+			<Footer/>
 		</div>
 	);
 };
