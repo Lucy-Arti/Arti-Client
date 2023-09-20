@@ -1,9 +1,7 @@
 import { RANKING_TABS } from '@/utils/constant';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import TotalRank from './TotalRank';
-import TodayRank from './TodayRank';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 const RankingSection = () => {
 	const { pathname } = useLocation();
@@ -103,7 +101,7 @@ const RankingSection = () => {
 					</div>
 				))}
 			</div>
-			{tab === RANKING_TABS.TOTAL ? <TotalRank /> : <TodayRank />}
+			<Outlet/>
 		</div>
 	);
 };

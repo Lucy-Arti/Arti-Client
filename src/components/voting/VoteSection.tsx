@@ -3,18 +3,18 @@ import { css } from '@emotion/react';
 const VoteSection = () => {
 	const voteSection = css`
 		width: 90%;
-        min-height: 70vh;
+		min-height: 70vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 4rem;
-        margin-top: 5rem;
+		margin-top: 5rem;
 	`;
 	const bannerSection = css`
 		width: 90%;
-		height: 300px;
-		background-color: #D9D9D9;
+		height: 250px;
+		background-color: #d9d9d9;
 		border-radius: 5px;
 		margin-top: 5rem;
 		display: flex;
@@ -33,18 +33,29 @@ const VoteSection = () => {
 			-10px -10px 10px 0px rgba(174, 174, 192, 0.25) inset,
 			10px 10px 10px 0px rgba(255, 255, 255, 0.25) inset;
 		display: flex;
-        align-items: center;
-        justify-content: center;
+		align-items: center;
+		justify-content: center;
 		font-size: 2rem;
 		font-weight: 500;
-        margin-top: 5rem;
+		margin-top: 5rem;
+	`;
+
+	const shareBtn = css`
+		margin: 5rem 0 4rem 0;
 	`;
 
 	return (
 		<div css={voteSection}>
-			<div css={css`font-size:3rem;`}>투표 시작문구 시작문구</div>
+			<div
+				css={css`
+					font-size: 3rem;
+				`}
+			>
+				투표 시작문구 시작문구
+			</div>
 			<div css={bannerSection}>사진</div>
 			<div css={startBtn}>투표 시작하기</div>
+			<img src="/img/shareBtn.svg" css={shareBtn} />
 		</div>
 	);
 };

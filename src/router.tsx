@@ -30,6 +30,12 @@ const router = createBrowserRouter([
     {
         path: "/vote",
         element: <Voting />,
+        children:[
+            {
+                path:"total",
+                element:<TotalRank/>
+            },
+        ],
     },
     {
         path: "/productlist",
