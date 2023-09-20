@@ -10,8 +10,8 @@ const RankingSection = () => {
 	const [tab, setTab] = useState(RANKING_TABS.TOTAL);
 
 	const rankingLabels = [
-		{ label: '전체 랭킹', route: 'vote/total' },
-		{ label: '오늘의 랭킹', route: 'vote/today' },
+		{ label: '전체 랭킹', route: 'rank/total' },
+		{ label: '오늘의 랭킹', route: 'rank/today' },
 	];
 
 	useEffect(() => {
