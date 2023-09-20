@@ -22,9 +22,7 @@ const Login: React.FC<LoginProps> = ({ content }) => {
 		border-radius: 5px;
 		width: 75%;
 	`;
-	const spaceBetween = css`
-		justify-content: space-between;
-	`;
+
 	const Rest_API_key = '209c9251e18aa84300b9f4dc8047c6cd';
 	const Redirect_uri = 'http://localhost:3000/login';
 	const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_API_key}&redirect_uri=${Redirect_uri}&response_type=code`;
@@ -37,15 +35,15 @@ const Login: React.FC<LoginProps> = ({ content }) => {
 
 	return (
 		<>
-			<div className="headerLayout">
-				<div css={spaceBetween} className="headerComponent">
-					<img src="/img/blackLogo.svg" />
-					<img src="/img/search.svg" />
-				</div>
-			</div>
-			{/* <NavBar /> */}
 			<div css={loginSection}>
-				<div>{content}</div>
+				<div
+					css={css`
+						font-size: 2rem;
+						font-weight: 500;
+					`}
+				>
+					{content}
+				</div>
 				<img src={'/img/voteBanner.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>

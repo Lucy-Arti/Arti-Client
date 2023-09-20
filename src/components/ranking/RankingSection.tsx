@@ -94,7 +94,7 @@ const RankingSection = () => {
 		<div css={rankingSection}>
 			<div css={bannerSection}>
 				<img css={[bannerChild, bannerImg]} src="/img/voteBanner.png" />
-				<img css={[bannerChild, voteBtnImg]} src="/img/goVoteBtn.png" />
+				<img css={[bannerChild, voteBtnImg]} src="/img/goVoteBtn.png" onClick={handleClick(`/vote`)}/>
 			</div>
 			<div css={rankingBtnWrapper}>
 				{rankingLabels.map((tabs, index) => (
