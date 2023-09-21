@@ -6,6 +6,7 @@ import Voting from '@pages/Voting';
 import { createBrowserRouter } from 'react-router-dom';
 import TodayRank from '@ranking/TodayRank';
 import Login from '@pages/Login';
+import KakaoLogin from '@/components/login/KakaoLogin';
 
 const router = createBrowserRouter([
 	{
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
 	{
 		path: '/login',
 		element: <Login content={'로그인 창입니다!'} />,
+	},
+	{
+		path: '/kakaologin',
+		element: <KakaoLogin />,
 	},
 ]);
 

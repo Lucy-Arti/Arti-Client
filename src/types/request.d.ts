@@ -5,7 +5,3 @@ export interface RankingSample {
 	like: number;
 	mark: boolean;
 }
-
-export interface Content {
-	content: string;
-}
