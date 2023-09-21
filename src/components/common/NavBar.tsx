@@ -9,14 +9,14 @@ const NavBar = () => {
 
 	const tabLabels = [
 		{ label: '홈', route: '' },
-		{ label: '투표', route: 'vote/total' },
+		{ label: '투표', route: 'rank/total' },
 		{ label: '둘러보기', route: 'productlist' },
 		{ label: '마이페이지', route: 'mypage' },
 	];
 
 	useEffect(() => {
-		if (pathname.includes('vote')) {
-			setTab(TABS.VOTE);
+		if (pathname.includes('rank')) {
+			setTab(TABS.RANK);
 		} else if (pathname.includes('productlist')) {
 			setTab(TABS.PRODUCT_LIST);
 		} else if (pathname.includes('mypage')) {
