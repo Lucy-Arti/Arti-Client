@@ -1,7 +1,6 @@
 import '@styles/commonStyle.css';
 import { css } from '@emotion/react';
-import VoteSection from '@/components/voting/VoteSection';
-import {useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const Voting = () => {
 	const spaceBetween = css`
@@ -24,7 +23,16 @@ const Voting = () => {
 		<div css={flexColumn}>
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
-					<img src="/img/backBtn.svg" onClick={handleClick('/rank/total')}/>
+					<div
+						css={css`
+							width: 20px;
+							display: flex;
+							align-items: center;
+						`}
+						onClick={handleClick('/rank/total')}
+					>
+						<img src="/img/backBtn.svg" />
+					</div>
 					<div
 						css={css`
 							font-size: 2rem;
@@ -33,10 +41,15 @@ const Voting = () => {
 					>
 						투표하기
 					</div>
-					<div className="emptyDiv"></div>
+					<div
+						css={css`
+							width: 20px;
+						`}
+						className="emptyDiv"
+					></div>
 				</div>
 			</div>
-			<VoteSection />
+			<Outlet />
 		</div>
 	);
 };

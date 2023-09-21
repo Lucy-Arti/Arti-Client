@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
-const VoteSection = () => {
+const VoteMain = () => {
 	const voteSection = css`
 		width: 90%;
 		min-height: 70vh;
@@ -44,6 +45,13 @@ const VoteSection = () => {
 		margin: 5rem 0 4rem 0;
 	`;
 
+	const handleClick = (page: string) => {
+		const navigate = useNavigate();
+		return () => {
+			navigate(page);
+		};
+	};
+
 	return (
 		<div css={voteSection}>
 			<div
@@ -54,10 +62,12 @@ const VoteSection = () => {
 				투표 시작문구 시작문구
 			</div>
 			<div css={bannerSection}>사진</div>
-			<div css={startBtn}>투표 시작하기</div>
+			<div css={startBtn} onClick={handleClick('userVote')}>
+				투표 시작하기
+			</div>
 			<img src="/img/shareBtn.svg" css={shareBtn} />
 		</div>
 	);
 };
 
-export default VoteSection;
+export default VoteMain;

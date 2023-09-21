@@ -10,7 +10,7 @@ const landingSection = css`
 	margin-bottom: 4rem;
 `;
 const bannerSection = css`
-	width: 90%;
+	width: 100%;
 	height: 300px;
 	background-color: rgba(172, 253, 96, 0.7);
     border-radius: 5px;
