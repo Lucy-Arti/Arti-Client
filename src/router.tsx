@@ -9,6 +9,7 @@ import Login from '@pages/Login';
 import Ranking from "./pages/Ranking";
 import VoteMain from "./components/voting/VoteMain";
 import UserVoting from "./components/voting/UserVoting";
+import KakaoLogin from './components/login/KakaoLogin';
         
 const router = createBrowserRouter([
     {
