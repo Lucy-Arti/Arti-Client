@@ -98,9 +98,8 @@ const UserVoting = () => {
 
 			<div css={cardSection}>
 				{displays.map((item, index) => (
-					<DisplayCard key={index} data={item} index={index}/>
+					<DisplayCard key={index} data={item}/>
 				))}
-				{/* <DisplayCard data={displays[0]} index={1} /> */}
 			</div>
 			<button css={btn} onClick={handleProgressBar}>
 				진행

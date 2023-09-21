@@ -28,6 +28,7 @@ const Voting = () => {
 							width: 20px;
 							display: flex;
 							align-items: center;
+							cursor: pointer;
 						`}
 						onClick={handleClick('/rank/total')}
 					>

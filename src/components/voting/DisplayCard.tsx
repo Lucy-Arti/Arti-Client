@@ -1,7 +1,7 @@
 import { WorldcupSample } from '@/types/request';
 import { css } from '@emotion/react';
 
-const DisplayCard = ({ data, index }: { data: WorldcupSample; index: number }) => {
+const DisplayCard = ({ data}: { data: WorldcupSample; }) => {
 	const card = css`
 		width: 45%;
 		height: 350px;
@@ -22,6 +22,7 @@ const DisplayCard = ({ data, index }: { data: WorldcupSample; index: number }) =
         border-radius: 5px;
         &:hover{
             border: 3px solid #6BDA01;
+            background-color: #6BDA01;
         }
         @media (min-width:0px){
             height: 230px;
@@ -52,7 +53,7 @@ const DisplayCard = ({ data, index }: { data: WorldcupSample; index: number }) =
 			</div>
 			<div css={info}>
 				<div>{data.product}</div>
-				<img src="/img/voteSearch.svg" />
+				<img src="/img/voteSearch.svg" css={css`cursor: pointer;`}/>
 			</div>
 		</div>
 	);

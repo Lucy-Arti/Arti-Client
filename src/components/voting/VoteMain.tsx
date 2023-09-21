@@ -62,7 +62,7 @@ const VoteMain = () => {
 				투표 시작문구 시작문구
 			</div>
 			<div css={bannerSection}>사진</div>
-			<div css={startBtn} onClick={handleClick('userVote')}>
+			<div css={[startBtn,css`cursor: pointer;`]} onClick={handleClick('userVote')}>
 				투표 시작하기
 			</div>
 			<img src="/img/shareBtn.svg" css={shareBtn} />
