@@ -29,11 +29,23 @@ const List = () => {
 			display: none;
 		}
 	`
-
+	const spaceBetween = css`
+		justify-content: space-between;
+	`
+	const flexColumn = css`
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	`
 	return (
 		<>
+			<div css={flexColumn}>
 			<div className="headerLayout">
-				<div className="headerComponent">dd</div>
+				<div css={spaceBetween} className='headerComponent'>
+					<img src='/img/blackLogo.svg'/>
+					<img src='/img/search.svg'/>
+				</div>
+			</div>
 			</div>
 			<NavBar />
 			<div css={gridWrapper}>
