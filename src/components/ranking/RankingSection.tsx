@@ -1,17 +1,15 @@
 import { RANKING_TABS } from '@/utils/constant';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import TotalRank from './TotalRank';
-import TodayRank from './TodayRank';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 const RankingSection = () => {
 	const { pathname } = useLocation();
 	const [tab, setTab] = useState(RANKING_TABS.TOTAL);
 
 	const rankingLabels = [
-		{ label: '전체 랭킹', route: 'vote/total' },
-		{ label: '오늘의 랭킹', route: 'vote/today' },
+		{ label: '전체 랭킹', route: 'rank/total' },
+		{ label: '오늘의 랭킹', route: 'rank/today' },
 	];
 
 	useEffect(() => {
@@ -55,6 +53,7 @@ const RankingSection = () => {
 		right: 2.8rem;
 		border-radius: 50%;
 		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+		cursor: pointer;
 	`;
 
 	const rankingBtnWrapper = css`
@@ -94,7 +93,7 @@ const RankingSection = () => {
 		<div css={rankingSection}>
 			<div css={bannerSection}>
 				<img css={[bannerChild, bannerImg]} src="/img/voteBanner.png" />
-				<img css={[bannerChild, voteBtnImg]} src="/img/goVoteBtn.png" />
+				<img css={[bannerChild, voteBtnImg]} src="/img/goVoteBtn.png" onClick={handleClick(`/vote`)}/>
 			</div>
 			<div css={rankingBtnWrapper}>
 				{rankingLabels.map((tabs, index) => (
@@ -103,7 +102,7 @@ const RankingSection = () => {
 					</div>
 				))}
 			</div>
-			{tab === RANKING_TABS.TOTAL ? <TotalRank /> : <TodayRank />}
+			<Outlet/>
 		</div>
 	);
 };

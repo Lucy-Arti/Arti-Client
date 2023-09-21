@@ -6,6 +6,9 @@ import Voting from "@pages/Voting";
 import { createBrowserRouter } from "react-router-dom";
 import TodayRank from "@ranking/TodayRank";
 import Login from '@pages/Login';
+import Ranking from "./pages/Ranking";
+import VoteMain from "./components/voting/VoteMain";
+import UserVoting from "./components/voting/UserVoting";
         
 const router = createBrowserRouter([
     {
@@ -13,8 +16,8 @@ const router = createBrowserRouter([
         element: <Home />,
     },
     {
-        path: "/vote",
-        element: <Voting />,
+        path: "/rank",
+        element: <Ranking />,
         children:[
             {
                 path:"total",
@@ -23,6 +26,20 @@ const router = createBrowserRouter([
             {
                 path:"today",
                 element:<TodayRank/>
+            },
+        ],
+    },
+    {
+        path: "/vote",
+        element: <Voting />,
+        children:[
+            {
+                path:"",
+                element:<VoteMain/>
+            },
+            {
+                path:"userVote",
+                element:<UserVoting/>
             },
         ],
     },
