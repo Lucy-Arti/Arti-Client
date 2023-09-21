@@ -1,6 +1,6 @@
 export enum TABS {
     HOME,
-    VOTE,
+    RANK,
     PRODUCT_LIST,
     MY_PAGE,
 }
