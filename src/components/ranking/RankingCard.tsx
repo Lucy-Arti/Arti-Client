@@ -115,7 +115,7 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 				</div>
 				<div css={middle}>
 					<div css={row}>
-						<img src="/img/profileLogo.png" />
+						<img src="/img/profileLogo.svg" />
 						<div
 							css={css`
 								font-size: 1.5rem;

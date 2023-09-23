@@ -24,6 +24,7 @@ export default defineConfig({
 			{ find: '@utils', replacement: path.resolve(__dirname, 'src/utils') },
 			{ find: '@constant', replacement: path.resolve(__dirname, 'src/utils/constant') },
 			{ find: '@styles', replacement: path.resolve(__dirname, 'src/styles') },
+			{ find: '@types', replacement: path.resolve(__dirname, 'src/types') },
 			{ find: '@components', replacement: path.resolve(__dirname, 'src/components') },
 			{ find: '@common', replacement: path.resolve(__dirname, 'src/components/common') },
 			{ find: '@ranking', replacement: path.resolve(__dirname, 'src/components/ranking') },
