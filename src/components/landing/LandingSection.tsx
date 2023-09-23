@@ -25,6 +25,66 @@ const bannerSection = css`
 	justify-content: center;
 `;
 
+const square = css`
+	width: 100%;
+	height: 285px;
+	border-radius: 5px;
+	background-color: rgba(172, 253, 96, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	color: grey;
+`;
+
+const square2 = css`
+	width: 100%;
+	height: 285px;
+	border-radius: 5px;
+	background-color: rgba(189, 244, 137, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	color: grey;
+`;
+
+const square3 = css`
+	width: 100%;
+	height: 285px;
+	border-radius: 5px;
+	background-color: rgba(137, 243, 39, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	color: grey;
+`;
+
+const square4 = css`
+	width: 100%;
+	height: 285px;
+	border-radius: 5px;
+	background-color: rgba(188, 244, 135, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	color: grey;
+`;
+
+const square5 = css`
+	width: 100%;
+	height: 285px;
+	border-radius: 5px;
+	background-color: rgba(117, 237, 4, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	color: grey;
+`;
+
 const LandingSection = () => {
 	return (
 		<div css={landingSection}>
@@ -43,9 +103,21 @@ const LandingSection = () => {
 					className="mySwiper"
 				>
 					<SwiperSlide>
-						<img src="/img/voteBanner.png" alt="landing" />
+						<div css={square}>Landing Banner</div>
 					</SwiperSlide>
 					<SwiperSlide>
+						<div css={square2}>Landing Banner2</div>
+					</SwiperSlide>
+					<SwiperSlide>
+						<div css={square3}>Landing Banner3</div>
+					</SwiperSlide>
+					<SwiperSlide>
+						<div css={square4}>Landing Banner4</div>
+					</SwiperSlide>
+					<SwiperSlide>
+						<div css={square5}>Landing Banner5</div>
+					</SwiperSlide>
+					{/* <SwiperSlide>
 						<img src="/img/voteBanner.png" alt="landing2" />
 					</SwiperSlide>
 					<SwiperSlide>
@@ -59,7 +131,7 @@ const LandingSection = () => {
 					</SwiperSlide>
 					<SwiperSlide>
 						<img src="/img/voteBanner.png" alt="landing6" />
-					</SwiperSlide>
+					</SwiperSlide> */}
 				</Swiper>
 			</div>
 		</div>
