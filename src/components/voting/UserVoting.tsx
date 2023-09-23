@@ -17,6 +17,7 @@ const UserVoting = () => {
 	const [roundList, setRoundList] = useState<WorldcupSample[]>(worldcupList);
 	const [displays, setDisplays] = useState<WorldcupSample[]>([roundList[0], roundList[1]]);
 	const [selectedItems, setSelectedItems] = useState<WorldcupSample[]>([]);
+	const [isCardClickable, setIsCardClickable] = useState(true);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -40,16 +41,25 @@ const UserVoting = () => {
 	}, [selectedItems]);
 
 	const handleCardClick = (item: WorldcupSample) => {
+		if (!isCardClickable) {
+			return; // 선택 불가능한 상태라면 클릭 무시
+		}
+		setIsCardClickable(false);
 		if (progress === 2) {
 			const encodedData = encodeURIComponent(item.product);
-			navigate(`../userPick?p=${encodedData}&id=${item.id}`);
+			setTimeout(() => {
+				navigate(`../userPick?p=${encodedData}&id=${item.id}`);
+			}, 500);
 		} else {
 			setRound((prevRound) => ({
 				...prevRound,
 				count: prevRound.count + 1,
 			}));
 		}
-		setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
+		setTimeout(() => {
+			setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
+			setIsCardClickable(true);
+		}, 500);
 		setRoundList((prevRoundList) => prevRoundList.slice(2));
 	};
 

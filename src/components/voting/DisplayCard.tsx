@@ -12,9 +12,20 @@ const DisplayCard = ({
 	handleCardClick: (item: WorldcupSample) => void;
 }) => {
 	const [isZoomed, setIsZoomed] = useState(false);
+	const [isClicked, setIsClicked] = useState(false);
 
 	const handleZoom = () => {
 		setIsZoomed((prevIsZoomed) => !prevIsZoomed);
+	};
+
+	const handleCardClickInternal = () => {
+		setIsClicked(true);
+
+		setTimeout(() => {
+			setIsClicked(false);
+		}, 500);
+
+		handleCardClick(data);
 	};
 
 	const card = css`
@@ -35,10 +46,18 @@ const DisplayCard = ({
 		object-fit: cover;
 		overflow: hidden;
 		border-radius: 5px;
-		&:hover {
-			border: 3px solid #6bda01;
-			background-color: #6bda01;
+		border: ${isClicked ? '3px solid #6bda01' : 'none'};
+		background-color: ${isClicked ? '3px solid #6bda01' : 'none'};
+		transition:
+			border 0.1s ease-in-out,
+			background-color 0.1s ease-in-out;
+		@media (hover: hover) {
+			&:hover {
+				border: 3px solid #6bda01;
+				background-color: #6bda01;
+			}
 		}
+
 		@media (min-width: 0px) {
 			height: 230px;
 		}
@@ -64,7 +83,7 @@ const DisplayCard = ({
 	`;
 	return (
 		<div css={card}>
-			<div css={contentSection} onClick={() => handleCardClick(data)}>
+			<div css={contentSection} onClick={handleCardClickInternal}>
 				<img css={productimg} src={data.src} />
 			</div>
 			<div css={info}>
