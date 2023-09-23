@@ -17,7 +17,7 @@ const landingSection = css`
 `;
 const bannerSection = css`
 	width: 100%;
-	height: 400px;
+	height: fit-content;
 	border-radius: 5px;
 	margin-top: 3rem;
 	display: flex;
