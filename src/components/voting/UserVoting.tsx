@@ -33,7 +33,7 @@ const UserVoting = () => {
 				setProgress(progress + 1);
 				setRound((prevRound) => ({
 					...prevRound,
-					count: 1,
+					count: 0,
 					currentRound: prevRound.currentRound / 2,
 				}));
 			}
