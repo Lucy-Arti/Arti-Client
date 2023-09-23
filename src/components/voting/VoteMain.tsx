@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+import { BiShareAlt } from 'react-icons/bi';
 
 const VoteMain = () => {
 	const voteSection = css`
@@ -10,14 +11,14 @@ const VoteMain = () => {
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 4rem;
-		margin-top: 5rem;
+		margin-top: 40px;
 	`;
 	const bannerSection = css`
 		width: 90%;
 		height: 250px;
 		background-color: #d9d9d9;
 		border-radius: 5px;
-		margin-top: 5rem;
+		margin-top: 40px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -27,22 +28,33 @@ const VoteMain = () => {
 		width: 90%;
 		height: 5.25rem;
 		border-radius: 5px;
-		background: linear-gradient(180deg, rgba(134, 230, 45, 0.56) 0%, rgba(107, 218, 1, 0.8) 100%), #fff;
-		box-shadow:
-			-10px -10px 30px 0px rgba(255, 255, 255, 0.25),
-			5px 5px 10px 0px rgba(170, 238, 170, 0.4),
-			-10px -10px 10px 0px rgba(174, 174, 192, 0.25) inset,
-			10px 10px 10px 0px rgba(255, 255, 255, 0.25) inset;
+		background: linear-gradient(0deg, rgba(122, 210, 42, 0.8) 0%, rgba(122, 210, 42, 0.8) 100%), #fff;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 2rem;
 		font-weight: 500;
-		margin-top: 5rem;
+		margin-top: 30px;
+	`;
+
+	const shareSection = css`
+		font-size: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-top: 50px;
+		gap: 10px;
 	`;
 
 	const shareBtn = css`
-		margin: 5rem 0 4rem 0;
+		width: 37px;
+		height: 37px;
+		border-radius: 18.5px;
+		background: linear-gradient(0deg, #e7e7e7 0%, #e7e7e7 100%), #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	`;
 
 	const handleClick = (page: string) => {
@@ -62,10 +74,23 @@ const VoteMain = () => {
 				투표 시작문구 시작문구
 			</div>
 			<div css={bannerSection}>사진</div>
-			<div css={[startBtn,css`cursor: pointer;`]} onClick={handleClick('userVote')}>
+			<div
+				css={[
+					startBtn,
+					css`
+						cursor: pointer;
+					`,
+				]}
+				onClick={handleClick('userVote')}
+			>
 				투표 시작하기
 			</div>
-			<img src="/img/shareBtn.svg" css={shareBtn} />
+			<div css={shareSection}>
+				<div>친구에게 공유하기</div>
+				<div css={shareBtn}>
+					<BiShareAlt size="22px" />
+				</div>
+			</div>
 		</div>
 	);
 };

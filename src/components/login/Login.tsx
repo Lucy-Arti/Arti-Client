@@ -29,10 +29,6 @@ const Login = ({ content }: { content: string }) => {
 	const handleLogin = () => {
 		window.location.href = kakaoURL;
 	};
-
-	const code = new URL(window.location.href).searchParams.get('code');
-	console.log(code);
-
 	return (
 		<>
 			<div css={loginSection}>

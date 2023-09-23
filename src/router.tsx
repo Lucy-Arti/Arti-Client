@@ -10,6 +10,7 @@ import Ranking from "./pages/Ranking";
 import VoteMain from "./components/voting/VoteMain";
 import UserVoting from "./components/voting/UserVoting";
 import KakaoLogin from './components/login/KakaoLogin';
+import FinalPick from './components/voting/FinalPick';
         
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path:"userVote",
                 element:<UserVoting/>
+            },
+            {
+                path:"userPick",
+                element:<FinalPick/>
             },
         ],
     },

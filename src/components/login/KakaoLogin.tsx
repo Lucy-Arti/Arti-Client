@@ -1,9 +1,13 @@
 // import { kakaoLogin } from '@/apis/login';
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
-import { body, postCode } from '@/apis/login';
+import { body } from '@/apis/login';
+import { isLoginAtom } from '@/utils/state';
+import { useRecoilState } from 'recoil';
 
 const KakaoLogin = () => {
+	const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
+
 	const container = css`
 		height: 98vh;
 		display: flex;
@@ -17,8 +21,11 @@ const KakaoLogin = () => {
 	`;
 
 	useEffect(() => {
-		postCode(body);
-		// window.location.href = '/mypage';
+		// window.location.href = '/';
+		console.log(body);
+		// postCode(body);
+		setIsLogin(true);
+		console.log(isLogin);
 	}, []);
 
 	return (
