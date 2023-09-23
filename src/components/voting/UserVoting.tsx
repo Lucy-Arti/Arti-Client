@@ -13,7 +13,7 @@ const progressProps = [
 
 const UserVoting = () => {
 	const [progress, setProgress] = useState(0);
-	const [round, setRound] = useState({ count: 1, currentRound: 4 });
+	const [round, setRound] = useState({ count: 0, currentRound: 4 });
 	const [roundList, setRoundList] = useState<WorldcupSample[]>(worldcupList);
 	const [displays, setDisplays] = useState<WorldcupSample[]>([roundList[0], roundList[1]]);
 	const [selectedItems, setSelectedItems] = useState<WorldcupSample[]>([]);
