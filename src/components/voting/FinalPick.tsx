@@ -75,7 +75,7 @@ const FinalPick = () => {
 	`;
 	const card = css`
 		position: relative;
-		width: 90%;
+		width: 85%;
 		object-fit: contain;
 		overflow: hidden;
 		display: flex;
@@ -134,7 +134,7 @@ const FinalPick = () => {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 90%;
+		width: 85%;
 	`;
 	const btn1 = css`
 		color: white;
