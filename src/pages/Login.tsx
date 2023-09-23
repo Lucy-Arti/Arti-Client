@@ -1,3 +1,4 @@
+// import React from 'react';
 import { kakaoURL } from '@/components/login/loginInfo';
 import { css } from '@emotion/react';
 import '@styles/commonStyle.css';
@@ -25,26 +26,14 @@ const Login = ({ content }: { content: string }) => {
 		width: 75%;
 	`;
 
-
-
 	const handleLogin = () => {
 		window.location.href = kakaoURL;
 	};
 
-	const code = new URL(window.location.href).searchParams.get('code');
-	console.log(code);
-
 	return (
 		<>
 			<div css={loginSection}>
-
 				<div css={contentCss}>{content}</div>
-
-				<div
-				>
-					{content}
-				</div>
-
 				<img src={'/img/voteBanner.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
