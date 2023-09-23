@@ -2,8 +2,15 @@ import { WorldcupSample } from '@/types/request';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import ZoomImg from './ZoomImg';
+import { IoSearchOutline } from 'react-icons/io5';
 
-const DisplayCard = ({ data }: { data: WorldcupSample }) => {
+const DisplayCard = ({
+	data,
+	handleCardClick,
+}: {
+	data: WorldcupSample;
+	handleCardClick: (item: WorldcupSample) => void;
+}) => {
 	const [isZoomed, setIsZoomed] = useState(false);
 
 	const handleZoom = () => {
@@ -57,17 +64,16 @@ const DisplayCard = ({ data }: { data: WorldcupSample }) => {
 	`;
 	return (
 		<div css={card}>
-			<div css={contentSection}>
+			<div css={contentSection} onClick={() => handleCardClick(data)}>
 				<img css={productimg} src={data.src} />
 			</div>
 			<div css={info}>
 				<div>{data.product}</div>
-				<img
-					src="/img/voteSearch.svg"
+				<IoSearchOutline
+					onClick={handleZoom}
 					css={css`
 						cursor: pointer;
 					`}
-					onClick={handleZoom}
 				/>
 			</div>
 			{isZoomed ? <ZoomImg image={data.src} setIsZoomed={setIsZoomed} /> : ''}

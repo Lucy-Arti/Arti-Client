@@ -3,7 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 interface ZoomImgProps {
 	image: string;
-	setIsZoomed: (b:boolean) => void;
+	setIsZoomed: (b: boolean) => void;
 }
 
 const ZoomImg = ({ image, setIsZoomed }: ZoomImgProps) => {
@@ -16,7 +16,7 @@ const ZoomImg = ({ image, setIsZoomed }: ZoomImgProps) => {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-        width: 100%;
+		width: 100%;
 		top: 0;
 		right: 50%;
 		bottom: 0;
@@ -39,7 +39,7 @@ const ZoomImg = ({ image, setIsZoomed }: ZoomImgProps) => {
 		height: fit-content;
 		object-fit: cover;
 		overflow: hidden;
-        @media (min-width: 576px) {
+		@media (min-width: 576px) {
 			width: 60%;
 		}
 	`;
@@ -59,14 +59,7 @@ const ZoomImg = ({ image, setIsZoomed }: ZoomImgProps) => {
 		<div css={zoomSection}>
 			<div css={imgSection}>
 				<div css={closedBtn}>
-					<AiOutlineClose
-						color="white"
-						size="2.5rem"
-						onClick={handleClose}
-						css={css`
-							cursor: pointer;
-						`}
-					/>
+					<AiOutlineClose color="white" size="2.8rem" onClick={handleClose} cursor="pointer" />
 				</div>
 				<img src={image} css={imgcss} />
 			</div>
