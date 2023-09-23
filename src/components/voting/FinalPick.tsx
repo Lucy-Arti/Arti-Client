@@ -143,6 +143,7 @@ const FinalPick = () => {
 		width: 45%;
 		text-align: center;
 		border-radius: 5px;
+		cursor: pointer;
 		background: linear-gradient(0deg, rgba(53, 53, 53, 0.8) 0%, rgba(53, 53, 53, 0.8) 100%), #fff;
 	`;
 	const btn2 = css`
@@ -152,6 +153,7 @@ const FinalPick = () => {
 		width: 45%;
 		text-align: center;
 		border-radius: 5px;
+		cursor: pointer;
 		background: white;
 	`;
 	return (
