@@ -25,7 +25,7 @@ const Home = () => {
 			</div>
 			<NavBar />
 			<LandingSection />
-            <Footer/>
+			<Footer />
 		</div>
 	);
 };

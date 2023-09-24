@@ -14,6 +14,7 @@ const landingSection = css`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 4rem;
+	overflow-y: hidden;
 `;
 const bannerSection = css`
 	width: 100%;
@@ -23,6 +24,7 @@ const bannerSection = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
 `;
 
 const square = css`
