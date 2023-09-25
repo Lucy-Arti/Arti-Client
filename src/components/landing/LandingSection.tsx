@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 import './landing.css';
-import { EffectCube, Pagination } from 'swiper/modules';
+import { EffectCube, Pagination, Autoplay } from 'swiper/modules';
 
 const landingSection = css`
 	width: 100%;
@@ -101,8 +101,9 @@ const LandingSection = () => {
 						shadowScale: 0,
 					}}
 					pagination={true}
-					modules={[EffectCube, Pagination]}
+					modules={[EffectCube, Pagination, Autoplay]}
 					className="mySwiper"
+					autoplay={{ delay: 2000, disableOnInteraction: false }}
 				>
 					<SwiperSlide>
 						<div css={square}>Landing Banner</div>
