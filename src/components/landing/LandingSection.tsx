@@ -103,7 +103,7 @@ const LandingSection = () => {
 					pagination={true}
 					modules={[EffectCube, Pagination, Autoplay]}
 					className="mySwiper"
-					autoplay={{ delay: 2000, disableOnInteraction: false }}
+					autoplay={{ delay: 2500, disableOnInteraction: false }}
 				>
 					<SwiperSlide>
 						<div css={square}>Landing Banner</div>
