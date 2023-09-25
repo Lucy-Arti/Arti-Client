@@ -1,7 +1,6 @@
 // import { kakaoLogin } from '@/apis/login';
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
-import { body } from '@/apis/login';
 import { isLoginAtom } from '@/utils/state';
 import { useRecoilState } from 'recoil';
 
@@ -22,7 +21,7 @@ const KakaoLogin = () => {
 
 	useEffect(() => {
 		// window.location.href = '/';
-		console.log(body);
+		// console.log(body);
 		// postCode(body);
 		setIsLogin(true);
 		console.log(isLogin);
