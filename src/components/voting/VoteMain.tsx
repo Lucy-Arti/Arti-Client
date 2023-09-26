@@ -64,7 +64,7 @@ const VoteMain = () => {
 		<div css={voteSection}>
 			<div
 				css={css`
-					font-size: 3rem;
+					font-size: 24px;
 				`}
 			>
 				투표 시작문구 시작문구

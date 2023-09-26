@@ -8,10 +8,17 @@ const ShareButton = ({ shareData }: { shareData: ShareData }) => {
 	const handleShareClick = React.useCallback(async () => {
 		try {
 			if (navigator.share) {
+                const imageUrl = 'https://lucy-arti.netlify.app/img/desktopBanner1.png';
+
+                // 이미지를 fetch하여 Blob 객체로 변환
+                const imageResponse = await fetch(imageUrl);
+                const imageBlob = await imageResponse.blob();
+
 				await navigator.share({
 					title: shareData.title,
 					text: shareData.text,
 					url: location.href,
+                    files: [new File([imageBlob], 'image.png', { type: 'image.png' })], 
 				});
 			} else {
 				await navigator.clipboard.writeText(link);
