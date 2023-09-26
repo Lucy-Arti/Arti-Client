@@ -33,7 +33,7 @@ const Login = ({ content }: { content: string }) => {
 		<>
 			<div css={loginSection}>
 				<div css={contentCss}>{content}</div>
-				<img src={'/img/voteBanner.png'}></img>
+				{/* <img src={'/img/voteBanner.png'}></img> */}
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
 		</>
