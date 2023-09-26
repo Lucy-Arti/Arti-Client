@@ -47,12 +47,6 @@ const VoteMain = () => {
 		gap: 10px;
 	`;
 
-	const shareData = {
-		title: 'ARTI 아티',
-		text: '투표를 통해 세상에 숨겨져 있던 유니크한 옷들을 만나보세요',
-		url: 'https://lucy-arti.netlify.app/vote',
-	};
-
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
 		return () => {
@@ -83,7 +77,7 @@ const VoteMain = () => {
 			</div>
 			<div css={shareSection}>
 				<div>친구에게 공유하기</div>
-				<ShareButton shareData={shareData} />
+				<ShareButton/>
 			</div>
 		</div>
 	);
