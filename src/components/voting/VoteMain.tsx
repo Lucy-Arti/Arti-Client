@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
-import { BiShareAlt } from 'react-icons/bi';
+import ShareButton from '../common/ShareButton';
 
 const VoteMain = () => {
 	const voteSection = css`
@@ -47,29 +47,10 @@ const VoteMain = () => {
 		gap: 10px;
 	`;
 
-	const shareBtn = css`
-		width: 37px;
-		height: 37px;
-		border-radius: 18.5px;
-		background: linear-gradient(0deg, #e7e7e7 0%, #e7e7e7 100%), #fff;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-	`;
-
 	const shareData = {
 		title: 'ARTI 아티',
 		text: '투표를 통해 세상에 숨겨져 있던 유니크한 옷들을 만나보세요',
 		url: 'https://lucy-arti.netlify.app/vote',
-	};
-
-	const handleShare = async () => {
-		try {
-			await navigator.share(shareData);
-		} catch (err) {
-			alert('지원하지 않는 브라우저입니다.');
-		}
 	};
 
 	const handleClick = (page: string) => {
@@ -102,9 +83,7 @@ const VoteMain = () => {
 			</div>
 			<div css={shareSection}>
 				<div>친구에게 공유하기</div>
-				<div css={shareBtn} onClick={handleShare}>
-					<BiShareAlt size="22px" />
-				</div>
+				<ShareButton shareData={shareData} />
 			</div>
 		</div>
 	);

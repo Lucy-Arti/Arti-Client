@@ -13,6 +13,11 @@ export interface WorldcupSample {
 	src: string;
 }
 
+export interface ShareData {
+	title: string,
+	text: string,
+}
+
 export const worldcupList = [
 	{
 		id: 1,
