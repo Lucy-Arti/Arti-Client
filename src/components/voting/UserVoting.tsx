@@ -46,9 +46,14 @@ const UserVoting = () => {
 		}
 		setIsCardClickable(false);
 		if (progress === 2) {
+			setRound((prevRound) => ({
+				...prevRound,
+				count: prevRound.count + 1,
+			}));
 			const encodedData = encodeURIComponent(item.product);
 			setTimeout(() => {
 				navigate(`../userPick?p=${encodedData}&id=${item.id}`);
+				window.location.reload();
 			}, 500);
 		} else {
 			setRound((prevRound) => ({
