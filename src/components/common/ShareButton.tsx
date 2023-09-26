@@ -10,7 +10,7 @@ const ShareButton = ({ shareData }: { shareData: ShareData }) => {
 			if (navigator.share) {
 				await navigator.share({
 					title: shareData.title,
-                    text: shareData.text,
+					text: shareData.text,
 					url: location.href,
 				});
 			} else {
@@ -18,8 +18,15 @@ const ShareButton = ({ shareData }: { shareData: ShareData }) => {
 				alert('링크가 복사되었습니다.');
 			}
 		} catch (e) {
-			console.log(e);
-			alert('공유 중 오류가 발생했습니다. 다시 시도해주세요!');
+			if (typeof e === 'object' && e instanceof Error) {
+				if (e.name === 'AbortError') {
+					// AbortError는 사용자가 공유 창을 닫은 경우에 발생합니다.
+					console.log('사용자가 공유 창을 닫았습니다.');
+				}
+			} else {
+				// 다른 오류 처리
+				alert('지원하지 않는 브라우저입니다.');
+			}
 		}
 	}, []);
 
