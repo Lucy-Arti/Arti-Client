@@ -5,6 +5,8 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 import './landing.css';
 import { EffectCube, Pagination, Autoplay } from 'swiper/modules';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const landingSection = css`
 	width: 100%;
@@ -20,7 +22,6 @@ const bannerSection = css`
 	width: 100%;
 	height: 80%;
 	border-radius: 5px;
-	margin-top: 3rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -28,6 +29,27 @@ const bannerSection = css`
 `;
 
 const LandingSection = () => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	const handleClick = (page: string) => {
+		const navigate = useNavigate();
+		return () => {
+			navigate(page);
+		};
+	};
+
+	// 화면 너비 576px 이상이면 데스크탑 이미지 사용
+	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : '/img/mobileBanner';
 	return (
 		<div css={landingSection}>
 			<div css={bannerSection}>
@@ -46,18 +68,20 @@ const LandingSection = () => {
 					autoplay={{ delay: 2500, disableOnInteraction: false }}
 				>
 					<SwiperSlide>
-						<img src="/img/banner1.png" alt="landing2" />
+						<img src={selectedImage + '1.png'} alt="landing1" />
 					</SwiperSlide>
 					<SwiperSlide>
-						<img src="/img/banner2.png" alt="landing3" />
+						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)}/>
 					</SwiperSlide>
 					<SwiperSlide>
-						<img src="/img/banner3.png" alt="landing4" />
+						<img src={selectedImage + '3.png'} alt="landing3" />
 					</SwiperSlide>
 					<SwiperSlide>
-						<img src="/img/banner4.png" alt="landing5" />
+						<img src={selectedImage + '4.png'} alt="landing4" />
 					</SwiperSlide>
 				</Swiper>
+				<div className="custom-pagination-container">
+      </div>
 			</div>
 		</div>
 	);
