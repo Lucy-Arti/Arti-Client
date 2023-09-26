@@ -20,7 +20,6 @@ const landingSection = css`
 `;
 const bannerSection = css`
 	width: 100%;
-	height: 80%;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
@@ -71,7 +70,7 @@ const LandingSection = () => {
 						<img src={selectedImage + '1.png'} alt="landing1" />
 					</SwiperSlide>
 					<SwiperSlide>
-						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)}/>
+						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} />
 					</SwiperSlide>
 					<SwiperSlide>
 						<img src={selectedImage + '3.png'} alt="landing3" />
@@ -80,8 +79,6 @@ const LandingSection = () => {
 						<img src={selectedImage + '4.png'} alt="landing4" />
 					</SwiperSlide>
 				</Swiper>
-				<div className="custom-pagination-container">
-      </div>
 			</div>
 		</div>
 	);

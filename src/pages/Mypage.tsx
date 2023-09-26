@@ -1,12 +1,11 @@
 import '@styles/commonStyle.css';
 import NavBar from '@common/NavBar';
+import Header from '@/components/common/Header';
 
 const Mypage = () => {
 	return (
 		<>
-			<div className="headerLayout">
-				<div className="headerComponent">dd</div>
-			</div>
+			<Header where='main'/>
 			<NavBar />
 			<div>Mypage</div>
 		</>

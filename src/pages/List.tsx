@@ -2,6 +2,7 @@ import '@styles/commonStyle.css';
 import NavBar from '@common/NavBar';
 import { css } from '@emotion/react';
 import ListCard, { CardBoxType } from '@/components/list/ListCard';
+import Header from '@/components/common/Header';
 
 const List = () => {
 	const ProductList = [
@@ -29,9 +30,6 @@ const List = () => {
 			display: none;
 		}
 	`
-	const spaceBetween = css`
-		justify-content: space-between;
-	`
 	const flexColumn = css`
 		display: flex;
 		flex-direction: column;
@@ -40,12 +38,7 @@ const List = () => {
 	return (
 		<>
 			<div css={flexColumn}>
-			<div className="headerLayout">
-				<div css={spaceBetween} className='headerComponent'>
-					<img src='/img/blackLogo.svg'/>
-					<img src='/img/search.svg'/>
-				</div>
-			</div>
+				<Header where='main'/>
 			</div>
 			<NavBar />
 			<div css={gridWrapper}>
