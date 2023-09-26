@@ -1,13 +1,10 @@
-import '@styles/commonStyle.css';
 import NavBar from '@common/NavBar';
 import { css } from '@emotion/react';
 import RankingSection from '@ranking/RankingSection';
 import Footer from '@/components/common/Footer';
+import Header from '@/components/common/Header';
 
 const Ranking = () => {
-    const spaceBetween = css`
-        justify-content: space-between;
-    `
 	const flexColumn = css`
 		display: flex;
 		flex-direction: column;
@@ -15,12 +12,7 @@ const Ranking = () => {
 	`
 	return (
 		<div css={flexColumn}>
-			<div className="headerLayout">
-                <div css={spaceBetween} className='headerComponent'>
-                    <img src='/img/blackLogo.svg'/>
-                    <img src='/img/search.svg'/>
-                </div>
-            </div>
+			<Header where='main'/>
 			<NavBar />
 			<RankingSection/>
 			<Footer/>
