@@ -30,11 +30,13 @@ const RankingSection = () => {
 		margin-bottom: 4rem;
 	`;
 	const bannerSection = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 		width: 100%;
 		aspect-ratio: 1 / 0.64;
 		margin-top: 2rem;
 		position: relative;
-		background-color: aliceblue;
 		overflow: -moz-hidden-unscrollable;
 	`;
 
@@ -45,15 +47,23 @@ const RankingSection = () => {
 	const bannerImg = css`
 		width: 100%;
 	`;
-	const voteBtnImg = css`
-		width: 35%;
+	const voteBtn = css`
 		z-index: 1;
-		margin-top: 40px;
-		bottom: 2.8rem;
-		right: 2.8rem;
-		border-radius: 50%;
-		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+		width: fit-content;
+		border-radius: 30px;
+		background: #555;
+		color: white;
+		text-align: center;
 		cursor: pointer;
+		font-size: 2rem;
+		padding: 10px 20px;
+		margin-top: 25px;
+	`;
+
+	const text1 = css`
+		font-size: 3.3rem;
+		font-weight: 600;
+		margin-top: 20px;
 	`;
 
 	const rankingBtnWrapper = css`
@@ -82,6 +92,15 @@ const RankingSection = () => {
 		border-bottom: 1px solid black;
 	`;
 
+	const textSection = css`
+		width: 88%;
+		height: 80%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+	`;
+
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
 		return () => {
@@ -93,7 +112,20 @@ const RankingSection = () => {
 		<div css={rankingSection}>
 			<div css={bannerSection}>
 				<img css={[bannerChild, bannerImg]} src="/img/voteBanner.png" />
-				<img css={[bannerChild, voteBtnImg]} src="/img/goVoteBtn.png" onClick={handleClick(`/vote`)}/>
+				<div css={[bannerChild, textSection]}>
+					<div>
+						<div css={[text1]}>
+							투표를 통해
+							<br />
+							특별한 옷들을 만나다
+						</div>
+						<div css={[voteBtn]} onClick={handleClick(`/vote`)}>
+							투표하러 가기
+						</div>
+					</div>
+
+					<div>1차 투표 기간 : 00.00 ~ 00.00</div>
+				</div>
 			</div>
 			<div css={rankingBtnWrapper}>
 				{rankingLabels.map((tabs, index) => (
@@ -102,7 +134,7 @@ const RankingSection = () => {
 					</div>
 				))}
 			</div>
-			<Outlet/>
+			<Outlet />
 		</div>
 	);
 };

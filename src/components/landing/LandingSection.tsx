@@ -5,6 +5,8 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 import './landing.css';
 import { EffectCube, Pagination, Autoplay } from 'swiper/modules';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const landingSection = css`
 	width: 100%;
@@ -18,76 +20,36 @@ const landingSection = css`
 `;
 const bannerSection = css`
 	width: 100%;
-	height: fit-content;
+	height: 80%;
 	border-radius: 5px;
-	margin-top: 3rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
 `;
 
-const square = css`
-	width: 100%;
-	height: 285px;
-	border-radius: 5px;
-	background-color: rgba(172, 253, 96, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 25px;
-	color: grey;
-`;
-
-const square2 = css`
-	width: 100%;
-	height: 285px;
-	border-radius: 5px;
-	background-color: rgba(189, 244, 137, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 25px;
-	color: grey;
-`;
-
-const square3 = css`
-	width: 100%;
-	height: 285px;
-	border-radius: 5px;
-	background-color: rgba(137, 243, 39, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 25px;
-	color: grey;
-`;
-
-const square4 = css`
-	width: 100%;
-	height: 285px;
-	border-radius: 5px;
-	background-color: rgba(188, 244, 135, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 25px;
-	color: grey;
-`;
-
-const square5 = css`
-	width: 100%;
-	height: 285px;
-	border-radius: 5px;
-	background-color: rgba(117, 237, 4, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 25px;
-	color: grey;
-`;
-
 const LandingSection = () => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	const handleClick = (page: string) => {
+		const navigate = useNavigate();
+		return () => {
+			navigate(page);
+		};
+	};
+
+	// 화면 너비 576px 이상이면 데스크탑 이미지 사용
+	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : '/img/mobileBanner';
 	return (
 		<div css={landingSection}>
 			<div css={bannerSection}>
@@ -103,39 +65,23 @@ const LandingSection = () => {
 					pagination={true}
 					modules={[EffectCube, Pagination, Autoplay]}
 					className="mySwiper"
-					autoplay={{ delay: 2000, disableOnInteraction: false }}
+					autoplay={{ delay: 2500, disableOnInteraction: false }}
 				>
 					<SwiperSlide>
-						<div css={square}>Landing Banner</div>
+						<img src={selectedImage + '1.png'} alt="landing1" />
 					</SwiperSlide>
 					<SwiperSlide>
-						<div css={square2}>Landing Banner2</div>
+						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)}/>
 					</SwiperSlide>
 					<SwiperSlide>
-						<div css={square3}>Landing Banner3</div>
+						<img src={selectedImage + '3.png'} alt="landing3" />
 					</SwiperSlide>
 					<SwiperSlide>
-						<div css={square4}>Landing Banner4</div>
+						<img src={selectedImage + '4.png'} alt="landing4" />
 					</SwiperSlide>
-					<SwiperSlide>
-						<div css={square5}>Landing Banner5</div>
-					</SwiperSlide>
-					{/* <SwiperSlide>
-						<img src="/img/voteBanner.png" alt="landing2" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="/img/voteBanner.png" alt="landing3" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="/img/voteBanner.png" alt="landing4" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="/img/voteBanner.png" alt="landing5" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="/img/voteBanner.png" alt="landing6" />
-					</SwiperSlide> */}
 				</Swiper>
+				<div className="custom-pagination-container">
+      </div>
 			</div>
 		</div>
 	);
