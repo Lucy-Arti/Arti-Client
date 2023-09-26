@@ -8,18 +8,13 @@ const Header = ({ where }: { where: string }) => {
 	const isUserPickPage = location.pathname.includes('/userPick');
 
 	const spaceBetween = css`
+		height: 100%;
 		justify-content: space-between;
 		${isUserPickPage ? 'color: white;' : ''}
 	`;
-
-	const objectBtn = css`
-		position: absolute;
-		top: 38px;
-		width: 110px;
-		height: 33px;
-		z-index: 1;
-	`;
-
+	const logoImg = css`
+		height: 24px;
+	`
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
 		return () => {
@@ -31,10 +26,7 @@ const Header = ({ where }: { where: string }) => {
 		return (
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
-					<div >
-						<object data="/img/blackLogo.svg" />
-						<div css={objectBtn} onClick={handleClick('/')}/>
-					</div>
+					<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} />
 					<img src="/img/search.svg" />
 				</div>
 			</div>
@@ -45,10 +37,7 @@ const Header = ({ where }: { where: string }) => {
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
 					<FiChevronLeft cursor="pointer" size="26px" onClick={handleClick('/')} />
-					<div >
-						<object data="/img/blackLogo.svg" />
-						<div css={objectBtn} onClick={handleClick('/')}/>
-					</div>
+					<img src="/img/blackLogo.png" onClick={handleClick('/')} />
 					<div
 						css={css`
 							width: 20px;
