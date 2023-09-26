@@ -46,6 +46,7 @@ const RankingSection = () => {
 
 	const bannerImg = css`
 		width: 100%;
+		border-radius: 13px;
 	`;
 	const voteBtn = css`
 		z-index: 1;
