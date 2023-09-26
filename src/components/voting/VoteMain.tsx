@@ -55,7 +55,22 @@ const VoteMain = () => {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		cursor: pointer;
 	`;
+
+	const shareData = {
+		title: 'ARTI 아티',
+		text: '투표를 통해 세상에 숨겨져 있던 유니크한 옷들을 만나보세요',
+		url: 'https://lucy-arti.netlify.app/vote',
+	};
+
+	const handleShare = async () => {
+		try {
+			await navigator.share(shareData);
+		} catch (err) {
+			alert('지원하지 않는 브라우저입니다.');
+		}
+	};
 
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
@@ -87,7 +102,7 @@ const VoteMain = () => {
 			</div>
 			<div css={shareSection}>
 				<div>친구에게 공유하기</div>
-				<div css={shareBtn}>
+				<div css={shareBtn} onClick={handleShare}>
 					<BiShareAlt size="22px" />
 				</div>
 			</div>
