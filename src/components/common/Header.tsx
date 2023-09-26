@@ -33,7 +33,7 @@ const Header = ({ where }: { where: string }) => {
 		return (
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
-					<FiChevronLeft cursor="pointer" size="3rem" onClick={handleClick('/')} />
+					<FiChevronLeft cursor="pointer" size="26px" onClick={handleClick('/')} />
 					<img src="/img/artiLogo.svg" onClick={handleClick('/')} />
 					<div
 						css={css`
@@ -49,7 +49,7 @@ const Header = ({ where }: { where: string }) => {
 		return (
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
-					<FiChevronLeft cursor="pointer" size="3rem" onClick={handleClick('/')} />
+					<FiChevronLeft cursor="pointer" size="26px" onClick={handleClick('/')} />
 					<div
 						css={css`
 							font-size: 2rem;
