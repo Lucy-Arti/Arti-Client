@@ -11,6 +11,8 @@ import VoteMain from './components/voting/VoteMain';
 import UserVoting from './components/voting/UserVoting';
 import KakaoLogin from './components/login/KakaoLogin';
 import FinalPick from './components/voting/FinalPick';
+import ListView from './components/list/ListView';
+import ProductDetail from './components/list/ProductDetail';
 
 const router = createBrowserRouter([
 	{
@@ -52,6 +54,16 @@ const router = createBrowserRouter([
 	{
 		path: '/productlist',
 		element: <List />,
+		children: [
+			{
+				path: '',
+				element: <ListView />,
+			},
+			{
+				path: ':idx',
+				element: <ProductDetail />
+			}
+		],
 	},
 	{
 		path: '/mypage',
