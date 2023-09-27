@@ -10,7 +10,7 @@ const Header = ({ where }: { where: string }) => {
 	const spaceBetween = css`
 		height: 100%;
 		justify-content: space-between;
-		${isUserPickPage ? 'color: white;' : ''}
+		${isUserPickPage ? 'color: white; z-index: 3;' : ''}
 	`;
 	const logoImg = css`
 		height: 24px;
