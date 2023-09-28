@@ -1,7 +1,6 @@
 import { css } from "@emotion/react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-// import ModalProductSaved from "../common/ModalProductSaved"
 
 export type ProductMapType = {
 	id: number,
@@ -17,22 +16,31 @@ type CardBoxType = {
 	product: string,
 	like: number,
 	mark: boolean,
-    savedModalIsOpen : boolean,
-    setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ListCard = (props:CardBoxType) => {
     const [markState, setMarkState] = useState(props.mark);
-    // const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
+    const isUser = false;
     const handleMarkClick = () => {
-        if (markState) {
-            setMarkState(false);
+        if(isUser){
+            if (markState) {
+                setMarkState(false);
+                props.setUnsavedModalIsOpen(true);
+                setTimeout(() => {
+                    props.setUnsavedModalIsOpen(false);
+                }, 1000);
+            } else {
+                setMarkState(true);
+                props.setSavedModalIsOpen(true);
+                setTimeout(() => {
+                    props.setSavedModalIsOpen(false);
+                }, 1000);
+            }
         } else {
-            setMarkState(true);
-            props.setSavedModalIsOpen(true);
-            setTimeout(() => {
-                props.setSavedModalIsOpen(false);
-            }, 1000);
+            props.setLoginModalIsOpen(true);
         }
     }
     const cardBox = css`

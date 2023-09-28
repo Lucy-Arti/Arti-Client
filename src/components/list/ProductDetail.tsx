@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import {BiShareAlt} from "react-icons/bi"
-import HeaderSecond from "../common/HeaderSecond";
+// import HeaderSecond from "../common/HeaderSecond";
+import Header from "../common/Header";
 
 const ProductDetail = () => {
     const ProductDetail= {id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true }
@@ -50,7 +51,7 @@ const ProductDetail = () => {
   return (
     <>
         <div css={flexColumn}>
-			<HeaderSecond />
+            <Header where='detail'/>
 		</div>
         <div>
             <img width="100%" src="/img/productsampleimg.png" />

@@ -3,10 +3,14 @@ import ListCard, { ProductMapType } from "./ListCard";
 import NavBar from "../common/NavBar";
 import Header from "../common/Header";
 import { useState } from "react";
-import ModalProductSaved from "../common/ModalProductSaved";
+import ModalProductSaved from "./ModalProductSaved";
+import ModalProductUnsaved from "./ModalProductUnsaved";
+import ModalLogin from "./ModalLogin";
 
 const ListView = () => {
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
+	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
+	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const ProductList = [
 		{ id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true },
 		{ id: 23, designer: '민집', product: '새콤한 감귤 모자', like: 30, mark: true },
@@ -44,7 +48,14 @@ const ListView = () => {
 		</div>
 		<NavBar />
 		{
+			(loginModalIsOpen === true) && 
+			<ModalLogin setLoginModalIsOpen={setLoginModalIsOpen} />
+		}
+		{
 			(savedModalIsOpen === true) && <ModalProductSaved />
+		}
+		{
+			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
 		}
 		<div css={gridWrapper}>
 			{ProductList.map((product:ProductMapType, idx:number) => (
@@ -55,8 +66,10 @@ const ListView = () => {
 					product={product.product}
 					like={product.like}
 					mark={product.mark}
-					savedModalIsOpen={savedModalIsOpen}
-					setSavedModalIsOpen={setSavedModalIsOpen} />
+					setSavedModalIsOpen={setSavedModalIsOpen} 
+					setUnsavedModalIsOpen={setUnsavedModalIsOpen} 
+					setLoginModalIsOpen={setLoginModalIsOpen} 
+				/>
 			))}
 		</div>
 	</>

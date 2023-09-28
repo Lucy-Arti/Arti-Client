@@ -34,10 +34,15 @@ const Header = ({ where }: { where: string }) => {
 	} else if (where === 'detail') {
 		// 백 버튼 + 로고만 있는 헤더
 		return (
+			<>
+			<div css={css`
+				height: 40px;
+				width: 100%;
+			`}></div>
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
-					<FiChevronLeft cursor="pointer" size="26px" onClick={handleClick('/')} />
-					<img src="/img/blackLogo.png" onClick={handleClick('/')} />
+					<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
+					<img width="35px" src="/img/artiLogo.svg" onClick={handleClick('/')} />
 					<div
 						css={css`
 							width: 20px;
@@ -46,6 +51,7 @@ const Header = ({ where }: { where: string }) => {
 					></div>
 				</div>
 			</div>
+			</>
 		);
 	} else {
 		// 백 버튼 + 페이지 이름 헤더
