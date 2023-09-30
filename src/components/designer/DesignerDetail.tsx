@@ -47,7 +47,6 @@ const DesignerDetail = () => {
         grid-template-rows: repeat(3,1fr);
         grid-auto-flow: row;
         grid-gap: 2rem;
-        overflow-y: scroll;
         &::-webkit-scrollbar {
             display: none;
         }
