@@ -2,9 +2,11 @@ import { css } from "@emotion/react";
 import {BiShareAlt} from "react-icons/bi"
 // import HeaderSecond from "../common/HeaderSecond";
 import Header from "../common/Header";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetail = () => {
     const ProductDetail= {id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true }
+    const navigate = useNavigate();
     const flexColumn = css`
 		display: flex;
 		flex-direction: column;
@@ -55,7 +57,7 @@ const ProductDetail = () => {
 		</div>
         <div>
             <img width="100%" src="/img/productsampleimg.png" />
-            <div css={designerBox}>
+            <div onClick={()=>navigate(`/designer/${ProductDetail.designer}`)} css={designerBox}>
                 <img width = "30rem" src="/img/profileLogo.png" />
                 <div css={makebold}>{ProductDetail.designer}</div>
                 <div css={fontsize}> 디자이너</div>

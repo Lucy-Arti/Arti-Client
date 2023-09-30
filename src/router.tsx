@@ -13,6 +13,7 @@ import KakaoLogin from './components/login/KakaoLogin';
 import FinalPick from './components/voting/FinalPick';
 import ListView from './components/list/ListView';
 import ProductDetail from './components/list/ProductDetail';
+import DesignerDetail from './components/designer/DesignerDetail';
 
 const router = createBrowserRouter([
 	{
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
 	{
 		path: '/kakaologin',
 		element: <KakaoLogin />,
+	},
+	{
+		path: '/designer/:name',
+		element: <DesignerDetail />,
 	},
 ]);
 
