@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 const ModalLogin = (props:{setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const navigate = useNavigate();
+    // const viewportHeight = document.documentElement.clientHeight;
+    const totalHeight = document.documentElement.scrollHeight;
     const modalSection = css`
-        position: absolute;
+        position: fixed;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -16,7 +18,7 @@ const ModalLogin = (props:{setLoginModalIsOpen: React.Dispatch<React.SetStateAct
         bottom: 0;
         left: 50%;
         transform: translate(-50%, 0%);
-        height: 100%;
+        height: ${totalHeight};
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 1;
         @media (min-width: 576px) {
