@@ -26,6 +26,11 @@ const Login = ({ content }: { content: string }) => {
 		width: 75%;
 	`;
 
+	const img = css`
+		width: 70%;
+		height: 50%;
+	`;
+
 	const handleLogin = () => {
 		window.location.href = kakaoURL;
 	};
@@ -34,7 +39,7 @@ const Login = ({ content }: { content: string }) => {
 		<>
 			<div css={loginSection}>
 				<div css={contentCss}>{content}</div>
-				<img src={'/img/voteBanner.png'}></img>
+				<img css={img} src={'/img/desktopBanner1.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
 		</>

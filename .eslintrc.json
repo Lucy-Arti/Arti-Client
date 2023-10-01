@@ -16,10 +16,13 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "react"
+        "react",
+        "prefer-rest-params"
     ],
     "rules": {
         "react/no-unknown-property": ["error", { "ignore": ["css"] }],
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "prefer-rest-params/prefer-rest-params": "off"
     }
 }

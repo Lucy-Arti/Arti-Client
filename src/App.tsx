@@ -3,6 +3,7 @@ import router from './router';
 import { RecoilRoot } from 'recoil';
 
 function App() {
+	// ChannelService.loadScript();
 	return (
 		<RecoilRoot>
 			<RouterProvider router={router} />
