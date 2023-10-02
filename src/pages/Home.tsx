@@ -6,11 +6,10 @@ import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
 import { useEffect } from 'react';
 import { getUserInfo } from '@/apis/login';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoginAtom, userEmailAtom, userNameAtom } from '@/utils/state';
+import { useSetRecoilState } from 'recoil';
+import { userEmailAtom, userNameAtom } from '@/utils/state';
 
 const Home = () => {
-	const isLogin = useRecoilValue(isLoginAtom);
 	const setUserEmail = useSetRecoilState(userEmailAtom);
 	const setUserName = useSetRecoilState(userNameAtom);
 

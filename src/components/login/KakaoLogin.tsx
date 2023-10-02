@@ -1,17 +1,14 @@
 // import { kakaoLogin } from '@/apis/login';
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
-import { getUserInfo, postCode } from '@/apis/login';
+import { postCode } from '@/apis/login';
 import { useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '@/utils/state';
 import { useNavigate } from 'react-router-dom';
-import { userEmailAtom, userNameAtom } from '@/utils/state';
 
 const KakaoLogin = () => {
 	const navigate = useNavigate();
 	const setIsLogin = useSetRecoilState(isLoginAtom);
-	const setUserEmail = useSetRecoilState(userEmailAtom);
-	const setUserName = useSetRecoilState(userNameAtom);
 
 	const container = css`
 		height: 98vh;
