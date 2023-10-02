@@ -34,7 +34,7 @@ export const worldcupList = [
 		src: '/img/productsampleimg.png',
 	},
 	{ id: 5, designer: '브리', product: '짱멋진 롱스커트', src: '/img/productsampleimg.png' },
-	{ id: 6, designer: '초록', product: '개구리 머리띠',  src: '/img/productsampleimg.png' },
+	{ id: 6, designer: '초록', product: '개구리 머리띠', src: '/img/productsampleimg.png' },
 	{ id: 7, designer: '피터', product: '스파이더맨 거미줄', src: '/img/productsampleimg.png' },
 	{ id: 8, designer: '상도', product: '상도역 출근룩', src: '/img/productsampleimg.png' },
 ];
