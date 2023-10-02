@@ -38,6 +38,12 @@ const PaginationTable = () => {
 		usePagination,
 	);
 
+    const handleRowClick = (row: Row<UserInfoData>) => {
+        // 클릭된 행의 데이터를 가져와서 콘솔에 출력합니다.
+        console.log('클릭된 행의 데이터:', row.original);
+        // 또는 다른 동작을 수행할 수 있습니다.
+      };
+
 	const { pageIndex, pageSize } = state;
 	/* eslint-disable react/jsx-key */
 	return (
@@ -57,7 +63,7 @@ const PaginationTable = () => {
 					{page.map((row: Row<UserInfoData>) => {
 						prepareRow(row);
 						return (
-							<tr {...row.getRowProps()}>
+							<tr {...row.getRowProps()} onClick={() => handleRowClick(row)}>
 								{row.cells.map((cell: Cell<UserInfoData>) => {
 									return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
 								})}

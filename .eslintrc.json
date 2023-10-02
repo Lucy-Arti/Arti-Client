@@ -20,6 +20,9 @@
     ],
     "rules": {
         "react/no-unknown-property": ["error", { "ignore": ["css"] }],
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "prefer-const": "off", // is never reassigned. Use 'const' instead 문구 제거
+        "@typescript-eslint/no-explicit-any": "off", // Unexpected any. Specify a different type 문구 제거
+        "@typescript-eslint/explicit-module-boundary-types": "off" // React, { ReactElement } from "react" 설정 안함
     }
 }
