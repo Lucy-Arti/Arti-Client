@@ -27,7 +27,7 @@ const Header = ({ where }: { where: string }) => {
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
 					<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} />
-					<img src="/img/search.svg" />
+					<img src="/img/search.svg" onClick={handleClick('/search')}/>
 				</div>
 			</div>
 		);
