@@ -11,16 +11,17 @@ const Mypage = () => {
 		width: 100%;
 		flex-direction: column;
 		align-items: center;
-	`
+	`;
 	const gapDesign = css`
 		background-color: #f5f5f5;
 		height: 1rem;
 		width: 100%;
 		margin-top: 2rem;
-	`
+	`;
+
 	return (
 		<>
-			<Header where='main'/>
+			<Header where="main" />
 			<NavBar />
 			<div css={ArticleWrapper}>
 				<MypageUpperContent />

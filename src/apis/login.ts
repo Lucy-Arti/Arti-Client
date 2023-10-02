@@ -11,15 +11,13 @@ const baseURL = `http://lucy-arti.kro.kr:8080/`;
 
 export const postCode = async (body: object) => {
 	try {
-		const response = await axios.post(`http://lucy-arti.kro.kr:8080/auth/kakao/login`, body);
-		// console.log('인가코드 전송 및 전용 토큰 응답');
-		console.log(response);
-		// const accessToken = response.data.accessToken;
-		// const refreshToken = response.data.refreshToken;
+		const response = await axios.post(`${baseURL}api/v1/auth/kakao/login`, body);
+		console.log('인가코드 전송 및 전용 토큰 응답');
+		const accessToken = response.data.accessToken;
+		const refreshToken = response.data.refreshToken;
 
-		// localStorage.setItem('access', accessToken);
-		// localStorage.setItem('refresh', refreshToken);
-		// return response.data;
+		localStorage.setItem('access', accessToken);
+		localStorage.setItem('refresh', refreshToken);
 	} catch (error) {
 		console.error('🚨🚨에러 발생 에러 발생 🚨🚨', error);
 		throw error;
@@ -41,6 +39,19 @@ export const getNewRefreshToken = async () => {
 			},
 		},
 	);
+
+	return response.data;
+};
+
+export const getUserInfo = async () => {
+	const accessToken = localStorage.getItem('access');
+
+	const response = await axios.get(`${baseURL}api/v1/auth/kakao/info`, {
+		headers: {
+			Authorization: `${accessToken}`,
+		},
+	});
+	console.log('사용자 정보 저장 완료');
 
 	return response.data;
 };
