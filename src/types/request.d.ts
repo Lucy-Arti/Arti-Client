@@ -12,6 +12,17 @@ export interface WorldcupSample {
 	designer: string;
 	src: string;
 }
+export interface UserInfoData {
+	name: string;
+	nickname:string;
+	phone:string;
+	email:string;
+	birth:string;
+	joindate: string;
+	votecount: number;
+	voteproduct: string;
+	lastvisit : string;
+}
 
 export const worldcupList = [
 	{

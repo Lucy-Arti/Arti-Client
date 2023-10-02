@@ -14,6 +14,11 @@ import FinalPick from './components/voting/FinalPick';
 import ListView from './components/list/ListView';
 import ProductDetail from './components/list/ProductDetail';
 import DesignerDetail from './components/designer/DesignerDetail';
+import Admin from './pages/Admin';
+import UserInfo from './components/admin/UserInfo';
+import VoteStatus from './components/admin/VoteStatus';
+import ClothesInfo from './components/admin/ClothesInfo';
+import DesignerInfo from './components/admin/DesignerInfo';
 
 const router = createBrowserRouter([
 	{
@@ -81,6 +86,28 @@ const router = createBrowserRouter([
 	{
 		path: '/designer/:name',
 		element: <DesignerDetail />,
+	},
+	{
+		path: '/admin',
+		element: <Admin />,
+		children: [
+			{
+				path: '',
+				element: <UserInfo />,
+			},
+			{
+				path: 'votestatus',
+				element: <VoteStatus />,
+			},
+			{
+				path: 'clothes',
+				element: <ClothesInfo />,
+			},
+			{
+				path: 'designer',
+				element: <DesignerInfo />,
+			},
+		],
 	},
 ]);
 
