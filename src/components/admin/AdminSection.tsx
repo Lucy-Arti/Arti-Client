@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { FiChevronLeft } from 'react-icons/fi';
 
 const AdminSection = () => {
 	const adminLabels = [
@@ -21,7 +22,7 @@ const AdminSection = () => {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: start;
 		width: 100%;
 		top: 0;
 		right: 50%;
@@ -32,6 +33,7 @@ const AdminSection = () => {
 		min-height: 100%;
 		background-color: #f4f4f4;
 		z-index: 1;
+		overflow: scroll;
 	`;
 
 	const header = css`
@@ -48,15 +50,22 @@ const AdminSection = () => {
 	const btnWrapper = css`
 		display: flex;
 		width: fit-content;
-        margin-left: 5%;
-        gap: 3.5rem;
+		gap: 1rem;
 	`;
+	const btn =css`
+	margin-left: 3rem;
+		cursor: pointer;
+		:hover{
+			color: green;
+		}
+	`
 	return (
 		<div css={section}>
 			<div css={header}>
+			<FiChevronLeft css={btn} cursor="pointer" size="26px" onClick={handleClick('/')} />
 				<div css={btnWrapper}>
 					{adminLabels.map((tabs, index) => (
-						<div key={index} onClick={handleClick(`/${tabs.route}`)}>
+						<div css={btn} key={index} onClick={handleClick(`/${tabs.route}`)}>
 							{tabs.label}
 						</div>
 					))}

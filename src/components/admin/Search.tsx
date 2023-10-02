@@ -1,5 +1,5 @@
-const Search = ({ onSubmit }) => {
-	const handleSubmit = (event) => {
+const Search = ({ onSubmit }:any) => {
+	const handleSubmit = (event:any) => {
 		event.preventDefault();
 		onSubmit(event.target.elements.filter.value);
 	};

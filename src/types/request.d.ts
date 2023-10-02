@@ -12,6 +12,8 @@ export interface WorldcupSample {
 	designer: string;
 	src: string;
 }
+
+// admin 페이지용 type
 export interface UserInfoData {
 	name: string;
 	nickname:string;
@@ -22,6 +24,28 @@ export interface UserInfoData {
 	votecount: number;
 	voteproduct: string;
 	lastvisit : string;
+}
+export interface VoteSatusData {
+	name: string;
+	nickname:string;
+	votedate:string;
+	firstround:string;
+	secondround:string;
+	finalround: string;
+}
+export interface ClothesInfoData {
+	productname: string;
+	designer:string;
+	firstround:number;
+	secondround:number;
+	finalround:number;
+	totalpoint: number;
+	todaypoint: number;
+}
+export interface DesignerInfoData {
+	name: string;
+	about:string;
+	product:string;
 }
 
 export const worldcupList = [
