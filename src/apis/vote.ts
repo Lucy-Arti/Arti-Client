@@ -8,7 +8,35 @@ interface VoteData {
 	first: number;
 }
 
-// 투표로 올라간 리스트 전달
+// 투표 가능 여부 확인
+export const getIsVotePossible = async () => {
+	const accessToken = localStorage.getItem('access');
+
+	const response = await axios.get(`${baseURL}api/v1/votes/possible`, {
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	});
+	console.log('투표 가능여부 확인 완료');
+
+	return response.data;
+};
+
+// 라운드 8강 옷 불러오기
+export const getVoteDataList = async () => {
+	const accessToken = localStorage.getItem('access');
+
+	const response = await axios.get(`${baseURL}api/v1/votes`, {
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	});
+	console.log('대진 옷 불러오기 성공');
+
+	return response.data;
+};
+
+// 투표 결과 전달
 export const postMatchList = async (body: VoteData) => {
 	const accessToken = localStorage.getItem('access');
 	try {
