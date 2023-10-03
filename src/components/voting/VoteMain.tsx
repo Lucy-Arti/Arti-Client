@@ -5,30 +5,29 @@ import ShareButton from '../common/ShareButton';
 const VoteMain = () => {
 	const voteSection = css`
 		width: 90%;
-		min-height: 70vh;
+		min-height: 100%;
+		height: fit-content;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		margin-bottom: 4rem;
-		margin-top: 40px;
+		margin-bottom: 10rem;
 	`;
 	const bannerSection = css`
 		width: 90%;
-		height: 250px;
-		background-color: #d9d9d9;
+		height: fit-content;
 		border-radius: 5px;
-		margin-top: 40px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-top: 50px;
 	`;
 
 	const startBtn = css`
 		width: 90%;
 		height: 5.25rem;
 		border-radius: 5px;
-		background: linear-gradient(0deg, rgba(122, 210, 42, 0.8) 0%, rgba(122, 210, 42, 0.8) 100%), #fff;
+		background-color: black;
+		color: white;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -37,14 +36,20 @@ const VoteMain = () => {
 		margin-top: 30px;
 	`;
 
+	const img =css`
+		object-fit: contain;
+		width: 70%;
+	`
+
 	const shareSection = css`
 		font-size: 1.5rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		margin-top: 50px;
+		margin-top: 40px;
 		gap: 10px;
+		
 	`;
 
 	const handleClick = (page: string) => {
@@ -56,14 +61,9 @@ const VoteMain = () => {
 
 	return (
 		<div css={voteSection}>
-			<div
-				css={css`
-					font-size: 24px;
-				`}
-			>
-				투표 시작문구 시작문구
+			<div css={bannerSection}>
+				<img css={img} src='/img/votemainbanner.png'/>
 			</div>
-			<div css={bannerSection}>사진</div>
 			<div
 				css={[
 					startBtn,
@@ -76,7 +76,6 @@ const VoteMain = () => {
 				투표 시작하기
 			</div>
 			<div css={shareSection}>
-				<div>친구에게 공유하기</div>
 				<ShareButton/>
 			</div>
 		</div>

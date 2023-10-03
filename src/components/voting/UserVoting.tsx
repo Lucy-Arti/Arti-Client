@@ -53,7 +53,6 @@ const UserVoting = () => {
 			const encodedData = encodeURIComponent(item.product);
 			setTimeout(() => {
 				navigate(`../userPick?p=${encodedData}&id=${item.id}`);
-				window.location.reload();
 			}, 500);
 		} else {
 			setRound((prevRound) => ({
