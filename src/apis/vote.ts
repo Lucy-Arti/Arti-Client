@@ -12,28 +12,64 @@ interface VoteData {
 export const getIsVotePossible = async () => {
 	const accessToken = localStorage.getItem('access');
 
-	const response = await axios.get(`${baseURL}api/v1/votes/possible`, {
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-		},
-	});
-	console.log('투표 가능여부 확인 완료');
+	try {
+		const response = await axios.get(`${baseURL}api/v1/votes/possible`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
 
-	return response.data;
+		if (response.status === 200) {
+			console.log('투표 가능');
+			return '투표 가능';
+		} else if (response.status === 400) {
+			console.log('이미 투표한 사용자');
+			return '투표 불가능';
+		} else {
+			console.log('로그인 필요');
+			return '로그인 필요';
+		}
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			const axiosError = error as AxiosError;
+			console.error('서버 응답 에러 - 상태 코드:', axiosError.response?.status, axiosError.response?.data);
+		} else {
+			console.error('알 수 없는 에러', error);
+		}
+		throw error;
+	}
 };
 
 // 라운드 8강 옷 불러오기
 export const getVoteDataList = async () => {
 	const accessToken = localStorage.getItem('access');
 
-	const response = await axios.get(`${baseURL}api/v1/votes`, {
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-		},
-	});
-	console.log('대진 옷 불러오기 성공');
-
-	return response.data;
+	try {
+		const response = await axios.get(`${baseURL}api/v1/votes`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+		console.log('대진 옷 불러오기 성공');
+		return response.data;
+	} catch (error) {
+        if (axios.isAxiosError(error)) {
+          const axiosError = error as AxiosError;
+          if (axiosError.response) {
+            const statusCode = axiosError.response.status;
+            if (statusCode === 500) {
+              console.error('로그인하지 않은 사용자');
+            } else {
+              console.error('서버 응답 에러 - 상태 코드:', statusCode, axiosError.response.data);
+            }
+          } else {
+            console.error('네트워크 에러', error.message);
+          }
+        } else {
+          console.error('알 수 없는 에러', error);
+        }
+        throw error;
+      }
 };
 
 // 투표 결과 전달
