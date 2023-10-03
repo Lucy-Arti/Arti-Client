@@ -13,6 +13,10 @@ export interface WorldcupSample {
 	src: string;
 }
 
+export interface postCodeBody {
+	authCode: string;
+}
+
 export const worldcupList = [
 	{
 		id: 1,
