@@ -15,7 +15,7 @@ const landingSection = css`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 4rem;
+	/* margin-bottom: 2rem; */
 	overflow-y: hidden;
 `;
 const bannerSection = css`
@@ -50,37 +50,39 @@ const LandingSection = () => {
 	// 화면 너비 576px 이상이면 데스크탑 이미지 사용
 	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : '/img/mobileBanner';
 	return (
-		<div css={landingSection}>
-			<div css={bannerSection}>
-				<Swiper
-					effect={'cube'}
-					grabCursor={true}
-					cubeEffect={{
-						shadow: false,
-						slideShadows: false,
-						shadowOffset: 0,
-						shadowScale: 0,
-					}}
-					pagination={true}
-					modules={[EffectCube, Pagination, Autoplay]}
-					className="mySwiper"
-					autoplay={{ delay: 2500, disableOnInteraction: false }}
-				>
-					<SwiperSlide>
-						<img src={selectedImage + '1.png'} alt="landing1" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src={selectedImage + '3.png'} alt="landing3" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src={selectedImage + '4.png'} alt="landing4" />
-					</SwiperSlide>
-				</Swiper>
+		<>
+			<div css={landingSection}>
+				<div css={bannerSection}>
+					<Swiper
+						effect={'cube'}
+						grabCursor={true}
+						cubeEffect={{
+							shadow: false,
+							slideShadows: false,
+							shadowOffset: 0,
+							shadowScale: 0,
+						}}
+						pagination={true}
+						modules={[EffectCube, Pagination, Autoplay]}
+						className="mySwiper"
+						autoplay={{ delay: 2500, disableOnInteraction: false }}
+					>
+						<SwiperSlide>
+							<img src={selectedImage + '1.png'} alt="landing1" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img src={selectedImage + '3.png'} alt="landing3" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img src={selectedImage + '4.png'} alt="landing4" />
+						</SwiperSlide>
+					</Swiper>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

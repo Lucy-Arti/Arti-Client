@@ -1,11 +1,15 @@
 // import { kakaoLogin } from '@/apis/login';
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
+import { postCode } from '@/apis/login';
+import { useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '@/utils/state';
-import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import { postCodeBody } from '@/types/request';
 
 const KakaoLogin = () => {
-	const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
+	const navigate = useNavigate();
+	const setIsLogin = useSetRecoilState(isLoginAtom);
 
 	const container = css`
 		height: 98vh;
@@ -19,17 +23,24 @@ const KakaoLogin = () => {
 		font-weight: 700;
 	`;
 
+	const code: string | null = new URL(window.location.href).searchParams.get('code');
+
+	const body: postCodeBody = {
+		authCode: code,
+	};
+
 	useEffect(() => {
-		// window.location.href = '/';
-		// console.log(body);
-		// postCode(body);
-		setIsLogin(true);
-		console.log(isLogin);
+		const login = async () => {
+			await postCode(body);
+			setIsLogin(true);
+			navigate('/');
+		};
+		login();
 	}, []);
 
 	return (
 		<div css={container}>
-			<div css={fontSize}>로그인 중입니다...</div>
+			<div css={fontSize}>로그인이 완료되었습니다.</div>
 		</div>
 	);
 };

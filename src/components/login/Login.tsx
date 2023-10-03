@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import '@styles/commonStyle.css';
 import { kakaoURL } from './loginInfo';
 
-const Login = ({ content }: { content: string }) => {
+const Login = ({ where }: { where: string }) => {
 	const loginSection = css`
 		width: 100%;
 		height: 60vh;
@@ -26,14 +26,28 @@ const Login = ({ content }: { content: string }) => {
 		width: 75%;
 	`;
 
+	const img = css`
+		width: 45%;
+		height: 35%;
+	`;
+
 	const handleLogin = () => {
 		window.location.href = kakaoURL;
 	};
+
+	let content;
+
+	if (where === 'vote') {
+		content = '로그인하여 \n 투표에 참여해보세요!';
+	} else if (where === 'mypage') {
+		content = '아티와 함께하여 \n 새로운 스타일과 브랜드를 경험해 보세요!';
+	}
+
 	return (
 		<>
 			<div css={loginSection}>
 				<div css={contentCss}>{content}</div>
-				{/* <img src={'/img/voteBanner.png'}></img> */}
+				<img css={img} src={'/img/loginBanner.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
 		</>

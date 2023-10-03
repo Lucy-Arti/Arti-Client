@@ -17,11 +17,13 @@
     "axios": "^1.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gtm-module": "^2.0.11",
     "react-icons": "^4.11.0",
     "react-loading-skeleton": "^3.3.1",
     "react-router-dom": "^6.15.0",
     "react-select": "^5.7.4",
     "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
     "swiper": "^10.2.0"
   },
   "devDependencies": {
