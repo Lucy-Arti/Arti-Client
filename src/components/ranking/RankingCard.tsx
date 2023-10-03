@@ -24,9 +24,10 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 	const tag = css`
 		margin-top: 0.625rem;
 		width: 14%;
+		height: fit-content;
 		z-index: 1;
-		margin-left: 0.7rem;
 		position: relative;
+		display: flex;
 	`;
 
 	const tagImg = css`
@@ -38,10 +39,9 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 		font-size: 1.5rem;
 		font-weight: 500;
 		position: absolute;
-		top: 4%;
 		z-index: 2;
 		width: 100%;
-		height: 25%;
+		height: 100%;
 		display: flex;
 		justify-content: flex-start;
 		padding-left: 1.2rem;
@@ -50,13 +50,13 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 
 	const box = css`
 		display: flex;
-		width: 87%;
+		width: 92%;
 		aspect-ratio: 3.18 / 1;
 		border-radius: 5px;
 		background: #fff;
 		box-shadow: 4px 4px 14px -1px rgba(0, 0, 0, 0.1);
 		justify-content: space-between;
-		margin-left: -2.5rem;
+		margin-left: -2.9rem;
 	`;
 
 	const left = css`
