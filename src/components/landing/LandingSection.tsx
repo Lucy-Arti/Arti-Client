@@ -77,7 +77,9 @@ const LandingSection = () => {
 							<img src={selectedImage + '3.png'} alt="landing3" />
 						</SwiperSlide>
 						<SwiperSlide>
-							<img src={selectedImage + '4.png'} alt="landing4" />
+							<a href="https://arti.channel.io" target="_blank">
+								<img src={selectedImage + '4.png'} alt="landing4" />
+							</a>
 						</SwiperSlide>
 					</Swiper>
 				</div>
