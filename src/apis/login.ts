@@ -10,7 +10,7 @@ const baseURL = `http://lucy-arti.kro.kr:8080/`;
 // 		.catch((err) => console.log(err));
 // };
 
-export const postCode = async ({ body }: { body: postCodeBody }) => {
+export const postCode = async (body: postCodeBody) => {
 	try {
 		const response = await axios.post(`${baseURL}api/v1/auth/kakao/login`, body);
 		console.log('인가코드 전송 및 전용 토큰 응답');

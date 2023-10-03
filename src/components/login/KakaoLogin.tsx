@@ -5,6 +5,7 @@ import { postCode } from '@/apis/login';
 import { useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '@/utils/state';
 import { useNavigate } from 'react-router-dom';
+import { postCodeBody } from '@/types/request';
 
 const KakaoLogin = () => {
 	const navigate = useNavigate();
@@ -24,7 +25,7 @@ const KakaoLogin = () => {
 
 	const code: string | null = new URL(window.location.href).searchParams.get('code');
 
-	const body = {
+	const body: postCodeBody = {
 		authCode: code,
 	};
 

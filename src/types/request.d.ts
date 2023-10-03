@@ -14,7 +14,7 @@ export interface WorldcupSample {
 }
 
 export interface postCodeBody {
-	authCode: string;
+	authCode: string | null;
 }
 
 export const worldcupList = [
