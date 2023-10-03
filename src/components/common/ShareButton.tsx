@@ -31,7 +31,7 @@ const ShareButton = () => {
 		width: 37px;
 		height: 37px;
 		border-radius: 18.5px;
-		background: linear-gradient(0deg, #e7e7e7 0%, #e7e7e7 100%), #fff;
+		background-color: #ADADAD;
 		display: flex;
 		align-items: center;
 		justify-content: center;
