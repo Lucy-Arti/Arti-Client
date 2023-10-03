@@ -5,6 +5,8 @@ import { useRecoilValue } from "recoil"
 const MypageUpperContent = () => {
     const userName = useRecoilValue(userNameAtom);
     const userEmail = useRecoilValue(userEmailAtom);
+    const randomNum = ( Math.random() * 4 );
+    const randomNumFloor = Math.floor(randomNum);
     const columnSort = css`
         display: flex;
         width: 90%;
@@ -12,18 +14,8 @@ const MypageUpperContent = () => {
     `
     const profileWrapper = css`
         display: flex;
-        margin: 2rem 0 3rem 0;
+        margin: 2.5rem 0 4rem 1rem;
         align-items: center;
-    `
-    const profileText = css`
-        display: flex;
-        flex-direction: column;
-        margin-left: 2rem;
-    `
-    const Title = css`
-        font-size: 3rem;
-        font-weight: bolder;
-        margin-bottom: 1rem;
     `
     const BtnWrapper = css`
         display: flex;
@@ -32,9 +24,6 @@ const MypageUpperContent = () => {
         border-radius: 15px;
         justify-content: center;
         align-items: center;
-        /* grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2px; */
-        /* background-color: #f3f3f3; */
     `
     const btnStyle = css`
         display: flex;
@@ -55,31 +44,34 @@ const MypageUpperContent = () => {
             border-left: 2px solid #f3f3f3;
         }
     `
-    const MenuText = css`
-        font-size: 1.5rem;
-    `
 
   return (
     <div css={columnSort}>
         <div css={profileWrapper}>
-            <img width="15%" src="/img/profile-large.png" />
-            <div css={profileText}>
-                <div css={Title}>{userName}</div>
-                <div css={MenuText}>{userEmail}</div>
+            <img width="20%" src={`/img/myProfile-${randomNumFloor}.png`} />
+            <div css={css`
+                display: flex;
+                flex-direction: column;
+                margin-left: 2rem; `}>
+                <div css={css`
+                    font-size: 3rem;
+                    font-weight: bolder;
+                    margin-bottom: 1rem;`}>{userName}</div>
+                <div css={css`font-size: 1.5rem;`}>{userEmail}</div>
             </div>
         </div>
         <div css={BtnWrapper}>
             <div className="start" css={btnStyle}>
                 <img src="/img/mypageVoteBtn.png" />
-                <div css={MenuText}>투표한 옷</div>
+                <div css={css`font-size: 1.5rem;`}>투표한 옷</div>
             </div>
             <div css={btnStyle}>
                 <img src="/img/mypageRecentBtn.png" />
-                <div css={MenuText}>최근 본 옷</div>
+                <div css={css`font-size: 1.5rem;`}>최근 본 옷</div>
             </div>
             <div className="last" css={btnStyle}>
                 <img src="/img/mypageHeart.png" />
-                <div css={MenuText}>저장한 옷</div>
+                <div css={css`font-size: 1.5rem;`}>저장한 옷</div>
             </div>
         </div>
     </div>
