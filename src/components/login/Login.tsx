@@ -5,6 +5,7 @@ import { kakaoURL } from './loginInfo';
 
 const Login = ({ where }: { where: string }) => {
 	const loginSection = css`
+		margin-top: 5rem;
 		width: 100%;
 		height: 60vh;
 		display: flex;
@@ -14,11 +15,16 @@ const Login = ({ where }: { where: string }) => {
 	`;
 
 	const contentCss = css`
-		font-size: 20px;
-		font-weight: 700;
+		font-size: 2.2rem;
+		font-weight: 900;
 		text-align: center;
 		line-height: 22px;
 		letter-spacing: -0.408px;
+		height: 6rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin-bottom: 2rem;
 	`;
 
 	const kakao = css`
@@ -27,26 +33,33 @@ const Login = ({ where }: { where: string }) => {
 	`;
 
 	const img = css`
-		width: 45%;
-		height: 35%;
+		width: 35rem;
+		height: 22rem;
 	`;
 
 	const handleLogin = () => {
 		window.location.href = kakaoURL;
 	};
 
-	let content;
+	let content: string = '';
 
 	if (where === 'vote') {
-		content = '로그인하여 \n 투표에 참여해보세요!';
+		content = '로그인하여\n투표에 참여해보세요!';
 	} else if (where === 'mypage') {
-		content = '아티와 함께하여 \n 새로운 스타일과 브랜드를 경험해 보세요!';
+		content = '아티와 함께하여\n새로운 스타일과 브랜드를 경험해 보세요!';
 	}
 
 	return (
 		<>
 			<div css={loginSection}>
-				<div css={contentCss}>{content}</div>
+				<div css={contentCss}>
+					{content.split('\n').map((line, index) => (
+						<span key={index}>
+							{line}
+							<br />
+						</span>
+					))}
+				</div>
 				<img css={img} src={'/img/loginBanner.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
