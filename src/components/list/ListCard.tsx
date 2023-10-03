@@ -94,7 +94,7 @@ const ListCard = (props:CardBoxType) => {
                     {
                         markState === true ?
                         <img onClick={handleMarkClick} css={imgdesign} width = "30rem" src="/img/activeHeart.png" />
-                        : <img onClick={handleMarkClick} css={imgdesign} width = "30rem" src="/img/nonactiveHeart.png" />
+                        : <img onClick={handleMarkClick} css={imgdesign} width = "30rem" src="/img/nonactiveHeartFill.png" />
                     }
                 </div>
             </div>
