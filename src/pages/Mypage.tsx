@@ -4,8 +4,12 @@ import Header from '@/components/common/Header';
 import MypageUpperContent from '@/components/mypage/MypageUpperContent';
 import MypageExternalContent from '@/components/mypage/MypageExternalContent';
 import { css } from '@emotion/react';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/utils/state';
+import Login from '@/components/login/Login';
 
 const Mypage = () => {
+	const isLogin = useRecoilValue(isLoginAtom);
 	const ArticleWrapper = css`
 		display: flex;
 		width: 100%;
@@ -23,11 +27,17 @@ const Mypage = () => {
 		<>
 			<Header where="main" />
 			<NavBar />
-			<div css={ArticleWrapper}>
-				<MypageUpperContent />
-				<div css={gapDesign} />
-				<MypageExternalContent />
-			</div>
+			{
+				(isLogin === true) ? 
+				<div css={ArticleWrapper}>
+					<MypageUpperContent />
+					<div css={gapDesign} />
+					<MypageExternalContent />
+				</div>
+				:
+				<Login where='mypage' />
+
+			}
 		</>
 	);
 };
