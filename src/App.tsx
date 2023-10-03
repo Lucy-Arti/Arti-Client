@@ -2,6 +2,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 import { RecoilRoot } from 'recoil';
 import ChannelService from './ChannelService';
+import GoogleTagManager from './GoogleTagManager';
 
 function App() {
 	ChannelService.loadScript();
@@ -11,9 +12,12 @@ function App() {
 	});
 
 	return (
-		<RecoilRoot>
-			<RouterProvider router={router} />
-		</RecoilRoot>
+		<>
+			<RecoilRoot>
+				<RouterProvider router={router} />
+			</RecoilRoot>
+			<GoogleTagManager gtmId="GTM-P8H6W3G8" />
+		</>
 	);
 }
 
