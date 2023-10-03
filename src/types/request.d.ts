@@ -17,6 +17,10 @@ export interface postCodeBody {
 	authCode: string | null;
 }
 
+export interface GtmId {
+	gtmId: string | null;
+}
+
 export const worldcupList = [
 	{
 		id: 1,
