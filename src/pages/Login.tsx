@@ -27,8 +27,8 @@ const Login = ({ content }: { content: string }) => {
 	`;
 
 	const img = css`
-		width: 70%;
-		height: 50%;
+		width: 45%;
+		height: 35%;
 	`;
 
 	const handleLogin = () => {
@@ -39,7 +39,7 @@ const Login = ({ content }: { content: string }) => {
 		<>
 			<div css={loginSection}>
 				<div css={contentCss}>{content}</div>
-				<img css={img} src={'/img/desktopBanner1.png'}></img>
+				<img css={img} src={'/img/loginBanner.png'}></img>
 				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
 			</div>
 		</>
