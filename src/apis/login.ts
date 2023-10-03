@@ -25,25 +25,6 @@ export const postCode = async (body: postCodeBody) => {
 	}
 };
 
-export const getNewRefreshToken = async () => {
-	const accessToken = localStorage.getItem('access');
-	const refreshToken = localStorage.getItem('refresh');
-
-	const response = await axios.post(
-		`${baseURL}/newRefresh`,
-		{
-			refreshToken,
-		},
-		{
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		},
-	);
-
-	return response.data;
-};
-
 export const getUserInfo = async () => {
 	const accessToken = localStorage.getItem('access');
 
@@ -56,6 +37,25 @@ export const getUserInfo = async () => {
 
 	return response.data;
 };
+
+// export const getNewRefreshToken = async () => {
+// 	const accessToken = localStorage.getItem('access');
+// 	const refreshToken = localStorage.getItem('refresh');
+
+// 	const response = await axios.post(
+// 		`${baseURL}/newRefresh`,
+// 		{
+// 			refreshToken,
+// 		},
+// 		{
+// 			headers: {
+// 				Authorization: `Bearer ${accessToken}`,
+// 			},
+// 		},
+// 	);
+
+// 	return response.data;
+// };
 
 // export const getAuthAxios = (token: string | null) => {
 // 	const authAxios = axios.create({
