@@ -7,10 +7,10 @@ const Login = ({ where }: { where: string }) => {
 	const loginSection = css`
 		margin-top: 5rem;
 		width: 100%;
-		height: 60vh;
+		height: 45rem;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		align-items: center;
 	`;
 
@@ -33,8 +33,8 @@ const Login = ({ where }: { where: string }) => {
 	`;
 
 	const img = css`
-		width: 35rem;
-		height: 22rem;
+		width: 30rem;
+		height: 17rem;
 	`;
 
 	const handleLogin = () => {
