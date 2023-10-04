@@ -1,6 +1,8 @@
 import { worldcupList } from '@/types/request.d';
+import { userNameAtom } from '@/utils/state';
 import { css } from '@emotion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 const FinalPick = () => {
 	const navigate = useNavigate();
@@ -9,7 +11,7 @@ const FinalPick = () => {
 	const encodedData = searchParams.get('p') as string;
 	const targetId = Number(searchParams.get('id'));
 	const productName = decodeURIComponent(encodedData);
-	const nickName = '{닉네임}';
+	const userName = useRecoilValue(userNameAtom);
 	const pickedItem = worldcupList.find((item) => item.id === targetId);
 
 	const finalpickSection = css`
@@ -167,7 +169,7 @@ const FinalPick = () => {
 			</div>
 			<div css={infoSection}>
 				<div css={pickText}>
-					<span className="black">{nickName}</span> 님의 PICK
+					<span className="black">{`{${userName}}`}</span> 님의 PICK
 				</div>
 				<div css={card}>
 					<img css={cardImg} src={pickedItem?.src} />
