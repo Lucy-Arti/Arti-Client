@@ -30,7 +30,7 @@ export const getUserInfo = async () => {
 
 	const response = await axios.get(`${baseURL}api/v1/kakao/info`, {
 		headers: {
-			Authorization: `${accessToken}`,
+			Authorization: `Bearer ${accessToken}`,
 		},
 	});
 	console.log('사용자 정보 저장 완료');
