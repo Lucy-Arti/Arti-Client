@@ -1,7 +1,7 @@
 import { postCodeBody } from '@/types/request';
 import axios from 'axios';
 
-const baseURL = `http://lucy-arti.kro.kr:8080/`;
+const baseURL = `https://arti-fashion.shop/`;
 
 // export const postCode = (body: object) => {
 // 	const data = axios
