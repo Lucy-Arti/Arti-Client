@@ -2,10 +2,29 @@ import { css } from "@emotion/react";
 import {BiShareAlt} from "react-icons/bi"
 // import HeaderSecond from "../common/HeaderSecond";
 import Header from "../common/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { GetProductDetail } from "@/apis/list";
+import { useEffect, useState } from "react";
+import { ProductType } from "./ListView";
+import Footer from "../common/Footer";
 
 const ProductDetail = () => {
-    const ProductDetail= {id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true }
+    // const ProductDetail= {id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true }
+    const {idx} = useParams();
+    const [productDetail, setProductDetail] = useState<ProductType>();
+    const getProduct = async() => {
+        const result = await GetProductDetail(idx!);
+        if(result===false){
+            alert("불러오기 오류 발생");
+            navigate('/');
+        } else {
+            setProductDetail(result.data);
+        }
+    }
+    useEffect(()=>{
+        getProduct();
+    }, [])
+    
     const navigate = useNavigate();
     const flexColumn = css`
 		display: flex;
@@ -55,27 +74,34 @@ const ProductDetail = () => {
         <div css={flexColumn}>
             <Header where='detail'/>
 		</div>
-        <div>
-            <img width="100%" src="/img/productsampleimg.png" />
-            <div onClick={()=>navigate(`/designer/${ProductDetail.designer}`)} css={designerBox}>
-                <img width = "30rem" src="/img/profileLogo.png" />
-                <div css={makebold}>{ProductDetail.designer}</div>
-                <div css={fontsize}> 디자이너</div>
-            </div>
-            <div css={flexrow}>
-                <div css={Title}>{ProductDetail.product}</div>
-                <div css={flexrow} className='icon-box'>
-                    {
-                        (ProductDetail.mark === true) ? 
-                        <img width = "30rem" src="/img/activeHeart.png" />
-                        : <img width = "30rem" src="/img/nonactiveHeart.png" />
-                    }
-                    <BiShareAlt size="3rem" />
+        {
+            (productDetail) &&
+            <div>
+                <img width="100%" src={`${productDetail.preview}`} />
+                <div onClick={()=>navigate(`/designer/${productDetail.designerId}`)} css={designerBox}>
+                    <img width = "30rem" src="/img/profileLogo.png" />
+                    <div css={makebold}>{productDetail.designerName}</div>
+                    <div css={fontsize}> 디자이너</div>
                 </div>
+                <div css={flexrow}>
+                    <div css={Title}>{productDetail.clothesName}</div>
+                    <div css={flexrow} className='icon-box'>
+                        {
+                            // (ProductDetail.score === true) ? 
+                            // <img width = "30rem" src="/img/activeHeart.png" />
+                            // : 
+                            <img width = "30rem" src="/img/nonactiveHeart.png" />
+                        }
+                        <BiShareAlt size="3rem" />
+                    </div>
+                </div>
+                <div css={gapDesign} />
+                <div>
+                    <img width="100%" src={`${productDetail.detailImg}`} />
+                </div>
+                <Footer />
             </div>
-            <div css={gapDesign} />
-            <div><img width="100%" src="/img/mobileBanner1.png" /></div>
-        </div>
+        }
     </>
   )
 }
