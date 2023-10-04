@@ -68,15 +68,14 @@ const VoteMain = () => {
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
 		if (possible==='투표 가능') {
+			console.log('투표가 가능해요');
 			return () => {
 				navigate(page);
 			};
 		} else if(possible ==='투표 불가능'){
-			alert('오늘 투표를 완료했습니다!');
+			console.log('오늘 투표를 완료했습니다!');
 		} else if(possible ==='로그인 필요'){
-			alert('로그인을 먼저 해주세요!');
-		} else {
-			alert('뭔 오류임?');
+			console.log('로그인을 먼저 해주세요!');
 		}
 	};
 
