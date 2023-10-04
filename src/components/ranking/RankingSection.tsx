@@ -30,9 +30,9 @@ const RankingSection = () => {
 		margin-bottom: 4rem;
 	`;
 	const bannerSection = css`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 100%;
 		aspect-ratio: 1 / 0.64;
 		margin-top: 2rem;
@@ -48,6 +48,7 @@ const RankingSection = () => {
 		width: 100%;
 		border-radius: 13px;
 	`;
+
 	const voteBtn = css`
 		z-index: 1;
 		width: fit-content;
@@ -58,7 +59,7 @@ const RankingSection = () => {
 		cursor: pointer;
 		font-size: 2rem;
 		padding: 10px 20px;
-		margin-top: 25px;
+		margin-top: 2.2rem;
 	`;
 
 	const text1 = css`
@@ -102,6 +103,11 @@ const RankingSection = () => {
 		justify-content: space-between;
 	`;
 
+	const fontSize = css`
+		font-weight: 600;
+		font-size: 1.7rem;
+	`;
+
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
 		return () => {
@@ -125,7 +131,7 @@ const RankingSection = () => {
 						</div>
 					</div>
 
-					<div>1차 투표 기간 : ~ 23.10.31</div>
+					<div css={fontSize}>1차 투표 기간 : ~ 23.10.31</div>
 				</div>
 			</div>
 			<div css={rankingBtnWrapper}>
