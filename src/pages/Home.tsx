@@ -6,12 +6,12 @@ import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
 import { useEffect } from 'react';
 import { getUserInfo } from '@/apis/login';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userEmailAtom, userNameAtom } from '@/utils/state';
 
 const Home = () => {
 	const setUserEmail = useSetRecoilState(userEmailAtom);
-	const setUserName = useSetRecoilState(userNameAtom);
+	const [userName, setUserName] = useRecoilState(userNameAtom);
 
 	const flexColumn = css`
 		display: flex;
@@ -28,6 +28,8 @@ const Home = () => {
 				setUserName(data.userName);
 			};
 			getUserProfile();
+		} else if (localStorage.getItem('access') && userName !== '') {
+			console.log('로그인 완료 상태');
 		}
 	});
 
