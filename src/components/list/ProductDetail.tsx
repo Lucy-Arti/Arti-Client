@@ -24,7 +24,7 @@ const ProductDetail = () => {
     const makebold = css`
         font-size: 2rem;
         margin-left: 1rem;
-        font-weight: bold;
+        font-weight: 600;
     `
     const fontsize = css`
         font-size: 2rem;
@@ -32,7 +32,7 @@ const ProductDetail = () => {
     `
     const Title = css`
         font-size: 2rem;
-        font-weight: bolder;
+        font-weight: 600;
     `
     const flexrow = css`
         display: flex;

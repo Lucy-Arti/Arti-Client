@@ -62,7 +62,7 @@ const ListCard = (props:CardBoxType) => {
 
     const header = css`
         font-size: 2rem;
-        font-weight: bold;
+        font-weight: 600;
         margin: 1rem 1rem 2rem 1rem;
     `
     const flexraw = css`
@@ -73,7 +73,7 @@ const ListCard = (props:CardBoxType) => {
     const makebold = css`
         font-size: 1.5rem;
         margin-left: 0.5rem;
-        font-weight: bold;
+        font-weight: 600;
     `
     const fontsize = css`
         font-size: 1.5rem;

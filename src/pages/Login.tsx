@@ -15,7 +15,7 @@ const Login = ({ content }: { content: string }) => {
 
 	const contentCss = css`
 		font-size: 20px;
-		font-weight: 700;
+		font-weight: 600;
 		text-align: center;
 		line-height: 22px;
 		letter-spacing: -0.408px;
