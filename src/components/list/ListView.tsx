@@ -2,25 +2,44 @@ import { css } from "@emotion/react";
 import ListCard, { ProductMapType } from "./ListCard";
 import NavBar from "../common/NavBar";
 import Header from "../common/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalProductSaved from "./ModalProductSaved";
 import ModalProductUnsaved from "./ModalProductUnsaved";
 import ModalLogin from "./ModalLogin";
+import { GetAllProductLists } from "@/apis/list";
+
+type ProductType = {
+	clothesId: number,
+	createdAt: string|null,
+	updatedAt: string|null,
+	detailImg: string|null,
+	likeCount: number|null,
+	clothesName: string|null,
+	preview: string|null,
+	designerId: number|null,
+	designerName: string|null,
+	score: number|null
+}
 
 const ListView = () => {
+	const productList : ProductType[] = [];
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-    const ProductList = [
-		{ id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true },
-		{ id: 23, designer: '민집', product: '새콤한 감귤 모자', like: 30, mark: true },
-		{ id: 43, designer: '짜잉', product: '보송보송 츄리닝 바지', like: 25, mark: false },
-		{ id: 24, designer: '비니', product: '프란체스카 올블랙 티셔츠', like: 20, mark: true },
-		{ id: 39, designer: '브리', product: '짱멋진 롱스커트', like: 14, mark: true },
-		{ id: 21, designer: '초록', product: '개구리 머리띠', like: 10, mark: false },
-		{ id: 47, designer: '피터', product: '스파이더맨 거미줄', like: 5, mark: false },
-		{ id: 14, designer: '상도', product: '상도역 출근룩', like: 7, mark: true },
-	];
+	const [products, setProducts] = useState<ProductType[]>(productList);
+	// const [products, setProducts] = useState([]);
+
+	const getProducts = async() => {
+		const result = await GetAllProductLists();
+		if(result===false) {
+            alert("불러오기 오류 발생");
+        } else {
+            setProducts(products.concat(result.data));
+        }
+	}
+	useEffect(()=>{
+		getProducts();
+	}, [])
 
 	const flexColumn = css`
 		display: flex;
@@ -58,14 +77,19 @@ const ListView = () => {
 			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
 		}
 		<div css={gridWrapper}>
-			{ProductList.map((product:ProductMapType, idx:number) => (
+			{products.map((product:ProductType, idx:number) => (
 				<ListCard 
 					key={idx}
-					id={product.id}
-					designer={product.designer} 
-					product={product.product}
-					like={product.like}
-					mark={product.mark}
+					clothesId={product.clothesId}
+					createdAt={product.createdAt}
+					updatedAt={product.updatedAt}
+					detailImg={product.detailImg}
+					likeCount={product.likeCount}
+					clothesName={product.clothesName}
+					preview={product.preview}
+					designerId={product.designerId}
+					designerName={product.designerName}
+					score={product.score}
 					setSavedModalIsOpen={setSavedModalIsOpen} 
 					setUnsavedModalIsOpen={setUnsavedModalIsOpen} 
 					setLoginModalIsOpen={setLoginModalIsOpen} 
