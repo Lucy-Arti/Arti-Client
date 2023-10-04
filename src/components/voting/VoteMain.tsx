@@ -1,9 +1,20 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import ShareButton from '../common/ShareButton';
-import Login from '../login/Login';
+import { useEffect } from 'react';
+import { getIsVotePossible } from '../../apis/vote';
 
 const VoteMain = () => {
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const getPossible = async () => {
+				const data = await getIsVotePossible();
+				console.log(data);
+			};
+			getPossible();
+		}
+	});
+
 	const voteSection = css`
 		width: 90%;
 		min-height: 100%;

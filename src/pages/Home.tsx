@@ -23,6 +23,7 @@ const Home = () => {
 		if (localStorage.getItem('access')) {
 			const getUserProfile = async () => {
 				const data = await getUserInfo();
+				console.log(data);
 				setUserEmail(data.email);
 				setUserName(data.userName);
 			};
