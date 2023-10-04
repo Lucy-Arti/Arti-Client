@@ -1,14 +1,22 @@
 import { css } from '@emotion/react'
 import Header from '../common/Header'
 import { ProductMapType } from '../list/ListCard'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModalLogin from '../list/ModalLogin';
 import ModalProductSaved from '../list/ModalProductSaved';
 import ModalProductUnsaved from '../list/ModalProductUnsaved';
 import Footer from '../common/Footer';
 import ProductListCard from './ProductListCard';
+import { useParams } from 'react-router-dom';
+import { GetDesignerDetail } from '@/apis/list';
+
+type DesignerProfType = {
+    user_name : string,
+    introduce : string
+}
 
 const DesignerDetail = () => {
+    const {idx} = useParams();
     const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
@@ -22,6 +30,21 @@ const DesignerDetail = () => {
 		{ id: 47, designer: '피터', product: '스파이더맨 거미줄', like: 5, mark: false },
 		{ id: 14, designer: '상도', product: '상도역 출근룩', like: 7, mark: true },
 	];
+
+    const [designerProfile, setDesignerProfile] = useState<DesignerProfType>();
+    const getDesigner = async() => {
+        const result = await GetDesignerDetail(idx!);
+        if(result === false){
+            alert("불러오기 오류 발생");
+        } else {
+            setDesignerProfile(result.data);
+        }
+    }
+    
+    useEffect(()=>{
+        getDesigner();
+    }, [])
+
     const flexColumn = css`
 		display: flex;
 		flex-direction: column;
@@ -66,10 +89,10 @@ const DesignerDetail = () => {
                 font-weight: bolder;
                 font-size: 3rem;
                 margin: 1rem 0 1rem 0;
-            `}>백쟌너</div>
+            `}>{designerProfile?.user_name}</div>
             <div css={css`
                 font-size: 1.5rem;
-            `}>설명어쩌구저쩌구디자이너설명으아아아아아아아아아힘들다언제끝나징</div>
+            `}>{designerProfile?.introduce}</div>
         </div>
     </div>
     <div css={css`
