@@ -8,7 +8,7 @@ const ShareButton = () => {
 		try {
 			if (navigator.share) {
 				await navigator.share({
-					url: 'https://lucy-arti.netlify.app/',
+					url: 'https://arti-fashion.site/',
 				});
 			} else {
 				await navigator.clipboard.writeText(link);
