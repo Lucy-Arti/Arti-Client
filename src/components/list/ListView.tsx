@@ -8,7 +8,7 @@ import ModalProductUnsaved from "./ModalProductUnsaved";
 import ModalLogin from "./ModalLogin";
 import { GetAllProductLists } from "@/apis/list";
 
-type ProductType = {
+export type ProductType = {
 	clothesId: number,
 	createdAt: string|null,
 	updatedAt: string|null,

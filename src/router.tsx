@@ -79,7 +79,7 @@ const router = createBrowserRouter([
 		element: <KakaoLogin />,
 	},
 	{
-		path: '/designer/:name',
+		path: '/designer/:idx',
 		element: <DesignerDetail />,
 	},
 ]);
