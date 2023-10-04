@@ -11,18 +11,23 @@ export type ProductMapType = {
 }
 
 type CardBoxType = {
-    id: number,
-	designer: string,
-	product: string,
-	like: number,
-	mark: boolean,
+    clothesId: number,
+	createdAt: string|null,
+	updatedAt: string|null,
+	detailImg: string|null,
+	likeCount: number|null,
+	clothesName: string|null,
+	preview: string|null,
+	designerId: number|null,
+	designerName: string|null,
+	score: number|null,
     setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ListCard = (props:CardBoxType) => {
-    const [markState, setMarkState] = useState(props.mark);
+    const [markState, setMarkState] = useState(false);
     const isUser = false;
     const handleMarkClick = () => {
         if(isUser){
@@ -51,7 +56,7 @@ const ListCard = (props:CardBoxType) => {
     const imgBox = css`
         display: flex;
         border-radius: 10px;
-        background-image : url(/img/productsampleimg.png);
+        background-image : url(${props.preview});
         background-position: top center;
         background-size: cover;
         width : 100%;
@@ -89,7 +94,7 @@ const ListCard = (props:CardBoxType) => {
                 <div css={css`
                         height:35rem;
                         width:100%;
-                    `} onClick={() => navigate(`${props.id}`)} />
+                    `} onClick={() => navigate(`${props.clothesId}`)} />
                 <div>
                     {
                         markState === true ?
@@ -98,12 +103,12 @@ const ListCard = (props:CardBoxType) => {
                     }
                 </div>
             </div>
-            <div onClick={() => navigate(`${props.id}`)} css={flexraw}>
+            <div onClick={() => navigate(`${props.designerId}`)} css={flexraw}>
                 <img src="/img/profileLogo.png" />
-                <div css={makebold}>{props.designer}</div>
+                <div css={makebold}>{props.designerName}</div>
                 <div css={fontsize}> 디자이너</div>
             </div>
-            <div onClick={() => navigate(`${props.id}`)} css={header}>{props.product}</div>
+            <div onClick={() => navigate(`${props.clothesId}`)} css={header}>{props.clothesName}</div>
         </div>
   )
 }
