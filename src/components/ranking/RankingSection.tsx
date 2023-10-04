@@ -63,7 +63,7 @@ const RankingSection = () => {
 
 	const text1 = css`
 		font-size: 3.3rem;
-		font-weight: bolder;
+		font-weight: 600;
 		margin-top: 20px;
 	`;
 
@@ -71,7 +71,7 @@ const RankingSection = () => {
 		display: flex;
 		width: 100%;
 		font-size: 2rem;
-		font-weight: normal;
+		font-weight: 600;
 		color: #c6c6c6;
 		align-items: center;
 		justify-content: center;
