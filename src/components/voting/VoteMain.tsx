@@ -1,20 +1,9 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import ShareButton from '../common/ShareButton';
-import { useRecoilValue } from 'recoil';
-import { isLoginAtom } from '@/utils/state';
-import Login from '@/pages/Login';
+import Login from '../login/Login';
 
 const VoteMain = () => {
-	const isLogged = useRecoilValue(isLoginAtom);
-
-	const loginSection = css`
-		width: 100%;
-		background-color: white;
-	`;
-	const margintop =css`
-		height: 50px;
-	`
 	const voteSection = css`
 		width: 90%;
 		min-height: 100%;
@@ -69,36 +58,28 @@ const VoteMain = () => {
 			navigate(page);
 		};
 	};
-	if (!isLogged) {
-		return (
-			<div css={voteSection}>
-				<div css={bannerSection}>
-					<img css={img} src="/img/votemainbanner.png" />
-				</div>
-				<div
-					css={[
-						startBtn,
-						css`
-							cursor: pointer;
-						`,
-					]}
-					onClick={handleClick('userVote')}
-				>
-					투표 시작하기
-				</div>
-				<div css={shareSection}>
-					<ShareButton />
-				</div>
+
+	return (
+		<div css={voteSection}>
+			<div css={bannerSection}>
+				<img css={img} src="/img/votemainbanner.png" />
 			</div>
-		);
-	} else {
-		return (
-			<div css={loginSection}>
-				<div css={margintop}></div>
-				<Login content={`로그인하여 투표에 참여해 보세요!`} />
+			<div
+				css={[
+					startBtn,
+					css`
+						cursor: pointer;
+					`,
+				]}
+				onClick={handleClick('userVote')}
+			>
+				투표 시작하기
 			</div>
-		);
-	}
+			<div css={shareSection}>
+				<ShareButton />
+			</div>
+		</div>
+	);
 };
 
 export default VoteMain;

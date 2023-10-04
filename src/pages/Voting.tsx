@@ -3,10 +3,14 @@ import { css } from '@emotion/react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import { useEffect, useState } from 'react';
+import { isLoginAtom } from '@/utils/state';
+import { useRecoilValue } from 'recoil';
+import Login from '@/components/login/Login';
 
 const Voting = () => {
 	const location = useLocation();
 	const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
+	const isLogged = useRecoilValue(isLoginAtom);
 
 	useEffect(() => {
 		if (location.pathname.includes('/userPick')) {
@@ -26,11 +30,24 @@ const Voting = () => {
 		align-items: center;
 		background: ${backgroundColor};
 	`;
-
+	const loginSection = css`
+		width: 100%;
+		background-color: white;
+	`;
+	const margintop = css`
+		height: 30px;
+	`;
 	return (
 		<div css={flexColumn}>
 			<Header where="투표하기" />
-			<Outlet />
+			{isLogged ? (
+				<Outlet />
+			) : (
+				<div css={loginSection}>
+					<div css={margintop}></div>
+					<Login where="vote" />
+				</div>
+			)}
 		</div>
 	);
 };
