@@ -64,17 +64,14 @@ const VoteMain = () => {
 		margin-top: 40px;
 		gap: 10px;
 	`;
-
+	const navigate = useNavigate();
 	const handleClick = (page: string) => {
-		const navigate = useNavigate();
-		if (possible==='투표 가능') {
+		if (possible === '투표 가능') {
 			console.log('투표가 가능해요');
-			return () => {
-				navigate(page);
-			};
-		} else if(possible ==='투표 불가능'){
+			navigate(page); 
+		} else if (possible === '투표 불가능') {
 			console.log('오늘 투표를 완료했습니다!');
-		} else if(possible ==='로그인 필요'){
+		} else if (possible === '로그인 필요') {
 			console.log('로그인을 먼저 해주세요!');
 		}
 	};
@@ -91,7 +88,7 @@ const VoteMain = () => {
 						cursor: pointer;
 					`,
 				]}
-				onClick={handleClick('userVote')}
+				onClick={() => handleClick('userVote')}
 			>
 				투표 시작하기
 			</div>
