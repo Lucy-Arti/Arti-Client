@@ -1,17 +1,19 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import ShareButton from '../common/ShareButton';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getIsVotePossible } from '../../apis/vote';
 
 const VoteMain = () => {
+	const [possible, setIsPossible] = useState('');
+
 	useEffect(() => {
 		if (localStorage.getItem('access')) {
-			const getPossible = async () => {
-				const data = await getIsVotePossible();
-				console.log(data);
+			const checkPossible = async () => {
+				const result = await getIsVotePossible();
+				setIsPossible(result);
 			};
-			getPossible();
+			checkPossible();
 		}
 	});
 
@@ -65,9 +67,17 @@ const VoteMain = () => {
 
 	const handleClick = (page: string) => {
 		const navigate = useNavigate();
-		return () => {
-			navigate(page);
-		};
+		if (possible==='투표 가능') {
+			return () => {
+				navigate(page);
+			};
+		} else if(possible ==='투표 불가능'){
+			alert('오늘 투표를 완료했습니다!');
+		} else if(possible ==='로그인 필요'){
+			alert('로그인을 먼저 해주세요!');
+		} else {
+			alert('뭔 오류임?');
+		}
 	};
 
 	return (
