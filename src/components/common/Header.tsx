@@ -35,11 +35,9 @@ const Header = ({ where }: { where: string }) => {
 	if (where === 'main') {
 		return (
 			<div className="headerLayout">
-				<div css={bgwrapper}>
-					<div css={spaceBetween} className="headerComponent">
-						<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} />
-						<img src="/img/search.svg" />
-					</div>
+				<div css={spaceBetween} className="headerComponent">
+					<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} />
+					<img src="/img/search.svg" onClick={handleClick('/search')}/>
 				</div>
 			</div>
 		);

@@ -14,6 +14,7 @@ import FinalPick from './components/voting/FinalPick';
 import ListView from './components/list/ListView';
 import ProductDetail from './components/list/ProductDetail';
 import DesignerDetail from './components/designer/DesignerDetail';
+import Search from './components/search/Search';
 
 const router = createBrowserRouter([
 	{
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
 	{
 		path: '/designer/:name',
 		element: <DesignerDetail />,
+	},
+	{
+		path: '/search',
+		element: <Search />,
 	},
 ]);
 
