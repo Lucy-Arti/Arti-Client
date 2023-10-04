@@ -91,7 +91,7 @@ const VoteMain = () => {
 						cursor: pointer;
 					`,
 				]}
-				onClick={handleClick('userVote')}
+				onClick={()=>handleClick('userVote')}
 			>
 				투표 시작하기
 			</div>
