@@ -125,7 +125,7 @@ const RankingSection = () => {
 						</div>
 					</div>
 
-					<div>1차 투표 기간 : 00.00 ~ 00.00</div>
+					<div>1차 투표 기간 : ~ 23.10.31</div>
 				</div>
 			</div>
 			<div css={rankingBtnWrapper}>
