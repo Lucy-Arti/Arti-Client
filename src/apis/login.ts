@@ -28,7 +28,7 @@ export const postCode = async (body: postCodeBody) => {
 export const getUserInfo = async () => {
 	const accessToken = localStorage.getItem('access');
 
-	const response = await axios.get(`${baseURL}api/v1/auth/kakao/info`, {
+	const response = await axios.get(`${baseURL}api/v1/kakao/info`, {
 		headers: {
 			Authorization: `${accessToken}`,
 		},
