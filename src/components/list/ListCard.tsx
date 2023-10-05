@@ -25,8 +25,10 @@ const ListCard = (props:CardBoxType) => {
     const [markState, setMarkState] = useState(false);
     const [isSuccessed, setIsSuccessed] = useState(false);
     const isUser = useRecoilValue(isLoginAtom);
+    
     const getMark = async() => {
         if (isUser){
+            // const result = await getMarked(props.clothesId, localStorage.getItem("access"));
             const result = await getMarked(props.clothesId, localStorage.getItem("access"));
             if(result!==false){
                 setMarkState(result.data);
