@@ -7,6 +7,8 @@ import ListCard from '../list/ListCard';
 import ModalLogin from '../list/ModalLogin';
 import ModalProductSaved from '../list/ModalProductSaved';
 import ModalProductUnsaved from '../list/ModalProductUnsaved';
+import SearchCard from './SearchCard';
+import { GetAllProductLists } from '@/apis/list';
 
 const Search = () => {
     const inputText = useRef<HTMLInputElement>(null);
@@ -17,11 +19,20 @@ const Search = () => {
 	const [products, setProducts] = useState<ProductType[]>(productList);
     const getProducts = async() => {
         if (inputText.current === null || inputText.current.value === ''){
-            const result = await GetSearchProductList('');
+            const result = await GetAllProductLists();
             if(result===false) {
                 alert("불러오기 오류 발생");
             } else {
-                setProducts(productList.concat(result.data));
+                var newArr:ProductType[] = [];
+                var preData:ProductType[] = result.data;
+                var arraySize = preData.length;
+                for (let i = 0; i < arraySize; i++) {
+                    let randomNum = Math.floor( Math.random() * (preData.length - i) );
+                    let element = preData.splice(randomNum, 1);
+                    newArr = newArr.concat(element);
+                }
+                // setProducts(products.concat(result.data));
+                setProducts(productList.concat(newArr));
             }
         } else {
             const result = await GetSearchProductList(inputText.current.value);
@@ -70,7 +81,7 @@ const Search = () => {
                 outline: none;
                 margin-left: 1rem;
             `} ref={inputText} />
-            <img src="/img/search.svg" onClick={handleClick} />
+            <img css={css`:hover{cursor: pointer;}`} src="/img/search.svg" onClick={handleClick} />
         </div>
     </div>
         {
@@ -87,7 +98,7 @@ const Search = () => {
         <div css={gridWrapper}>
             {products && 
             products.map((product:ProductType, idx:number) => (
-				<ListCard 
+				<SearchCard 
 					key={idx}
 					clothesId={product.clothesId}
 					createdAt={product.createdAt}

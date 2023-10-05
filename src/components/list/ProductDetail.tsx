@@ -115,7 +115,12 @@ const ProductDetail = () => {
             <div>
                 <img width="100%" src={`${productDetail.preview}`} />
                 <div onClick={()=>navigate(`/designer/${productDetail.designerId}`)} css={designerBox}>
-                    <img width = "30rem" src="/img/profileLogo.png" />
+                    <div css={css`
+                        display: flex;
+                        width: 3rem;
+                    `}>
+                        <img width="100%" src="/img/profile-large.png" />
+                    </div>
                     <div css={makebold}>{productDetail.designerName}</div>
                     <div css={fontsize}> 디자이너</div>
                 </div>
@@ -124,11 +129,11 @@ const ProductDetail = () => {
                     <div css={flexrow} className='icon-box'>
                         {
                             (markState === true) ? 
-                            <img width = "30rem" src="/img/activeHeart.png" onClick={handleMarkClick} />
+                            <img css={css`:hover{cursor: pointer;}`} width = "30rem" src="/img/activeHeart.png" onClick={handleMarkClick} />
                             : 
-                            <img width = "30rem" src="/img/nonactiveHeart.png" onClick={handleMarkClick} />
+                            <img css={css`:hover{cursor: pointer;}`} width = "30rem" src="/img/nonactiveHeart.png" onClick={handleMarkClick} />
                         }
-                        <BiShareAlt size="3rem" />
+                        <BiShareAlt css={css`:hover{cursor: pointer;}`} size="3rem" />
                     </div>
                 </div>
                 <div css={gapDesign} />
