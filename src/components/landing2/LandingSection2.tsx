@@ -10,11 +10,13 @@ import './landing2.css';
 import { useEffect, useState } from 'react';
 import { ProductType } from '../list/ListView';
 import { GetAllProductLists } from '@/apis/list';
+import { useNavigate } from 'react-router-dom';
 
 const LandingSection2 = () => {
 	const productList: ProductType[] = [];
 	const [products, setProducts] = useState<ProductType[]>(productList);
 	// const [products, setProducts] = useState([]);
+	const navigate = useNavigate();
 
 	const getProducts = async () => {
 		const result = await GetAllProductLists();
@@ -66,6 +68,7 @@ const LandingSection2 = () => {
 	const more = css`
 		font-size: 1.7rem;
 		font-weight: 300;
+		cursor: pointer;
 	`;
 
 	const card = css`
@@ -148,23 +151,23 @@ const LandingSection2 = () => {
 		<div css={landingSection2}>
 			<div css={bannerSection2}>
 				<div css={introduce}>소개합니다</div>
-				<div css={more}>더보기</div>
+				<div css={more} onClick={()=>{navigate('productlist')}}>더보기</div>
 			</div>
 			<div css={swipeSection}>
 				<Swiper {...settings} className="mySwiper">
 					{products && products.map((product: ProductType, index) => (
 						<SwiperSlide key={index}>
-							<div css={card}>
+							<div css={card} onClick={()=>{navigate(`productlist/${product.clothesId}`)}}>
 								<img css={cardImg} src={`${product.preview}`} />
 								<div css={info}>
 									<div css={infoText}>
 										<div css={[row, pickText]}>
 											<img src="/img/profileLogo.svg" />
-											<span className="black">&nbsp;{product.designerName}&nbsp;</span>디자이너
+											<span className="black">&nbsp;{product.designerName}&nbsp;</span>
 										</div>
-										<div css={[row, pickText]}>
+										{/* <div css={[row, pickText]}>
 											<div className="black productName">{product.clothesName}</div>
-										</div>
+										</div> */}
 									</div>
 								</div>
 							</div>
