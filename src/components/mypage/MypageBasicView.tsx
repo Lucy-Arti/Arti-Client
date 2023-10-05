@@ -8,7 +8,8 @@ import MypageExternalContent from "./MypageExternalContent";
 import Login from "../login/Login";
 
 const MypageBasicView = () => {
-    const isLogin = useRecoilValue(isLoginAtom);
+    // const isLogin = useRecoilValue(isLoginAtom);
+    const isLogin = true;
 	const ArticleWrapper = css`
 		display: flex;
 		width: 100%;

@@ -8,6 +8,7 @@ import ModalProductUnsaved from "../list/ModalProductUnsaved";
 import ListCard from "../list/ListCard";
 import Footer from "../common/Footer";
 import { useNavigate } from "react-router-dom";
+import SearchCard from "../search/SearchCard";
 
 const MypageVoted = () => {
     const productList : ProductType[] = [];
@@ -16,6 +17,7 @@ const MypageVoted = () => {
     const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const [products, setProducts] = useState<ProductType[]>(productList);
     const navigate = useNavigate();
+
     const getProductLists = async() => {
         const result = await GetVotedProductLists(localStorage.getItem("access"));
         if(result===false){
@@ -108,7 +110,7 @@ const MypageVoted = () => {
 		<div css={gridWrapper}>
 			{
             products && products.map((product:ProductType, idx:number) => (
-				<ListCard 
+				<SearchCard 
 					key={idx}
 					clothesId={product.clothesId}
 					createdAt={product.createdAt}
