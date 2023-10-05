@@ -17,7 +17,8 @@ const Home = () => {
 	const flexColumn = css`
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		justify-content: center;
+		height: fit-content;
 	`;
 
 	useEffect(() => {
