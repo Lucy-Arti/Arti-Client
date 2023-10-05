@@ -6,6 +6,7 @@ import { GetVotedProductLists } from "@/apis/mypage";
 import ModalProductSaved from "../list/ModalProductSaved";
 import ModalProductUnsaved from "../list/ModalProductUnsaved";
 import ListCard from "../list/ListCard";
+import Footer from "../common/Footer";
 
 const MypageVoted = () => {
     const productList : ProductType[] = [];
@@ -47,7 +48,6 @@ const MypageVoted = () => {
     `
     const gridWrapper = css`
         display: grid;
-        height: 80vh;
         margin: 2rem;
         /* border: 1px solid black; */
         grid-template-columns: repeat(2, 1fr);
@@ -116,6 +116,7 @@ const MypageVoted = () => {
 				/>
 			))}
 		</div>
+        <Footer />
     </>
   )
 }
