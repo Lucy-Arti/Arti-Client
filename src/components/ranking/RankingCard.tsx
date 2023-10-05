@@ -3,6 +3,7 @@ import { RankData } from '@/types/request';
 import { isLoginAtom } from '@/utils/state';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 type RankingCardPropsType = {
@@ -18,6 +19,7 @@ const RankingCard = (props:RankingCardPropsType) => {
 	const [markState, setMarkState] = useState(false);
 	const [isSuccessed, setIsSuccessed] = useState(false);
 	const isUser = useRecoilValue(isLoginAtom);
+	const navigate = useNavigate();
 
 	const getMark = async () => {
 		if (isUser) {
@@ -118,7 +120,7 @@ const RankingCard = (props:RankingCardPropsType) => {
 		flex-direction: column;
 		justify-content: flex-start;
 		margin-top: 2rem;
-		height: fit-content;
+		height:80%;
 		width: 48%;
 		margin-left: 1rem;
 	`;
@@ -159,10 +161,10 @@ const RankingCard = (props:RankingCardPropsType) => {
 				<div css={tagNumber}>{props.index + 1}</div>
 			</div>
 			<div css={box}>
-				<div css={left}>
+				<div css={left}  onClick={()=>navigate(`../../productlist/${props.data.clothesId}`)}>
 					<img css={productImg} src={`${props.data.preview}`} />
 				</div>
-				<div css={middle}>
+				<div css={middle}  onClick={()=>navigate(`../../productlist/${props.data.clothesId}`)}>
 					<div css={row}>
 						<img src="/img/profileLogo.svg" />
 						<div
