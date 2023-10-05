@@ -6,6 +6,7 @@ import { css } from "@emotion/react";
 import MypageUpperContent from "./MypageUpperContent";
 import MypageExternalContent from "./MypageExternalContent";
 import Login from "../login/Login";
+import Footer from "../common/Footer";
 
 const MypageBasicView = () => {
     const isLogin = useRecoilValue(isLoginAtom);
@@ -31,9 +32,16 @@ const MypageBasicView = () => {
 					<MypageUpperContent />
 					<div css={gapDesign} />
 					<MypageExternalContent />
+					<Footer />
 				</div>
 				:
-				<Login where='mypage' />
+				<div>
+					<div css={css`
+						height:2rem;
+						width: 100%;
+					`} />
+					<Login where='mypage' />
+				</div>
 
 			}
 		</>
