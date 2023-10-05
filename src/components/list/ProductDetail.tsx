@@ -87,6 +87,9 @@ const ProductDetail = () => {
         margin-left: 0.5rem;
     `
     const Title = css`
+        display: flex;
+        flex-wrap: wrap;
+        width: 70%;
         font-size: 2rem;
         font-weight: 600;
     `
