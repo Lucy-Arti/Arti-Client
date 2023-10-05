@@ -2,7 +2,14 @@ import { css } from '@emotion/react';
 import RankingCard from './RankingCard';
 import { RankData } from '@/types/request';
 
-const RankingDataList = ({ datas }: { datas: RankData[] }) => {
+type RankingDataListPropsType = {
+	datas: RankData[];
+	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const RankingDataList = (props:RankingDataListPropsType) => {
 
 	const card = css`
 		display: flex;
@@ -13,8 +20,14 @@ const RankingDataList = ({ datas }: { datas: RankData[] }) => {
 
 	return (
 		<div css={card}>
-			{datas && datas.map((data, index) => (
-				<RankingCard key={index} index={index} data={data} />
+			{props.datas && props.datas.map((data, index) => (
+				<RankingCard 
+				key={index} 
+				index={index} 
+				data={data}
+				setSavedModalIsOpen={props.setSavedModalIsOpen}
+				setUnsavedModalIsOpen={props.setUnsavedModalIsOpen}
+				setLoginModalIsOpen={props.setLoginModalIsOpen} />
 			))}
 		</div>
 	);
