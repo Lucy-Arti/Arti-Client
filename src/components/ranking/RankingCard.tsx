@@ -47,14 +47,17 @@ const RankingCard = (props:RankingCardPropsType) => {
 		if (isUser) {
 			if (markState) {
 				setMarkState(false);
+				setLikeNum(like-1);
 				postMark();
 				props.setUnsavedModalIsOpen(true);
 				setIsSuccessed(false);
 				setTimeout(() => {
 					props.setUnsavedModalIsOpen(false);
 				}, 1000);
+			
 			} else {
 				setMarkState(true);
+				setLikeNum(like+1);
 				postMark();
 				props.setSavedModalIsOpen(true);
 				setIsSuccessed(false);
