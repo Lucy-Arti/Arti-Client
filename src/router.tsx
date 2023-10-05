@@ -13,7 +13,10 @@ import FinalPick from './components/voting/FinalPick';
 import ListView from './components/list/ListView';
 import ProductDetail from './components/list/ProductDetail';
 import DesignerDetail from './components/designer/DesignerDetail';
-import Search from './components/search/Search';
+import MypageBasicView from './components/mypage/MypageBasicView';
+import MypageVoted from './components/mypage/MypageVoted';
+import MypageMarked from './components/mypage/MypageMarked';
+import MypageRecent from './components/mypage/MypageRecent';
 
 const router = createBrowserRouter([
 	{
@@ -69,6 +72,24 @@ const router = createBrowserRouter([
 	{
 		path: '/mypage',
 		element: <Mypage />,
+		children: [
+			{
+				path: '',
+				element: <MypageBasicView />,
+			},
+			{
+				path: 'voted',
+				element: <MypageVoted />
+			},
+			{
+				path: 'recent',
+				element: <MypageRecent />
+			},
+			{
+				path: 'marked',
+				element: <MypageMarked />
+			},
+		],
 	},
 	{
 		path: '/kakaologin',

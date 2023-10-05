@@ -73,7 +73,7 @@ const Header = ({ where }: { where: string }) => {
 			<div className="headerLayout">
 				<div css={bgwrapper}>
 					<div css={spaceBetween} className="headerComponent">
-						<FiChevronLeft cursor="pointer" size="26px" onClick={handleClick('/')} />
+						<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
 						<div
 							css={css`
 								font-size: 2rem;

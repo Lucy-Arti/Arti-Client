@@ -68,7 +68,7 @@ const ModalLogin = (props:{setLoginModalIsOpen: React.Dispatch<React.SetStateAct
                     text-align: center;`}>로그인 후<br />저장할 수 있어요</div>
                 <div css={buttonWrapper}>
                     <div onClick={() => props.setLoginModalIsOpen(false)} css={buttonStyle}>취소</div>
-                    <div onClick={() => navigate('/login')} className='right-button' css={buttonStyle}>로그인하기</div>
+                    <div onClick={() => navigate('/mypage')} className='right-button' css={buttonStyle}>로그인하기</div>
                 </div>
             </div>
         </div>

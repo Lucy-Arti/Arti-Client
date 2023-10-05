@@ -1,14 +1,9 @@
+import { getMarked, postMarked } from "@/apis/list"
+import { isLoginAtom } from "@/utils/state"
 import { css } from "@emotion/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-
-export type ProductMapType = {
-	id: number,
-	designer: string,
-	product: string,
-	like: number,
-	mark: boolean
-}
+import { useRecoilValue } from "recoil"
 
 type CardBoxType = {
     clothesId: number,
@@ -28,18 +23,43 @@ type CardBoxType = {
 
 const ListCard = (props:CardBoxType) => {
     const [markState, setMarkState] = useState(false);
-    const isUser = false;
+    const [isSuccessed, setIsSuccessed] = useState(false);
+    const isUser = useRecoilValue(isLoginAtom);
+    const getMark = async() => {
+        if (isUser){
+            const result = await getMarked(props.clothesId, localStorage.getItem("access"));
+            if(result!==false){
+                setMarkState(result.data);
+            }
+        }
+    }
+    const postMark = async() => {
+        const result = await postMarked(props.clothesId, localStorage.getItem("access"));
+        if (result === false) {
+            setIsSuccessed(false);
+            //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+        } else {
+            setIsSuccessed(true);
+        }
+    }
+    useEffect(()=>{
+        getMark();
+    }, []);
     const handleMarkClick = () => {
         if(isUser){
             if (markState) {
                 setMarkState(false);
+                postMark();
                 props.setUnsavedModalIsOpen(true);
+                setIsSuccessed(false);
                 setTimeout(() => {
                     props.setUnsavedModalIsOpen(false);
                 }, 1000);
             } else {
                 setMarkState(true);
+                postMark();
                 props.setSavedModalIsOpen(true);
+                setIsSuccessed(false);
                 setTimeout(() => {
                     props.setSavedModalIsOpen(false);
                 }, 1000);

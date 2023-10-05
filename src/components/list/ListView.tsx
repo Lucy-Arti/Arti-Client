@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import ListCard, { ProductMapType } from "./ListCard";
+import ListCard from "./ListCard";
 import NavBar from "../common/NavBar";
 import Header from "../common/Header";
 import { useEffect, useState } from "react";

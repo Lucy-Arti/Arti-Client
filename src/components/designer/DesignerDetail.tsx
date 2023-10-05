@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import Header from '../common/Header'
-import { ProductMapType } from '../list/ListCard'
+// import { ProductMapType } from '../list/ListCard'
 import { useEffect, useState } from 'react';
 import ModalLogin from '../list/ModalLogin';
 import ModalProductSaved from '../list/ModalProductSaved';
@@ -110,7 +110,7 @@ const DesignerDetail = () => {
 		{
 			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
 		}
-		<div css={gridWrapper}>
+		{/* <div css={gridWrapper}>
 			{ProductList.map((product:ProductMapType, idx:number) => (
 				<ProductListCard 
 					key={idx}
@@ -124,7 +124,7 @@ const DesignerDetail = () => {
 					setLoginModalIsOpen={setLoginModalIsOpen} 
 				/>
 			))}
-		</div>
+		</div> */}
         <Footer />
     </>
   )
