@@ -182,7 +182,7 @@ const FinalPick = () => {
 			{productDetail && (
 				<div css={infoSection}>
 					<div css={pickText}>
-						<span className="black">{`{${userName}}`}</span> 님의 PICK
+						<span className="black">{userName}</span> 님의 PICK
 					</div>
 					<div css={card}>
 						<img css={cardImg} src={`${productDetail.preview}`} />
