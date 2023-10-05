@@ -101,6 +101,9 @@ const ListView = () => {
 		{
 			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
 		}
+		<div css={css`
+			height: 120px;
+		`}></div>
 		<div css={gridWrapper}>
 			{products.map((product:ProductType, idx:number) => (
 				<ListCard 
