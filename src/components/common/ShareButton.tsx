@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { BiShareAlt } from 'react-icons/bi';
 
-const ShareButton = () => {
+const ShareButton = ({ where }: { where: string }) => {
 	const link = location.href;
 	const handleShareClick = React.useCallback(async () => {
 		try {
@@ -27,22 +27,39 @@ const ShareButton = () => {
 		}
 	}, []);
 
-	const shareBtn = css`
-		width: 37px;
-		height: 37px;
-		border-radius: 18.5px;
-		background-color: #ADADAD;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-	`;
-
-	return (
-		<div css={shareBtn} onClick={handleShareClick}>
-			<BiShareAlt size="22px" />
-		</div>
-	);
+		if(where==="product"){
+			const shareBtn = css`
+				width: 37px;
+				height: 37px;
+				border-radius: 18.5px;
+				/* background-color: #ADADAD; */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+			`;
+			return(
+				<div css={shareBtn} onClick={handleShareClick}>
+					<BiShareAlt size="22px" />
+				</div>
+			);
+		} else {
+			const shareBtn = css`
+				width: 37px;
+				height: 37px;
+				border-radius: 18.5px;
+				background-color: #ADADAD;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+			`;
+			return(
+				<div css={shareBtn} onClick={handleShareClick}>
+					<BiShareAlt size="22px" />
+				</div>
+			);
+		}
 };
 
 export default ShareButton;

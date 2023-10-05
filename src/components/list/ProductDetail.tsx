@@ -9,6 +9,7 @@ import { ProductType } from "./ListView";
 import Footer from "../common/Footer";
 import { useRecoilValue } from "recoil";
 import { isLoginAtom } from "@/utils/state";
+import ShareButton from "../common/ShareButton";
 
 const ProductDetail = () => {
     const {idx} = useParams();
@@ -133,7 +134,8 @@ const ProductDetail = () => {
                             : 
                             <img css={css`:hover{cursor: pointer;}`} width = "30rem" src="/img/nonactiveHeart.png" onClick={handleMarkClick} />
                         }
-                        <BiShareAlt css={css`:hover{cursor: pointer;}`} size="3rem" />
+                        {/* <BiShareAlt css={css`:hover{cursor: pointer;}`} size="3rem" /> */}
+                        <ShareButton where="product" />
                     </div>
                 </div>
                 <div css={gapDesign} />
