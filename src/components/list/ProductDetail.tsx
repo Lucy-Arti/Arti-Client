@@ -189,7 +189,7 @@ const ProductDetail = () => {
 										onClick={handleMarkClick}
 									/>
 								)}
-								<div>{productDetail.likeCount}</div>
+								<div>{like}</div>
 							</div>
 
 							{/* <BiShareAlt css={css`:hover{cursor: pointer;}`} size="3rem" /> */}
