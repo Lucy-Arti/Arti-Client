@@ -22,17 +22,20 @@ export const getIsVotePossible = async () => {
 		if (response.status === 200) {
 			console.log('투표 가능');
 			return '투표 가능';
-		} else if (response.status === 400) {
-			console.log('이미 투표한 사용자');
-			return '투표 불가능';
-		} else {
-			console.log('로그인 필요');
-			return '로그인 필요';
 		}
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			const axiosError = error as AxiosError;
-			console.error('서버 응답 에러 - 상태 코드:', axiosError.response?.status, axiosError.response?.data);
+			if (axiosError.response) {
+				const statusCode = axiosError.response.status;
+				if (statusCode === 400) {
+					alert('오늘 투표를 완료했어요!')
+				} else {
+					console.log('로그인 필요', statusCode, axiosError.response.data);
+				}
+			} else {
+				console.error('네트워크 에러', error.message);
+			}
 		} else {
 			console.error('알 수 없는 에러', error);
 		}
