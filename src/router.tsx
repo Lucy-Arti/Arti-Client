@@ -17,6 +17,7 @@ import MypageBasicView from './components/mypage/MypageBasicView';
 import MypageVoted from './components/mypage/MypageVoted';
 import MypageMarked from './components/mypage/MypageMarked';
 import MypageRecent from './components/mypage/MypageRecent';
+import Search from './components/search/Search';
 
 const router = createBrowserRouter([
 	{
