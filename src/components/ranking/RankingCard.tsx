@@ -204,7 +204,7 @@ const RankingCard = (props:RankingCardPropsType) => {
 						onClick={handleMarkClick}
 						src={markState ? '/img/activeHeart.png' : '/img/nonactiveHeart.png'}
 					/>
-					{like}
+				
 				</div>
 			</div>
 		</div>
