@@ -1,19 +1,30 @@
-
 import { userNameAtom } from '@/utils/state';
 import { css } from '@emotion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { worldcupList } from './test';
+import { ProductType } from '../list/ListView';
+import { GetProductDetail } from '@/apis/list';
+import { useEffect, useState } from 'react';
 
 const FinalPick = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	const encodedData = searchParams.get('p') as string;
-	const targetId = Number(searchParams.get('id'));
-	const productName = decodeURIComponent(encodedData);
+	const targetId = searchParams.get('id');
 	const userName = useRecoilValue(userNameAtom);
-	const pickedItem = worldcupList.find((item) => item.clothesId === targetId);
+	const [productDetail, setProductDetail] = useState<ProductType>();
+	const getProduct = async () => {
+		const result = await GetProductDetail(targetId!);
+		if (result === false) {
+			alert('불러오기 오류 발생');
+			navigate('/');
+		} else {
+			setProductDetail(result.data);
+		}
+	};
+	useEffect(() => {
+		getProduct();
+	}, []);
 
 	const finalpickSection = css`
 		width: 100%;
@@ -168,31 +179,33 @@ const FinalPick = () => {
 				<img css={heart2} src="/img/backgreenheart.png" />
 				<img css={heart3} src="/img/backgreenheart.png" />
 			</div>
-			<div css={infoSection}>
-				<div css={pickText}>
-					<span className="black">{`{${userName}}`}</span> 님의 PICK
-				</div>
-				<div css={card}>
-					<img css={cardImg} src={pickedItem?.preview} />
-					<div css={info}>
-						<div css={infoText}>
-							<div css={[row, pickText]}>
-								<img src="/img/profileLogo.svg" />
-								<span className="black">&nbsp;{pickedItem?.designerName}&nbsp;</span>디자이너
-							</div>
-							<div css={[row, pickText]}>
-								<div className="black productName">{productName}</div>
+			{productDetail && (
+				<div css={infoSection}>
+					<div css={pickText}>
+						<span className="black">{`{${userName}}`}</span> 님의 PICK
+					</div>
+					<div css={card}>
+						<img css={cardImg} src={`${productDetail.preview}`} />
+						<div css={info}>
+							<div css={infoText}>
+								<div css={[row, pickText]}>
+									<img src="/img/profileLogo.svg" />
+									<span className="black">&nbsp;{productDetail.designerName}&nbsp;</span>디자이너
+								</div>
+								<div css={[row, pickText]}>
+									<div className="black productName">{productDetail.clothesName}</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div css={btnSection}>
-					<div css={btn1} onClick={() => navigate('../../')}>
-						홈
+					<div css={btnSection}>
+						<div css={btn1} onClick={() => navigate('../../')}>
+							홈
+						</div>
+						<div css={btn2}onClick={() => navigate(`../../productlist/${targetId}`)}>옷 구경하기</div>
 					</div>
-					<div css={btn2}>옷 구경하기</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };

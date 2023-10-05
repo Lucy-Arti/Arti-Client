@@ -62,11 +62,11 @@ const DisplayCard = ({
 			height: 230px;
 		}
 		@media (min-width: 470px) {
-			height: 250px;
 			width: 95%;
 		}
 	`;
 	const productimg = css`
+			object-fit: cover;
 		border-radius: 5px;
 		@media (min-width: 0px) {
 			height: 100%;
