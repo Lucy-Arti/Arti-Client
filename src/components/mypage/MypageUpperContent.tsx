@@ -1,5 +1,6 @@
 import { userEmailAtom, userNameAtom } from "@/utils/state"
 import { css } from "@emotion/react"
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil"
 
 const MypageUpperContent = () => {
@@ -7,6 +8,7 @@ const MypageUpperContent = () => {
     const userEmail = useRecoilValue(userEmailAtom);
     const randomNum = ( Math.random() * 4 );
     const randomNumFloor = Math.floor(randomNum);
+    const navigate = useNavigate();
     const columnSort = css`
         display: flex;
         width: 90%;
@@ -61,15 +63,15 @@ const MypageUpperContent = () => {
             </div>
         </div>
         <div css={BtnWrapper}>
-            <div className="start" css={btnStyle}>
+            <div className="start" css={btnStyle} onClick={()=>{navigate('voted')}}>
                 <img src="/img/mypageVoteBtn.png" />
                 <div css={css`font-size: 1.5rem;`}>투표한 옷</div>
             </div>
-            <div css={btnStyle}>
+            <div css={btnStyle} onClick={()=>{navigate('recent')}}>
                 <img src="/img/mypageRecentBtn.png" />
                 <div css={css`font-size: 1.5rem;`}>최근 본 옷</div>
             </div>
-            <div className="last" css={btnStyle}>
+            <div className="last" css={btnStyle} onClick={()=>{navigate('marked')}}>
                 <img src="/img/mypageHeart.png" />
                 <div css={css`font-size: 1.5rem;`}>저장한 옷</div>
             </div>
