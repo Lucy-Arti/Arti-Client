@@ -51,7 +51,6 @@ const LandingSection2 = () => {
 	const swipeSection = css`
 		width: 100%;
 		max-height: 300px;
-		background-color: antiquewhite;
 	`;
 
 	const introduce = css`
