@@ -1,10 +1,28 @@
+import { getMarked } from '@/apis/list';
+import { RankData } from '@/types/request';
+import { isLoginAtom } from '@/utils/state';
 import { css } from '@emotion/react';
-import { RankingSample } from '../../types/request.d';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
-const RankingCard = ({ data, index }: { data: RankingSample; index: number }) => {
-	const [markState, setMarkState] = useState(data.mark);
-	const [like, setLikeNum] = useState(data.like);
+const RankingCard = ({ data, index }: { data: RankData; index: number }) => {
+	const [like, setLikeNum] = useState(data.likeCount);
+	const [markState, setMarkState] = useState(false);
+	const isUser = useRecoilValue(isLoginAtom);
+
+	const getMark = async() => {
+        if (isUser){
+            // const result = await getMarked(props.clothesId, localStorage.getItem("access"));
+            const result = await getMarked(data.clothesId, localStorage.getItem("access"));
+            if(result!==false){
+                setMarkState(result.data);
+            }
+        }
+    }
+
+	useEffect(()=>{
+        getMark();
+    }, []);
 
 	const handleMark = () => {
 		if (markState) {
@@ -122,7 +140,7 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 								font-weight: 500;
 							`}
 						>
-							&nbsp;{data.designer}&nbsp;
+							&nbsp;{data.designerName}&nbsp;
 						</div>
 						<div
 							css={css`
@@ -141,7 +159,7 @@ const RankingCard = ({ data, index }: { data: RankingSample; index: number }) =>
 							margin-top: 0.3rem;
 						`}
 					>
-						{data.product}
+						{data.clothesName}
 					</div>
 				</div>
 				<div css={right}>
