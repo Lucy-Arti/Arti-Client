@@ -5,20 +5,20 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 const RankingSection = () => {
 	const { pathname } = useLocation();
-	const [tab, setTab] = useState(RANKING_TABS.TOTAL);
+	// const [tab, setTab] = useState(RANKING_TABS.TOTAL);
 
-	const rankingLabels = [
-		{ label: '전체 랭킹', route: 'rank/total' },
-		{ label: '오늘의 랭킹', route: 'rank/today' },
-	];
+	// const rankingLabels = [
+	// 	{ label: '전체 랭킹', route: 'rank/total' },
+	// 	{ label: '오늘의 랭킹', route: 'rank/today' },
+	// ];
 
-	useEffect(() => {
-		if (pathname.includes('total')) {
-			setTab(RANKING_TABS.TOTAL);
-		} else if (pathname.includes('today')) {
-			setTab(RANKING_TABS.TODAY);
-		}
-	}, [pathname]);
+	// useEffect(() => {
+	// 	if (pathname.includes('total')) {
+	// 		setTab(RANKING_TABS.TOTAL);
+	// 	} else if (pathname.includes('today')) {
+	// 		setTab(RANKING_TABS.TODAY);
+	// 	}
+	// }, [pathname]);
 
 	const rankingSection = css`
 		width: 90%;
@@ -84,7 +84,7 @@ const RankingSection = () => {
 		color: #c6c6c6;
 		align-items: center;
 		justify-content: center;
-		margin-top: 2.5rem;
+		margin-top: 2.8rem;
 	`;
 
 	const rankingBtn = css`
@@ -146,11 +146,14 @@ const RankingSection = () => {
 				</div>
 			</div>
 			<div css={rankingBtnWrapper}>
-				{rankingLabels.map((tabs, index) => (
+				{/* {rankingLabels.map((tabs, index) => (
 					<div css={[rankingBtn, tab === index ? active : '']} key={index} onClick={handleClick(`/${tabs.route}`)}>
 						{tabs.label}
 					</div>
-				))}
+				))} */}
+				<div css={[rankingBtn, active]}>
+					전체 랭킹
+				</div>
 			</div>
 			<Outlet />
 		</div>
