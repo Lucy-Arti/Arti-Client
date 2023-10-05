@@ -1,4 +1,4 @@
-import { WorldcupSample } from '@/types/request';
+import { MatchData} from '@/types/request';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import ZoomImg from './ZoomImg';
@@ -8,8 +8,8 @@ const DisplayCard = ({
 	data,
 	handleCardClick,
 }: {
-	data: WorldcupSample;
-	handleCardClick: (item: WorldcupSample) => void;
+	data: MatchData;
+	handleCardClick: (item: MatchData) => void;
 }) => {
 	const [isZoomed, setIsZoomed] = useState(false);
 	const [isClicked, setIsClicked] = useState(false);
@@ -84,10 +84,10 @@ const DisplayCard = ({
 	return (
 		<div css={card}>
 			<div css={contentSection} onClick={handleCardClickInternal}>
-				<img css={productimg} src={data.src} />
+				<img css={productimg} src={data.preview} />
 			</div>
 			<div css={info}>
-				<div>{data.product}</div>
+				<div>{data.clothesName}</div>
 				<IoSearchOutline
 					onClick={handleZoom}
 					css={css`
@@ -95,7 +95,7 @@ const DisplayCard = ({
 					`}
 				/>
 			</div>
-			{isZoomed ? <ZoomImg image={data.src} setIsZoomed={setIsZoomed} /> : ''}
+			{isZoomed ? <ZoomImg image={data.preview} setIsZoomed={setIsZoomed} /> : ''}
 		</div>
 	);
 };

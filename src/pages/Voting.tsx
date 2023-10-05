@@ -40,7 +40,7 @@ const Voting = () => {
 	return (
 		<div css={flexColumn}>
 			<Header where="투표하기" />
-			{isLogged ? (
+			{!isLogged ? (
 				<Outlet />
 			) : (
 				<div css={loginSection}>
