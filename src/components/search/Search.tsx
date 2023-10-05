@@ -49,7 +49,6 @@ const Search = () => {
     const searchSection =css`
         width: 100%;
         min-height: 90vh;
-        background-color: aliceblue;
     `
 	const fixed = css`
 		position: fixed;
