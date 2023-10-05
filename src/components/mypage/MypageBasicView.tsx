@@ -26,14 +26,14 @@ const MypageBasicView = () => {
 			<Header where="main" />
 			<NavBar />
 			{
-				// (isLogin === true) ? 
+				(isLogin === true) ? 
 				<div css={ArticleWrapper}>
 					<MypageUpperContent />
 					<div css={gapDesign} />
 					<MypageExternalContent />
 				</div>
-				// :
-				// <Login where='mypage' />
+				:
+				<Login where='mypage' />
 
 			}
 		</>
