@@ -23,7 +23,6 @@ export const getIsVotePossible = async () => {
 			console.log('투표 가능');
 		}
 		return '투표 가능';
-
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			const axiosError = error as AxiosError;
@@ -108,5 +107,17 @@ export const postMatchList = async (body: VoteData) => {
 			console.error('알 수 없는 에러', error);
 		}
 		throw error;
+	}
+};
+
+// 점수 정렬
+
+export const getTotalScoreList = async () => {
+	try {
+		const response = await axios.get(`${baseURL}api/v1/clothes/sort`, {});
+		console.log(response);
+		return response.data;
+	} catch (error) {
+		console.log(error);
 	}
 };

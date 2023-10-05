@@ -1,13 +1,20 @@
 import { css } from "@emotion/react"
 import RankingDataList from "./RankingDataList";
+import { useEffect, useState } from "react";
+import { getTotalScoreList } from "@/apis/vote";
 
 const TodayRank = () => {
-  const todayRankList = [
-    { id: 39, designer: '루트', product: '한석원 정장', like: 4, mark: false },
-		{ id: 21, designer: '유난', product: '유난떠는 복장', like: 2, mark: false },
-		{ id: 47, designer: '티켓', product: '영화관 미소지기 모자', like: 3, mark: true },
-		{ id: 14, designer: '루시', product: '아이디어 고갈', like: 2, mark: false },
-	];
+	const [rankData,setRankData]=useState([]);
+
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const getTotalScoreData = async () => {
+				const result = await getTotalScoreList();
+				setRankData(result);
+			};
+			getTotalScoreData();
+		}
+	});
 
 	const wrapper = css`
 		width: 100%;
@@ -16,7 +23,7 @@ const TodayRank = () => {
 	`;
 	return (
 		<div css={wrapper}>
-			<RankingDataList sampleList={todayRankList} />
+			<RankingDataList datas={rankData} />
 		</div>
 	);
 }
