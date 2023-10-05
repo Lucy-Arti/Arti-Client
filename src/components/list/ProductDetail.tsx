@@ -16,12 +16,13 @@ const ProductDetail = () => {
     const [markState, setMarkState] = useState(false);
     const [productDetail, setProductDetail] = useState<ProductType>();
     const isUser = useRecoilValue(isLoginAtom);
+
     const getProduct = async() => {
         if (isUser){
             const result = await GetProductDetailByUser(idx!, localStorage.getItem("access"));
             if(result===false){
                 alert("불러오기 오류 발생");
-                navigate('/');
+                // navigate('/');
             } else {
                 setProductDetail(result.data);
             }
