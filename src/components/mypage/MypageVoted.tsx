@@ -1,7 +1,31 @@
 import { css } from "@emotion/react"
 import Header from "../common/Header"
+import { ProductType } from "../list/ListView";
+import { useEffect, useState } from "react";
+import { GetVotedProductLists } from "@/apis/mypage";
+import ModalProductSaved from "../list/ModalProductSaved";
+import ModalProductUnsaved from "../list/ModalProductUnsaved";
+import ListCard from "../list/ListCard";
 
 const MypageVoted = () => {
+    const productList : ProductType[] = [];
+	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
+	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
+    const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+    const [products, setProducts] = useState<ProductType[]>(productList);
+    const getProductLists = async() => {
+        const result = await GetVotedProductLists(localStorage.getItem("access"));
+        if(result===false){
+            alert("불러오기 오류 발생");
+        } else {
+            setProducts(productList.concat(result.data));
+        }
+    }
+
+    useEffect(()=>{
+        getProductLists();
+    }, []);
+    
     const flexColumn = css`
 		display: flex;
 		flex-direction: column;
@@ -20,6 +44,20 @@ const MypageVoted = () => {
         width: 90%;
         background-color: rgba(232, 255, 211, 1);
         border-radius: 10px;
+    `
+    const gridWrapper = css`
+        display: grid;
+        height: 80vh;
+        margin: 2rem;
+        /* border: 1px solid black; */
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3,1fr);
+        grid-auto-flow: row;
+        grid-gap: 2rem;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     `
   return (
     <>
@@ -51,6 +89,33 @@ const MypageVoted = () => {
             <img css={css`margin-right:2rem;`} width="60rem" src="/img/MypageToVote.png" />
         </div>
     </div>
+		{
+			(savedModalIsOpen === true) && <ModalProductSaved />
+		}
+		{
+			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
+		}
+		<div css={gridWrapper}>
+			{
+            products && products.map((product:ProductType, idx:number) => (
+				<ListCard 
+					key={idx}
+					clothesId={product.clothesId}
+					createdAt={product.createdAt}
+					updatedAt={product.updatedAt}
+					detailImg={product.detailImg}
+					likeCount={product.likeCount}
+					clothesName={product.clothesName}
+					preview={product.preview}
+					designerId={product.designerId}
+					designerName={product.designerName}
+					score={product.score}
+					setSavedModalIsOpen={setSavedModalIsOpen} 
+					setUnsavedModalIsOpen={setUnsavedModalIsOpen} 
+					setLoginModalIsOpen={setLoginModalIsOpen} 
+				/>
+			))}
+		</div>
     </>
   )
 }
