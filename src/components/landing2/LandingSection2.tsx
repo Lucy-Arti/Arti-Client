@@ -84,9 +84,8 @@ const LandingSection2 = () => {
 		justify-content: center;
 		position: absolute;
 		z-index: 2;
-		bottom: 0;
 		width: 100%;
-		height: 60%;
+		height: 100%;
 		border-radius: 11px;
 		background: linear-gradient(182deg, rgba(255, 255, 255, 0) 1.97%, rgba(255, 255, 255, 0.9) 75.42%);
 	`;
