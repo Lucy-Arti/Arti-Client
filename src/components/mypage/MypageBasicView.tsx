@@ -32,6 +32,10 @@ const MypageBasicView = () => {
 					<MypageUpperContent />
 					<div css={gapDesign} />
 					<MypageExternalContent />
+					<div css={css`
+						height: 10rem;
+						width: 100%;
+					`} />
 					<Footer />
 				</div>
 				:
