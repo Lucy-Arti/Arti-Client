@@ -50,7 +50,7 @@ export const getVoteDataList = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		console.log('대진 옷 불러오기 성공');
+		console.log('대진 옷 불러오기 성공', response);
 		return response.data;
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
