@@ -19,12 +19,17 @@ const LandingSection2 = () => {
 	const getProducts = async () => {
 		const result = await GetAllProductLists();
 		if (result === false) {
-			alert('불러오기 오류 발생');
+			// alert('불러오기 오류 발생');
 		} else {
-			const preData = result.data;
-			// Slice the first 7 items from preData and set them in the products state
-			const newArr = preData.slice(0, 7);
-			setProducts(newArr);
+			var newArr:ProductType[] = [];
+			var preData:ProductType[] = result.data;
+			for (let i = 0; i < 7; i++) {
+				let randomNum = Math.floor( Math.random() * (preData.length - i) );
+    			let element = preData.splice(randomNum, 1);
+				newArr = newArr.concat(element);
+			}
+            // setProducts(products.concat(result.data));
+            setProducts(products.concat(newArr));
 		}
 	};
 	useEffect(() => {
@@ -147,7 +152,7 @@ const LandingSection2 = () => {
 			</div>
 			<div css={swipeSection}>
 				<Swiper {...settings} className="mySwiper">
-					{products.map((product: ProductType, index) => (
+					{products && products.map((product: ProductType, index) => (
 						<SwiperSlide key={index}>
 							<div css={card}>
 								<img css={cardImg} src={`${product.preview}`} />
