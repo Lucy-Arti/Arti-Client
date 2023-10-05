@@ -42,7 +42,6 @@ const UserVoting = () => {
 				};
 				getWorldcupList();
 			}
-			setRoundList(worldcupList);
 		} else {
 			if (roundList.length >= 2) {
 				if (round.count !== 0) {
