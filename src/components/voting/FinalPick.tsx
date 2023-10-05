@@ -1,8 +1,9 @@
-import { worldcupList } from '@/types/request.d';
+
 import { userNameAtom } from '@/utils/state';
 import { css } from '@emotion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import { worldcupList } from './test';
 
 const FinalPick = () => {
 	const navigate = useNavigate();
@@ -12,7 +13,7 @@ const FinalPick = () => {
 	const targetId = Number(searchParams.get('id'));
 	const productName = decodeURIComponent(encodedData);
 	const userName = useRecoilValue(userNameAtom);
-	const pickedItem = worldcupList.find((item) => item.id === targetId);
+	const pickedItem = worldcupList.find((item) => item.clothesId === targetId);
 
 	const finalpickSection = css`
 		width: 100%;
@@ -172,12 +173,12 @@ const FinalPick = () => {
 					<span className="black">{`{${userName}}`}</span> 님의 PICK
 				</div>
 				<div css={card}>
-					<img css={cardImg} src={pickedItem?.src} />
+					<img css={cardImg} src={pickedItem?.preview} />
 					<div css={info}>
 						<div css={infoText}>
 							<div css={[row, pickText]}>
 								<img src="/img/profileLogo.svg" />
-								<span className="black">&nbsp;{pickedItem?.designer}&nbsp;</span>디자이너
+								<span className="black">&nbsp;{pickedItem?.designerName}&nbsp;</span>디자이너
 							</div>
 							<div css={[row, pickText]}>
 								<div className="black productName">{productName}</div>
