@@ -7,6 +7,8 @@ import { GetMarkedProductLists } from "@/apis/mypage";
 import Footer from "../common/Footer";
 import ListCard from "../list/ListCard";
 import SearchCard from "../search/SearchCard";
+import ModalProductSaved from "../list/ModalProductSaved";
+import ModalProductUnsaved from "../list/ModalProductUnsaved";
 
 const MypageMarked = () => {
     const productList : ProductType[] = [];
@@ -53,6 +55,12 @@ const MypageMarked = () => {
     <div css={flexColumn}>
         <Header where='저장한 옷'/>
 	  </div>
+    {
+			(savedModalIsOpen === true) && <ModalProductSaved />
+		}
+		{
+			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
+		}
     <div css={gridWrapper}>
     {
       products && products.map((product:ProductType, idx:number) => (

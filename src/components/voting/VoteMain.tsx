@@ -95,7 +95,7 @@ const VoteMain = () => {
 				투표 시작하기
 			</div>
 			<div css={shareSection}>
-				<ShareButton />
+				<ShareButton where="vote" />
 			</div>
 		</div>
 	);
