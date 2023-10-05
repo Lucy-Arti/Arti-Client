@@ -15,7 +15,7 @@ const VoteMain = () => {
 			};
 			checkPossible();
 		}
-	});
+	},[]);
 
 	const voteSection = css`
 		width: 90%;
