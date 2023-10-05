@@ -53,7 +53,7 @@ const MypageVoted = () => {
         margin: 2rem;
         /* border: 1px solid black; */
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3,1fr);
+        /* grid-template-rows: repeat(3,1fr); */
         grid-auto-flow: row;
         grid-gap: 2rem;
         overflow-y: scroll;

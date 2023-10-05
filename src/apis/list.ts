@@ -24,17 +24,6 @@ export const GetProductDetail = async(id:string) => {
     }
 }
 
-export const GetDesignerDetail = async(id:string) => {
-    try{
-        const response = await axios.get(`${baseURL}api/v1/designers/${id}`);
-        console.log(response.data);
-        return response;
-    } catch(error) {
-        console.log(error);
-        return false;
-    }
-}
-
 export const getMarked = async(id:number, token:string|null) => {
     try{
         const response = await axios.get(`${baseURL}api/v1/likes/${id}/member`, {
