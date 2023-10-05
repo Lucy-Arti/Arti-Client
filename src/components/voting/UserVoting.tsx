@@ -38,7 +38,7 @@ const UserVoting = () => {
 			if (localStorage.getItem('access')) {
 				const getWorldcupList = async () => {
 					const result = await getVoteDataList();
-					setRoundList(result);
+					setRoundList(result.data.data);
 				};
 				getWorldcupList();
 			}

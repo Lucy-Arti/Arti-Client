@@ -51,7 +51,7 @@ export const getVoteDataList = async () => {
 			},
 		});
 		console.log('대진 옷 불러오기 성공', response);
-		return response.data;
+		return response;
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			const axiosError = error as AxiosError;
