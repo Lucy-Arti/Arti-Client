@@ -70,11 +70,15 @@ const ProductDetail = () => {
 		if (isUser) {
 			if (markState) {
 				setMarkState(false);
-                setLikeNum(like?-1);
+                if (like !== null) {
+                    setLikeNum(like - 1);
+                }
 				postMark();
 			} else {
 				setMarkState(true);
-                setLikeNum(like?+1);
+                if (like !== null) {
+                    setLikeNum(like + 1);
+                }
 				postMark();
 			}
 		} else {
