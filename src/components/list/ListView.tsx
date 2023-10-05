@@ -34,7 +34,16 @@ const ListView = () => {
 		if(result===false) {
             alert("불러오기 오류 발생");
         } else {
-            setProducts(products.concat(result.data));
+            var newArr:ProductType[] = [];
+			var preData:ProductType[] = result.data;
+			var arraySize = preData.length;
+			for (let i = 0; i < arraySize; i++) {
+				let randomNum = Math.floor( Math.random() * (preData.length - i) );
+    			let element = preData.splice(randomNum, 1);
+				newArr = newArr.concat(element);
+			}
+            // setProducts(products.concat(result.data));
+            setProducts(products.concat(newArr));
         }
 	}
 	useEffect(()=>{
