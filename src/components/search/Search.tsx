@@ -46,6 +46,7 @@ const Search = () => {
 		getProducts();
 	};
 	const fixed = css`
+		position: fixed;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
@@ -53,7 +54,9 @@ const Search = () => {
 		height: 70px;
 		top: 0%;
 		background-color: white;
-        margin-top: 10px;
+        @media (min-width: 576px) {
+            width: 576px;
+        }
 	`;
 	const searchBox = css`
 		display: flex;
@@ -63,7 +66,7 @@ const Search = () => {
 		border-radius: 10px;
 	`;
 	const margin = css`
-		height: 180px;
+		height: 80px;
 	`;
 	const gridWrapper = css`
 		display: grid;
@@ -91,7 +94,7 @@ const Search = () => {
 							border: none;
 							outline: none;
 							margin-left: 1rem;
-                            font-size: 2rem;
+							font-size: 2rem;
 						`}
 						ref={inputText}
 					/>
@@ -111,28 +114,27 @@ const Search = () => {
 			{loginModalIsOpen === true && <ModalLogin setLoginModalIsOpen={setLoginModalIsOpen} />}
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
-			<div css={margin}>
-				<div css={gridWrapper}>
-					{products &&
-						products.map((product: ProductType, idx: number) => (
-							<SearchCard
-								key={idx}
-								clothesId={product.clothesId}
-								createdAt={product.createdAt}
-								updatedAt={product.updatedAt}
-								detailImg={product.detailImg}
-								likeCount={product.likeCount}
-								clothesName={product.clothesName}
-								preview={product.preview}
-								designerId={product.designerId}
-								designerName={product.designerName}
-								score={product.score}
-								setSavedModalIsOpen={setSavedModalIsOpen}
-								setUnsavedModalIsOpen={setUnsavedModalIsOpen}
-								setLoginModalIsOpen={setLoginModalIsOpen}
-							/>
-						))}
-				</div>
+			<div css={margin}> </div>
+			<div css={gridWrapper}>
+				{products &&
+					products.map((product: ProductType, idx: number) => (
+						<SearchCard
+							key={idx}
+							clothesId={product.clothesId}
+							createdAt={product.createdAt}
+							updatedAt={product.updatedAt}
+							detailImg={product.detailImg}
+							likeCount={product.likeCount}
+							clothesName={product.clothesName}
+							preview={product.preview}
+							designerId={product.designerId}
+							designerName={product.designerName}
+							score={product.score}
+							setSavedModalIsOpen={setSavedModalIsOpen}
+							setUnsavedModalIsOpen={setUnsavedModalIsOpen}
+							setLoginModalIsOpen={setLoginModalIsOpen}
+						/>
+					))}
 			</div>
 		</div>
 	);
