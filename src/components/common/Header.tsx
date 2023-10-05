@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = ({ where }: { where: string }) => {
 	const location = useLocation(); // 현재 경로 가져오기
+	const navigate = useNavigate();
 	const isUserPickPage = location.pathname.includes('/userPick');
 
 	const bgwrapper = css`
@@ -26,7 +27,6 @@ const Header = ({ where }: { where: string }) => {
 		height: 24px;
 	`;
 	const handleClick = (page: string) => {
-		const navigate = useNavigate();
 		return () => {
 			navigate(page);
 		};
@@ -37,7 +37,7 @@ const Header = ({ where }: { where: string }) => {
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
 					<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} />
-					<img src="/img/search.svg" onClick={handleClick('/search')}/>
+					<img src="/img/search.svg" onClick={handleClick('/search')} />
 				</div>
 			</div>
 		);
@@ -66,6 +66,35 @@ const Header = ({ where }: { where: string }) => {
 					</div>
 				</div>
 			</>
+		);
+	} else if (where === 'vote') {
+		return (
+			<div className="headerLayout">
+				<div css={bgwrapper}>
+					<div css={spaceBetween} className="headerComponent">
+						{isUserPickPage ? (
+							<FiChevronLeft cursor="pointer" size="26px" onClick={() => navigate('../../vote')} />
+						) : (
+							<FiChevronLeft cursor="pointer" size="26px" onClick={() => navigate('../../')} />
+						)}
+
+						<div
+							css={css`
+								font-size: 2rem;
+								font-weight: 600;
+							`}
+						>
+							투표하기
+						</div>
+						<div
+							css={css`
+								width: 20px;
+							`}
+							className="emptyDiv"
+						></div>
+					</div>
+				</div>
+			</div>
 		);
 	} else {
 		// 백 버튼 + 페이지 이름 헤더

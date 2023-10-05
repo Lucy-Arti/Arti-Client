@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { MatchData } from '@/types/request.d';
 import DisplayCard from './DisplayCard';
 import { useNavigate } from 'react-router-dom';
-import { worldcupList } from './test';
 import { getVoteDataList } from '@/apis/vote';
 
 const progressProps = [
