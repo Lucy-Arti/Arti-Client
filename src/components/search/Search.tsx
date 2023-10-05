@@ -9,6 +9,7 @@ import ModalProductSaved from '../list/ModalProductSaved';
 import ModalProductUnsaved from '../list/ModalProductUnsaved';
 import SearchCard from './SearchCard';
 import { GetAllProductLists } from '@/apis/list';
+import Footer from '../common/Footer';
 
 const Search = () => {
     const inputText = useRef<HTMLInputElement>(null);
@@ -55,11 +56,11 @@ const Search = () => {
     `
     const gridWrapper = css`
 		display: grid;
-		height: 80vh;
+		/* height: 80vh; */
 		margin: 2rem;
 		/* border: 1px solid black; */
 		grid-template-columns: repeat(2, 1fr);
-  		grid-template-rows: repeat(3,1fr);
+  		/* grid-template-rows: repeat(3,1fr); */
   		grid-auto-flow: row;
 		grid-gap: 2rem;
 		overflow-y: scroll;
@@ -81,7 +82,10 @@ const Search = () => {
                 outline: none;
                 margin-left: 1rem;
             `} ref={inputText} />
-            <img css={css`:hover{cursor: pointer;}`} src="/img/search.svg" onClick={handleClick} />
+            <img css={css`
+                width: 25px;
+                :hover{cursor: pointer;}
+            `} src="/img/search.svg" onClick={handleClick} />
         </div>
     </div>
         {

@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { ProductType } from '../list/ListView';
 import { GetDesignerDetail, GetDesignerProduct } from '@/apis/designer';
 import ListCard from '../list/ListCard';
+import SearchCard from '../search/SearchCard';
 
 type DesignerProfType = {
     userName : string,
@@ -118,7 +119,7 @@ const DesignerDetail = () => {
 		}
 		<div css={gridWrapper}>
 			{products.map((product:ProductType, order:number) => (
-				<ListCard 
+				<SearchCard 
                     key={order}
                     clothesId={product.clothesId}
                     createdAt={product.createdAt}
