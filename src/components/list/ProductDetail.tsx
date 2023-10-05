@@ -3,15 +3,18 @@ import {BiShareAlt} from "react-icons/bi"
 // import HeaderSecond from "../common/HeaderSecond";
 import Header from "../common/Header";
 import { useNavigate, useParams } from "react-router-dom";
-import { GetProductDetail } from "@/apis/list";
+import { GetProductDetail, getMarked, postMarked } from "@/apis/list";
 import { useEffect, useState } from "react";
 import { ProductType } from "./ListView";
 import Footer from "../common/Footer";
+import { useRecoilValue } from "recoil";
+import { isLoginAtom } from "@/utils/state";
 
 const ProductDetail = () => {
-    // const ProductDetail= {id: 12, designer: '뻐끔', product: '입술이 두꺼운 열대어 셔츠', like: 34, mark: true }
     const {idx} = useParams();
+    const [markState, setMarkState] = useState(false);
     const [productDetail, setProductDetail] = useState<ProductType>();
+    const isUser = useRecoilValue(isLoginAtom);
     const getProduct = async() => {
         const result = await GetProductDetail(idx!);
         if(result===false){
@@ -21,9 +24,42 @@ const ProductDetail = () => {
             setProductDetail(result.data);
         }
     }
+
+    const getMark = async() => {
+        if (isUser){
+            const result = await getMarked(idx!, localStorage.getItem("access"));
+            if(result!==false){
+                setMarkState(result.data);
+            }
+        }
+    }
+    const postMark = async() => {
+        const result = await postMarked(idx!, localStorage.getItem("access"));
+        // if (result === false) {
+        //     setIsSuccessed(false);
+        //     //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+        // } else {
+        //     setIsSuccessed(true);
+        // }
+    }
     useEffect(()=>{
         getProduct();
+        getMark();
     }, [])
+
+    const handleMarkClick = () => {
+        if(isUser){
+            if (markState) {
+                setMarkState(false);
+                postMark();
+            } else {
+                setMarkState(true);
+                postMark();
+            }
+        } else {
+            alert("로그인 후 저장이 가능합니다!");
+        }
+    }
     
     const navigate = useNavigate();
     const flexColumn = css`
@@ -87,10 +123,10 @@ const ProductDetail = () => {
                     <div css={Title}>{productDetail.clothesName}</div>
                     <div css={flexrow} className='icon-box'>
                         {
-                            // (ProductDetail.score === true) ? 
-                            // <img width = "30rem" src="/img/activeHeart.png" />
-                            // : 
-                            <img width = "30rem" src="/img/nonactiveHeart.png" />
+                            (markState === true) ? 
+                            <img width = "30rem" src="/img/activeHeart.png" onClick={handleMarkClick} />
+                            : 
+                            <img width = "30rem" src="/img/nonactiveHeart.png" onClick={handleMarkClick} />
                         }
                         <BiShareAlt size="3rem" />
                     </div>
