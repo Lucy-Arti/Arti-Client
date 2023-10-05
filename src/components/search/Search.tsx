@@ -64,6 +64,8 @@ const Search = () => {
 		height: 40px;
 		background-color: rgba(245, 245, 245, 1);
 		border-radius: 10px;
+        padding-left: 2px;
+        padding-right: 12px;
 	`;
 	const margin = css`
 		height: 80px;
