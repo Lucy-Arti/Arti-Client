@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { MatchData } from '@/types/request.d';
 import DisplayCard from './DisplayCard';
 import { useNavigate } from 'react-router-dom';
-import { getVoteDataList } from '@/apis/vote';
+import { getVoteDataList, postMatchList } from '@/apis/vote';
 
 const progressProps = [
 	{ progress: '8강', percentage: 33, translateX: 33 },
@@ -13,9 +13,9 @@ const progressProps = [
 ];
 
 interface BodyType {
-	fourth: MatchData[]; // 4강까지 올라온 아이템 리스트 (number 배열)
-	second: MatchData[]; // 2강까지 올라온 아이템의 ID (number)
-	first: MatchData[]; // 최종 선택된 아이템의 ID (number)
+	fourth: number[]; // 4강까지 올라온 아이템 리스트 (number 배열)
+	second: number[]; // 2강까지 올라온 아이템의 ID (number)
+	first: number; // 최종 선택된 아이템의 ID (number)
 }
 
 const UserVoting = () => {
@@ -28,7 +28,7 @@ const UserVoting = () => {
 	const [apiBody, setBody] = useState<BodyType>({
 		fourth: [],
 		second: [],
-		first: [],
+		first: 0,
 	});
 	const navigate = useNavigate();
 
@@ -53,21 +53,24 @@ const UserVoting = () => {
 			} else {
 				if (progress === 2) {
 					console.log(selectedItems);
+					const clothesIdArray = selectedItems.map((item) => item.clothesId);
 					setBody((prevBody) => ({
 						...prevBody,
-						first: selectedItems, // 4강까지 올라온 아이템 리스트 업데이트
+						first: clothesIdArray[0], // 4강까지 올라온 아이템 리스트 업데이트
 					}));
 				} else {
 					console.log(selectedItems);
+					const clothesIdArray = selectedItems.map((item) => item.clothesId);
 					if (progress === 0) {
 						setBody((prevBody) => ({
 							...prevBody,
-							fourth: selectedItems, // 4강까지 올라온 아이템 리스트 업데이트
+							fourth: clothesIdArray, // 4강까지 올라온 아이템 리스트 업데이트
 						}));
 					} else if (progress === 1) {
+						const clothesIdArray = selectedItems.map((item) => item.clothesId);
 						setBody((prevBody) => ({
 							...prevBody,
-							second: selectedItems, // 2강까지 올라온 아이템의 첫 번째 ID 업데이트
+							second: clothesIdArray, // 2강까지 올라온 아이템의 첫 번째 ID 업데이트
 						}));
 					}
 					setRoundList(selectedItems);
@@ -87,6 +90,16 @@ const UserVoting = () => {
 
 	useEffect(() => {
 		console.log(apiBody);
+		if(apiBody.first){
+			const body = {
+				fourth: apiBody.fourth.filter((id)=>!apiBody.second.includes(id)),
+				second: apiBody.second.filter((id)=>id!==apiBody.first)[0],
+				first: apiBody.first
+			}
+			console.log(body);
+			postMatchList(body);
+		}
+
 	  }, [apiBody]);
 
 	const handleCardClick = (item: MatchData) => {

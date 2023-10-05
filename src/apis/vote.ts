@@ -43,7 +43,6 @@ export const getIsVotePossible = async () => {
 // 라운드 8강 옷 불러오기
 export const getVoteDataList = async () => {
 	const accessToken = localStorage.getItem('access');
-	
 	try {
 		const response = await axios.get(`${baseURL}api/v1/votes`, {
 			headers: {
