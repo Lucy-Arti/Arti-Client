@@ -69,10 +69,12 @@ const VoteMain = () => {
 		if (possible === '투표 가능') {
 			console.log('투표가 가능해요');
 			navigate(page); 
-		} else if (possible === '투표 불가능') {
-			console.log('오늘 투표를 완료했습니다!');
+		} else if (possible === '투표 완료') {
+			alert('1일 1회 투표가 가능해요. 내일 다시 투표해주세요!');
 		} else if (possible === '로그인 필요') {
-			console.log('로그인을 먼저 해주세요!');
+			alert('로그인을 먼저 해주세요!');
+		} else {
+			alert('알 수 없는 에러 발생');
 		}
 	};
 
