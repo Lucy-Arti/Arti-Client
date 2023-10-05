@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 const ModalProductUnsaved = () => {
+    const totalHeight = document.documentElement.scrollHeight;
     const modalSection = css`
         position: absolute;
         display: flex;
@@ -13,7 +14,7 @@ const ModalProductUnsaved = () => {
         bottom: 0;
         left: 50%;
         transform: translate(-50%, 0%);
-        height: 100%;
+        height: ${totalHeight};
         /* background-color: rgba(0, 0, 0, 0.5); */
         /* z-index: 1; */
         @media (min-width: 576px) {

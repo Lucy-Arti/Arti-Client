@@ -1,18 +1,18 @@
 import { css } from '@emotion/react';
-import RankingDataList from './RankingDataList';
-import { useEffect, useState } from 'react';
-import { getTotalScoreList } from '@/apis/vote';
+// import RankingDataList from './RankingDataList';
+// import { useEffect, useState } from 'react';
+// import { getTotalScoreList } from '@/apis/vote';
 
 const TodayRank = () => {
-	const [rankData, setRankData] = useState([]);
+	// const [rankData, setRankData] = useState([]);
 
-	useEffect(() => {
-		const getTotalScoreData = async () => {
-			const result = await getTotalScoreList();
-			setRankData(result);
-		};
-		getTotalScoreData();
-	});
+	// useEffect(() => {
+	// 	const getTotalScoreData = async () => {
+	// 		const result = await getTotalScoreList();
+	// 		setRankData(result);
+	// 	};
+	// 	getTotalScoreData();
+	// });
 
 	const wrapper = css`
 		width: 100%;
@@ -21,7 +21,7 @@ const TodayRank = () => {
 	`;
 	return (
 		<div css={wrapper}>
-			<RankingDataList datas={rankData} />
+			{/* <RankingDataList datas={rankData} /> */}
 		</div>
 	);
 };
