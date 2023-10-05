@@ -7,11 +7,30 @@ import 'swiper/css/pagination';
 import { css } from '@emotion/react';
 
 import './landing2.css';
-
-// import required modules
-import { EffectCoverflow } from 'swiper/modules';
+import { useEffect, useState } from 'react';
+import { ProductType } from '../list/ListView';
+import { GetAllProductLists } from '@/apis/list';
 
 const LandingSection2 = () => {
+	const productList: ProductType[] = [];
+	const [products, setProducts] = useState<ProductType[]>(productList);
+	// const [products, setProducts] = useState([]);
+
+	const getProducts = async () => {
+		const result = await GetAllProductLists();
+		if (result === false) {
+			alert('불러오기 오류 발생');
+		} else {
+			const preData = result.data;
+			// Slice the first 7 items from preData and set them in the products state
+			const newArr = preData.slice(0, 7);
+			setProducts(newArr);
+		}
+	};
+	useEffect(() => {
+		getProducts();
+	}, []);
+
 	const landingSection2 = css`
 		width: 100%;
 		height: fit-content;
@@ -19,62 +38,129 @@ const LandingSection2 = () => {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		overflow-y: hidden;
+		margin-top: 10px;
 	`;
 
 	const bannerSection2 = css`
 		width: 90%;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: end;
 	`;
 
 	const introduce = css`
-		font-size: 24px;
+		font-size: 2.8rem;
 		font-weight: 600;
 	`;
 
 	const more = css`
-		font-size: 16px;
-		font-weight: 00;
-		line-height: 6px;
+		font-size: 1.7rem;
+		font-weight: 300;
 	`;
-	
+
+	const card = css`
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 230px;
+		object-fit: cover;
+		overflow: hidden;
+		border-radius: 11px;
+		background-color: aliceblue;
+	`;
+
+	const cardImg = css`
+		object-fit: cover;
+		border-radius: 11px;
+		min-height: 230px;
+		z-index: 1;
+	`;
+	const info = css`
+		display: flex;
+		align-items: end;
+		justify-content: center;
+		position: absolute;
+		z-index: 2;
+		bottom: 0;
+		width: 100%;
+		height: 60%;
+		border-radius: 11px;
+		background: linear-gradient(182deg, rgba(255, 255, 255, 0) 1.97%, rgba(255, 255, 255, 0.9) 75.42%);
+	`;
+	const pickText = css`
+		color: #636363;
+		font-size: 1.5rem;
+		font-weight: 500;
+		@media (max-width: 380px) {
+				font-size: 1rem;
+			}
+		.black {
+			color: black;
+		}
+		.productName {
+			color: black;
+			font-size: 2rem;
+			font-weight: 500;
+			line-height: normal;
+			@media (max-width: 380px) {
+				font-size: 1.5rem;
+			}
+		}
+		img {
+			width: 1.7rem;
+		}
+	`;
+	const infoText = css`
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 90%;
+		gap: 3px;
+		margin-bottom: 15px;
+	`;
+	const row = css`
+		display: flex;
+		align-items: center;
+		width: 100%;
+	`;
+
+	const settings = {
+		spaceBetween: 20,
+		navigation: {},
+		scrollbar: { draggable: true, el: null },
+		slidesPerView: 3,
+		// 수정된 부분
+	};
 
 	return (
 		<div css={landingSection2}>
 			<div css={bannerSection2}>
-				<div css={introduce}>소개합니달ㄹㄹ</div>
+				<div css={introduce}>소개합니다</div>
 				<div css={more}>더보기</div>
 			</div>
-			<Swiper
-				effect={'coverflow'}
-				grabCursor={true}
-				centeredSlides={true}
-				slidesPerView={'auto'}
-				coverflowEffect={{
-					rotate: 50,
-					stretch: 0,
-					depth: 100,
-					modifier: 1,
-					slideShadows: false,
-				}}
-				loop={true}
-				modules={[EffectCoverflow]}
-				className="mySwiper"
-			>
-				<SwiperSlide>
-					<img src="/img/productsampleimg.png" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/img/productsampleimg.png" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/img/productsampleimg.png" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src="/img/productsampleimg.png" />
-				</SwiperSlide>
+			<Swiper {...settings} className="mySwiper">
+				{products.map((product: ProductType, index) => (
+					<SwiperSlide key={index}>
+						<div css={card}>
+							<img css={cardImg} src={`${product.preview}`} />
+							<div css={info}>
+								<div css={infoText}>
+									<div css={[row, pickText]}>
+										<img src="/img/profileLogo.svg" />
+										<span className="black">&nbsp;{product.designerName}&nbsp;</span>디자이너
+									</div>
+									<div css={[row, pickText]}>
+										<div className="black productName">{product.clothesName}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</div>
 	);
