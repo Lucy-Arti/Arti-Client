@@ -60,8 +60,9 @@ const RankingSection = () => {
 		font-size: 2rem;
 		padding: 10px 20px;
 		margin-top: 2.2rem;
-		@media (max-width: 450px) {
+		@media (max-width: 420px) {
 			font-size: 1.5rem;
+			padding: 8px 17px;
 		}
 	`;
 
@@ -69,8 +70,8 @@ const RankingSection = () => {
 		font-size: 3.3rem;
 		font-weight: 600;
 		margin-top: 20px;
-		@media (max-width: 450px) {
-			font-size: 2.5rem;
+		@media (max-width: 420px) {
+			font-size: 2.8rem;
 			margin-top: 15px;
 		}
 	`;
@@ -113,7 +114,7 @@ const RankingSection = () => {
 	const fontSize = css`
 		font-weight: 600;
 		font-size: 1.7rem;
-		@media (max-width: 450px) {
+		@media (max-width: 420px) {
 			font-size: 1.5rem;
 		}
 	`;
