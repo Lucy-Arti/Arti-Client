@@ -14,6 +14,7 @@ import ShareButton from '../common/ShareButton';
 const ProductDetail = () => {
 	const { idx } = useParams();
 	const [markState, setMarkState] = useState(false);
+    const [like, setLikeNum] = useState(props.data.likeCount);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -63,9 +64,11 @@ const ProductDetail = () => {
 		if (isUser) {
 			if (markState) {
 				setMarkState(false);
+                setLikeNum(like-1);
 				postMark();
 			} else {
 				setMarkState(true);
+                setLikeNum(like+1);
 				postMark();
 			}
 		} else {
