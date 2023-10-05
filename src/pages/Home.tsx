@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { getUserInfo } from '@/apis/login';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userEmailAtom, userNameAtom } from '@/utils/state';
+import LandingSection2 from '@/components/landing2/LandingSection2';
 
 const Home = () => {
 	const setUserEmail = useSetRecoilState(userEmailAtom);
@@ -16,7 +17,8 @@ const Home = () => {
 	const flexColumn = css`
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		justify-content: center;
+		height: fit-content;
 	`;
 
 	useEffect(() => {
@@ -38,6 +40,7 @@ const Home = () => {
 			<Header where="main" />
 			<NavBar />
 			<LandingSection />
+			<LandingSection2/>
 			<Footer />
 		</div>
 	);
