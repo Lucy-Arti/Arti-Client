@@ -25,7 +25,7 @@ export const GetProductDetail = async(id:string) => {
 }
 export const GetProductDetailByUser = async(id:string, token:string|null) => {
     try{
-        const response = await axios.get(`${baseURL}/api/v1/recent/${id}`, {
+        const response = await axios.get(`${baseURL}api/v1/recent/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
         console.log(response.data);
