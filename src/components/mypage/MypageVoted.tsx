@@ -7,6 +7,7 @@ import ModalProductSaved from "../list/ModalProductSaved";
 import ModalProductUnsaved from "../list/ModalProductUnsaved";
 import ListCard from "../list/ListCard";
 import Footer from "../common/Footer";
+import { useNavigate } from "react-router-dom";
 
 const MypageVoted = () => {
     const productList : ProductType[] = [];
@@ -14,6 +15,7 @@ const MypageVoted = () => {
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
     const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const [products, setProducts] = useState<ProductType[]>(productList);
+    const navigate = useNavigate();
     const getProductLists = async() => {
         const result = await GetVotedProductLists(localStorage.getItem("access"));
         if(result===false){
@@ -86,7 +88,15 @@ const MypageVoted = () => {
                     더 많은 옷들이 세상에 나올 수 있도록
                 </div>
             </div>
-            <img css={css`margin-right:2rem;`} width="60rem" src="/img/MypageToVote.png" />
+            <img css={css`
+                margin-right:2rem;
+                :hover{
+                    cursor:pointer;
+                }
+            `} 
+            width="60rem" 
+            src="/img/MypageToVote.png"
+            onClick={()=>{navigate('/vote')}} />
         </div>
     </div>
 		{
