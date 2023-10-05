@@ -28,11 +28,15 @@ export const postCode = async (body: postCodeBody) => {
 export const getUserInfo = async () => {
 	const accessToken = localStorage.getItem('access');
 
-	const response = await axios.get(`${baseURL}api/v1/kakao/info`, {
-		headers: {
-			Authorization: `${accessToken}`,
+	const response = await axios.get(
+		`${baseURL}api/v1/kakao/info`,
+
+		{
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
 		},
-	});
+	);
 	console.log('사용자 정보 저장 완료');
 
 	return response.data;
