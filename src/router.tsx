@@ -5,7 +5,6 @@ import Mypage from '@pages/Mypage';
 import Voting from '@pages/Voting';
 import { createBrowserRouter } from 'react-router-dom';
 import TodayRank from '@ranking/TodayRank';
-import Login from '@pages/Login';
 import Ranking from './pages/Ranking';
 import VoteMain from './components/voting/VoteMain';
 import UserVoting from './components/voting/UserVoting';
@@ -63,17 +62,13 @@ const router = createBrowserRouter([
 			},
 			{
 				path: ':idx',
-				element: <ProductDetail />
-			}
+				element: <ProductDetail />,
+			},
 		],
 	},
 	{
 		path: '/mypage',
 		element: <Mypage />,
-	},
-	{
-		path: '/login',
-		element: <Login content={'로그인 후 이용해주세요!'} />,
 	},
 	{
 		path: '/kakaologin',
@@ -90,4 +85,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-
