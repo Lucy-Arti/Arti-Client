@@ -1,36 +1,67 @@
-import { getMarked } from '@/apis/list';
+import { getMarked, postMarked } from '@/apis/list';
 import { RankData } from '@/types/request';
 import { isLoginAtom } from '@/utils/state';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const RankingCard = ({ data, index }: { data: RankData; index: number }) => {
-	const [like, setLikeNum] = useState(data.likeCount);
+type RankingCardPropsType = {
+	data:RankData;
+	index:number;
+	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const RankingCard = (props:RankingCardPropsType) => {
+	const [like, setLikeNum] = useState(props.data.likeCount);
 	const [markState, setMarkState] = useState(false);
+	const [isSuccessed, setIsSuccessed] = useState(false);
 	const isUser = useRecoilValue(isLoginAtom);
 
-	const getMark = async() => {
-        if (isUser){
-            // const result = await getMarked(props.clothesId, localStorage.getItem("access"));
-            const result = await getMarked(data.clothesId, localStorage.getItem("access"));
-            if(result!==false){
-                setMarkState(result.data);
-            }
-        }
-    }
+	const getMark = async () => {
+		if (isUser) {
+			// const result = await getMarked(props.clothesId, localStorage.getItem("access"));
+			const result = await getMarked(props.data.clothesId, localStorage.getItem('access'));
+			if (result !== false) {
+				setMarkState(result.data);
+			}
+		}
+	};
 
-	useEffect(()=>{
-        getMark();
-    }, []);
-
-	const handleMark = () => {
-		if (markState) {
-			setMarkState(false);
-			setLikeNum(like - 1);
+	useEffect(() => {
+		getMark();
+	}, []);
+	const postMark = async () => {
+		const result = await postMarked(props.data.clothesId, localStorage.getItem('access'));
+		// if (result === false) {
+		//     setIsSuccessed(false);
+		//     //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+		// } else {
+		//     setIsSuccessed(true);
+		// }
+	};
+	const handleMarkClick = () => {
+		if (isUser) {
+			if (markState) {
+				setMarkState(false);
+				postMark();
+				props.setUnsavedModalIsOpen(true);
+				setIsSuccessed(false);
+				setTimeout(() => {
+					props.setUnsavedModalIsOpen(false);
+				}, 1000);
+			} else {
+				setMarkState(true);
+				postMark();
+				props.setSavedModalIsOpen(true);
+				setIsSuccessed(false);
+				setTimeout(() => {
+					props.setSavedModalIsOpen(false);
+				}, 1000);
+			}
 		} else {
-			setMarkState(true);
-			setLikeNum(like + 1);
+			props.setLoginModalIsOpen(true);
 		}
 	};
 
@@ -124,12 +155,12 @@ const RankingCard = ({ data, index }: { data: RankData; index: number }) => {
 	return (
 		<div css={card}>
 			<div css={tag}>
-				<img css={tagImg} src={index === 0 ? '/img/greentag.png' : '/img/graytag.png'} />
-				<div css={tagNumber}>{index + 1}</div>
+				<img css={tagImg} src={props.index === 0 ? '/img/greentag.png' : '/img/graytag.png'} />
+				<div css={tagNumber}>{props.index + 1}</div>
 			</div>
 			<div css={box}>
 				<div css={left}>
-					<img css={productImg} src="/img/productsampleimg.png" />
+					<img css={productImg} src={`${props.data.preview}`} />
 				</div>
 				<div css={middle}>
 					<div css={row}>
@@ -140,7 +171,7 @@ const RankingCard = ({ data, index }: { data: RankData; index: number }) => {
 								font-weight: 500;
 							`}
 						>
-							&nbsp;{data.designerName}&nbsp;
+							&nbsp;{props.data.designerName}&nbsp;
 						</div>
 						<div
 							css={css`
@@ -159,13 +190,13 @@ const RankingCard = ({ data, index }: { data: RankData; index: number }) => {
 							margin-top: 0.3rem;
 						`}
 					>
-						{data.clothesName}
+						{props.data.clothesName}
 					</div>
 				</div>
 				<div css={right}>
 					<img
 						css={heartSection}
-						onClick={handleMark}
+						onClick={handleMarkClick}
 						src={markState ? '/img/activeHeart.png' : '/img/nonactiveHeart.png'}
 					/>
 					{like}

@@ -115,7 +115,6 @@ export const postMatchList = async (body: VoteData) => {
 export const getTotalScoreList = async () => {
 	try {
 		const response = await axios.get(`${baseURL}api/v1/clothes/score`);
-		console.log(response);
 		return response.data;
 	} catch (error) {
 		console.log(error);
