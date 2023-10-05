@@ -14,7 +14,7 @@ import ShareButton from '../common/ShareButton';
 const ProductDetail = () => {
 	const { idx } = useParams();
 	const [markState, setMarkState] = useState(false);
-    const [like, setLikeNum] = useState(0);
+    const [like, setLikeNum] =useState<number | null>(null);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -34,7 +34,6 @@ const ProductDetail = () => {
 				// navigate('/');
 			} else {
 				setProductDetail(result.data);
-                setLikeNum(result.data.likeCount);
 			}
 		}
 	};
@@ -61,15 +60,21 @@ const ProductDetail = () => {
 		getMark();
 	}, []);
 
+	useEffect(() => {
+        if(productDetail){
+            setLikeNum(productDetail.likeCount)
+        }
+	}, [productDetail]);
+
 	const handleMarkClick = () => {
 		if (isUser) {
 			if (markState) {
 				setMarkState(false);
-                setLikeNum(like-1);
+                setLikeNum(like?-1);
 				postMark();
 			} else {
 				setMarkState(true);
-                setLikeNum(like+1);
+                setLikeNum(like?+1);
 				postMark();
 			}
 		} else {
