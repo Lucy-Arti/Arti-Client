@@ -26,3 +26,16 @@ export const GetMarkedProductLists = async(token:string|null) => {
         return false;
     }
 }
+
+export const GetRecentProductLists = async(token:string|null) => {
+    try{
+        const response = await axios.get(`${baseURL}api/v1/recent`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+        console.log(response.data);
+        return response;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}

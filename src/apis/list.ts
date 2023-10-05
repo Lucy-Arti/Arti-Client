@@ -23,6 +23,18 @@ export const GetProductDetail = async(id:string) => {
         return false;
     }
 }
+export const GetProductDetailByUser = async(id:string, token:string|null) => {
+    try{
+        const response = await axios.get(`${baseURL}/api/v1/recent/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+        console.log(response.data);
+        return response;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}
 
 export const getMarked = async(id:number|string, token:string|null) => {
     try{

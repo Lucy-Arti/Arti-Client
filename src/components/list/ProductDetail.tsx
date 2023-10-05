@@ -3,7 +3,7 @@ import {BiShareAlt} from "react-icons/bi"
 // import HeaderSecond from "../common/HeaderSecond";
 import Header from "../common/Header";
 import { useNavigate, useParams } from "react-router-dom";
-import { GetProductDetail, getMarked, postMarked } from "@/apis/list";
+import { GetProductDetail, GetProductDetailByUser, getMarked, postMarked } from "@/apis/list";
 import { useEffect, useState } from "react";
 import { ProductType } from "./ListView";
 import Footer from "../common/Footer";
@@ -17,12 +17,22 @@ const ProductDetail = () => {
     const [productDetail, setProductDetail] = useState<ProductType>();
     const isUser = useRecoilValue(isLoginAtom);
     const getProduct = async() => {
-        const result = await GetProductDetail(idx!);
-        if(result===false){
-            alert("불러오기 오류 발생");
-            navigate('/');
+        if (isUser){
+            const result = await GetProductDetailByUser(idx!, localStorage.getItem("access"));
+            if(result===false){
+                alert("불러오기 오류 발생");
+                navigate('/');
+            } else {
+                setProductDetail(result.data);
+            }
         } else {
-            setProductDetail(result.data);
+            const result = await GetProductDetail(idx!);
+            if(result===false){
+                alert("불러오기 오류 발생");
+                navigate('/');
+            } else {
+                setProductDetail(result.data);
+            }
         }
     }
 
