@@ -20,7 +20,7 @@ const MypageRecent = () => {
   const getProductLists = async() => {
       const result = await GetRecentProductLists(localStorage.getItem("access"));
       if(result===false){
-          alert("불러오기 오류 발생");
+          // alert("불러오기 오류 발생");
       } else {
           setProducts(productList.concat(result.data));
       }

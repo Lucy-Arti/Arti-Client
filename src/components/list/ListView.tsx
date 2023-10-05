@@ -32,7 +32,7 @@ const ListView = () => {
 	const getProducts = async() => {
 		const result = await GetAllProductLists();
 		if(result===false) {
-            alert("불러오기 오류 발생");
+            // alert("불러오기 오류 발생");
         } else {
             var newArr:ProductType[] = [];
 			var preData:ProductType[] = result.data;
@@ -57,7 +57,7 @@ const ListView = () => {
 	`
 	const gridWrapper = css`
 		display: grid;
-		height: 80vh;
+		height: 80%;
 		margin: 2rem;
 		/* border: 1px solid black; */
 		grid-template-columns: repeat(2, 1fr);
@@ -71,7 +71,8 @@ const ListView = () => {
 	`
   return (
 	<div css={css`
-		overflow-y:hidden;
+		height: 100vh;
+		/* overflow-y: hidden; */
 	`}>
 		<div css={flexColumn}>
 			<Header where='main'/>

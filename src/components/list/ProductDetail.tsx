@@ -21,7 +21,7 @@ const ProductDetail = () => {
         if (isUser){
             const result = await GetProductDetailByUser(idx!, localStorage.getItem("access"));
             if(result===false){
-                alert("불러오기 오류 발생");
+                // alert("불러오기 오류 발생");
                 // navigate('/');
             } else {
                 setProductDetail(result.data);
@@ -29,8 +29,8 @@ const ProductDetail = () => {
         } else {
             const result = await GetProductDetail(idx!);
             if(result===false){
-                alert("불러오기 오류 발생");
-                navigate('/');
+                // alert("불러오기 오류 발생");
+                // navigate('/');
             } else {
                 setProductDetail(result.data);
             }
