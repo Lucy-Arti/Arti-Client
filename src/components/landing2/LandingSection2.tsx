@@ -146,7 +146,7 @@ const LandingSection2 = () => {
 					<SwiperSlide key={index}>
 						<div css={card}>
 							<img css={cardImg} src={`${product.preview}`} />
-							{/* <div css={info}>
+							<div css={info}>
 								<div css={infoText}>
 									<div css={[row, pickText]}>
 										<img src="/img/profileLogo.svg" />
@@ -156,7 +156,7 @@ const LandingSection2 = () => {
 										<div className="black productName">{product.clothesName}</div>
 									</div>
 								</div>
-							</div> */}
+							</div>
 						</div>
 					</SwiperSlide>
 				))}

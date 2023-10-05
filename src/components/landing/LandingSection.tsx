@@ -7,7 +7,6 @@ import './landing.css';
 import { EffectCube, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LandingSection2 from '../landing2/LandingSection2';
 
 const landingSection = css`
 	width: 100%;
@@ -85,7 +84,6 @@ const LandingSection = () => {
 					</Swiper>
 				</div>
 			</div>
-			<LandingSection2/>
 		</>
 	);
 };
