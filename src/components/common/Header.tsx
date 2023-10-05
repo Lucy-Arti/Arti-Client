@@ -55,7 +55,7 @@ const Header = ({ where }: { where: string }) => {
 					<div css={bgwrapper}>
 						<div css={spaceBetween} className="headerComponent">
 							<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
-							<img css={css`:hover{cursor: pointer;}`} width="35px" src="/img/artiLogo.svg" onClick={handleClick('/')} />
+							<img css={css`:hover{cursor: pointer;}`} width="35px" src="/img/artiLogo.png" onClick={handleClick('/')} />
 							<div
 								css={css`
 									width: 20px;

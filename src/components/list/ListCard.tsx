@@ -125,8 +125,13 @@ const ListCard = (props:CardBoxType) => {
                     }
                 </div>
             </div>
-            <div onClick={() => navigate(`${props.designerId}`)} css={flexraw}>
-                <img src="/img/profileLogo.png" />
+            <div onClick={() => navigate(`${props.clothesId}`)} css={flexraw}>
+                <div css={css`
+                    display: flex;
+                    width: 10%;
+                `}>
+                    <img width="100%" src="/img/profile-large.png" />
+                </div>
                 <div css={makebold}>{props.designerName}</div>
                 <div css={fontsize}> 디자이너</div>
             </div>
