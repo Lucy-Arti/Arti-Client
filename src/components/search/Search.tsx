@@ -45,6 +45,12 @@ const Search = () => {
 	const handleClick = () => {
 		getProducts();
 	};
+
+    const searchSection =css`
+        width: 100%;
+        min-height: 90vh;
+        background-color: aliceblue;
+    `
 	const fixed = css`
 		position: fixed;
 		display: flex;
@@ -85,7 +91,7 @@ const Search = () => {
 		}
 	`;
 	return (
-		<div>
+		<div css={searchSection}>
 			<div css={fixed}>
 				<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
 				<div css={searchBox}>
