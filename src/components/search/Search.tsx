@@ -16,11 +16,15 @@ const Search = () => {
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	const [products, setProducts] = useState<ProductType[]>(productList);
+
+	const [isExist, setIsExist] = useState(true);
+	const [alertText, setAlertText] = useState('');
+
 	const getProducts = async () => {
 		if (inputText.current === null || inputText.current.value === '') {
 			const result = await GetAllProductLists();
 			if (result === false) {
-				alert('불러오기 오류 발생');
+				// alert('불러오기 오류 발생');
 			} else {
 				var newArr: ProductType[] = [];
 				var preData: ProductType[] = result.data;
@@ -32,12 +36,18 @@ const Search = () => {
 				}
 				// setProducts(products.concat(result.data));
 				setProducts(productList.concat(newArr));
+				setIsExist(true);
 			}
 		} else {
 			const result = await GetSearchProductList(inputText.current.value);
 			if (result === false) {
-				alert('불러오기 오류 발생');
-			} else {
+				// alert('불러오기 오류 발생');
+			} else if(result.data.length === 0) {
+				setIsExist(false);
+				setAlertText(inputText.current.value);
+			} 
+			else {
+				setIsExist(true);
 				setProducts(productList.concat(result.data));
 			}
 		}
@@ -122,8 +132,10 @@ const Search = () => {
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<div css={margin}> </div>
-			<div css={gridWrapper}>
-				{products &&
+			{
+				isExist ? 
+				<div css={gridWrapper}>
+					{products &&
 					products.map((product: ProductType, idx: number) => (
 						<SearchCard
 							key={idx}
@@ -142,8 +154,22 @@ const Search = () => {
 							setLoginModalIsOpen={setLoginModalIsOpen}
 						/>
 					))}
+				</div>
+				:
+				<div css={css`
+					display: flex;
+					flex-direction: column;
+					height: fit-content;
+					justify-content: center;
+					align-items: center;
+				`}>
+					<div css={css`
+						font-size: 1.5rem;
+					`}>{alertText}에 대한 검색결과가 없습니다</div>
+
+				</div>
+			}
 			</div>
-		</div>
 	);
 };
 
