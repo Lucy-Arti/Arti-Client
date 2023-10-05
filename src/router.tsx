@@ -18,6 +18,7 @@ import MypageVoted from './components/mypage/MypageVoted';
 import MypageMarked from './components/mypage/MypageMarked';
 import MypageRecent from './components/mypage/MypageRecent';
 import Search from './components/search/Search';
+import Login  from './components/login/Login';
 
 const router = createBrowserRouter([
 	{
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'today',
-				element: <TodayRank />,
+				element: <Login where="vote"/>,
 			},
 		],
 	},
