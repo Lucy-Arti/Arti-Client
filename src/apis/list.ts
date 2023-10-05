@@ -37,7 +37,7 @@ export const GetDesignerDetail = async(id:string) => {
 
 export const getMarked = async(id:number, token:string|null) => {
     try{
-        const response = await axios.get(`${baseURL}/api/v1/likes/${id}/member`, {
+        const response = await axios.get(`${baseURL}api/v1/likes/${id}/member`, {
             headers: { Authorization: `Bearer ${token}` },
           });
         console.log(response.data);
@@ -50,7 +50,7 @@ export const getMarked = async(id:number, token:string|null) => {
 
 export const postMarked = async(id:number, token:string|null) => {
     try{
-        const response = await axios.post(`${baseURL}/api/v1/likes/${id}`, {
+        const response = await axios.post(`${baseURL}api/v1/likes/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
         console.log(response.data);
