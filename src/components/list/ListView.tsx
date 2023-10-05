@@ -70,7 +70,9 @@ const ListView = () => {
 		}
 	`
   return (
-	<>
+	<div css={css`
+		overflow-y:hidden;
+	`}>
 		<div css={flexColumn}>
 			<Header where='main'/>
 		</div>
@@ -105,7 +107,7 @@ const ListView = () => {
 				/>
 			))}
 		</div>
-	</>
+	</div>
 	
   );
 }
