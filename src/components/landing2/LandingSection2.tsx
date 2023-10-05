@@ -47,6 +47,12 @@ const LandingSection2 = () => {
 		justify-content: space-between;
 		align-items: end;
 	`;
+	
+	const swipeSection = css`
+		width: 100%;
+		max-height: 300px;
+		background-color: antiquewhite;
+	`;
 
 	const introduce = css`
 		font-size: 2.8rem;
@@ -69,7 +75,6 @@ const LandingSection2 = () => {
 		object-fit: cover;
 		overflow: hidden;
 		border-radius: 11px;
-		background-color: aliceblue;
 	`;
 
 	const cardImg = css`
@@ -94,8 +99,8 @@ const LandingSection2 = () => {
 		font-size: 1.5rem;
 		font-weight: 500;
 		@media (max-width: 380px) {
-				font-size: 1rem;
-			}
+			font-size: 1rem;
+		}
 		.black {
 			color: black;
 		}
@@ -141,26 +146,28 @@ const LandingSection2 = () => {
 				<div css={introduce}>소개합니다</div>
 				<div css={more}>더보기</div>
 			</div>
-			<Swiper {...settings} className="mySwiper">
-				{products.map((product: ProductType, index) => (
-					<SwiperSlide key={index}>
-						<div css={card}>
-							<img css={cardImg} src={`${product.preview}`} />
-							<div css={info}>
-								<div css={infoText}>
-									<div css={[row, pickText]}>
-										<img src="/img/profileLogo.svg" />
-										<span className="black">&nbsp;{product.designerName}&nbsp;</span>디자이너
-									</div>
-									<div css={[row, pickText]}>
-										<div className="black productName">{product.clothesName}</div>
+			<div css={swipeSection}>
+				<Swiper {...settings} className="mySwiper">
+					{products.map((product: ProductType, index) => (
+						<SwiperSlide key={index}>
+							<div css={card}>
+								<img css={cardImg} src={`${product.preview}`} />
+								<div css={info}>
+									<div css={infoText}>
+										<div css={[row, pickText]}>
+											<img src="/img/profileLogo.svg" />
+											<span className="black">&nbsp;{product.designerName}&nbsp;</span>디자이너
+										</div>
+										<div css={[row, pickText]}>
+											<div className="black productName">{product.clothesName}</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</SwiperSlide>
-				))}
-			</Swiper>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
 		</div>
 	);
 };
