@@ -49,8 +49,9 @@ export const getMarked = async(id:number, token:string|null) => {
 }
 
 export const postMarked = async(id:number, token:string|null) => {
+    const data = null;
     try{
-        const response = await axios.post(`${baseURL}api/v1/likes/${id}`, {
+        const response = await axios.post(`${baseURL}api/v1/likes/${id}`, data, {
             headers: { Authorization: `Bearer ${token}` },
           });
         console.log(response.data);

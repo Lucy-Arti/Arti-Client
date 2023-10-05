@@ -35,12 +35,12 @@ const ListCard = (props:CardBoxType) => {
     }
     const postMark = async() => {
         const result = await postMarked(props.clothesId, localStorage.getItem("access"));
-        if (result === false) {
-            setIsSuccessed(false);
-            //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
-        } else {
-            setIsSuccessed(true);
-        }
+        // if (result === false) {
+        //     setIsSuccessed(false);
+        //     //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+        // } else {
+        //     setIsSuccessed(true);
+        // }
     }
     useEffect(()=>{
         getMark();
