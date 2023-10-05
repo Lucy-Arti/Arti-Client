@@ -16,7 +16,7 @@ const ModalProductSaved = () => {
 		transform: translate(-50%, 0%);
 		height: ${totalHeight};
 		/* background-color: rgba(0, 0, 0, 0.5); */
-		/* z-index: 1; */
+		z-index: 3;
 		@media (min-width: 576px) {
 			width: 576px;
 		}
