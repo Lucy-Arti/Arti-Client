@@ -35,7 +35,6 @@ const RankingSection = () => {
 		align-items: center;
 		width: 100%;
 		aspect-ratio: 1 / 0.64;
-		margin-top: 2rem;
 		position: relative;
 		overflow: -moz-hidden-unscrollable;
 	`;
