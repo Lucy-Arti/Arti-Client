@@ -63,6 +63,12 @@ const Search = () => {
 			getProducts();
 		}
 	};
+
+	const handleBlur = () => {
+		setTimeout(() => {
+		  window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
+		}, 0);
+	  };
 	const searchSection = css`
 		width: 100%;
 		min-height: 90vh;
@@ -114,7 +120,7 @@ const Search = () => {
 		}
 	`;
 	return (
-		<div css={searchSection}>
+		<div css={searchSection} onBlur={handleBlur}>
 			<div css={fixed}>
 				<div css={backBtn}>
 					<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
