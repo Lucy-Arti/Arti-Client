@@ -94,12 +94,13 @@ const ListCard = (props:CardBoxType) => {
     `
     const flexraw = css`
         display: flex;
+        align-items: center;
         margin-top: 1rem;
         margin-left: 1rem;
     `
     const makebold = css`
         font-size: 1.5rem;
-        margin-left: 0.5rem;
+        margin-left: 0.3rem;
         font-weight: 600;
     `
     const fontsize = css`
@@ -130,7 +131,7 @@ const ListCard = (props:CardBoxType) => {
                     display: flex;
                     width: 10%;
                 `}>
-                    <img width="100%" src="/img/profile-large.png" />
+                    <img width="80%" src="/img/profile-large.png" />
                 </div>
                 <div css={makebold}>{props.designerName}</div>
                 <div css={fontsize}> 디자이너</div>
