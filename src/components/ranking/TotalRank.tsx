@@ -18,7 +18,7 @@ const TotalRank = () => {
 			setRankData(result);
 		};
 		getTotalScoreData();
-	});
+	},[]);
 
 	const wrapper = css`
 		width: 100%;
