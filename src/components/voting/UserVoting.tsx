@@ -109,6 +109,9 @@ const UserVoting = () => {
 					// 로그인하고 이미 투표했는데 url 접근으로 들어온 사람들
 					console.log(error);
 					alert('1일 1회 투표가 가능해요. 내일 다시 투표해주세요!');
+					setTimeout(() => {
+						navigate(`../`);
+					}, 500);
 				});
 		}
 	}, [apiBody]);
