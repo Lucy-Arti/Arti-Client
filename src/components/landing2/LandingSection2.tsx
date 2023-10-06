@@ -150,7 +150,7 @@ const LandingSection2 = () => {
 	return (
 		<div css={landingSection2}>
 			<div css={bannerSection2}>
-				<div css={introduce}>소개합니다</div>
+				<div css={introduce}>With Arti</div>
 				<div css={more} onClick={()=>{navigate('productlist')}}>더보기</div>
 			</div>
 			<div css={swipeSection}>
