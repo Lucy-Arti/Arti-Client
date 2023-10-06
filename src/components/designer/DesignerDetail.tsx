@@ -57,6 +57,7 @@ const DesignerDetail = () => {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		overflow-x: hidden;
 	`;
 	const flexColumn = css`
 		width: 100%;
