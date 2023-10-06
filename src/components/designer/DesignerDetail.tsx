@@ -65,7 +65,7 @@ const DesignerDetail = () => {
 		align-items: center;
 	`;
 	const infoWrapper = css`
-		max-width: 80%;
+		max-width: 100%;
 		display: flex;
 		background-color: white;
 		/* align-items: center; */
@@ -95,11 +95,17 @@ const DesignerDetail = () => {
 				<Header where="detail" />
 			</div>
 			<div css={infoWrapper}>
-				<img width="80rem" height="80rem" src={`/img/myProfile-${randomNumFloor}.png`} />
+				<div css={css`
+					width: 30rem;
+					margin-left: 2rem;
+				`}>
+					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
+				</div>
 				<div
 					css={css`
 						display: flex;
 						flex-direction: column;
+						margin-right: 2rem;
 					`}
 				>
 					<div

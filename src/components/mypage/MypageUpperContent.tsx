@@ -91,6 +91,7 @@ const MypageUpperContent = () => {
 					<div
 						css={css`
 							font-size: 1.5rem;
+							font-weight: 600;
 						`}
 					>
 						투표한 옷
@@ -106,6 +107,7 @@ const MypageUpperContent = () => {
 					<div
 						css={css`
 							font-size: 1.5rem;
+							font-weight: 600;
 						`}
 					>
 						최근 본 옷
@@ -122,6 +124,7 @@ const MypageUpperContent = () => {
 					<div
 						css={css`
 							font-size: 1.5rem;
+							font-weight: 600;
 						`}
 					>
 						저장한 옷
