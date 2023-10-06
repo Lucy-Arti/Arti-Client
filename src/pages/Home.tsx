@@ -21,8 +21,21 @@ const Home = () => {
 		height: fit-content;
 	`;
 
+	// useEffect(() => {
+	// 	if (localStorage.getItem('access')) {
+	// 		const getUserProfile = async () => {
+	// 			const data = await getUserInfo();
+	// 			console.log(data);
+	// 			setUserEmail(data.email);
+	// 			setUserName(data.userName);
+	// 		};
+	// 		getUserProfile();
+	// 	} else if (localStorage.getItem('access') && userName !== '') {
+	// 		console.log('로그인 완료 상태');
+	// 	}
+	// });
 	useEffect(() => {
-		if (localStorage.getItem('access')) {
+		if (localStorage.getItem('access') && userName === '') {
 			const getUserProfile = async () => {
 				const data = await getUserInfo();
 				console.log(data);
@@ -30,17 +43,15 @@ const Home = () => {
 				setUserName(data.userName);
 			};
 			getUserProfile();
-		} else if (localStorage.getItem('access') && userName !== '') {
-			console.log('로그인 완료 상태');
 		}
-	});
+	}, [userName]);
 
 	return (
 		<div css={flexColumn}>
 			<Header where="main" />
 			<NavBar />
 			<LandingSection />
-			<LandingSection2/>
+			<LandingSection2 />
 			<Footer />
 		</div>
 	);
