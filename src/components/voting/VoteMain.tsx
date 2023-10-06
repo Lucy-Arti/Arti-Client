@@ -83,7 +83,7 @@ const VoteMain = () => {
 	return (
 		<div css={voteSection}>
 			<div css={bannerSection}>
-				<img css={img} src="/img/votemainbanner.png" />
+				<img css={img} src="/img/votemainbanner.png" loading="lazy" />
 			</div>
 			<div
 				css={[

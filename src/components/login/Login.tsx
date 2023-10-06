@@ -60,8 +60,8 @@ const Login = ({ where }: { where: string }) => {
 						</span>
 					))}
 				</div>
-				<img css={img} src={'/img/loginBanner.png'}></img>
-				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} />
+				<img css={img} src={'/img/loginBanner.png'} loading="lazy"></img>
+				<img src={'/img/kakao.png'} css={kakao} onClick={handleLogin} loading="lazy" />
 			</div>
 		</>
 	);

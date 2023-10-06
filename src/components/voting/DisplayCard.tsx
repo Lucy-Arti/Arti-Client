@@ -1,16 +1,10 @@
-import { MatchData} from '@/types/request';
+import { MatchData } from '@/types/request';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import ZoomImg from './ZoomImg';
 import { IoSearchOutline } from 'react-icons/io5';
 
-const DisplayCard = ({
-	data,
-	handleCardClick,
-}: {
-	data: MatchData;
-	handleCardClick: (item: MatchData) => void;
-}) => {
+const DisplayCard = ({ data, handleCardClick }: { data: MatchData; handleCardClick: (item: MatchData) => void }) => {
 	const [isZoomed, setIsZoomed] = useState(false);
 	const [isClicked, setIsClicked] = useState(false);
 
@@ -66,7 +60,7 @@ const DisplayCard = ({
 		}
 	`;
 	const productimg = css`
-			object-fit: cover;
+		object-fit: cover;
 		border-radius: 5px;
 		@media (min-width: 0px) {
 			height: 100%;
@@ -84,7 +78,7 @@ const DisplayCard = ({
 	return (
 		<div css={card}>
 			<div css={contentSection} onClick={handleCardClickInternal}>
-				<img css={productimg} src={data.preview} />
+				<img css={productimg} src={data.preview} loading="lazy" />
 			</div>
 			<div css={info}>
 				<div>{data.clothesName}</div>

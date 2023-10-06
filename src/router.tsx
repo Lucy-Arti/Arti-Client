@@ -18,7 +18,7 @@ import MypageVoted from './components/mypage/MypageVoted';
 import MypageMarked from './components/mypage/MypageMarked';
 import MypageRecent from './components/mypage/MypageRecent';
 import Search from './components/search/Search';
-import Login  from './components/login/Login';
+import Login from './components/login/Login';
 
 const router = createBrowserRouter([
 	{
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'today',
-				element: <Login where="vote"/>,
+				element: <Login where="vote" />,
 			},
 		],
 	},
@@ -81,15 +81,15 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'voted',
-				element: <MypageVoted />
+				element: <MypageVoted />,
 			},
 			{
 				path: 'recent',
-				element: <MypageRecent />
+				element: <MypageRecent />,
 			},
 			{
 				path: 'marked',
-				element: <MypageMarked />
+				element: <MypageMarked />,
 			},
 		],
 	},

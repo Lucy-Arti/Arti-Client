@@ -23,15 +23,15 @@ const LandingSection2 = () => {
 		if (result === false) {
 			console.log('불러오기 오류 발생');
 		} else {
-			var newArr:ProductType[] = [];
-			var preData:ProductType[] = result.data;
+			var newArr: ProductType[] = [];
+			var preData: ProductType[] = result.data;
 			for (let i = 0; i < 7; i++) {
-				let randomNum = Math.floor( Math.random() * (preData.length - i) );
-    			let element = preData.splice(randomNum, 1);
+				let randomNum = Math.floor(Math.random() * (preData.length - i));
+				let element = preData.splice(randomNum, 1);
 				newArr = newArr.concat(element);
 			}
-            // setProducts(products.concat(result.data));
-            setProducts(products.concat(newArr));
+			// setProducts(products.concat(result.data));
+			setProducts(products.concat(newArr));
 		}
 	};
 	useEffect(() => {
@@ -54,7 +54,7 @@ const LandingSection2 = () => {
 		justify-content: space-between;
 		align-items: end;
 	`;
-	
+
 	const swipeSection = css`
 		width: 100%;
 		max-height: 300px;
@@ -151,28 +151,41 @@ const LandingSection2 = () => {
 		<div css={landingSection2}>
 			<div css={bannerSection2}>
 				<div css={introduce}>With Arti</div>
-				<div css={more} onClick={()=>{navigate('productlist')}}>더보기</div>
+				<div
+					css={more}
+					onClick={() => {
+						navigate('productlist');
+					}}
+				>
+					더보기
+				</div>
 			</div>
 			<div css={swipeSection}>
 				<Swiper {...settings} className="mySwiper">
-					{products && products.map((product: ProductType, index) => (
-						<SwiperSlide key={index}>
-							<div css={card} onClick={()=>{navigate(`productlist/${product.clothesId}`)}}>
-								<img css={cardImg} src={`${product.preview}`} />
-								<div css={info}>
-									<div css={infoText}>
-										<div css={[row, pickText]}>
-											<img src="/img/profileLogo.svg" />
-											<span className="black">&nbsp;{product.designerName}&nbsp;</span>
-										</div>
-										{/* <div css={[row, pickText]}>
+					{products &&
+						products.map((product: ProductType, index) => (
+							<SwiperSlide key={index}>
+								<div
+									css={card}
+									onClick={() => {
+										navigate(`productlist/${product.clothesId}`);
+									}}
+								>
+									<img css={cardImg} src={`${product.preview}`} loading="lazy" />
+									<div css={info}>
+										<div css={infoText}>
+											<div css={[row, pickText]}>
+												<img src="/img/profileLogo.svg" loading="lazy" />
+												<span className="black">&nbsp;{product.designerName}&nbsp;</span>
+											</div>
+											{/* <div css={[row, pickText]}>
 											<div className="black productName">{product.clothesName}</div>
 										</div> */}
+										</div>
 									</div>
 								</div>
-							</div>
-						</SwiperSlide>
-					))}
+							</SwiperSlide>
+						))}
 				</Swiper>
 			</div>
 		</div>

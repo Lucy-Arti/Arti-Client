@@ -29,13 +29,13 @@ const Search = () => {
 			}, 0);
 		});
 	}, []);
-	
+
 	const getProducts = async () => {
 		if (inputText.current === null || inputText.current.value === '') {
 			//input 값이 없을 때 전체 랜덤하게 불러오기
 			const result = await GetAllProductLists();
 			if (result === false) {
-				console.log("불러오기 오류 발생");
+				console.log('불러오기 오류 발생');
 			} else {
 				var newArr: ProductType[] = [];
 				var preData: ProductType[] = result.data;
@@ -157,6 +157,7 @@ const Search = () => {
 						`}
 						src="/img/search.svg"
 						onClick={handleClick}
+						loading="lazy"
 					/>
 				</div>
 			</div>

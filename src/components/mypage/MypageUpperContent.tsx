@@ -53,7 +53,7 @@ const MypageUpperContent = () => {
 	return (
 		<div css={columnSort}>
 			<div css={profileWrapper}>
-				<img width="20%" src={`/img/myProfile-${randomNumFloor}.png`} />
+				<img width="20%" src={`/img/myProfile-${randomNumFloor}.png`} loading="lazy" />
 				<div
 					css={css`
 						display: flex;
@@ -87,7 +87,7 @@ const MypageUpperContent = () => {
 						navigate('voted');
 					}}
 				>
-					<img src="/img/mypageVoteBtn.png" />
+					<img src="/img/mypageVoteBtn.png" loading="lazy" />
 					<div
 						css={css`
 							font-size: 1.5rem;
@@ -120,7 +120,7 @@ const MypageUpperContent = () => {
 						navigate('marked');
 					}}
 				>
-					<img src="/img/mypageHeart.png" />
+					<img src="/img/mypageHeart.png" loading="lazy" />
 					<div
 						css={css`
 							font-size: 1.5rem;

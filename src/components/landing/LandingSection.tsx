@@ -68,17 +68,17 @@ const LandingSection = () => {
 						autoplay={{ delay: 2500, disableOnInteraction: false }}
 					>
 						<SwiperSlide>
-							<img src={selectedImage + '1.png'} alt="landing1" />
+							<img src={selectedImage + '1.png'} alt="landing1" loading="lazy" />
 						</SwiperSlide>
 						<SwiperSlide>
-							<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} />
+							<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} loading="lazy" />
 						</SwiperSlide>
 						<SwiperSlide>
-							<img src={selectedImage + '3.png'} alt="landing3" />
+							<img src={selectedImage + '3.png'} alt="landing3" loading="lazy" />
 						</SwiperSlide>
 						<SwiperSlide>
 							<a href="https://arti.channel.io" target="_blank">
-								<img src={selectedImage + '4.png'} alt="landing4" />
+								<img src={selectedImage + '4.png'} alt="landing4" loading="lazy" />
 							</a>
 						</SwiperSlide>
 					</Swiper>

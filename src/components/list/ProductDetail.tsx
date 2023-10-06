@@ -13,7 +13,7 @@ import ShareButton from '../common/ShareButton';
 const ProductDetail = () => {
 	const { idx } = useParams();
 	const [markState, setMarkState] = useState(false);
-    const [like, setLikeNum] =useState<number | null>(null);
+	const [like, setLikeNum] = useState<number | null>(null);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -48,11 +48,11 @@ const ProductDetail = () => {
 	const postMark = async () => {
 		const result = await postMarked(idx!, localStorage.getItem('access'));
 		if (result === false) {
-            console.log('불러오기 오류 발생');
-            //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
-        } else {
-            console.log('post 성공');
-        }
+			console.log('불러오기 오류 발생');
+			//나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+		} else {
+			console.log('post 성공');
+		}
 	};
 	useEffect(() => {
 		getProduct();
@@ -60,24 +60,24 @@ const ProductDetail = () => {
 	}, []);
 
 	useEffect(() => {
-        if(productDetail){
-            setLikeNum(productDetail.likeCount)
-        }
+		if (productDetail) {
+			setLikeNum(productDetail.likeCount);
+		}
 	}, [productDetail]);
 
 	const handleMarkClick = () => {
 		if (isUser) {
 			if (markState) {
 				setMarkState(false);
-                if (like !== null) {
-                    setLikeNum(like - 1);
-                }
+				if (like !== null) {
+					setLikeNum(like - 1);
+				}
 				postMark();
 			} else {
 				setMarkState(true);
-                if (like !== null) {
-                    setLikeNum(like + 1);
-                }
+				if (like !== null) {
+					setLikeNum(like + 1);
+				}
 				postMark();
 			}
 		} else {
@@ -149,7 +149,7 @@ const ProductDetail = () => {
 			</div>
 			{productDetail && (
 				<div>
-					<img width="100%" src={`${productDetail.preview}`} />
+					<img width="100%" src={`${productDetail.preview}`} loading="lazy" />
 					<div onClick={() => navigate(`/designer/${productDetail.designerId}`)} css={designerBox}>
 						<div
 							css={css`
@@ -176,6 +176,7 @@ const ProductDetail = () => {
 										width="30rem"
 										src="/img/activeHeart.png"
 										onClick={handleMarkClick}
+										loading="lazy"
 									/>
 								) : (
 									<img
@@ -187,6 +188,7 @@ const ProductDetail = () => {
 										width="30rem"
 										src="/img/nonactiveHeart.png"
 										onClick={handleMarkClick}
+										loading="lazy"
 									/>
 								)}
 								<div>{like}</div>
@@ -198,7 +200,7 @@ const ProductDetail = () => {
 					</div>
 					<div css={gapDesign} />
 					<div>
-						<img width="100%" src={`${productDetail.detailImg}`} />
+						<img width="100%" src={`${productDetail.detailImg}`} loading="lazy" />
 					</div>
 					<Footer />
 				</div>

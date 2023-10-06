@@ -35,9 +35,9 @@ const ProgressBar = ({ progressprops }: { progressprops: ProgressBarProps }) => 
 		font-size: 1.5rem;
 		text-align: center;
 		z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	`;
 
 	const progressText = css`
@@ -51,11 +51,11 @@ const ProgressBar = ({ progressprops }: { progressprops: ProgressBarProps }) => 
 		border-radius: 21px;
 		background: rgba(178, 255, 106, 0.4);
 		z-index: 1;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        backdrop-filter: blur(2.254070520401001px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+		backdrop-filter: blur(2.254070520401001px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	`;
 
 	return (
@@ -63,8 +63,8 @@ const ProgressBar = ({ progressprops }: { progressprops: ProgressBarProps }) => 
 			<div css={progress}>
 				<div css={progressLogoWrap}>
 					<div css={progressLogo}>
-                    <img src="/img/progresslogo.svg" />
-                    </div>
+						<img src="/img/progresslogo.svg" loading="lazy" />
+					</div>
 					{/* <img css={progressLogo} src="/img/progressLogo.svg" /> */}
 					<div css={progressText}>{progressprops.progress}</div>
 				</div>

@@ -61,7 +61,7 @@ const ZoomImg = ({ image, setIsZoomed }: ZoomImgProps) => {
 				<div css={closedBtn}>
 					<AiOutlineClose color="white" size="2.8rem" onClick={handleClose} cursor="pointer" />
 				</div>
-				<img src={image} css={imgcss} />
+				<img src={image} css={imgcss} loading="lazy" />
 			</div>
 		</div>
 	);

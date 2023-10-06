@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 type RankingCardPropsType = {
-	data:RankData;
-	index:number;
-	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+	data: RankData;
+	index: number;
+	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const RankingCard = (props:RankingCardPropsType) => {
+const RankingCard = (props: RankingCardPropsType) => {
 	const [markState, setMarkState] = useState(false);
 	const [isSuccessed, setIsSuccessed] = useState(false);
 	const isUser = useRecoilValue(isLoginAtom);
@@ -52,7 +52,6 @@ const RankingCard = (props:RankingCardPropsType) => {
 				setTimeout(() => {
 					props.setUnsavedModalIsOpen(false);
 				}, 1000);
-			
 			} else {
 				setMarkState(true);
 				postMark();
@@ -120,7 +119,7 @@ const RankingCard = (props:RankingCardPropsType) => {
 		flex-direction: column;
 		justify-content: flex-start;
 		margin-top: 2rem;
-		height:80%;
+		height: 80%;
 		width: 48%;
 		margin-left: 1rem;
 	`;
@@ -157,16 +156,16 @@ const RankingCard = (props:RankingCardPropsType) => {
 	return (
 		<div css={card}>
 			<div css={tag}>
-				<img css={tagImg} src={props.index === 0 ? '/img/greentag.png' : '/img/graytag.png'} />
+				<img css={tagImg} src={props.index === 0 ? '/img/greentag.png' : '/img/graytag.png'} loading="lazy" />
 				<div css={tagNumber}>{props.index + 1}</div>
 			</div>
 			<div css={box}>
-				<div css={left}  onClick={()=>navigate(`../../productlist/${props.data.clothesId}`)}>
-					<img css={productImg} src={`${props.data.preview}`} />
+				<div css={left} onClick={() => navigate(`../../productlist/${props.data.clothesId}`)}>
+					<img css={productImg} src={`${props.data.preview}`} loading="lazy" />
 				</div>
-				<div css={middle}  onClick={()=>navigate(`../../productlist/${props.data.clothesId}`)}>
+				<div css={middle} onClick={() => navigate(`../../productlist/${props.data.clothesId}`)}>
 					<div css={row}>
-						<img src="/img/profileLogo.svg" />
+						<img src="/img/profileLogo.svg" loading="lazy" />
 						<div
 							css={css`
 								font-size: 1.5rem;
@@ -200,8 +199,8 @@ const RankingCard = (props:RankingCardPropsType) => {
 						css={heartSection}
 						onClick={handleMarkClick}
 						src={markState ? '/img/activeHeart.png' : '/img/nonactiveHeart.png'}
+						loading="lazy"
 					/>
-				
 				</div>
 			</div>
 		</div>

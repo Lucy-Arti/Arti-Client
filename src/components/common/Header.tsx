@@ -36,8 +36,8 @@ const Header = ({ where }: { where: string }) => {
 		return (
 			<div className="headerLayout">
 				<div css={spaceBetween} className="headerComponent">
-					<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} />
-					<img src="/img/search.svg" onClick={handleClick('/search')} />
+					<img css={logoImg} src="/img/blackLogo.png" onClick={handleClick('/')} loading="lazy" />
+					<img src="/img/search.svg" onClick={handleClick('/search')} loading="lazy" />
 				</div>
 			</div>
 		);
@@ -55,7 +55,17 @@ const Header = ({ where }: { where: string }) => {
 					<div css={bgwrapper}>
 						<div css={spaceBetween} className="headerComponent">
 							<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
-							<img css={css`:hover{cursor: pointer;}`} width="35px" src="/img/artiLogo.png" onClick={handleClick('/')} />
+							<img
+								css={css`
+									:hover {
+										cursor: pointer;
+									}
+								`}
+								width="35px"
+								src="/img/artiLogo.png"
+								onClick={handleClick('/')}
+								loading="lazy"
+							/>
 							<div
 								css={css`
 									width: 20px;
