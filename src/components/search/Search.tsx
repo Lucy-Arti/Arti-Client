@@ -52,12 +52,14 @@ const Search = () => {
 		}
 	};
 	const handleClick = () => {
+		window.scrollTo(0, 0);
 		getProducts();
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
 			// Enter 키가 눌렸을 때 검색 함수 호출
+			window.scrollTo(0, 0);
 			getProducts();
 		}
 	};
@@ -89,7 +91,7 @@ const Search = () => {
 		justify-content: space-between;
 	`;
 	const margin = css`
-		height: 80px;
+		height: 60px;
 	`;
 	const backBtn = css`
 		height: 40px;

@@ -15,6 +15,7 @@ const NavBar = () => {
 	];
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		if (pathname.includes('rank')) {
 			setTab(TABS.RANK);
 		} else if (pathname.includes('productlist')) {
