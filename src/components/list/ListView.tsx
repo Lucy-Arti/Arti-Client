@@ -32,7 +32,7 @@ const ListView = () => {
 	const getProducts = async() => {
 		const result = await GetAllProductLists();
 		if(result===false) {
-            // alert("불러오기 오류 발생");
+            console.log('불러오기 오류 발생');
         } else {
             var newArr:ProductType[] = [];
 			var preData:ProductType[] = result.data;

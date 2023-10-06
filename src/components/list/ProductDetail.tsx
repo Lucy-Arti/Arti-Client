@@ -47,12 +47,12 @@ const ProductDetail = () => {
 	};
 	const postMark = async () => {
 		const result = await postMarked(idx!, localStorage.getItem('access'));
-		// if (result === false) {
-		//     setIsSuccessed(false);
-		//     //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
-		// } else {
-		//     setIsSuccessed(true);
-		// }
+		if (result === false) {
+            console.log('불러오기 오류 발생');
+            //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+        } else {
+            console.log('post 성공');
+        }
 	};
 	useEffect(() => {
 		getProduct();

@@ -21,7 +21,7 @@ const MypageVoted = () => {
     const getProductLists = async() => {
         const result = await GetVotedProductLists(localStorage.getItem("access"));
         if(result===false){
-            alert("불러오기 오류 발생");
+            console.log("불러오기 오류 발생");
         } else {
             setProducts(productList.concat(result.data));
         }

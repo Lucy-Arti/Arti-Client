@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetMarkedProductLists } from '@/apis/mypage';
 import Footer from '../common/Footer';
-import ListCard from '../list/ListCard';
 import SearchCard from '../search/SearchCard';
 import ModalProductSaved from '../list/ModalProductSaved';
 import ModalProductUnsaved from '../list/ModalProductUnsaved';

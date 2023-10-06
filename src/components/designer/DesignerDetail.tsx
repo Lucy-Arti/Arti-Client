@@ -31,7 +31,7 @@ const DesignerDetail = () => {
 	const getDesigner = async () => {
 		const result = await GetDesignerDetail(idx!);
 		if (result === false) {
-			alert('불러오기 오류 발생');
+			console.log('불러오기 오류 발생');
 		} else {
 			setDesignerProfile(result.data);
 		}
@@ -40,7 +40,7 @@ const DesignerDetail = () => {
 	const getDesignersProducts = async () => {
 		const result = await GetDesignerProduct(idx!);
 		if (result === false) {
-			alert('불러오기 오류 발생');
+			console.log('불러오기 오류 발생');
 		} else {
 			setProducts(products.concat(result.data));
 		}

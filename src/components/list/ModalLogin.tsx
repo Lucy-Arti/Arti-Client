@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const ModalLogin = (props:{setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const navigate = useNavigate();
-    // const viewportHeight = document.documentElement.clientHeight;
     const totalHeight = document.documentElement.scrollHeight;
     const modalSection = css`
         position: fixed;
