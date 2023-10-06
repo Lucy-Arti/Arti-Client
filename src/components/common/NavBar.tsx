@@ -32,6 +32,7 @@ const NavBar = () => {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding-bottom: 10px;
 	`;
 
 	const wrapper = css`
