@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { ProductType } from '../list/ListView';
 import { GetSearchProductList } from '@/apis/search';
@@ -8,6 +8,7 @@ import ModalProductSaved from '../list/ModalProductSaved';
 import ModalProductUnsaved from '../list/ModalProductUnsaved';
 import SearchCard from './SearchCard';
 import { GetAllProductLists } from '@/apis/list';
+import $ from 'jquery';
 
 const Search = () => {
 	const inputText = useRef<HTMLInputElement>(null);
@@ -20,6 +21,15 @@ const Search = () => {
 	const [isExist, setIsExist] = useState(true);
 	const [alertText, setAlertText] = useState('');
 
+	// ios input fixed 에러 해결
+	useEffect(() => {
+		$(document).on('blur', 'input, textarea', function () {
+			setTimeout(function () {
+				window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
+			}, 0);
+		});
+	}, []);
+	
 	const getProducts = async () => {
 		if (inputText.current === null || inputText.current.value === '') {
 			const result = await GetAllProductLists();
@@ -64,17 +74,13 @@ const Search = () => {
 		}
 	};
 
-	const handleBlur = () => {
-		setTimeout(() => {
-		  window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
-		}, 0);
-	  };
 	const searchSection = css`
 		width: 100%;
 		min-height: 90vh;
 	`;
 	const fixed = css`
 		position: fixed;
+		top: 0px !important;
 		display: flex;
 		justify-content: space-around;
 		align-items: end;
@@ -120,7 +126,7 @@ const Search = () => {
 		}
 	`;
 	return (
-		<div css={searchSection} onBlur={handleBlur}>
+		<div css={searchSection}>
 			<div css={fixed}>
 				<div css={backBtn}>
 					<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
