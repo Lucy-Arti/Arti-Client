@@ -5,6 +5,7 @@ export const GetDesignerProduct = async(idx:string) => {
     try{
         const response = await axios.get(`${baseURL}api/v1/clothes/designer/${idx}`);
         // console.log(response.data);
+        console.log("")
         return response;
     } catch(error) {
         console.log(error);

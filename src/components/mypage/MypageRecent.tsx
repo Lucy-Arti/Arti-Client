@@ -22,7 +22,17 @@ const MypageRecent = () => {
       if(result===false){
           console.log("불러오기 오류 발생");
       } else {
-          setProducts(productList.concat(result.data));
+          var newArr: ProductType[] = [];
+          var preData: ProductType[] = result.data;
+          var arraySize = preData.length;
+          for (let i = 0; i < arraySize; i++) {
+            let element = preData.pop();
+            if (element !== undefined){
+              newArr.push(element);
+            }
+          }
+          // newArr.push()
+          setProducts(productList.concat(newArr));
       }
   }
 
