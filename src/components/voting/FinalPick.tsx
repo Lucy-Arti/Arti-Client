@@ -16,8 +16,7 @@ const FinalPick = () => {
 	const getProduct = async () => {
 		const result = await GetProductDetail(targetId!);
 		if (result === false) {
-			alert('불러오기 오류 발생');
-			navigate('/');
+			console.log('불러오기 오류 발생');
 		} else {
 			setProductDetail(result.data);
 		}
