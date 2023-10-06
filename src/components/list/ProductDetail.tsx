@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { BiShareAlt } from 'react-icons/bi';
 // import HeaderSecond from "../common/HeaderSecond";
 import Header from '../common/Header';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -95,8 +94,8 @@ const ProductDetail = () => {
 	const designerBox = css`
 		display: flex;
 		align-items: center;
-		margin: 1rem 2rem 1rem 2rem;
-		padding: 2rem 0 2rem 1rem;
+		margin: 18px;
+		padding: 2rem 0 2rem 1.5rem;
 		border-radius: 10px;
 		background-color: white;
 		filter: drop-shadow(0 0 0.3rem #9e9e9e);
@@ -116,6 +115,7 @@ const ProductDetail = () => {
 		width: 70%;
 		font-size: 2rem;
 		font-weight: 600;
+		margin-left: 0.5rem;
 	`;
 	const flexrow = css`
 		display: flex;

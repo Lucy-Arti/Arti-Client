@@ -47,7 +47,7 @@ const Header = ({ where }: { where: string }) => {
 			<>
 				<div
 					css={css`
-						height: 40px;
+						height: 10px;
 						width: 100%;
 					`}
 				></div>

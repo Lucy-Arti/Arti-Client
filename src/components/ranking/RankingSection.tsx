@@ -1,10 +1,8 @@
-import { RANKING_TABS } from '@/utils/constant';
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const RankingSection = () => {
-	const { pathname } = useLocation();
+	// const { pathname } = useLocation();
 	// const [tab, setTab] = useState(RANKING_TABS.TOTAL);
 
 	// const rankingLabels = [
