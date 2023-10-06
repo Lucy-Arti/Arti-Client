@@ -94,8 +94,12 @@ const SearchCard = (props:CardBoxType) => {
     `
     const flexraw = css`
         display: flex;
+        align-items: center;
         margin-top: 1rem;
         margin-left: 1rem;
+        img{
+            height: 1.5rem;
+        }
     `
     const makebold = css`
         font-size: 1.5rem;
@@ -126,7 +130,7 @@ const SearchCard = (props:CardBoxType) => {
                 </div>
             </div>
             <div onClick={() => navigate(`${props.designerId}`)} css={flexraw}>
-                <img src="/img/profileLogo.png" />
+                <img src="/img/profile-large.png"  />
                 <div css={makebold}>{props.designerName}</div>
                 <div css={fontsize}> 디자이너</div>
             </div>
