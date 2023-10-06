@@ -42,11 +42,10 @@ const Search = () => {
 			const result = await GetSearchProductList(inputText.current.value);
 			if (result === false) {
 				// alert('불러오기 오류 발생');
-			} else if(result.data.length === 0) {
+			} else if (result.data.length === 0) {
 				setIsExist(false);
 				setAlertText(inputText.current.value);
-			} 
-			else {
+			} else {
 				setIsExist(true);
 				setProducts(productList.concat(result.data));
 			}
@@ -56,22 +55,28 @@ const Search = () => {
 		getProducts();
 	};
 
-    const searchSection =css`
-        width: 100%;
-        min-height: 90vh;
-    `
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter') {
+			// Enter 키가 눌렸을 때 검색 함수 호출
+			getProducts();
+		}
+	};
+	const searchSection = css`
+		width: 100%;
+		min-height: 90vh;
+	`;
 	const fixed = css`
 		position: fixed;
 		display: flex;
 		justify-content: space-around;
-		align-items: center;
+		align-items: end;
 		width: 100%;
 		height: 70px;
 		top: 0%;
 		background-color: white;
-        @media (min-width: 576px) {
-            width: 576px;
-        }
+		@media (min-width: 576px) {
+			width: 576px;
+		}
 	`;
 	const searchBox = css`
 		display: flex;
@@ -79,11 +84,18 @@ const Search = () => {
 		height: 40px;
 		background-color: rgba(245, 245, 245, 1);
 		border-radius: 10px;
-        padding-left: 2px;
-        padding-right: 12px;
+		margin-bottom: 10px;
+		align-items: center;
+		justify-content: space-between;
 	`;
 	const margin = css`
 		height: 80px;
+	`;
+	const backBtn = css`
+		height: 40px;
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
 	`;
 	const gridWrapper = css`
 		display: grid;
@@ -102,7 +114,9 @@ const Search = () => {
 	return (
 		<div css={searchSection}>
 			<div css={fixed}>
-				<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
+				<div css={backBtn}>
+					<FiChevronLeft cursor="pointer" size="26px" onClick={() => history.back()} />
+				</div>
 				<div css={searchBox}>
 					<input
 						css={css`
@@ -114,13 +128,16 @@ const Search = () => {
 							font-size: 2rem;
 						`}
 						ref={inputText}
+						onKeyDown={handleKeyDown}
 					/>
 					<img
 						css={css`
-							width: 25px;
+							width: fit-content;
+							height: 60%;
 							:hover {
 								cursor: pointer;
 							}
+							margin-right: 6.5px;
 						`}
 						src="/img/search.svg"
 						onClick={handleClick}
@@ -132,44 +149,48 @@ const Search = () => {
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<div css={margin}> </div>
-			{
-				isExist ? 
+			{isExist ? (
 				<div css={gridWrapper}>
 					{products &&
-					products.map((product: ProductType, idx: number) => (
-						<SearchCard
-							key={idx}
-							clothesId={product.clothesId}
-							createdAt={product.createdAt}
-							updatedAt={product.updatedAt}
-							detailImg={product.detailImg}
-							likeCount={product.likeCount}
-							clothesName={product.clothesName}
-							preview={product.preview}
-							designerId={product.designerId}
-							designerName={product.designerName}
-							score={product.score}
-							setSavedModalIsOpen={setSavedModalIsOpen}
-							setUnsavedModalIsOpen={setUnsavedModalIsOpen}
-							setLoginModalIsOpen={setLoginModalIsOpen}
-						/>
-					))}
+						products.map((product: ProductType, idx: number) => (
+							<SearchCard
+								key={idx}
+								clothesId={product.clothesId}
+								createdAt={product.createdAt}
+								updatedAt={product.updatedAt}
+								detailImg={product.detailImg}
+								likeCount={product.likeCount}
+								clothesName={product.clothesName}
+								preview={product.preview}
+								designerId={product.designerId}
+								designerName={product.designerName}
+								score={product.score}
+								setSavedModalIsOpen={setSavedModalIsOpen}
+								setUnsavedModalIsOpen={setUnsavedModalIsOpen}
+								setLoginModalIsOpen={setLoginModalIsOpen}
+							/>
+						))}
 				</div>
-				:
-				<div css={css`
-					display: flex;
-					flex-direction: column;
-					height: fit-content;
-					justify-content: center;
-					align-items: center;
-				`}>
-					<div css={css`
-						font-size: 1.5rem;
-					`}>{alertText}에 대한 검색결과가 없습니다</div>
-
+			) : (
+				<div
+					css={css`
+						display: flex;
+						flex-direction: column;
+						height: fit-content;
+						justify-content: center;
+						align-items: center;
+					`}
+				>
+					<div
+						css={css`
+							font-size: 1.5rem;
+						`}
+					>
+						{alertText}에 대한 검색결과가 없습니다
+					</div>
 				</div>
-			}
-			</div>
+			)}
+		</div>
 	);
 };
 
