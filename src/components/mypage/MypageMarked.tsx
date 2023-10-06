@@ -15,13 +15,18 @@ const MypageMarked = () => {
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	const [products, setProducts] = useState<ProductType[]>(productList);
+	const [isExist, setIsExist] = useState(true);
 	const navigate = useNavigate();
 
 	const getProductLists = async () => {
 		const result = await GetMarkedProductLists(localStorage.getItem('access'));
 		if (result === false) {
-			// alert("불러오기 오류 발생");
+			console.log("불러오기 오류 발생");
+		} else if(result.data.length === 0) {
+			setIsExist(false);
+
 		} else {
+			setIsExist(true);
 			setProducts(productList.concat(result.data));
 		}
 	};
@@ -56,7 +61,9 @@ const MypageMarked = () => {
 			</div>
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
-			<div css={gridWrapper}>
+			{
+				isExist ? 
+				<div css={gridWrapper}>
 				{products &&
 					products.map((product: ProductType, idx: number) => (
 						<SearchCard
@@ -76,7 +83,56 @@ const MypageMarked = () => {
 							setLoginModalIsOpen={setLoginModalIsOpen}
 						/>
 					))}
-			</div>
+				</div>
+				:
+				<div
+					css={css`
+						display: flex;
+						flex-direction: column;
+						height: fit-content;
+						justify-content: center;
+						align-items: center;
+					`}
+				>
+					<div
+						css={css`
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+							align-items: center;
+							margin-top: 50px;
+							margin-bottom: 50px;
+						`}
+					>
+						<div css={css`
+							width: 20rem;
+							margin-bottom: 5rem;
+						`}>
+							<img width="100%" src="/img/artiLogo.png" />
+						</div>
+						<div css={css`
+							font-size: 2rem;
+							text-align: center;
+							font-weight: 600;
+						`}>
+							하트 아이콘을 눌러
+							<br />
+							취향에 맞는 옷을 저장해보세요
+						</div>
+						<div css={css`
+							display: flex;
+							background-color: rgba(107, 218, 1, 1);
+							padding: 1rem 2rem 1rem 2rem;
+							border-radius: 8px;
+							margin-top: 4rem;
+							font-size: 1.5rem;
+							font-weight: 600;
+							/* color: white; */
+						`} onClick={()=>{navigate('/productlist')}}>둘러보기 바로가기</div>
+					</div>
+				</div>
+			}
+			
 			<Footer />
 		</>
 	);

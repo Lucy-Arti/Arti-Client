@@ -15,16 +15,22 @@ const MypageVoted = () => {
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
     const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+    const [isExist, setIsExist] = useState(true);
     const [products, setProducts] = useState<ProductType[]>(productList);
+
     const navigate = useNavigate();
 
     const getProductLists = async() => {
         const result = await GetVotedProductLists(localStorage.getItem("access"));
-        if(result===false){
+        if (result === false) {
             console.log("불러오기 오류 발생");
-        } else {
-            setProducts(productList.concat(result.data));
-        }
+		} else if(result.data.length === 0) {
+			setIsExist(false);
+
+		} else {
+			setIsExist(true);
+			setProducts(productList.concat(result.data));
+		}
     }
 
     useEffect(()=>{
@@ -107,27 +113,66 @@ const MypageVoted = () => {
 		{
 			(unsavedModalIsOpen === true) && <ModalProductUnsaved />
 		}
-		<div css={gridWrapper}>
-			{
-            products && products.map((product:ProductType, idx:number) => (
-				<SearchCard 
-					key={idx}
-					clothesId={product.clothesId}
-					createdAt={product.createdAt}
-					updatedAt={product.updatedAt}
-					detailImg={product.detailImg}
-					likeCount={product.likeCount}
-					clothesName={product.clothesName}
-					preview={product.preview}
-					designerId={product.designerId}
-					designerName={product.designerName}
-					score={product.score}
-					setSavedModalIsOpen={setSavedModalIsOpen} 
-					setUnsavedModalIsOpen={setUnsavedModalIsOpen} 
-					setLoginModalIsOpen={setLoginModalIsOpen} 
-				/>
-			))}
-		</div>
+		{
+				isExist ? 
+				<div css={gridWrapper}>
+				{products &&
+					products.map((product: ProductType, idx: number) => (
+						<SearchCard
+							key={idx}
+							clothesId={product.clothesId}
+							createdAt={product.createdAt}
+							updatedAt={product.updatedAt}
+							detailImg={product.detailImg}
+							likeCount={product.likeCount}
+							clothesName={product.clothesName}
+							preview={product.preview}
+							designerId={product.designerId}
+							designerName={product.designerName}
+							score={product.score}
+							setSavedModalIsOpen={setSavedModalIsOpen}
+							setUnsavedModalIsOpen={setUnsavedModalIsOpen}
+							setLoginModalIsOpen={setLoginModalIsOpen}
+						/>
+					))}
+				</div>
+				:
+				<div
+					css={css`
+						display: flex;
+						flex-direction: column;
+						height: fit-content;
+						justify-content: center;
+						align-items: center;
+					`}
+				>
+					<div
+						css={css`
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+							align-items: center;
+							margin-top: 50px;
+							margin-bottom: 50px;
+						`}
+					>
+						<div css={css`
+							font-size: 1.5rem;
+							text-align: center;
+						`}>
+							투표를 통해 유니크한 옷들을 둘러보고
+							<br />
+							랭킹을 통해 트렌드를 확인해보세요!
+						</div>
+                        <div css={css`
+							width: 30rem;
+							margin-top: 5rem;
+						`}>
+							<img width="100%" src="/img/loginBanner.png" />
+						</div>
+					</div>
+				</div>
+			}
         <Footer />
     </>
   )
