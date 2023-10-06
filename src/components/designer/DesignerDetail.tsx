@@ -76,7 +76,7 @@ const DesignerDetail = () => {
 		/* filter:drop-shadow(0 0.4rem 0.1rem #9e9e9e); */
 		box-shadow: 0 0.5rem 0.5rem -0.3rem #9e9e9e;
 		gap: 3rem;
-		padding: 1rem 3rem 3rem 3rem;
+		padding: 1rem 0rem 3rem 0rem;
 	`;
 	const gridWrapper = css`
 		display: grid;
@@ -98,7 +98,7 @@ const DesignerDetail = () => {
 			<div css={infoWrapper}>
 				<div css={css`
 					width: 30rem;
-					margin-left: 2rem;
+					margin-left: 5rem;
 				`}>
 					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
 				</div>
@@ -106,7 +106,7 @@ const DesignerDetail = () => {
 					css={css`
 						display: flex;
 						flex-direction: column;
-						margin-right: 2rem;
+						margin-right: 5rem;
 					`}
 				>
 					<div
