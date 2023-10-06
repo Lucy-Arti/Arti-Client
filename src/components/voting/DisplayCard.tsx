@@ -72,20 +72,25 @@ const DisplayCard = ({ data, handleCardClick }: { data: MatchData; handleCardCli
 	const info = css`
 		width: 95%;
 		display: flex;
-		align-items: center;
+		align-items: start;
 		justify-content: space-between;
 	`;
+	const infotext = css`
+		width: 85%;
+	`
 	return (
 		<div css={card}>
 			<div css={contentSection} onClick={handleCardClickInternal}>
 				<img css={productimg} src={data.preview} loading="lazy" />
 			</div>
 			<div css={info}>
-				<div>{data.clothesName}</div>
+				<div css={infotext}>{data.clothesName}</div>
 				<IoSearchOutline
 					onClick={handleZoom}
 					css={css`
 						cursor: pointer;
+						width: 10%;
+						padding-top: 3px;
 					`}
 				/>
 			</div>
