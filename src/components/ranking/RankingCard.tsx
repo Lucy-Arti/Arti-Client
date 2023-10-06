@@ -15,7 +15,6 @@ type RankingCardPropsType = {
 }
 
 const RankingCard = (props:RankingCardPropsType) => {
-	const [like, setLikeNum] = useState(props.data.likeCount);
 	const [markState, setMarkState] = useState(false);
 	const [isSuccessed, setIsSuccessed] = useState(false);
 	const isUser = useRecoilValue(isLoginAtom);
@@ -47,7 +46,6 @@ const RankingCard = (props:RankingCardPropsType) => {
 		if (isUser) {
 			if (markState) {
 				setMarkState(false);
-				setLikeNum(like-1);
 				postMark();
 				props.setUnsavedModalIsOpen(true);
 				setIsSuccessed(false);
@@ -57,7 +55,6 @@ const RankingCard = (props:RankingCardPropsType) => {
 			
 			} else {
 				setMarkState(true);
-				setLikeNum(like+1);
 				postMark();
 				props.setSavedModalIsOpen(true);
 				setIsSuccessed(false);
