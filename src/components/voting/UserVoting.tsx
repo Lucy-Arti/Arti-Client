@@ -90,17 +90,28 @@ const UserVoting = () => {
 
 	useEffect(() => {
 		console.log(apiBody);
-		if(apiBody.first){
+		if (apiBody.first) {
 			const body = {
-				fourth: apiBody.fourth.filter((id)=>!apiBody.second.includes(id)),
-				second: apiBody.second.filter((id)=>id!==apiBody.first)[0],
-				first: apiBody.first
-			}
-			console.log(body);
-			postMatchList(body);
+				fourth: apiBody.fourth.filter((id) => !apiBody.second.includes(id)),
+				second: apiBody.second.filter((id) => id !== apiBody.first)[0],
+				first: apiBody.first,
+			};
+			// console.log(body);
+			postMatchList(body)
+				.then((response) => {
+					console.log('투표결과 전송 완료:', response.data);
+					const encodedData = encodeURIComponent(selectedItems[0].clothesName);
+					setTimeout(() => {
+						navigate(`../userPick?p=${encodedData}&id=${selectedItems[0].clothesId}`);
+					}, 500);
+				})
+				.catch((error) => {
+					// 로그인하고 이미 투표했는데 url 접근으로 들어온 사람들
+					console.log(error);
+					alert('1일 1회 투표가 가능해요. 내일 다시 투표해주세요!');
+				});
 		}
-
-	  }, [apiBody]);
+	}, [apiBody]);
 
 	const handleCardClick = (item: MatchData) => {
 		if (!isCardClickable) {
@@ -111,12 +122,7 @@ const UserVoting = () => {
 			setRound((prevRound) => ({
 				...prevRound,
 				count: prevRound.count + 1,
-			}));
-			const encodedData = encodeURIComponent(item.clothesName);
-			setTimeout(() => {
-				navigate(`../userPick?p=${encodedData}&id=${item.clothesId}`);
-			}, 500);
-		
+			}))
 		} else {
 			setRound((prevRound) => ({
 				...prevRound,
