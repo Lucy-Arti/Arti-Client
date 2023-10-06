@@ -96,11 +96,13 @@ const DesignerDetail = () => {
 				<Header where="detail" />
 			</div>
 			<div css={infoWrapper}>
-				<div css={css`
-					width: 30rem;
-					margin-left: 5rem;
-				`}>
-					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
+				<div
+					css={css`
+						width: 30rem;
+						margin-left: 5rem;
+					`}
+				>
+					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} loading="lazy" />
 				</div>
 				<div
 					css={css`
@@ -130,7 +132,7 @@ const DesignerDetail = () => {
 					font-size: 1.5rem;
 					color: #535353;
 					margin: 40px 0 16px 0;
-                    width: 90%;
+					width: 90%;
 				`}
 			>
 				{designerProfile?.userName} 디자이너가 디자인한 옷이에요
