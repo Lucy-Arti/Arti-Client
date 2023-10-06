@@ -41,7 +41,7 @@ export const getMarked = async(id:number|string, token:string|null) => {
         const response = await axios.get(`${baseURL}api/v1/likes/${id}/member`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-        console.log(response.data);
+        // console.log(response.data);
         return response;
     } catch(error) {
         console.log(error);
@@ -55,7 +55,7 @@ export const postMarked = async(id:number|string, token:string|null) => {
         const response = await axios.post(`${baseURL}api/v1/likes/${id}`, data, {
             headers: { Authorization: `Bearer ${token}` },
           });
-        console.log(response.data);
+        // console.log(response.data);
         return response;
     } catch(error) {
         console.log(error);
