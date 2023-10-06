@@ -186,6 +186,7 @@ const Search = () => {
 					<div
 						css={css`
 							font-size: 1.5rem;
+							margin-top: 50px;
 						`}
 					>
 						{alertText}에 대한 검색결과가 없습니다
