@@ -53,3 +53,4 @@ const Voting = () => {
 };
 
 export default Voting;
+
