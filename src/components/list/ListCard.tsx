@@ -130,7 +130,7 @@ const ListCard = (props:CardBoxType) => {
                     display: flex;
                     width: 10%;
                 `}>
-                    <img width="80%" src="/img/profile-large.png" />
+                    <img width="80%" src="/img/profile-large.png" loading="lazy"/>
                 </div>
                 <div css={makebold}>{props.designerName}</div>
                 <div css={fontsize}> 디자이너</div>

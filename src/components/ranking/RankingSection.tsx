@@ -127,7 +127,7 @@ const RankingSection = () => {
 	return (
 		<div css={rankingSection}>
 			<div css={bannerSection}>
-				<img css={[bannerChild, bannerImg]} src="/img/voteBanner.png" />
+				<img css={[bannerChild, bannerImg]} src="/img/voteBanner.png" loading="lazy" />
 				<div css={[bannerChild, textSection]}>
 					<div>
 						<div css={[text1]}>
@@ -149,9 +149,7 @@ const RankingSection = () => {
 						{tabs.label}
 					</div>
 				))} */}
-				<div css={[rankingBtn, active]}>
-					전체 랭킹
-				</div>
+				<div css={[rankingBtn, active]}>전체 랭킹</div>
 			</div>
 			<Outlet />
 		</div>

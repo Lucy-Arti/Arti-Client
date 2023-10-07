@@ -34,6 +34,7 @@ const Home = () => {
 	// 		console.log('로그인 완료 상태');
 	// 	}
 	// });
+	
 	useEffect(() => {
 		if (localStorage.getItem('access') && userName === '') {
 			const getUserProfile = async () => {

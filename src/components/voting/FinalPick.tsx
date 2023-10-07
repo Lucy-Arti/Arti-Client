@@ -174,9 +174,9 @@ const FinalPick = () => {
 	return (
 		<div css={finalpickSection}>
 			<div css={background}>
-				<img css={heart1} src="/img/backgreenheart.png" />
-				<img css={heart2} src="/img/backgreenheart.png" />
-				<img css={heart3} src="/img/backgreenheart.png" />
+				<img css={heart1} src="/img/backgreenheart.png" loading="lazy"/>
+				<img css={heart2} src="/img/backgreenheart.png" loading="lazy"/>
+				<img css={heart3} src="/img/backgreenheart.png" loading="lazy"/>
 			</div>
 			{productDetail && (
 				<div css={infoSection}>
@@ -184,11 +184,11 @@ const FinalPick = () => {
 						<span className="black">{userName}</span> 님의 PICK
 					</div>
 					<div css={card}>
-						<img css={cardImg} src={`${productDetail.preview}`} />
+						<img css={cardImg} src={`${productDetail.preview}`} loading="lazy" />
 						<div css={info}>
 							<div css={infoText}>
 								<div css={[row, pickText]}>
-									<img src="/img/profileLogo.svg" />
+									<img src="/img/profileLogo.svg" loading="lazy" />
 									<span className="black">&nbsp;{productDetail.designerName}&nbsp;</span>디자이너
 								</div>
 								<div css={[row, pickText]}>
