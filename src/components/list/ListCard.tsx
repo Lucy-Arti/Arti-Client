@@ -41,6 +41,11 @@ const ListCard = (props:CardBoxType) => {
             //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
         } else {
             console.log('post 성공');
+            if (markState){
+                setMarkState(false);
+            } else {
+                setMarkState(true);
+            }
         }
     }
     useEffect(()=>{
@@ -49,7 +54,7 @@ const ListCard = (props:CardBoxType) => {
     const handleMarkClick = () => {
         if(isUser){
             if (markState) {
-                setMarkState(false);
+                // setMarkState(false);
                 postMark();
                 props.setUnsavedModalIsOpen(true);
                 // setIsSuccessed(false);
@@ -57,7 +62,7 @@ const ListCard = (props:CardBoxType) => {
                     props.setUnsavedModalIsOpen(false);
                 }, 1000);
             } else {
-                setMarkState(true);
+                // setMarkState(true);
                 postMark();
                 props.setSavedModalIsOpen(true);
                 // setIsSuccessed(false);
