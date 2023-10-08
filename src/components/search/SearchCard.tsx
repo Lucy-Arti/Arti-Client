@@ -133,7 +133,6 @@ const SearchCard = (props: CardBoxType) => {
 							css={imgdesign}
 							width="30rem"
 							src="/img/nonactiveHeartFill.png"
-							loading="lazy"
 						/>
 					)}
 				</div>

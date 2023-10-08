@@ -87,9 +87,9 @@ const ProductListCard = (props: CardBoxType) => {
 				/>
 				<div>
 					{markState === true ? (
-						<img onClick={handleMarkClick} css={imgdesign} width="30rem" src="/img/activeHeart.png" loading="lazy" />
+						<img onClick={handleMarkClick} css={imgdesign} width="30rem" src="/img/activeHeart.png" />
 					) : (
-						<img onClick={handleMarkClick} css={imgdesign} width="30rem" src="/img/nonactiveHeart.png" loading="lazy" />
+						<img onClick={handleMarkClick} css={imgdesign} width="30rem" src="/img/nonactiveHeart.png" />
 					)}
 				</div>
 			</div>
