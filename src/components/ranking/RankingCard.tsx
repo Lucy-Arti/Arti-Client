@@ -35,17 +35,22 @@ const RankingCard = (props: RankingCardPropsType) => {
 	}, []);
 	const postMark = async () => {
 		const result = await postMarked(props.data.clothesId, localStorage.getItem('access'));
-		// if (result === false) {
-		//     setIsSuccessed(false);
-		//     //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
-		// } else {
-		//     setIsSuccessed(true);
-		// }
+		if (result === false) {
+            console.log('불러오기 오류 발생');
+            //나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
+        } else {
+            console.log('post 성공');
+            if (markState){
+                setMarkState(false);
+            } else {
+                setMarkState(true);
+            }
+        }
 	};
 	const handleMarkClick = () => {
 		if (isUser) {
 			if (markState) {
-				setMarkState(false);
+				// setMarkState(false);
 				postMark();
 				props.setUnsavedModalIsOpen(true);
 				setIsSuccessed(false);
@@ -53,7 +58,7 @@ const RankingCard = (props: RankingCardPropsType) => {
 					props.setUnsavedModalIsOpen(false);
 				}, 1000);
 			} else {
-				setMarkState(true);
+				// setMarkState(true);
 				postMark();
 				props.setSavedModalIsOpen(true);
 				setIsSuccessed(false);
