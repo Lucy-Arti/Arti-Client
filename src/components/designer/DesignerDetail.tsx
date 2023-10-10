@@ -102,7 +102,8 @@ const DesignerDetail = () => {
 						margin-left: 5rem;
 					`}
 				>
-					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} loading="lazy" />
+					{/* <img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} loading="lazy" /> */}
+					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
 				</div>
 				<div
 					css={css`
