@@ -56,7 +56,7 @@ const DesignerDetail = () => {
 		height: fit-content;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		/* align-items: center; */
 		overflow-x: hidden;
 	`;
 	const flexColumn = css`
@@ -66,7 +66,8 @@ const DesignerDetail = () => {
 		align-items: center;
 	`;
 	const infoWrapper = css`
-		max-width: 100%;
+		/* max-width: 100%; */
+		width: 100%;
 		display: flex;
 		background-color: white;
 		/* align-items: center; */
@@ -98,7 +99,8 @@ const DesignerDetail = () => {
 			<div css={infoWrapper}>
 				<div
 					css={css`
-						width: 30rem;
+						/* width: 10rem; */
+						width: 20%;
 						margin-left: 5rem;
 					`}
 				>
@@ -110,6 +112,7 @@ const DesignerDetail = () => {
 						display: flex;
 						flex-direction: column;
 						margin-right: 5rem;
+						width: 70%;
 					`}
 				>
 					<div
@@ -132,7 +135,7 @@ const DesignerDetail = () => {
 				css={css`
 					font-size: 1.5rem;
 					color: #535353;
-					margin: 40px 0 16px 0;
+					margin: 40px 0 16px 25px;
 					width: 90%;
 				`}
 			>
