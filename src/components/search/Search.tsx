@@ -142,6 +142,7 @@ const Search = () => {
 							outline: none;
 							margin-left: 1rem;
 							font-size: 2rem;
+							font-family: 'Pretendard';
 						`}
 						ref={inputText}
 						onKeyDown={handleKeyDown}
