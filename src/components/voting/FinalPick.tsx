@@ -174,9 +174,9 @@ const FinalPick = () => {
 	return (
 		<div css={finalpickSection}>
 			<div css={background}>
-				<img css={heart1} src="/img/backgreenheart.png" loading="lazy"/>
-				<img css={heart2} src="/img/backgreenheart.png" loading="lazy"/>
-				<img css={heart3} src="/img/backgreenheart.png" loading="lazy"/>
+				<img css={heart1} src="/img/backgreenheart.png" />
+				<img css={heart2} src="/img/backgreenheart.png"/>
+				<img css={heart3} src="/img/backgreenheart.png"/>
 			</div>
 			{productDetail && (
 				<div css={infoSection}>
