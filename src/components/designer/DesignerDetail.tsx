@@ -128,7 +128,15 @@ const DesignerDetail = () => {
 						css={css`
 							font-size: 1.5rem;
 						`}
-					>{`${designerProfile?.introduce}`}</div>
+					>
+						{designerProfile?.introduce &&
+							designerProfile.introduce.split('\n').map((line, index) => (
+								<div key={index}>
+									{line}
+									<br />
+								</div>
+							))}
+					</div>
 				</div>
 			</div>
 			<div
