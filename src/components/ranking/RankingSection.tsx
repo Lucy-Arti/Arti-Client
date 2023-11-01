@@ -140,7 +140,7 @@ const RankingSection = () => {
 						</div>
 					</div>
 
-					<div css={fontSize}>1차 투표 기간 : ~ 23.10.31</div>
+					<div css={fontSize}>투표 기간 : ~ 23.11.20</div>
 				</div>
 			</div>
 			<div css={rankingBtnWrapper}>
