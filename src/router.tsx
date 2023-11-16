@@ -19,6 +19,7 @@ import MypageMarked from './components/mypage/MypageMarked';
 import MypageRecent from './components/mypage/MypageRecent';
 import Search from './components/search/Search';
 import Login from './components/login/Login';
+import SignUp from './components/signup/SignUp';
 
 const router = createBrowserRouter([
 	{
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
 	{
 		path: '/search',
 		element: <Search />,
+	},
+	{
+		path: '/signup',
+		element: <SignUp />,
 	},
 ]);
 
