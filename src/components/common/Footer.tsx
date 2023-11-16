@@ -71,7 +71,7 @@ const Footer = () => {
 					navigate('/signup');
 				}}
 			>
-				회원가입!
+				회원가입 / 로그인
 			</Btn>
 		</div>
 	);
@@ -80,20 +80,20 @@ const Footer = () => {
 export default Footer;
 
 const Btn = styled.button`
-	width: 80px;
+	width: 120px;
 	height: 45px;
 	background-color: white;
-	color: #6bd46b;
-	border: 3px solid #6bda01;
+	color: grey;
+	border: none;
 	border-radius: 10px;
 	display: center;
 	justify-content: center;
 	align-items: center;
-	font-size: 12px;
+	font-size: 8px;
 	margin-left: 1.9rem;
 	cursor: pointer;
 	&:hover {
-		background-color: #6bd46b;
+		background-color: grey;
 		color: white;
 	}
 `;
