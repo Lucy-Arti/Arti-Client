@@ -53,7 +53,7 @@ const PointMain = () => {
 							<div className="mission-name">댓글 달기</div>
 						</Group>
 						{sampleData.mission.comment ? (
-							<Group>
+							<Group onClick={() => router.push(`/mypage/point/mission?type=comment`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -68,7 +68,7 @@ const PointMain = () => {
 							<div className="mission-name">투표하기</div>
 						</Group>
 						{sampleData.mission.vote ? (
-							<Group>
+							<Group onClick={() => router.push(`/mypage/point/mission?type=vote`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -83,7 +83,7 @@ const PointMain = () => {
 							<div className="mission-name">출석체크</div>
 						</Group>
 						{sampleData.mission.visit ? (
-							<Group>
+							<Group onClick={() => router.push(`/mypage/point/mission?type=visit`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -103,7 +103,7 @@ const PointMain = () => {
 							<div className="mission-name">Arti 계정 팔로우</div>
 						</Group>
 						{sampleData.mission.follow ? (
-							<Group>
+							<Group onClick={() => router.push(`/mypage/point/mission?type=follow`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -118,7 +118,7 @@ const PointMain = () => {
 							<div className="mission-name">Arti 태그 후 게시물 업로드</div>
 						</Group>
 						{sampleData.mission.post ? (
-							<Group>
+							<Group onClick={() => router.push(`/mypage/point//mission?type=post`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -133,7 +133,7 @@ const PointMain = () => {
 							<div className="mission-name">Arti 태그 후 스토리 업로드</div>
 						</Group>
 						{sampleData.mission.story ? (
-							<Group>
+							<Group onClick={() => router.push(`/mypage/point//mission?type=story`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -153,8 +153,8 @@ const PointMain = () => {
 							<div className="mission-name">친구 초대</div>
 						</Group>
 						{sampleData.mission.freind ? (
-							<Group>
-								<div className="point-text">250P</div>
+							<Group onClick={() => router.push(`/mypage/point//mission?type=freind`)}>
+								<div className="point-text">700P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
@@ -168,8 +168,8 @@ const PointMain = () => {
 							<div className="mission-name">디자이너 초대</div>
 						</Group>
 						{sampleData.mission.designer ? (
-							<Group>
-								<div className="point-text">250P</div>
+							<Group onClick={() => router.push(`/mypage/point//mission?type=designer`)}>
+								<div className="point-text">1000P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
@@ -191,7 +191,7 @@ const MainWrap = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	margin-top: 3rem;
-	margin-bottom :2rem;
+	margin-bottom: 2rem;
 `;
 
 const PointProfileSection = styled.div`
@@ -289,7 +289,7 @@ const StyledFiChevronRight1 = styled(FiChevronRight)`
 const StyledFiChevronRight2 = styled(FiChevronRight)`
 	cursor: pointer;
 	color: #383838;
-	padding-left : 1rem;
+	padding-left: 1rem;
 `;
 
 const Section = styled.div`
