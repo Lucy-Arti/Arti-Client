@@ -37,6 +37,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 
 const LandingSection = () => {
 	const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+	const router = useRouter();
 
 	const handleResize = () => {
 		setWindowWidth(typeof window !== 'undefined' ? window.innerWidth : 0);
@@ -52,7 +53,6 @@ const LandingSection = () => {
 	}, []);
 
 	const handleClick = (page: string) => {
-		const router = useRouter();
 		return () => {
 			router.push(page);
 		};
