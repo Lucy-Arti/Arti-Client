@@ -52,8 +52,8 @@ const FinalPick = () => {
 						</Info>
 					</Card>
 					<BtnSection>
-						<Btn1 onClick={() => route.push('../../')}>홈</Btn1>
-						<Btn2 onClick={() => route.push(`../../productlist/${targetId}`)}>옷 구경하기</Btn2>
+						<Btn1 onClick={() => route.push('/')}>홈</Btn1>
+						<Btn2 onClick={() => route.push(`/productlist/${targetId}`)}>옷 구경하기</Btn2>
 					</BtnSection>
 				</InfoSection>
 			)}

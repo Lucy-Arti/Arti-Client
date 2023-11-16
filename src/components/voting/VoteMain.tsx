@@ -21,7 +21,7 @@ const VoteMain = () => {
 	const handleClick = (page: string) => {
 		if (possible === 'defalut') {
 			if (typeof window !== 'undefined') {
-				window.location.reload();
+				route.refresh();
 			}
 		} else if (possible === '투표 가능') {
 			console.log('투표가 가능해요');
