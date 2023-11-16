@@ -9,13 +9,13 @@ const sampleData = {
 	point: 390,
 	mission: {
 		comment: true,
-		vote: false,
-		visit: true,
+		vote: true,
+		visit: false,
 		follow: true,
-		post: false,
-		story: false,
-		freind: true,
-		designer: true,
+		post: true,
+		story: true,
+		freind: false,
+		designer: false,
 	},
 };
 const PointMain = () => {
