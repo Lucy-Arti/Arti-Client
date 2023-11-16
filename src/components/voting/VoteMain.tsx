@@ -40,7 +40,7 @@ const VoteMain = () => {
 			<BannerSection>
 				<img src="/img/votemainbanner.png" loading="lazy" />
 			</BannerSection>
-			{/* <StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn> */}
+			<StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn>
 			<ShareSection>
 				<ShareButton where="vote" />
 			</ShareSection>
