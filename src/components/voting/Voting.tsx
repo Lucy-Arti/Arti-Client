@@ -24,7 +24,7 @@ const Voting = () => {
 		} else {
 			setBackgroundColor('#EBEBEB');
 		}
-	}, [location.pathname]);
+	}, [pathname]);
 
 	return (
 		<FlexColumn $backgroundColor={backgroundColor}>
