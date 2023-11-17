@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import PointHeader from '../PointHeader';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 const FollowMission = () => {
-	const router = useRouter();
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [userAccount, setUserAccount] = useState('');
 	const handleSubmit = () => {
@@ -23,36 +20,6 @@ const FollowMission = () => {
 		}
 	};
 
-	if (isSubmitted) {
-		return (
-			<MainWrapper>
-				<Top>
-					<PointHeader text="인스타그램 팔로우하기" backTo="/mypage/point" />
-					<ContentSection>
-						<StyledImage src="/img/followBanner.png" alt="팔로우 미션 배너" fill priority />
-						<Span>
-							<div className="detail">@arti_fashion_design 인스타그램 계정을</div>
-							팔로우하면 <span className="bold">250P</span>를 획득할 수 있어요
-						</Span>
-						<div className="state">
-							<StyledImage src="/img/missionstate2.png" alt="팔로우 미션 상태" fill priority />
-						</div>
-						<div className="text1">포인트 적립 기다리기</div>
-						<Info>
-							<Circle />
-							<div className="info">최대 48시간이 소요될 수 있어요</div>
-						</Info>
-					</ContentSection>
-				</Top>
-				<MissionFooter>
-					<div className="title">주의사항</div>
-					<div className="detail">- 팔로우를 취소한 후 동일 계정으로 다시 팔로우하면 포인트가 적립되지 않아요.</div>
-					<div className="detail">- 인스타그램 아이디를 정확히 입력해주셔야 포인트 적립이 가능해요.</div>
-					<div className="detail">- 부적절한 방법으로 포인트를 적립하면 포인트 적립이 취소될 수 있어요.</div>
-				</MissionFooter>
-			</MainWrapper>
-		);
-	}
 	return (
 		<MainWrapper>
 			<Top>
