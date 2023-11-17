@@ -220,7 +220,7 @@ const Info = styled.div`
 	padding-bottom: 3rem;
 	.info {
 		color: #818181;
-		text-align: center;
+		text-align: start;
 		font-size: 1.75rem;
 		font-weight: 400;
 		padding-left: 1rem;
