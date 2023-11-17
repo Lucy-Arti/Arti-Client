@@ -3,6 +3,7 @@ import PointHeader from '../PointHeader';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const FollowMission = () => {
 	const router = useRouter();
@@ -85,11 +86,18 @@ const FollowMission = () => {
 						</div>
 						<div className="text1">@arti_fashion_design 인스타그램 팔로우하기</div>
 						<RouteBtn
-							onClick={() => {
-								router.push('https://instagram.com/arti_fashion_design?igshid=NGVhN2U2NjQ0Yg==');
-							}}
+						// onClick={() => {
+
+						// 	router.push('https://instagram.com/arti_fashion_design?igshid=NGVhN2U2NjQ0Yg==');
+						// }}
 						>
-							팔로우하러 가기
+							<a
+								href="https://instagram.com/arti_fashion_design?igshid=NGVhN2U2NjQ0Yg=="
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								팔로우하러 가기
+							</a>
 						</RouteBtn>
 						<div className="text1">팔로우하고 인스타그램 아이디 입력하기</div>
 						<Info>
@@ -232,16 +240,23 @@ const RouteBtn = styled.div`
 	margin-bottom: 4.5rem;
 	display: flex;
 	width: 100%;
-	padding: 1.8rem 0rem;
 	justify-content: center;
 	align-items: center;
 	border-radius: 5.625px;
 	background: #9689f0;
 	color: white;
 	font-size: 1.75rem;
-	font-style: normal;
 	font-weight: 600;
 	cursor: pointer;
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width:100%;
+		padding: 1.8rem 0rem;
+		text-decoration: none;
+		color: white;
+	}
 `;
 const SubmitBtn = styled.div`
 	margin-top: 1.2rem;
