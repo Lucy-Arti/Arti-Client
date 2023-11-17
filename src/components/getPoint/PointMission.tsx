@@ -4,7 +4,6 @@ import React from 'react';
 import CommentMission from './mission/CommentMission';
 import VoteMission from './mission/VoteMission';
 import StoryMission from './mission/StoryMission';
-import PostMission from './mission/PostMission';
 import FollowMission from './mission/FollowMission';
 
 const PointMission = () => {
@@ -19,8 +18,6 @@ const PointMission = () => {
 				return <VoteMission />;
 			case 'story':
 				return <StoryMission />;
-			case 'post':
-				return <PostMission />;
 			case 'follow':
 				return <FollowMission />;
 			default:

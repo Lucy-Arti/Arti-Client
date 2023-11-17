@@ -12,7 +12,6 @@ const sampleData = {
 		vote: true,
 		visit: false,
 		follow: true,
-		post: true,
 		story: true,
 		freind: false,
 		designer: false,
@@ -112,20 +111,6 @@ const PointMain = () => {
 						)}
 					</Mission>
 					<Line />
-					<Mission $isPossible={sampleData.mission.post}>
-						<Group>
-							<div className="possible-circle" />
-							<div className="mission-name">Arti 태그 후 게시물 업로드</div>
-						</Group>
-						{sampleData.mission.post ? (
-							<Group onClick={() => router.push(`/mypage/point//mission?type=post`)}>
-								<div className="point-text">250P</div>
-								<StyledFiChevronRight2 size="26px" />
-							</Group>
-						) : (
-							<img src="/img/check-circle.png" />
-						)}
-					</Mission>
 					<Line />
 					<Mission $isPossible={sampleData.mission.story}>
 						<Group>
