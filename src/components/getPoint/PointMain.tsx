@@ -13,7 +13,7 @@ const sampleData = {
 		visit: false,
 		follow: true,
 		story: true,
-		freind: false,
+		freind: true,
 		designer: false,
 	},
 };
