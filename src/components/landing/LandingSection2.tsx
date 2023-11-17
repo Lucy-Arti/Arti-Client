@@ -182,11 +182,11 @@ const LandingSection2 = () => {
 										router.push(`productlist/${product.clothesId}`);
 									}}
 								>
-									<CardImg src={`${product.preview}`} loading="lazy" />
+									<CardImg src={`${product.preview}`} />
 									<Info>
 										<InfoText>
 											<Row>
-												<img src="/img/profileLogo.svg" loading="lazy" />
+												<img src="/img/profileLogo.svg" />
 												<span className="black">&nbsp;{product.designerName}&nbsp;</span>
 											</Row>
 										</InfoText>

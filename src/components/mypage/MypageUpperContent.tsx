@@ -14,7 +14,7 @@ const MypageUpperContent = () => {
 	return (
 		<ColumnSort>
 			<ProfileWrapper>
-				<img width="20%" src={`/img/myProfile-${randomNumFloor}.png`} loading="lazy" />
+				<img width="20%" src={`/img/myProfile-${randomNumFloor}.png`}/>
 				<UserBox>
 					<div className='username'>
 						{userName}
@@ -31,7 +31,7 @@ const MypageUpperContent = () => {
 						route.push('/mypage/voted');
 					}}
 				>
-					<img src="/img/mypageVoteBtn.png" loading="lazy" />
+					<img src="/img/mypageVoteBtn.png" />
 					<div className='text'>
 						투표한 옷
 					</div>
@@ -52,7 +52,7 @@ const MypageUpperContent = () => {
 						route.push('/mypage/marked');
 					}}
 				>
-					<img src="/img/mypageHeart.png" loading="lazy" />
+					<img src="/img/mypageHeart.png" />
 					<div className='text'>
 						저장한 옷
 					</div>

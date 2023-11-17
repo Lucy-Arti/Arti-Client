@@ -38,11 +38,11 @@ const FinalPick = () => {
 						<span className="black">{userName}</span> 님의 PICK
 					</PickText>
 					<Card>
-						<img src={`${productDetail.preview}`} loading="lazy" />
+						<img src={`${productDetail.preview}`} />
 						<Info>
 							<InfoText>
 								<Row>
-									<img src="/img/profileLogo.svg" loading="lazy" />
+									<img src="/img/profileLogo.svg" />
 									<span className="black">&nbsp;{productDetail.designerName}&nbsp;</span>디자이너
 								</Row>
 								<Row>

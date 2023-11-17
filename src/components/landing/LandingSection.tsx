@@ -79,10 +79,10 @@ const LandingSection = () => {
 					autoplay={{ delay: 2500, disableOnInteraction: false }}
 				>
 					<StyledSwiperSlide>
-						<img src={selectedImage + '1.png'} alt="landing1" loading="lazy" />
+						<img src={selectedImage + '1.png'} alt="landing1" />
 					</StyledSwiperSlide>
 					<StyledSwiperSlide>
-						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} loading="lazy" />
+						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} />
 					</StyledSwiperSlide>
 					<StyledSwiperSlide>
 						<img src={selectedImage + '3.png'} alt="landing3" />

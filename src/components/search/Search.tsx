@@ -97,7 +97,7 @@ const Search = () => {
 				</BackBtn>
 				<SearchBox>
 					<input className="searchInputBox" ref={inputText} onKeyDown={handleKeyDown} />
-					<img className="searchLogo" src="/img/search.svg" onClick={handleClick} loading="lazy" />
+					<img className="searchLogo" src="/img/search.svg" onClick={handleClick} />
 				</SearchBox>
 			</Fixed>
 

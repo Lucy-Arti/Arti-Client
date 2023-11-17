@@ -51,8 +51,8 @@ const Header = ({ where }: { where: string }) => {
 		return (
 			<div className="headerLayout">
 				<HeaderComponent className="headerComponent">
-					<LogoImg src="/img/headerLogo.png" onClick={handleClick('/')} loading="lazy" />
-					<img src="/img/search.svg" onClick={handleClick('/search')} loading="lazy" />
+					<LogoImg src="/img/headerLogo.png" onClick={handleClick('/')} />
+					<img src="/img/search.svg" onClick={handleClick('/search')} />
 				</HeaderComponent>
 			</div>
 		);
@@ -64,7 +64,7 @@ const Header = ({ where }: { where: string }) => {
 					<BackgroundWrapper $isUserPickPage={isUserPickPage}>
 						<HeaderComponent className="headerComponent">
 							<StyledFiChevronLeft size="26px" onClick={handleBack} />
-							<LogoImg onClick={handleClick('/')} width="35px" src="/img/artiLogo.png" loading="lazy" />
+							<LogoImg onClick={handleClick('/')} width="35px" src="/img/artiLogo.png"/>
 							<EmptyDiv className="emptyDiv"></EmptyDiv>
 						</HeaderComponent>
 					</BackgroundWrapper>

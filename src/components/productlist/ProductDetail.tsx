@@ -105,7 +105,7 @@ const ProductDetail = () => {
 			</FlexColumn>
 			{productDetail && (
 				<div>
-					<img width="100%" src={`${productDetail.preview}`} loading="lazy" />
+					<img width="100%" src={`${productDetail.preview}`} />
 					<DesignerBox onClick={() => route.push(`/designer/${productDetail.designerId}`)}>
 						<div className='imgwrapper'>
 							<img width="100%" src="/img/profile-large.png" />
@@ -122,14 +122,12 @@ const ProductDetail = () => {
 										width="30rem"
 										src="/img/activeHeart.png"
 										onClick={handleMarkClick}
-										loading="lazy"
 									/>
 								) : (
 									<HeartImg
 										width="30rem"
 										src="/img/nonactiveHeart.png"
 										onClick={handleMarkClick}
-										loading="lazy"
 									/>
 								)}
 								<div>{like}</div>
@@ -141,7 +139,7 @@ const ProductDetail = () => {
 					</FlexRow>
 					<GapDesign />
 					<div>
-						<img width="100%" src={`${productDetail.detailImg}`} loading="lazy" />
+						<img width="100%" src={`${productDetail.detailImg}`}/>
 					</div>
 					<Footer />
 				</div>

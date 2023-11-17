@@ -20,9 +20,7 @@ const VoteMain = () => {
 	const route = useRouter();
 	const handleClick = (page: string) => {
 		if (possible === 'defalut') {
-			if (typeof window !== 'undefined') {
-				route.refresh();
-			}
+			route.refresh();
 		} else if (possible === '투표 가능') {
 			console.log('투표가 가능해요');
 			route.push(page);
@@ -38,7 +36,7 @@ const VoteMain = () => {
 	return (
 		<VoteSection>
 			<BannerSection>
-				<img src="/img/votemainbanner.png" loading="lazy" />
+				<img src="/img/votemainbanner.png" />
 			</BannerSection>
 			<StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn>
 			<ShareSection>

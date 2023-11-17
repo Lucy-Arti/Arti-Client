@@ -11,7 +11,7 @@ const ProgressBar = ({ progressprops }: { progressprops: ProgressBarProps }) => 
 			<Progress $percentage={progressprops.percentage}>
 				<ProgressLogoWrap>
 					<ProgressLogo>
-						<img src="/img/progresslogo.svg" loading="lazy" />
+						<img src="/img/progresslogo.svg" />
 					</ProgressLogo>
 					<ProgressText>{progressprops.progress}</ProgressText>
 				</ProgressLogoWrap>

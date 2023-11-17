@@ -90,7 +90,7 @@ const SearchCard = (props: CardBoxType) => {
 				</Heart>
 			</ImgBox>
 			<Flexraw onClick={() => route.push(`${props.designerId}`)}>
-				<img src="/img/profile-large.png" loading="lazy" />
+				<img src="/img/profile-large.png" />
 				<Makebold>{props.designerName}</Makebold>
 				<Fontsize> 디자이너</Fontsize>
 			</Flexraw>

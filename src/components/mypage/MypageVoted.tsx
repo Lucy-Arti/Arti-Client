@@ -56,7 +56,6 @@ const MypageVoted = () => {
 						onClick={() => {
 							route.push('/vote');
 						}}
-						loading="lazy"
 					/>
 				</PromoBox>
 			</ArticleWrapper>
@@ -95,7 +94,7 @@ const MypageVoted = () => {
 							<br />
 							랭킹을 통해 트렌드를 확인해보세요!
 						</div>
-                        <img width="100%" src="/img/loginBanner.png" loading="lazy" />
+                        <img width="100%" src="/img/loginBanner.png"/>
 					</NoticeBox>
 				</NoticeWrapper>
 			)}

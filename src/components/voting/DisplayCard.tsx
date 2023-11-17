@@ -25,7 +25,7 @@ const DisplayCard = ({ data, handleCardClick }: { data: MatchData; handleCardCli
 	return (
 		<Card>
 			<ContentSection $isClicked={isClicked} onClick={handleCardClickInternal}>
-				<img src={data.preview} loading="lazy" />
+				<img src={data.preview} />
 			</ContentSection>
 			<Info>
 				<Infotext>{data.clothesName}</Infotext>

@@ -177,16 +177,16 @@ const RankingCard = (props: RankingCardPropsType) => {
 	return (
 		<Card>
 			<Tag>
-				<TagImg src={props.index === 0 ? '/img/greentag.png' : '/img/graytag.png'} loading="lazy" />
+				<TagImg src={props.index === 0 ? '/img/greentag.png' : '/img/graytag.png'}/>
 				<TagNumber>{props.index + 1}</TagNumber>
 			</Tag>
 			<Box>
 				<Left onClick={() => route.push(`../../productlist/${props.data.clothesId}`)}>
-					<ProductImg src={`${props.data.preview}`} loading="lazy" />
+					<ProductImg src={`${props.data.preview}`} />
 				</Left>
 				<Middle onClick={() => route.push(`../../productlist/${props.data.clothesId}`)}>
 					<Row>
-						<img src="/img/profileLogo.svg" loading="lazy" />
+						<img src="/img/profileLogo.svg"/>
 						<DesignerName color='black'>&nbsp;{props.data.designerName}&nbsp;</DesignerName>
 						<DesignerName color='#535353'>디자이너</DesignerName>
 					</Row>
@@ -197,7 +197,6 @@ const RankingCard = (props: RankingCardPropsType) => {
 						<img
 							onClick={handleMarkClick}
 							src={markState ? '/img/activeHeart.png' : '/img/nonactiveHeart.png'}
-							loading="lazy"
 						/>
 					</HeartSection>
 				</Right>
