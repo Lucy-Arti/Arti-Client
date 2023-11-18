@@ -93,8 +93,10 @@ const ListCard = (props:CardBoxType) => {
                 <ProfileWrapper>
                     <img width="80%" src="/img/profile-large.png"/>
                 </ProfileWrapper>
-                <MakeBold>{props.designerName}</MakeBold>
-                <FontSize> 디자이너</FontSize>
+                <ProfileName>
+                    <div className="designer-name">{props.designerName}</div>
+                    <div className="designer-noti">디자이너</div>
+                </ProfileName>
             </FlexRow>
             <Header onClick={() => route.push(`/productlist/${props.clothesId}`)}>{props.clothesName}</Header>
         </CardBox>
@@ -134,15 +136,22 @@ const ProfileWrapper = styled.div`
     display: flex;
     width: 10%;
 `
-const MakeBold = styled.div`
-    font-size: 1.5rem;
+const ProfileName = styled.div`
+    display: flex;
+    flex-direction: row;
     margin-left: 0.3rem;
-    font-weight: 600;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    & > .designer-name{
+        font-size: 1.5rem;
+        margin-left: 0.3rem;
+        font-weight: 600;
+    }
+    & > .designer-noti{
+        font-size: 1.5rem;
+    }
 `
-const FontSize = styled.div`
-    font-size: 1.5rem;
-    margin-left: 0.5rem;
-`
+
 const ImgDesign = styled.img`
     margin : 1rem;
 `
