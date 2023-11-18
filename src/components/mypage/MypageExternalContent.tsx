@@ -10,20 +10,24 @@ const MypageExternalContent = () => {
 
 	return (
 		<ColumnSort>
-			{/* <div css={menulist}>
-            <div className="text">이벤트</div>
-            <FiChevronRight size="26px" />
-        </div>
-        <div css={menulist}>
-            <div className="text">자주 묻는 질문</div>
-            <FiChevronRight size="26px" />
-        </div> */}
+			<MenuList>
+				<div className="text">이벤트</div>
+				<FiChevronRight size="26px" />
+			</MenuList>
+			<MenuList>
+				<div className="text">자주 묻는 질문</div>
+				<FiChevronRight size="26px" />
+			</MenuList>
 			<MenuList onClick={() => onClickToExternel('https://arti.channel.io/')}>
 				<div className="text">1:1문의</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
+			<MenuList>
+				<div className="text">초대코드 입력</div>
+				<FiChevronRight size="26px" />
+			</MenuList>
 			<MenuList className="last" onClick={() => onClickToExternel('https://forms.gle/rK4TQXT6uSXzDCrL8')}>
-				<div className="text">입점 신청</div>
+				<div className="text">디자이너 참여 신청</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
 		</ColumnSort>
