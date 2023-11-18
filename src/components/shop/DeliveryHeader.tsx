@@ -37,7 +37,7 @@ const DeliveryHeader = (props: DeliveryHeaderPropsType) => {
 export default DeliveryHeader;
 
 const HeaderComponent = styled.div`
-	width: 90%;
+	width: 95%;
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
