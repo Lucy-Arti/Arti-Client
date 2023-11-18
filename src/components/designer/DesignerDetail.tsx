@@ -10,6 +10,7 @@ import { GetDesignerDetail, GetDesignerProduct } from '@/apis/designer';
 import SearchCard from '../search/SearchCard';
 import { usePathname } from 'next/navigation';
 import styled from 'styled-components';
+import {FaInstagram} from 'react-icons/fa'
 
 type DesignerProfType = {
 	userName: string;
@@ -25,11 +26,28 @@ const DesignerDetail = () => {
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 
+	const [sketchTab, setSketchTab] = useState('active');
+	const [productTab, setProductTab] = useState('');
+
 	const [products, setProducts] = useState<ProductType[]>(productList);
 	const [designerProfile, setDesignerProfile] = useState<DesignerProfType>();
 
 	const randomNum = Math.random() * 4;
 	const randomNumFloor = Math.floor(randomNum);
+
+	const handleTabBtn = async(tab:string) => {
+		if(tab === 'sketch') {
+			if(sketchTab === '') {
+				setSketchTab('active');
+				setProductTab('');
+			}
+		} else {
+			if(productTab === '') {
+				setProductTab('active');
+				setSketchTab('');
+			}
+		}
+	}
 
 	const getDesigner = async () => {
 		const result = await GetDesignerDetail(pathname!);
@@ -59,28 +77,42 @@ const DesignerDetail = () => {
 			<FlexColumn>
 				<Header where="detail" />
 			</FlexColumn>
-			<InfoWrapper>
-				<ImgBox>
-					<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
-				</ImgBox>
-				<DesignerInfo>
-					<div className='designerName'>
-						{designerProfile?.userName}
+			<Gap90Wrapper>
+				<InfoWrapper>
+					<DesignerProfile>
+						<DesignerBox>
+							<div className='designerName'>
+								{designerProfile?.userName}
+							</div>
+							<div>
+								디자이너
+							</div>
+						</DesignerBox>
+						<div className='instagram-noti'>인스타그램에서 새로운 옷들을 발견해 보세요!</div>
+					</DesignerProfile>
+					<div className='designer-profile-img'>
+						<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
 					</div>
-					<div className='designerIntro'>
-						{designerProfile?.introduce &&
-							designerProfile.introduce.split('\n').map((line, index) => (
+				</InfoWrapper>
+				<InstaBtn><FaInstagram size="2rem" />디자이너 인스타그램 구경하기</InstaBtn>
+				<DesignerIntro>
+					<div className='title'>💁 디자이너 소개</div>
+					<IntroBox>
+						<div className='content'>
+							{designerProfile?.introduce &&
+								designerProfile.introduce.split('\n').map((line, index) => (
 								<div key={index}>
 									{line}
 									<br />
-								</div>
-							))}
-					</div>
-				</DesignerInfo>
-			</InfoWrapper>
-			<GridInfo>
-				{designerProfile?.userName} 디자이너가 디자인한 옷이에요
-			</GridInfo>
+								</div>))}
+						</div>
+					</IntroBox>
+				</DesignerIntro>
+			</Gap90Wrapper>
+			<GridTap>
+				<GridBtn className={sketchTab} onClick={() => {handleTabBtn('sketch')}}>패션스케치</GridBtn>
+				<GridBtn className={productTab} onClick={() => {handleTabBtn('product')}}>작품</GridBtn>
+			</GridTap>
 			{loginModalIsOpen === true && <ModalLogin setLoginModalIsOpen={setLoginModalIsOpen} />}
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
@@ -116,7 +148,7 @@ const DesignerSection = styled.div`
     height: fit-content;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     overflow-x: hidden;
 `;
 const FlexColumn = styled.div`
@@ -125,43 +157,110 @@ const FlexColumn = styled.div`
     flex-direction: column;
     align-items: center;
 `;
+const Gap90Wrapper = styled.div`
+	display: flex;
+	width: 90%;
+	flex-direction: column;
+	margin-bottom: 3rem;
+`
 const InfoWrapper = styled.div`
-    /* max-width: 100%; */
     width: 100%;
     display: flex;
     background-color: white;
-    /* align-items: center; */
     height: fit-content;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    /* filter:drop-shadow(0 0.4rem 0.1rem #9e9e9e); */
-    box-shadow: 0 0.5rem 0.5rem -0.3rem #9e9e9e;
+	justify-content: space-between;
     gap: 3rem;
-    padding: 1rem 0rem 3rem 0rem;
+    margin-top: 2rem;
+	margin-bottom: 1rem;
+	& > .designer-profile-img{
+		width: 18%;
+    	margin-left: 5rem;
+	}
 `;
-const ImgBox = styled.div`
-    width: 20%;
-    margin-left: 5rem;
-`
-const DesignerInfo = styled.div`
+const DesignerProfile = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 5rem;
+	justify-content: center;
     width: 70%;
-    & > .designerName {
-        font-weight: bolder;
+	gap: 1.5rem;
+	& > .instagram-noti{
+		font-weight: 200;
+		font-size: 1.5rem;
+	}
+`
+const DesignerBox = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	gap: 1rem;
+	flex-wrap: wrap;
+	& > div {
+		font-weight: 400;
+		font-size: 2rem;
+		color: rgba(168, 168, 168, 1);
+	}
+	& > .designerName {
+        font-weight: 800;
         font-size: 3rem;
-        margin: 1rem 0 1rem 0;
-    }
-    & > .deginerIntro {
-        font-size: 1.5rem;
+		padding: 0;
+		margin: 0;
+		color: black;
     }
 `
-const GridInfo = styled.div`
-    font-size: 1.5rem;
-    color: #535353;
-    margin: 40px 0 16px 25px;
-    width: 90%;
+const InstaBtn = styled.div`
+	display: flex;
+	width: fit-content;
+	padding: 1rem 1.5rem 1rem 1.5rem;
+	background-color: rgba(85, 85, 85, 1);
+	color: white;
+	font-size: 1.5rem;
+	gap: 0.5rem;
+	border-radius: 10px;
+`
+const DesignerIntro = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-top: 4rem;
+	gap: 1rem;
+	& > .title{
+		font-size: 2rem;
+		font-weight: 600;
+	}
+`
+const IntroBox = styled.div`
+	display: flex;
+	background-color: rgba(250, 250, 250, 1);
+	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
+	& > .content{
+		width: 90%;
+		font-size: 1.5rem;
+		font-weight: 200;
+		padding: 2rem 0 2rem 0;
+	}
+`
+const GridTap = styled.div`
+	display: flex;
+	width: 90%;
+	flex-direction: row;
+	margin-bottom: 1rem;
+`
+const GridBtn = styled.div`
+	display: flex;
+	width: 50%;
+	justify-content: center;
+	font-size: 2rem;
+	border-bottom: 1px solid rgba(198, 198, 198, 1);
+	color: rgba(198, 198, 198, 1);
+	padding-bottom: 1rem;
+	&.active{
+		color: black;
+		border-color: black;
+	}
+	&:hover{
+		cursor: pointer;
+	}
 `
 const GridWrapper = styled.div`
     display: grid;
