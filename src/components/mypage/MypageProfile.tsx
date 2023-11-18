@@ -14,8 +14,7 @@ const MypageProfile = () => {
         <UserBox>
         <img width="13%" src={`/img/myProfile-${randomNumFloor}.png`}/>
             <div className='username'>
-                {/* {userName} */}
-                Test
+                {userName}
             </div>
         </UserBox>
         <IoSettingsOutline className="setting-icon" size="13%" color="#B5B5BC" />
