@@ -11,10 +11,9 @@ const sampleData = {
 		comment: true,
 		vote: true,
 		visit: true,
-		follow: true,
+		follow: false,
 		story: true,
 		freind: true,
-		designer: false,
 	},
 };
 const PointMain = () => {
@@ -140,21 +139,6 @@ const PointMain = () => {
 						{sampleData.mission.freind ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=freind`)}>
 								<div className="point-text">700P</div>
-								<StyledFiChevronRight2 size="26px" />
-							</Group>
-						) : (
-							<img src="/img/check-circle.png" />
-						)}
-					</Mission>
-					<Line />
-					<Mission $isPossible={sampleData.mission.designer}>
-						<Group>
-							<div className="possible-circle" />
-							<div className="mission-name">디자이너 초대</div>
-						</Group>
-						{sampleData.mission.designer ? (
-							<Group onClick={() => router.push(`/mypage/point//mission?type=designer`)}>
-								<div className="point-text">1000P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
