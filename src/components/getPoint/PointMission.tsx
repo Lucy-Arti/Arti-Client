@@ -6,6 +6,7 @@ import VoteMission from './mission/VoteMission';
 import StoryMission from './mission/StoryMission';
 import FollowMission from './mission/FollowMission';
 import FreindInviteMission from './mission/FreindInviteMission';
+import VisitMission from './mission/VisitMission';
 
 const PointMission = () => {
 	const params = useSearchParams();
@@ -17,6 +18,8 @@ const PointMission = () => {
 				return <CommentMission />;
 			case 'vote':
 				return <VoteMission />;
+			case 'visit':
+				return <VisitMission />;
 			case 'story':
 				return <StoryMission />;
 			case 'follow':

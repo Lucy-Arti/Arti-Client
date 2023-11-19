@@ -10,7 +10,7 @@ const sampleData = {
 	mission: {
 		comment: true,
 		vote: true,
-		visit: false,
+		visit: true,
 		follow: true,
 		story: true,
 		freind: true,
