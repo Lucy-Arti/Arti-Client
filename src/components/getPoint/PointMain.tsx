@@ -14,6 +14,8 @@ const sampleData = {
 		follow: false,
 		story: true,
 		freind: true,
+		survey: true,
+		interview: true,
 	},
 };
 const PointMain = () => {
@@ -110,7 +112,6 @@ const PointMain = () => {
 						)}
 					</Mission>
 					<Line />
-					<Line />
 					<Mission $isPossible={sampleData.mission.story}>
 						<Group>
 							<div className="possible-circle" />
@@ -138,13 +139,44 @@ const PointMain = () => {
 						</Group>
 						{sampleData.mission.freind ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=freind`)}>
-								<div className="point-text">700P</div>
+								<div className="point-text">1500P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
 							<img src="/img/check-circle.png" />
 						)}
 					</Mission>
+					<Line />
+					<Mission $isPossible={sampleData.mission.survey}>
+						<Group>
+							<div className="possible-circle" />
+							<div className="mission-name">설문조사 참여</div>
+						</Group>
+						{sampleData.mission.survey ? (
+							<Group>
+								<div className="point-text">3000P</div>
+								<StyledFiChevronRight2 size="26px" />
+							</Group>
+						) : (
+							<img src="/img/check-circle.png" />
+						)}
+					</Mission>
+					<Line />
+					<Mission $isPossible={sampleData.mission.interview}>
+						<Group>
+							<div className="possible-circle" />
+							<div className="mission-name">인터뷰 참여</div>
+						</Group>
+						{sampleData.mission.interview ? (
+							<Group>
+								<div className="point-text">1500P</div>
+								<StyledFiChevronRight2 size="26px" />
+							</Group>
+						) : (
+							<img src="/img/check-circle.png" />
+						)}
+					</Mission>
+					<Line />
 				</Section>
 			</MainWrap>
 		</>
@@ -160,7 +192,7 @@ const MainWrap = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	margin-top: 3rem;
-	margin-bottom: 2rem;
+	margin-bottom: 4rem;
 `;
 
 const PointProfileSection = styled.div`
