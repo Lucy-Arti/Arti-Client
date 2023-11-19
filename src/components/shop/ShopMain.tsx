@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PointHeader from '../getPoint/PointHeader';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+import { getProductList } from '@/apis/pointshop';
 
 const point = {
 	point: 620,
@@ -11,6 +12,14 @@ const point = {
 
 const ShopMain = () => {
 	const router = useRouter();
+
+	useEffect(() => {
+		const getList = async () => {
+			const result = await getProductList('DISCOUNT');
+		};
+		getList();
+	}, []);
+
 	return (
 		<>
 			<PointHeader text="포인트 상점" backTo="/mypage" />
