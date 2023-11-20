@@ -19,7 +19,7 @@ const HistoryDetail = () => {
 	const router = useRouter();
 
 	return (
-		<>
+		<HistoryDetailSection>
 			<PointHeader text="구매 정보 확인" backTo="/mypage/shop/history" />
 			<StatusText>현재 상태 • {sampleData.status}</StatusText>
 			<Wrapper>
@@ -52,14 +52,22 @@ const HistoryDetail = () => {
 				</ExplainWrapper>
 				<Modify>주소, 전화번호 수정이 필요하신가요?</Modify>
 			</Wrapper>
-		</>
+		</HistoryDetailSection>
 	);
 };
 
 export default HistoryDetail;
 
-const Wrapper = styled.div`
+const HistoryDetailSection = styled.div`
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+const Wrapper = styled.div`
+	width: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -73,18 +81,17 @@ const ExplainWrapper = styled.div`
 	justify-content: center;
 	text-align: flex-start;
 	width: 80%;
-	height: 25rem;
 	border-radius: 0.3125rem;
 	border: 1px solid var(--grey, #a8a8a8);
 	margin-bottom: 4rem;
 `;
 
 const StatusText = styled.div`
+width: 80%;
 	display: flex;
 	color: black;
 	font-size: 2rem;
 	align-items: center;
-	padding-left: 4.5rem;
 	margin-top: 5rem;
 	margin-bottom: 1rem;
 	font-family: 'Pretendard Variable';
@@ -113,9 +120,7 @@ const Table = styled.table`
 	border-collapse: collapse;
 `;
 
-const TableRow = styled.tr`
-
-`;
+const TableRow = styled.tr``;
 
 const TableLabel = styled.td`
 	color: black;
