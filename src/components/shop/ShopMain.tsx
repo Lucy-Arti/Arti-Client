@@ -12,13 +12,28 @@ const point = {
 
 const ShopMain = () => {
 	const router = useRouter();
+	const discount = [];
+	const arti_item = [];
+	const giftcorn = [];
 
-	useEffect(() => {
-		const getList = async () => {
-			const result = await getProductList('DISCOUNT');
-		};
-		getList();
-	}, []);
+	// useEffect(() => {
+	// 	const getList = async () => {
+	// 		const discountResult = await getProductList('DISCOUNT');
+	// 		const artiItemResult = await getProductList('ARTI_ITEM');
+	// 		const giftcornResult = await getProductList('GIFTCORN');
+
+	// 		if (discountResult.data) {
+	// 			discount.push(...discountResult.data);
+	// 		}
+	// 		if (artiItemResult.data) {
+	// 			arti_item.push(...artiItemResult.data);
+	// 		}
+	// 		if (giftcornResult.data) {
+	// 			giftcorn.push(...giftcornResult.data);
+	// 		}
+	// 	};
+	// 	getList();
+	// }, []);
 
 	return (
 		<>

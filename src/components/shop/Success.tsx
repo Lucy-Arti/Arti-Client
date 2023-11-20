@@ -9,7 +9,10 @@ const Success = () => {
 				<img src="/img/check-circle2.png"></img>
 				<Text1>구매가 완료되었어요!</Text1>
 				<Text2>24시간 내로 문자 보내드릴게요</Text2>
-				<Btn>홈으로</Btn>
+				<BtnWrapper>
+					<BtnCheck>구매 내역 확인</BtnCheck>
+					<BtnHome>홈으로</BtnHome>
+				</BtnWrapper>
 			</Wrapper>
 		</>
 	);
@@ -51,10 +54,34 @@ const Text2 = styled.div`
 	padding-bottom: 10rem;
 `;
 
-const Btn = styled.div`
+const BtnWrapper = styled.div`
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 80%;
-	/* margin-left: 1rem; */
+	gap: 30px;
+	position: relative;
+	top: 12rem;
+`;
+
+const BtnCheck = styled.div`
+	display: flex;
+	width: 50%;
+	padding: 1.5rem 0rem;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5.625px;
+	background: #d7d7d7;
+	color: #000000;
+	font-size: 1.75rem;
+	font-weight: 600;
+	cursor: pointer;
+	margin-top: 1.5rem;
+`;
+
+const BtnHome = styled.div`
+	display: flex;
+	width: 50%;
 	padding: 1.5rem 0rem;
 	justify-content: center;
 	align-items: center;
