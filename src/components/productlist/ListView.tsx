@@ -30,6 +30,23 @@ const ListView = () => {
 	const [products, setProducts] = useState<ProductType[]>(productList);
 	// const [products, setProducts] = useState([]);
 
+	const [sketchTab, setSketchTab] = useState('active');
+	const [productTab, setProductTab] = useState('');
+
+	const handleTabBtn = async(tab:string) => {
+		if(tab === 'sketch') {
+			if(sketchTab === '') {
+				setSketchTab('active');
+				setProductTab('');
+			}
+		} else {
+			if(productTab === '') {
+				setProductTab('active');
+				setSketchTab('');
+			}
+		}
+	}
+
 	const getProducts = async() => {
 		const result = await GetAllProductLists();
 		if(result===false) {
@@ -58,6 +75,12 @@ const ListView = () => {
 				<Header where='main'/>
 			</FlexColumn>
 			<NavBar />
+			<FlexColumn>
+				<TabWrapper>
+					<TabBtn className={sketchTab} onClick={() => {handleTabBtn('sketch')}}>일러스트</TabBtn>
+					<TabBtn className={productTab} onClick={() => {handleTabBtn('product')}}>작품</TabBtn>
+				</TabWrapper>
+			</FlexColumn>
 		</Fixed>
 		{
 			(loginModalIsOpen === true) && 
@@ -116,8 +139,34 @@ const Fixed = styled.div`
 	}
 `;
 
+const TabWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 90%;
+	background-color: rgba(240, 240, 240, 1);
+	margin-bottom: 2rem;
+	border-radius: 5px;
+`;
+
+const TabBtn = styled.div`
+	display: flex;
+	width: 50%;
+	height: 5rem;
+	background-color: rgba(240, 240, 240, 1);
+	color: rgba(168, 168, 168, 1);
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	border: 1px solid rgba(240, 240, 240, 1);
+	font-size: 2rem;
+	&.active{
+		background-color: white;
+		color: black;
+	}
+`
+
 const ForBlank = styled.div`
-	height: 120px;
+	height: 180px;
 `
 const GridWrapper = styled.div`
 	display: grid;
