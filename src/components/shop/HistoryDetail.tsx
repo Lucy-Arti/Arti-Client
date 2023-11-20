@@ -25,26 +25,30 @@ const HistoryDetail = () => {
 			<Wrapper>
 				<ExplainWrapper>
 					<Name>{sampleData.user}</Name>
-					<TextWrapper>
-						<Text1>구매한 품목</Text1>
-						<Text2>{sampleData.name}</Text2>
-					</TextWrapper>
-					<TextWrapper>
-						<Text1>사용 포인트</Text1>
-						<Text2>{sampleData.point}</Text2>
-					</TextWrapper>
-					<TextWrapper>
-						<Text1>전화번호</Text1>
-						<Text2>{sampleData.phoneNum}</Text2>
-					</TextWrapper>
-					<TextWrapper>
-						<Text1>구매한 날짜</Text1>
-						<Text2>{sampleData.date}</Text2>
-					</TextWrapper>
-					<TextWrapper>
-						<Text1>배송지</Text1>
-						<Text2>{sampleData.address}</Text2>
-					</TextWrapper>
+					<Table>
+						<tbody>
+							<TableRow>
+								<TableLabel>구매한 품목</TableLabel>
+								<TableValue>{sampleData.name}</TableValue>
+							</TableRow>
+							<TableRow>
+								<TableLabel>사용 포인트</TableLabel>
+								<TableValue>{sampleData.point}</TableValue>
+							</TableRow>
+							<TableRow>
+								<TableLabel>전화번호</TableLabel>
+								<TableValue>{sampleData.phoneNum}</TableValue>
+							</TableRow>
+							<TableRow>
+								<TableLabel>구매한 날짜</TableLabel>
+								<TableValue>{sampleData.date}</TableValue>
+							</TableRow>
+							<TableRow>
+								<TableLabel>배송지</TableLabel>
+								<TableValue>{sampleData.address}</TableValue>
+							</TableRow>
+						</tbody>
+					</Table>
 				</ExplainWrapper>
 				<Modify>주소, 전화번호 수정이 필요하신가요?</Modify>
 			</Wrapper>
@@ -60,14 +64,12 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 2px solid #f9f9f9;
 `;
 
 const ExplainWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 1.7rem;
-	padding-top: 2.5rem;
+	padding: 3rem;
 	justify-content: center;
 	text-align: flex-start;
 	width: 80%;
@@ -80,61 +82,52 @@ const ExplainWrapper = styled.div`
 const StatusText = styled.div`
 	display: flex;
 	color: black;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	align-items: center;
-	margin-left: 4.5rem;
-	margin-top: 0.5rem;
+	padding-left: 4.5rem;
+	margin-top: 5rem;
 	margin-bottom: 1rem;
 	font-family: 'Pretendard Variable';
 	font-weight: 600;
 `;
 
 const Name = styled.div`
-	font-size: 2rem;
+	font-size: 2.5rem;
 	margin-bottom: 1rem;
 	font-weight: 600;
 	margin-left: 1rem;
-`;
-
-const TextWrapper = styled.div`
-	display: flex;
-	width: 50%;
-	padding: 1rem;
-	justify-content: space-between;
-`;
-
-const TextWrapper2 = styled.div`
-	display: flex;
-	align-self: flex-start;
-	width: 60%;
-	padding: 1rem;
-`;
-
-const Text1 = styled.div`
-	color: black;
-	font-family: 'Pretendard Variable';
-	font-weight: 600;
-	font-size: 1.5rem;
-	margin-bottom: 0.2rem;
-`;
-
-const Text2 = styled.div`
-	color: #9e9e9e;
-	font-size: 1.5rem;
-	font-style: normal;
-	font-weight: 500;
-	font-family: 'Pretendard Variable';
-	align-self: flex-start;
 `;
 
 const Modify = styled.div`
 	color: #5c5c5c;
 	text-align: center;
 	font-family: 'Pretendard Variable';
-	font-size: 1.5rem;
-	font-style: normal;
+	font-size: 2rem;
 	font-weight: 500;
-	line-height: normal;
 	text-decoration-line: underline;
 	cursor: pointer;
+`;
+
+const Table = styled.table`
+	width: 100%;
+	border-collapse: collapse;
+`;
+
+const TableRow = styled.tr`
+
+`;
+
+const TableLabel = styled.td`
+	color: black;
+	font-weight: 600;
+	font-size: 2rem;
+	padding: 1rem;
+`;
+
+const TableValue = styled.td`
+	color: #9e9e9e;
+	font-size: 2rem;
+	font-weight: 500;
+	align-self: flex-start;
+	padding: 1rem;
 `;
