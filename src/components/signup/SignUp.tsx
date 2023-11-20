@@ -20,11 +20,11 @@ const SignUp = () => {
 					</InputWrapper>
 					<InputWrapper>
 						<Text>이름</Text>
-						<Input />
+						<Input placeholder="ex) 홍길동" />
 					</InputWrapper>
 					<InputWrapper>
-						<Text>생년월일</Text>
-						<Input placeholder="ex) 990324" />
+						<Text>출생연도</Text>
+						<Input placeholder="ex) 1999" />
 					</InputWrapper>
 					<InputWrapper>
 						<Text>성별</Text>
@@ -43,10 +43,6 @@ const SignUp = () => {
 					<InputWrapper>
 						<Text>닉네임</Text>
 						<Input placeholder="ex) Arti 덕후" />
-					</InputWrapper>
-					<InputWrapper>
-						<Text>프로필 사진</Text>
-						<Input placeholder="ex) http://ifh.cc/I-02Cu" />
 					</InputWrapper>
 				</SignupWrapper>
 				<Btn onClick={click}>완료</Btn>
