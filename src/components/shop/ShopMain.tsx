@@ -16,6 +16,10 @@ const ShopMain = () => {
 	const arti_item = [];
 	const giftcorn = [];
 
+	const goHistory = () => {
+		router.push('/mypage/shop/history');
+	};
+
 	// useEffect(() => {
 	// 	const getList = async () => {
 	// 		const discountResult = await getProductList('DISCOUNT');
@@ -46,6 +50,7 @@ const ShopMain = () => {
 							<img src="/img/database.png" />
 							<div className="text">{point.point}P</div>
 						</UserPoint>
+						<HistoryBtn onClick={goHistory}>구매 내역</HistoryBtn>
 					</Text2>
 				</PointSection>
 				<Section>
@@ -145,6 +150,19 @@ const PointSection = styled.div`
 	justify-content: flex-end;
 	align-items: center;
 	padding-bottom: 3rem;
+`;
+
+const HistoryBtn = styled.div`
+	border-radius: 5.625px;
+	border: 0.563px solid #d9d9d9;
+	color: var(--navbar, #888);
+	font-size: 1.2rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	margin-top: 1rem;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
 `;
 
 const Text1 = styled.div`

@@ -1,8 +1,16 @@
 'use client';
 
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 const Success = () => {
+	const router = useRouter();
+	const check = () => {
+		router.push('/');
+	};
+	const home = () => {
+		router.push('/');
+	};
 	return (
 		<>
 			<Wrapper>
@@ -10,8 +18,8 @@ const Success = () => {
 				<Text1>구매가 완료되었어요!</Text1>
 				<Text2>24시간 내로 문자 보내드릴게요</Text2>
 				<BtnWrapper>
-					<BtnCheck>구매 내역 확인</BtnCheck>
-					<BtnHome>홈으로</BtnHome>
+					<BtnCheck onClick={check}>구매 내역 확인</BtnCheck>
+					<BtnHome onClick={home}>홈으로</BtnHome>
 				</BtnWrapper>
 			</Wrapper>
 		</>
