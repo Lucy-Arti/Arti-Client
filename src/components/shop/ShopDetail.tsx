@@ -28,9 +28,12 @@ const ShopDetail = () => {
 					<ProductName>아이스 아메리카노 T</ProductName>
 					<Point>620P</Point>
 				</ProductTextWrapper>
+				<img src="/img/product_img.png" />
+
 				<RouteBtn disabled={!active} onClick={handleSubmit}>
 					{active ? '구매하기' : '포인트가 부족해요'}
 				</RouteBtn>
+				<BtnWrapper />
 			</Wrapper>
 		</>
 	);
@@ -87,6 +90,14 @@ const Point = styled.div`
 	padding: 1rem;
 `;
 
+const BtnWrapper = styled.div`
+	width: 57.7rem;
+	height: 8.1rem;
+	position: fixed;
+	bottom: 0rem;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, #fff 100%);
+`;
+
 const RouteBtn = styled.div<{ disabled?: boolean }>`
 	display: flex;
 	width: 47rem;
@@ -102,4 +113,5 @@ const RouteBtn = styled.div<{ disabled?: boolean }>`
 	margin-top: 1.5rem;
 	position: fixed;
 	bottom: 3rem;
+	z-index: 1;
 `;
