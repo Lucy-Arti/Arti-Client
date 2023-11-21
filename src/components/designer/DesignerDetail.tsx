@@ -110,7 +110,7 @@ const DesignerDetail = () => {
 				</DesignerIntro>
 			</Gap90Wrapper>
 			<GridTap>
-				<GridBtn className={sketchTab} onClick={() => {handleTabBtn('sketch')}}>패션스케치</GridBtn>
+				<GridBtn className={sketchTab} onClick={() => {handleTabBtn('sketch')}}>일러스트</GridBtn>
 				<GridBtn className={productTab} onClick={() => {handleTabBtn('product')}}>작품</GridBtn>
 			</GridTap>
 			{loginModalIsOpen === true && <ModalLogin setLoginModalIsOpen={setLoginModalIsOpen} />}
