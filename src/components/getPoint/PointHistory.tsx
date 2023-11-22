@@ -54,7 +54,8 @@ const PointHistory = () => {
 					</Text2>
 				</PointProfileSection>
 				<Section>
-					{historyList?.['point history'].map((historyItem) => (
+					{/* 역순으로 배치 */}
+					{historyList?.['point history'].slice().reverse().map((historyItem) => (
 						<>
 							<Mission >
 								<Group>
