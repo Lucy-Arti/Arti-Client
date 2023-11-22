@@ -2,17 +2,17 @@
 import Header from '../common/Header';
 import { useParams, usePathname, useRouter } from "next/navigation"
 import { GetProductDetail, GetProductDetailByUser, getMarked, postMarked } from '@/apis/list';
-import { useEffect, useState } from 'react';
+import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { ProductType } from './ListView';
 import Footer from '../common/Footer';
 import { useRecoilValue } from 'recoil';
 import ShareButton from '../common/ShareButton';
 import { isLoginAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
+import Comment from './Comment';
+import CommentInput from './CommentInput';
 
 const ProductDetail = () => {
-	// const { idx } = useParams();
-	// const router  = useRouter();
 	const withslashpathname  = usePathname();
 	const pathname = withslashpathname.replace('/productlist/', '');
 	const [markState, setMarkState] = useState(false);
@@ -20,10 +20,101 @@ const ProductDetail = () => {
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
+	const [detailTab, setDetailTab] = useState('active');
+	const [cmtTab, setCmtTab] = useState('');
+
+	const [currentTab, setCurrentTab] = useState('detail');
+
+	const [getFixed, setGetFixed] = useState('');
+	const [replyName, setReplyName] = useState('');
+
+	// const ref = createRef<HTMLDivElement>();
+	const heightRef = useRef<HTMLDivElement>(null);
+	const towardCmtRef = useRef<HTMLDivElement>(null);
+	const towardDetailRef = useRef<HTMLDivElement>(null);
+	const commentHeightRef = useRef<HTMLDivElement>(null);
+
+	// const innerHeight = ref?.current?.clientHeight;
+	// const scrollHeight = ref?.current?.scrollHeight;
+	// const scrollTop = ref?.current?.scrollTop;
+
+
+	const handleTabScroll = useCallback((): void => {
+        const scrollOffset = window.scrollY;
+		const divHeight = heightRef?.current?.offsetHeight;
+        if (scrollOffset && divHeight){
+			if(scrollOffset >= divHeight) {
+				setGetFixed('active');
+			} else {
+				setGetFixed('');
+			}
+		}
+    }, []);
+
+	useEffect(() => {
+        window.addEventListener('scroll', handleTabScroll, true);
+        return () => {
+            window.removeEventListener('scroll', handleTabScroll, true);
+        };
+    }, [handleTabScroll]);
+
+	const handleTowardCmtScroll = useCallback((): void => {
+        const scrollOffset = window.scrollY;
+		const divHeight = commentHeightRef?.current?.offsetHeight;
+        if (scrollOffset && divHeight){
+			if(scrollOffset >= divHeight) {
+				setCurrentTab('comment');
+			} else {
+				setCurrentTab('detail');
+			}
+		}
+    }, []);
+
+	useEffect(() => {
+        window.addEventListener('scroll', handleTowardCmtScroll, true);
+        return () => {
+            window.removeEventListener('scroll', handleTowardCmtScroll, true);
+        };
+    }, [handleTowardCmtScroll]);
+
+	useEffect(()=>{
+		if(currentTab === 'detail'){
+			if(detailTab === '') {
+				setCurrentTab('detail');
+				setDetailTab('active');
+				setCmtTab('');
+				towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
+			}
+		} else {
+			if(cmtTab === '') {
+				setCurrentTab('comment');
+				setCmtTab('active');
+				setDetailTab('');
+				towardCmtRef.current?.scrollIntoView({ behavior: "smooth" });
+			}
+		}
+	}, [currentTab]);
+
+	// const handleTabBtn = async(tab:string) => {
+	// 	if(tab === 'detail') {
+	// 		if(detailTab === '') {
+	// 			setCurrentTab('detail');
+	// 			setDetailTab('active');
+	// 			setCmtTab('');
+	// 			towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
+	// 		}
+	// 	} else {
+	// 		if(cmtTab === '') {
+	// 			setCurrentTab('comment');
+	// 			setCmtTab('active');
+	// 			setDetailTab('');
+	// 			towardCmtRef.current?.scrollIntoView({ behavior: "smooth" });
+	// 		}
+	// 	}
+	// }
+
 	const getProduct = async () => {
 		if (isUser) {
-			// const result = await GetProductDetailByUser(idx[idx.length-1]!, localStorage.getItem('access'));
-			// const result = await GetProductDetailByUser(router.query.slug!, localStorage.getItem('access'));
 			const result = await GetProductDetailByUser(pathname!, localStorage.getItem('access'));
 			if (result === false) {
 				// alert("불러오기 오류 발생");
@@ -32,8 +123,6 @@ const ProductDetail = () => {
 				setProductDetail(result.data);
 			}
 		} else {
-			// const result = await GetProductDetail(idx[idx.length-1]!);
-			// const result = await GetProductDetail(router.query.slug!);
 			const result = await GetProductDetail(pathname!);
 			if (result === false) {
 				// alert("불러오기 오류 발생");
@@ -46,8 +135,6 @@ const ProductDetail = () => {
 
 	const getMark = async () => {
 		if (isUser) {
-			// const result = await getMarked(idx[idx.length-1]!, localStorage.getItem('access'));
-			// const result = await getMarked(router.query.slug!, localStorage.getItem('access'));
 			const result = await getMarked(pathname!, localStorage.getItem('access'));
 			if (result !== false) {
 				setMarkState(result.data);
@@ -55,8 +142,6 @@ const ProductDetail = () => {
 		}
 	};
 	const postMark = async () => {
-		// const result = await postMarked(idx[idx.length-1]!, localStorage.getItem('access'));
-		// const result = await postMarked(router.query.slug!, localStorage.getItem('access'));
 		const result = await postMarked(pathname!, localStorage.getItem('access'));
 		if (result === false) {
 			console.log('불러오기 오류 발생');
@@ -100,11 +185,16 @@ const ProductDetail = () => {
 
 	return (
 		<>
-			<FlexColumn>
-				<Header where="detail" />
-			</FlexColumn>
+			<Fixed>
+				<FlexColumn>
+					<Header where="detail" />
+				</FlexColumn>
+			</Fixed>
+			<ForBlank />
 			{productDetail && (
-				<div>
+				<>
+				<HeightWrapper ref={commentHeightRef}>
+					<GetHeight ref={heightRef}>
 					<img width="100%" src={`${productDetail.preview}`} />
 					<DesignerBox onClick={() => route.push(`/designer/${productDetail.designerId}`)}>
 						<div className='imgwrapper'>
@@ -138,11 +228,30 @@ const ProductDetail = () => {
 						</FlexRow>
 					</FlexRow>
 					<GapDesign />
-					<div>
+					</GetHeight>
+					<FlexColumn>
+						<SelectTab className={getFixed}>
+							<SelectBtn className={detailTab} onClick={() => setCurrentTab('detail')}>상세 정보</SelectBtn>
+							<SelectBtn className={cmtTab} onClick={() => setCurrentTab('comment')}>댓글</SelectBtn>
+							{/* <SelectBtn className={detailTab} onClick={() => {handleTabBtn('detail')}}>상세 정보</SelectBtn>
+							<SelectBtn className={cmtTab} onClick={() => {handleTabBtn('comment')}}>댓글</SelectBtn> */}
+						</SelectTab>
+					</FlexColumn>
+					<div ref={towardDetailRef}>
 						<img width="100%" src={`${productDetail.detailImg}`}/>
 					</div>
-					<Footer />
+					<GapDesign />
+				</HeightWrapper>
+				<div ref={towardCmtRef}>
+					<Comment 
+						pathname={pathname}
+						setReplyName={setReplyName} />
 				</div>
+				{/* <Footer /> */}
+				<CommentInput 
+					replyName={replyName}
+					setReplyName={setReplyName} />
+				</>
 			)}
 		</>
 	);
@@ -155,6 +264,31 @@ const FlexColumn = styled.div`
 	flex-direction: column;
 	align-items: center;
 `;
+
+const GetHeight = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
+const Fixed = styled.div`
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: space-around;
+	justify-content: center;
+	width: 100%;
+	height: fit-content;
+	top: 0%;
+	background-color: white;
+	@media (min-width: 576px) {
+		width: 576px;
+	}
+`;
+
+const ForBlank = styled.div`
+	height: 90px;
+`
+
 const DesignerBox = styled.div`
 	display: flex;
 	align-items: center;
@@ -201,6 +335,44 @@ const GapDesign = styled.div`
 	width: 100%;
 	margin-top: 2rem;
 `;
+
+const HeightWrapper = styled.div`
+	height: auto;
+`
+
+const SelectTab = styled.div`
+	display: flex;
+	width: 90%;
+	flex-direction: row;
+	margin-bottom: 1rem;
+	margin-top: 5rem;
+	background-color: white;
+	&.active{
+		position: fixed;
+		top: 40px;
+		padding-top: 2rem;
+		@media (min-width: 576px) {
+			width: 576px;
+		}
+	}
+`
+const SelectBtn = styled.div`
+	display: flex;
+	width: 50%;
+	justify-content: center;
+	font-size: 2rem;
+	border-bottom: 1px solid rgba(198, 198, 198, 1);
+	color: rgba(198, 198, 198, 1);
+	padding-bottom: 1rem;
+	&.active{
+		color: black;
+		border-color: black;
+	}
+	&:hover{
+		cursor: pointer;
+	}
+`
+
 const HeartSection = styled.div`
 	width: fit-content;
 	display: flex;
