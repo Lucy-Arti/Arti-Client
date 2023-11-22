@@ -56,3 +56,7 @@ export interface PointPossibleType {
 	visit: boolean;
 	vote: boolean;
 }
+export interface PointHistoryType {
+	['point history'] : any[],
+	savedpoint: number,
+}

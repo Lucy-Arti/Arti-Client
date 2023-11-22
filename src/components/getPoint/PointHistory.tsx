@@ -1,7 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from './PointHeader';
 import styled from 'styled-components';
+import { getPointHistory } from '@/apis/getPoint';
+import { PointHistoryType } from '@/types/request';
 
 const sampleData = {
 	point: 390,
@@ -16,6 +18,28 @@ const sampleData = {
 };
 
 const PointHistory = () => {
+	const [historyList, setHistoryList] = useState<PointHistoryType>();
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const getMissionList = async () => {
+				try {
+					const response = await getPointHistory();
+					if (response && response.data) {
+						setHistoryList(response.data);
+						console.log(response.data.pointhistory);
+					} else {
+						console.log('Failed to fetch history list');
+					}
+				} catch (error) {
+					console.error('Error fetching history list:', error);
+				}
+			};
+			getMissionList();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
+
 	return (
 		<>
 			<PointHeader text="포인트 내역" backTo="/mypage/point" />
@@ -25,30 +49,30 @@ const PointHistory = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">{sampleData.point}P</div>
+							<div className="text">{historyList?.savedpoint}P</div>
 						</UserPoint>
 					</Text2>
 				</PointProfileSection>
 				<Section>
-					{sampleData.history.map((historyItem) => (
+					{historyList?.['point history'].map((historyItem) => (
 						<>
-							<Mission>
+							<Mission >
 								<Group>
-									{historyItem.point > 0 ? <img src="/img/plus-circle.png" /> : <img src="/img/minus-circle.png" />}
+									{historyItem.score > 0 ? <img src="/img/plus-circle.png" /> : <img src="/img/minus-circle.png" />}
 									<Text>
-										<div className="mission-name">{historyItem.mission}</div>
+										<div className="mission-name">{historyItem.title}</div>
 										<div className="mission-date">{historyItem.date}</div>
 									</Text>
 								</Group>
 								<Group>
-									{historyItem.point > 0 ? (
-										<div className="point-text plus">+{historyItem.point}P</div>
+									{historyItem.score > 0 ? (
+										<div className="point-text plus">+{historyItem.score}P</div>
 									) : (
-										<div className="point-text">{historyItem.point}P</div>
+										<div className="point-text">{historyItem.score}P</div>
 									)}
 								</Group>
 							</Mission>
-							<Line />
+							<Line/>
 						</>
 					))}
 				</Section>
@@ -142,7 +166,6 @@ const Mission = styled.div`
 const Text = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding-top: 1.5rem;
 	padding-left: 1.5rem;
 	.mission-name {
 		color: #4d4d4d;
