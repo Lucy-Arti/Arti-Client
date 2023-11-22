@@ -1,25 +1,39 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from './PointHeader';
 import styled from 'styled-components';
 import { FiChevronRight } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/app/recoilContextProvider';
+import { getPossibleMissionList } from '@/apis/getPoint';
+import { PointPossibleData } from '@/types/request';
 
-const sampleData = {
-	point: 390,
-	mission: {
-		comment: true,
-		vote: true,
-		visit: true,
-		follow: false,
-		story: true,
-		freind: true,
-		survey: true,
-		interview: true,
-	},
-};
 const PointMain = () => {
 	const router = useRouter();
+	const isLogged = useRecoilValue(isLoginAtom);
+	const [missionList, setMissionList] = useState<PointPossibleData>();
+
+	useEffect(() => {
+		if (localStorage.getItem('access') && isLogged) {
+			const getMissionList = async () => {
+				try {
+					const response = await getPossibleMissionList();
+					if (response && response.data) {
+						setMissionList(response.data);
+					} else {
+						console.log('Failed to fetch mission list');
+					}
+				} catch (error) {
+					console.error('Error fetching mission list:', error);
+				}
+			};
+			getMissionList();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
+
 	return (
 		<>
 			<PointHeader text="포인트" backTo="/mypage" />
@@ -29,7 +43,7 @@ const PointMain = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">{sampleData.point}P</div>
+							<div className="text">{missionList?.point}P</div>
 						</UserPoint>
 						<HistoryBtn onClick={() => router.push(`/mypage/point/history`)}>포인트 내역</HistoryBtn>
 					</Text2>
@@ -47,12 +61,12 @@ const PointMain = () => {
 						<div>일일 미션</div>
 						<div className="detail">미션은 매일 밤 12시에 다시 시작돼요.</div>
 					</MissionTitle>
-					<Mission $isPossible={sampleData.mission.comment}>
+					<Mission $isPossible={missionList?.mission.comment || false}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">댓글 달기</div>
 						</Group>
-						{sampleData.mission.comment ? (
+						{missionList?.mission.comment ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=comment`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
@@ -62,12 +76,12 @@ const PointMain = () => {
 						)}
 					</Mission>
 					<Line />
-					<Mission $isPossible={sampleData.mission.vote}>
+					<Mission $isPossible={missionList?.mission.vote || false}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">투표하기</div>
 						</Group>
-						{sampleData.mission.vote ? (
+						{missionList?.mission.vote ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=vote`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
@@ -77,12 +91,12 @@ const PointMain = () => {
 						)}
 					</Mission>
 					<Line />
-					<Mission $isPossible={sampleData.mission.visit}>
+					<Mission $isPossible={missionList?.mission.visit || false}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">출석체크</div>
 						</Group>
-						{sampleData.mission.visit ? (
+						{missionList?.mission.visit ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=visit`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
@@ -97,12 +111,12 @@ const PointMain = () => {
 					<MissionTitle>
 						<div>인스타그램 미션</div>
 					</MissionTitle>
-					<Mission $isPossible={sampleData.mission.follow}>
+					<Mission $isPossible={missionList?.mission.follow || false}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">Arti 계정 팔로우</div>
 						</Group>
-						{sampleData.mission.follow ? (
+						{missionList?.mission.follow ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=follow`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
@@ -112,12 +126,12 @@ const PointMain = () => {
 						)}
 					</Mission>
 					<Line />
-					<Mission $isPossible={sampleData.mission.story}>
+					<Mission $isPossible={missionList?.mission.story || false}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">Arti 태그 후 스토리 업로드</div>
 						</Group>
-						{sampleData.mission.story ? (
+						{missionList?.mission.story ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=story`)}>
 								<div className="point-text">250P</div>
 								<StyledFiChevronRight2 size="26px" />
@@ -132,12 +146,12 @@ const PointMain = () => {
 					<MissionTitle>
 						<div>초대 미션</div>
 					</MissionTitle>
-					<Mission $isPossible={sampleData.mission.freind}>
+					<Mission $isPossible={missionList?.mission.friend || false}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">친구 초대</div>
 						</Group>
-						{sampleData.mission.freind ? (
+						{missionList?.mission.friend ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=freind`)}>
 								<div className="point-text">1500P</div>
 								<StyledFiChevronRight2 size="26px" />
@@ -147,34 +161,30 @@ const PointMain = () => {
 						)}
 					</Mission>
 					<Line />
-					<Mission $isPossible={sampleData.mission.survey}>
+					<Mission $isPossible={true}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">설문조사 참여</div>
 						</Group>
-						{sampleData.mission.survey ? (
-							<Group>
+						<Group>
+							<a href="https://tally.so/r/wd96dr" target="_blank" rel="noopener noreferrer">
 								<div className="point-text">3000P</div>
 								<StyledFiChevronRight2 size="26px" />
-							</Group>
-						) : (
-							<img src="/img/check-circle.png" />
-						)}
+							</a>
+						</Group>
 					</Mission>
 					<Line />
-					<Mission $isPossible={sampleData.mission.interview}>
+					<Mission $isPossible={true}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">인터뷰 참여</div>
 						</Group>
-						{sampleData.mission.interview ? (
-							<Group>
+						<Group>
+							<a href="https://sendtime.app/ko/reservation?i=mupN7D" target="_blank" rel="noopener noreferrer">
 								<div className="point-text">1500P</div>
 								<StyledFiChevronRight2 size="26px" />
-							</Group>
-						) : (
-							<img src="/img/check-circle.png" />
-						)}
+							</a>
+						</Group>
 					</Mission>
 					<Line />
 				</Section>
@@ -356,5 +366,13 @@ const Group = styled.div`
 		font-size: 1.75rem;
 		font-style: normal;
 		font-weight: 600;
+	}
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		text-decoration: none;
+		color: white;
 	}
 `;
