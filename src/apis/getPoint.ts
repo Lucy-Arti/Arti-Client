@@ -19,11 +19,45 @@ export const getPossibleMissionList = async () => {
 	}
 };
 
-// 포인트 내역
+// 포인트 내역 불러오기
 export const getPointHistory = async () => {
 	const accessToken = localStorage.getItem('access');
 	try {
 		const response = await axios.get(`${baseURL}api/v2/point/history`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+        console.log(response);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+
+// 나의 초대코드 불러오기
+export const getMyInviteCode = async () => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}api/v2/point/code`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+        console.log(response);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+
+// 친구초대 현황
+export const getInviteFreindResult = async () => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}api/v2/point/invite`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},

@@ -60,3 +60,7 @@ export interface PointHistoryType {
 	['point history'] : any[],
 	savedpoint: number,
 }
+export interface InviteResultType {
+	invited: number,
+	accumulated: number,
+}

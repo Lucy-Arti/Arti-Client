@@ -5,23 +5,11 @@ import styled from 'styled-components';
 import { getPointHistory } from '@/apis/getPoint';
 import { PointHistoryType } from '@/types/request';
 
-const sampleData = {
-	point: 390,
-	history: [
-		{ mission: '댓글 달기', date: '23.10.24', point: 20 },
-		{ mission: '할인쿠폰 구매', date: '23.10.24', point: -3000 },
-		{ mission: '투표하기', date: '23.10.24', point: 100 },
-		{ mission: '투표하기', date: '23.10.23', point: 100 },
-		{ mission: '굿즈 구매', date: '23.10.22', point: -500 },
-		{ mission: '투표하기', date: '23.10.21', point: 100 },
-	],
-};
-
 const PointHistory = () => {
 	const [historyList, setHistoryList] = useState<PointHistoryType>();
 	useEffect(() => {
 		if (localStorage.getItem('access')) {
-			const getMissionList = async () => {
+			const getHistoryList = async () => {
 				try {
 					const response = await getPointHistory();
 					if (response && response.data) {
@@ -34,7 +22,7 @@ const PointHistory = () => {
 					console.error('Error fetching history list:', error);
 				}
 			};
-			getMissionList();
+			getHistoryList();
 		} else {
 			console.log('Not logged in user');
 		}
