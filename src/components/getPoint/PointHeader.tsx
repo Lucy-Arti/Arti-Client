@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import styled from 'styled-components';
 import '@styles/commonStyle.css';
@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 type PointHeaderPropsType = {
 	text: string;
-    backTo: string;
+	backTo: string;
 };
 
 const PointHeader = (props: PointHeaderPropsType) => {
@@ -28,7 +28,7 @@ const PointHeader = (props: PointHeaderPropsType) => {
 export default PointHeader;
 
 const HeaderComponent = styled.div`
-	width: 90%;
+	width: 95%;
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
