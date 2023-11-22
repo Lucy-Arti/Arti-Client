@@ -3,18 +3,58 @@ import styled from 'styled-components';
 import PointHeader from '../PointHeader';
 import Image from 'next/image';
 import VisitModal from './VisitModal';
+import { checkAttendance, checkMonthAttendance, checkConsecutiveAttendance } from '@/apis/getPoint';
 
 const VisitMission = () => {
-	const [showModal, setShowModal] = useState(true);
+	const [showModal, setShowModal] = useState(false);
+	const [monthVisit, setMonthVisit] = useState<number>();
+	const [consecutiveVisit, setConsecutiveVisit] = useState<number>();
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
-		  setShowModal(false);
+			setShowModal(false);
 		}, 2000);
-	
+
 		return () => clearTimeout(timeoutId);
-	
-	  }, []); 
+	}, []);
+
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const chekTodayAttendance = async () => {
+				try {
+					const todayAttendanceResponse = await checkAttendance();
+					const monthResponse = await checkMonthAttendance();
+					const consecutiveResponse = await checkConsecutiveAttendance();
+					// 당일 출석 모달
+					if (todayAttendanceResponse) {
+						setShowModal(true);
+						setTimeout(() => {
+							setShowModal(false);
+						}, 2000);
+					} else {
+						console.log('당일 출석 실패');
+					}
+					// 이번 달 출석
+					if (monthResponse) {
+						setMonthVisit(monthResponse.data);
+					} else {
+						console.log('월 출석 데이터 패치 실패');
+					}
+					// 연속 출석
+					if (consecutiveResponse) {
+						setConsecutiveVisit(consecutiveResponse.data);
+					} else {
+						console.log('연속출석 데이터 패치 실패');
+					}
+				} catch (error) {
+					console.error('Error fetching attendance data:', error);
+				}
+			};
+			chekTodayAttendance();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
 
 	return (
 		<MainWrapper>
@@ -32,7 +72,7 @@ const VisitMission = () => {
 				</PointAlert>
 				<BoxTopDesign>
 					<Span>
-						이번 달 출석 <span className="bold">4일</span> 완료
+						이번 달 출석 <span className="bold">{monthVisit}일</span> 완료
 					</Span>
 					<div className="mascot-image">
 						<StyledImage src="/img/visittopimage.png" alt="출석체크 타이틀 마스코트" fill priority />
@@ -41,20 +81,32 @@ const VisitMission = () => {
 				<Box>
 					<div className="sub2">매일 출석하고 추가 포인트 보상을 받아보세요!</div>
 					<div className="title2">🎉 연속 출석 보상</div>
-					<div className="sub3">현재 5일 연속 출석중이에요!</div>
+					<div className="sub3">현재 {consecutiveVisit}일 연속 출석중이에요!</div>
 					<StampGroup>
 						<div className="stamp-image">
-							<StyledImage src="/img/donestamp.png" alt="출석체크 스탬프" fill priority />
+							{consecutiveVisit && consecutiveVisit >= 3 ? (
+								<StyledImage src="/img/donestamp.png" alt="출석체크 스탬프" fill priority />
+							) : (
+								<StyledImage src="/img/notdonestamp.png" alt="출석체크 스탬프" fill priority />
+							)}
 							<div>3일 연속 출석</div>
 						</div>
 						<div className="line" />
 						<div className="stamp-image">
-							<StyledImage src="/img/activestamp.png" alt="출석체크 스탬프" fill priority />
+						{consecutiveVisit && consecutiveVisit >= 5 ? (
+								<StyledImage src="/img/donestamp.png" alt="출석체크 스탬프" fill priority />
+							) : (
+								<StyledImage src="/img/notdonestamp.png" alt="출석체크 스탬프" fill priority />
+							)}
 							<div>5일 연속 출석</div>
 						</div>
 						<div className="line" />
 						<div className="stamp-image">
-							<StyledImage src="/img/notdonestamp.png" alt="출석체크 스탬프" fill priority />
+						{consecutiveVisit && consecutiveVisit >= 7 ? (
+								<StyledImage src="/img/donestamp.png" alt="출석체크 스탬프" fill priority />
+							) : (
+								<StyledImage src="/img/notdonestamp.png" alt="출석체크 스탬프" fill priority />
+							)}
 							<div>7일 연속 출석</div>
 						</div>
 					</StampGroup>
@@ -279,7 +331,7 @@ const TextGroup = styled.div`
 		font-size: 2rem;
 		font-weight: 400;
 	}
-	.mascot-image{
+	.mascot-image {
 		position: relative;
 		left: 70%;
 		width: 30%;

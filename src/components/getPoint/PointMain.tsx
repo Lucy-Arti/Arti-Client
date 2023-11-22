@@ -83,7 +83,7 @@ const PointMain = () => {
 						</Group>
 						{missionList?.mission.vote ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=vote`)}>
-								<div className="point-text">250P</div>
+								<div className="point-text">100P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
@@ -98,7 +98,7 @@ const PointMain = () => {
 						</Group>
 						{missionList?.mission.visit ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=visit`)}>
-								<div className="point-text">250P</div>
+								<div className="point-text">30P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
@@ -118,7 +118,7 @@ const PointMain = () => {
 						</Group>
 						{missionList?.mission.follow ? (
 							<Group onClick={() => router.push(`/mypage/point/mission?type=follow`)}>
-								<div className="point-text">250P</div>
+								<div className="point-text">500P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
@@ -133,7 +133,7 @@ const PointMain = () => {
 						</Group>
 						{missionList?.mission.story ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=story`)}>
-								<div className="point-text">250P</div>
+								<div className="point-text">500P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
