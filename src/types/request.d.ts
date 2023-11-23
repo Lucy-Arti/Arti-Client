@@ -31,17 +31,17 @@ export interface GtmId {
 }
 
 export type ProductType = {
-	clothesId: number;
-	createdAt: string | null;
-	updatedAt: string | null;
-	detailImg: string | null;
-	likeCount: number | null;
-	clothesName: string | null;
-	preview: string | null;
-	designerId: number | null;
-	designerName: string | null;
-	score: number | null;
-};
+	clothesId: number,
+	createdAt: string|null,
+	updatedAt: string|null,
+	detailImg: string|null,
+	likeCount: number|null,
+	clothesName: string|null,
+	preview: string|null,
+	designerId: number|null,
+	designerName: string|null,
+	score: number|null
+}
 
 export interface PointPossibleData {
 	mission: PointPossibleType;
@@ -63,4 +63,15 @@ export interface PointHistoryType {
 export interface InviteResultType {
 	invited: number,
 	accumulated: number,
+}
+
+// admin 페이지용 type
+export interface ClothesInfoData {
+	type: string;
+	clothesName:string;
+	designerName:string;
+	commentCount:number;
+	likeCount:number;
+	score: number;
+	purchaseLink: string;
 }

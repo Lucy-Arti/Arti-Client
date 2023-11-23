@@ -1,5 +1,5 @@
 'use client'
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import CommentMission from './mission/CommentMission';
 import VoteMission from './mission/VoteMission';
