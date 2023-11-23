@@ -4,7 +4,7 @@ const baseURL = `https://arti-fashion.shop/`;
 
 interface BuyData {
 	name: string;
-	address: string;
+	address?: string;
 	phoneNumber: string;
 	delivery: boolean;
 	itemId: number;
@@ -40,23 +40,22 @@ export const buyItem = async (body: BuyData) => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		console.log(result.data);
 	} catch (error) {
-		console.error('🚨🚨에러 발생 에러 발생 🚨🚨', error);
 		throw error;
 	}
 };
 
 export const getBuyList = async () => {
-	const accessToken = localStorage.getItem('access');
+	// const accessToken = localStorage.getItem('access');
+	const accessToken =
+		'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTgwMTg3Mzc4IiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMDY2NjUyNSwiZXhwIjozMzIwNjY2NTI1fQ.puFN2Y6jGx4E1DUWoOyvqwm0IvwS0TlaGAuNCzuNSPmwfCRBhNN1E-16paJLadLKA6knzzPa3fbGhES9NLICug';
 	try {
 		const result = await axios.get(`${baseURL}api/v2/buy`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		console.log(result.data);
-		return result.data;
+		return result;
 	} catch (error) {
 		throw error;
 	}
@@ -64,6 +63,6 @@ export const getBuyList = async () => {
 
 export const getBuyListDetail = async (id: string) => {
 	const result = await axios.get(`${baseURL}api/v2/buy/${id}`);
-	console.log(result);
-	return result.data;
+	console.log(result.data);
+	return result;
 };

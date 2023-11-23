@@ -22,46 +22,46 @@ const ShopDetail = () => {
 	const id = params.get('id');
 	const router = useRouter();
 	const [active, setActive] = useState(false);
-	const [detail, setDetail] = useState<Detail[]>([]);
-	const point = 620;
+	const [detail, setDetail] = useState<Detail>();
+	const point = 20000;
 
 	useEffect(() => {
 		const getDetail = async () => {
 			const result = await getProductDetail(id!);
 			setDetail(result.data);
+			if (point >= Number(result.data?.price)) {
+				setActive(true);
+			}
 		};
-		if (point >= 620) {
-			setActive(true);
-		}
 		getDetail();
 	}, []);
 
 	const handleSubmit = () => {
-		router.push(`/mypage/shop/detail?=${id}/delivery`);
+		if (detail?.delivery) {
+			router.push(`/mypage/shop/delivery?id=${id}`);
+		} else if (!detail?.delivery) {
+			router.push(`/mypage/shop/notDelivery?id=${id}`);
+		}
 	};
 
 	return (
 		<>
 			<PointHeader text="" backTo="/mypage/shop" />
-			{detail.map((item, index) => {
-				return (
-					<Wrapper key={index}>
-						<img src={item.thumnail} />
-						<ProductTextWrapper>
-							<ProductArti>{item.brand}</ProductArti>
-							<ProductName>{item.title}</ProductName>
-							<Point>{item.price}</Point>
-						</ProductTextWrapper>
-						<ImageWrapper>
-							<img src={item.image} alt={item.detail} />
-						</ImageWrapper>
-						<RouteBtn disabled={!active} onClick={handleSubmit}>
-							{active ? '구매하기' : '포인트가 부족해요'}
-						</RouteBtn>
-						<BtnWrapper />
-					</Wrapper>
-				);
-			})}
+			<Wrapper>
+				<img src={detail?.thumnail} />
+				<ProductTextWrapper>
+					<ProductArti>{detail?.brand}</ProductArti>
+					<ProductName>{detail?.title}</ProductName>
+					<Point>{detail?.price}</Point>
+				</ProductTextWrapper>
+				<ImageWrapper>
+					<img src={detail?.image} alt={detail?.detail} />
+				</ImageWrapper>
+				<RouteBtn disabled={!active} onClick={handleSubmit}>
+					{active ? '구매하기' : '포인트가 부족해요'}
+				</RouteBtn>
+				<BtnWrapper />
+			</Wrapper>
 		</>
 	);
 };
