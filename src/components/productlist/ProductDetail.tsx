@@ -11,6 +11,7 @@ import { isLoginAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
 import Comment from './Comment';
 import CommentInput from './CommentInput';
+import { GetAllCmts } from '@/apis/comments';
 
 const ProductDetail = () => {
 	const withslashpathname  = usePathname();
@@ -58,14 +59,30 @@ const ProductDetail = () => {
         };
     }, [handleTabScroll]);
 
+	// const handleTowardCmtScroll = useCallback((): void => {
+    //     const scrollOffset = window.scrollY;
+	// 	const divHeight = commentHeightRef?.current?.offsetHeight;
+    //     if (scrollOffset && divHeight){
+	// 		if(scrollOffset >= divHeight) {
+	// 			setCurrentTab('comment');
+	// 		} else {
+	// 			setCurrentTab('detail');
+	// 		}
+	// 	}
+    // }, []);
+
 	const handleTowardCmtScroll = useCallback((): void => {
         const scrollOffset = window.scrollY;
-		const divHeight = commentHeightRef?.current?.offsetHeight;
+		const divHeight = commentHeightRef?.current?.offsetHeight! - 150;
         if (scrollOffset && divHeight){
 			if(scrollOffset >= divHeight) {
 				setCurrentTab('comment');
+				setCmtTab('active');
+				setDetailTab('');
 			} else {
 				setCurrentTab('detail');
+				setDetailTab('active');
+				setCmtTab('');
 			}
 		}
     }, []);
@@ -77,12 +94,32 @@ const ProductDetail = () => {
         };
     }, [handleTowardCmtScroll]);
 
-	useEffect(()=>{
-		if(currentTab === 'detail'){
+	// useEffect(()=>{
+	// 	if(currentTab === 'detail'){
+	// 		if(detailTab === '') {
+	// 			// setCurrentTab('detail');
+	// 			setDetailTab('active');
+	// 			setCmtTab('');
+	// 			towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
+	// 		}
+	// 	} else {
+	// 		if(cmtTab === '') {
+	// 			// setCurrentTab('comment');
+	// 			setCmtTab('active');
+	// 			setDetailTab('');
+	// 			towardCmtRef.current?.scrollIntoView({ behavior: "smooth" });
+	// 		}
+	// 	}
+	// }, [currentTab]);
+
+	const handleTabBtn = (tab:string) => {
+		if(tab === 'detail') {
 			if(detailTab === '') {
 				setCurrentTab('detail');
 				setDetailTab('active');
 				setCmtTab('');
+				towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
+			} else {
 				towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
 			}
 		} else {
@@ -90,28 +127,12 @@ const ProductDetail = () => {
 				setCurrentTab('comment');
 				setCmtTab('active');
 				setDetailTab('');
-				towardCmtRef.current?.scrollIntoView({ behavior: "smooth" });
+				towardCmtRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
+			} else {
+				towardCmtRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
 			}
 		}
-	}, [currentTab]);
-
-	// const handleTabBtn = async(tab:string) => {
-	// 	if(tab === 'detail') {
-	// 		if(detailTab === '') {
-	// 			setCurrentTab('detail');
-	// 			setDetailTab('active');
-	// 			setCmtTab('');
-	// 			towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
-	// 		}
-	// 	} else {
-	// 		if(cmtTab === '') {
-	// 			setCurrentTab('comment');
-	// 			setCmtTab('active');
-	// 			setDetailTab('');
-	// 			towardCmtRef.current?.scrollIntoView({ behavior: "smooth" });
-	// 		}
-	// 	}
-	// }
+	}
 
 	const getProduct = async () => {
 		if (isUser) {
@@ -150,9 +171,19 @@ const ProductDetail = () => {
 			console.log('post 성공');
 		}
 	};
+	const getCmts = async() => {
+		const result = await GetAllCmts(pathname!);
+		if (result === false) {
+			console.log('불러오기 오류 발생');
+		} else {
+			console.log(result.data);
+		}
+	}
+
 	useEffect(() => {
 		getProduct();
 		getMark();
+		getCmts();
 	}, []);
 
 	useEffect(() => {
@@ -231,8 +262,8 @@ const ProductDetail = () => {
 					</GetHeight>
 					<FlexColumn>
 						<SelectTab className={getFixed}>
-							<SelectBtn className={detailTab} onClick={() => setCurrentTab('detail')}>상세 정보</SelectBtn>
-							<SelectBtn className={cmtTab} onClick={() => setCurrentTab('comment')}>댓글</SelectBtn>
+							<SelectBtn className={detailTab} onClick={() => handleTabBtn('detail')}>상세 정보</SelectBtn>
+							<SelectBtn className={cmtTab} onClick={() => handleTabBtn('comment')}>댓글</SelectBtn>
 							{/* <SelectBtn className={detailTab} onClick={() => {handleTabBtn('detail')}}>상세 정보</SelectBtn>
 							<SelectBtn className={cmtTab} onClick={() => {handleTabBtn('comment')}}>댓글</SelectBtn> */}
 						</SelectTab>
@@ -240,15 +271,17 @@ const ProductDetail = () => {
 					<div ref={towardDetailRef}>
 						<img width="100%" src={`${productDetail.detailImg}`}/>
 					</div>
+					{/* <Footer /> */}
+					<BlankSpace ref={towardCmtRef} />
 					<GapDesign />
 				</HeightWrapper>
-				<div ref={towardCmtRef}>
+				<div>
 					<Comment 
 						pathname={pathname}
 						setReplyName={setReplyName} />
 				</div>
-				{/* <Footer /> */}
 				<CommentInput 
+					getFixed={getFixed}
 					replyName={replyName}
 					setReplyName={setReplyName} />
 				</>
@@ -386,4 +419,9 @@ const HeartImg = styled.img`
 	&:hover{
 		cursor: pointer;
 	}
+`
+
+const BlankSpace = styled.div`
+	display: flex;
+	height: 120px;
 `

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const CommentInput = (props:{replyName:string, setReplyName:React.Dispatch<React.SetStateAction<string>>}) => {
+const CommentInput = (props:{getFixed:string ,replyName:string, setReplyName:React.Dispatch<React.SetStateAction<string>>}) => {
     const [inputCmt, setInputCmt] = useState('');
     const [btnActive, setBtnActive] = useState('');
     const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
@@ -23,7 +23,7 @@ const CommentInput = (props:{replyName:string, setReplyName:React.Dispatch<React
         }
     }, [inputCmt])
   return (
-    <FlexColumn>
+    <FlexColumn className={props.getFixed}>
         <CmtInputWrapper>
             <div className='profile-img'>
                 <img src='/img/myProfile-1.png' width='100%' />
@@ -43,6 +43,15 @@ const FlexColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+    width: 100%;
+    &.active{
+        position: fixed;
+		bottom: 0px;
+        z-index: 1;
+		@media (min-width: 576px) {
+			width: 576px;
+		}
+    }
 `;
 
 const CmtInputWrapper = styled.div`

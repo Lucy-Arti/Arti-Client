@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import {CgInfo} from 'react-icons/cg'
 import { FiChevronRight } from 'react-icons/fi';
 import { VscKebabVertical } from "react-icons/vsc";
 
-const Comment = (props:{pathname:string, setReplyName:React.Dispatch<React.SetStateAction<string>>}) => {
+const Comment = (props:{pathname:string, setReplyName:React.Dispatch<React.SetStateAction<string>>,}) => {
     const [replyOn, setReplyOn] = useState(false);
+    const viewHeightNum = document.documentElement.clientHeight;
     const handleReplyClick = () => {
         if(replyOn===false){
             setReplyOn(true);
@@ -15,8 +16,11 @@ const Comment = (props:{pathname:string, setReplyName:React.Dispatch<React.SetSt
             props.setReplyName('');
         }
     }
+    useEffect(() => {
+        console.log(viewHeightNum);
+    }, [])
   return (
-    <FlexColumn>
+    <FlexColumn styledheight={viewHeightNum}>
         <div className='cmt-header'>댓글 5</div>
         <CmtWrapper>
             <CmtInfo>
@@ -38,13 +42,13 @@ const Comment = (props:{pathname:string, setReplyName:React.Dispatch<React.SetSt
                         </CmtProfile>
                         <div className='content'>댓글 내용</div>
                         <CmtUtils>
-                            <UtilIconTextBox clicked={replyOn}>
+                            <UtilIconTextBox isclicked={replyOn}>
                                 <div className='img-box'>
                                     <img src='/img/cmt-blankHeart.png' width='100%' />
                                 </div>
                                 <div>좋아요 3</div>
                             </UtilIconTextBox>
-                            <UtilIconTextBox className='reply-icon' clicked={replyOn} onClick={handleReplyClick}>
+                            <UtilIconTextBox className='reply-icon' isclicked={replyOn} onClick={handleReplyClick}>
                                 <div className='img-box'>
                                     <img src='/img/chat-alt.png' width='100%' />
                                 </div>
@@ -65,7 +69,7 @@ const Comment = (props:{pathname:string, setReplyName:React.Dispatch<React.SetSt
                         </CmtProfile>
                         <div className='content'>댓글 내용이 완전 짱 ㅣㄱㄹ어지면어떻게댈까여? 테스트중 ㅋㅋ</div>
                         <CmtUtils>
-                            <UtilIconTextBox clicked={replyOn}>
+                            <UtilIconTextBox isclicked={replyOn}>
                                 <div className='img-box'>
                                     <img src='/img/cmt-blankHeart.png' width='100%' />
                                 </div>
@@ -82,17 +86,22 @@ const Comment = (props:{pathname:string, setReplyName:React.Dispatch<React.SetSt
 
 export default Comment
 
-const FlexColumn = styled.div`
+const FlexColumn = styled.div<{styledheight:number}>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+    @media (min-height: ${props=>`${props.styledheight}px`}) {
+		height: ${props=>`${props.styledheight}px`};
+	}
     gap: 2rem;
     & > .cmt-header {
         display: flex;
         width: 90%;
+        height: fit-content;
         margin-top: 5rem;
         font-weight: 600;
         font-size: 2rem;
+        padding-bottom: 0;
     }
 `;
 
@@ -173,13 +182,13 @@ const CmtUtils = styled.div`
     gap: 2rem;
 `
 
-const UtilIconTextBox = styled.div<{clicked:boolean}>`
+const UtilIconTextBox = styled.div<{isclicked:boolean}>`
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
     color: rgba(168, 168, 168, 1);
     &.reply-icon{
-        color: ${props => props.clicked ? 'rgba(165, 232, 101, 1)':'rgba(168, 168, 168, 1)'};
+        color: ${props => props.isclicked ? 'rgba(165, 232, 101, 1)':'rgba(168, 168, 168, 1)'};
     }
     & > .img-box{
         width: 1.5rem;
