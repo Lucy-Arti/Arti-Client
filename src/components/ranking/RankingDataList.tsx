@@ -17,10 +17,11 @@ const Card = styled.div`
 `;
 
 const RankingDataList = (props: RankingDataListPropsType) => {
+	const displayedDatas = props.datas.slice(0, 20);
 	return (
 		<Card>
 			{props.datas &&
-				props.datas.map((data, index) => (
+				displayedDatas.map((data, index) => (
 					<RankingCard
 						key={index}
 						index={index}

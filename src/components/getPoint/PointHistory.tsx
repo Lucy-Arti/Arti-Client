@@ -1,21 +1,32 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from './PointHeader';
 import styled from 'styled-components';
-
-const sampleData = {
-	point: 390,
-	history: [
-		{ mission: '댓글 달기', date: '23.10.24', point: 20 },
-		{ mission: '할인쿠폰 구매', date: '23.10.24', point: -3000 },
-		{ mission: '투표하기', date: '23.10.24', point: 100 },
-		{ mission: '투표하기', date: '23.10.23', point: 100 },
-		{ mission: '굿즈 구매', date: '23.10.22', point: -500 },
-		{ mission: '투표하기', date: '23.10.21', point: 100 },
-	],
-};
+import { getPointHistory } from '@/apis/getPoint';
+import { PointHistoryType } from '@/types/request';
 
 const PointHistory = () => {
+	const [historyList, setHistoryList] = useState<PointHistoryType>();
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const getHistoryList = async () => {
+				try {
+					const response = await getPointHistory();
+					if (response && response.data) {
+						setHistoryList(response.data);
+					} else {
+						console.log('Failed to fetch history list');
+					}
+				} catch (error) {
+					console.error('Error fetching history list:', error);
+				}
+			};
+			getHistoryList();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
+
 	return (
 		<>
 			<PointHeader text="포인트 내역" backTo="/mypage/point" />
@@ -25,32 +36,33 @@ const PointHistory = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">{sampleData.point}P</div>
+							<div className="text">{historyList?.savedPoint}P</div>
 						</UserPoint>
 					</Text2>
 				</PointProfileSection>
 				<Section>
-					{sampleData.history.map((historyItem) => (
-						<>
-							<Mission>
-								<Group>
-									{historyItem.point > 0 ? <img src="/img/plus-circle.png" /> : <img src="/img/minus-circle.png" />}
-									<Text>
-										<div className="mission-name">{historyItem.mission}</div>
-										<div className="mission-date">{historyItem.date}</div>
-									</Text>
-								</Group>
-								<Group>
-									{historyItem.point > 0 ? (
-										<div className="point-text plus">+{historyItem.point}P</div>
-									) : (
-										<div className="point-text">{historyItem.point}P</div>
-									)}
-								</Group>
-							</Mission>
-							<Line />
-						</>
-					))}
+					{/* 역순으로 배치 */}
+					{historyList?.pointHistory.slice().reverse().map((historyItem) => (
+							<>
+								<Mission>
+									<Group>
+										{historyItem.score > 0 ? <img src="/img/plus-circle.png" /> : <img src="/img/minus-circle.png" />}
+										<Text>
+											<div className="mission-name">{historyItem.title}</div>
+											<div className="mission-date">{historyItem.created_at.slice(2, 4) + '.' +historyItem.created_at.slice(5, 7) + '.' + historyItem.created_at.slice(8, 10)}</div>
+										</Text>
+									</Group>
+									<Group>
+										{historyItem.score > 0 ? (
+											<div className="point-text plus">+{historyItem.score}P</div>
+										) : (
+											<div className="point-text">{historyItem.score}P</div>
+										)}
+									</Group>
+								</Mission>
+								<Line />
+							</>
+						))}
 				</Section>
 			</MainWrap>
 		</>
@@ -142,8 +154,8 @@ const Mission = styled.div`
 const Text = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding-top: 1.5rem;
 	padding-left: 1.5rem;
+	padding-top: 1.5rem;
 	.mission-name {
 		color: #4d4d4d;
 		font-size: 2.25rem;
