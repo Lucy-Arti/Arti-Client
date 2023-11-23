@@ -18,31 +18,26 @@ export const getIsVotePossible = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-
-		if (response.status === 200) {
-			console.log('투표 가능');
-		}
-		return '투표 가능';
+		return response;
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			const axiosError = error as AxiosError;
 			if (axiosError.response) {
 				const statusCode = axiosError.response.status;
-				if (statusCode === 400) {
-					console.log('투표 완료', statusCode, axiosError.response.data);
-					return '투표 완료';
-				} else {
-					console.log('로그인 필요', statusCode, axiosError.response.data);
-					return '로그인 필요';
-				}
+				const errorMessage =
+					statusCode === 500
+						? '로그인 필요'
+						: statusCode === 400
+						  ? '이미 투표완료 혹은 body 없음'
+						  : `서버 응답 에러 - 상태 코드: ${statusCode}`;
+				console.error(errorMessage, axiosError.response.data);
 			} else {
 				console.error('네트워크 에러', error.message);
-				return 'none';
 			}
 		} else {
 			console.error('알 수 없는 에러', error);
-			return 'none';
 		}
+		throw error;
 	}
 };
 

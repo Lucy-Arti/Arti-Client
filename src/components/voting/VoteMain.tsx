@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react';
 import { getIsVotePossible } from '../../apis/vote';
 
 const VoteMain = () => {
-	const [possible, setIsPossible] = useState('defalut');
+	const [possible, setIsPossible] = useState(false);
 
 	useEffect(() => {
 		if (localStorage.getItem('access')) {
 			const checkPossible = async () => {
 				const result = await getIsVotePossible();
-				setIsPossible(result);
+				setIsPossible(result.data);
 			};
 			checkPossible();
 		}
@@ -66,17 +66,11 @@ const VoteMain = () => {
 	`;
 	const navigate = useNavigate();
 	const handleClick = (page: string) => {
-		if (possible === 'defalut') {
-			window.location.reload();
-		} else if (possible === '투표 가능') {
+		if (possible) {
 			console.log('투표가 가능해요');
 			navigate(page);
-		} else if (possible === '투표 완료') {
-			alert('1일 1회 투표가 가능해요. 내일 다시 투표해주세요!');
-		} else if (possible === '로그인 필요') {
-			alert('로그인을 먼저 해주세요!');
 		} else {
-			alert('알 수 없는 에러 발생');
+			alert('1일 1회 투표가 가능해요. 내일 다시 투표해주세요!');
 		}
 	};
 
