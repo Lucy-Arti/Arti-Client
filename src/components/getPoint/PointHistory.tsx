@@ -36,16 +36,13 @@ const PointHistory = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">{historyList?.savedpoint}P</div>
+							<div className="text">{historyList?.savedPoint}P</div>
 						</UserPoint>
 					</Text2>
 				</PointProfileSection>
 				<Section>
 					{/* 역순으로 배치 */}
-					{historyList?.['point history']
-						.slice()
-						.reverse()
-						.map((historyItem) => (
+					{historyList?.pointHistory.slice().reverse().map((historyItem) => (
 							<>
 								<Mission>
 									<Group>

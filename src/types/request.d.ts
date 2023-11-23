@@ -57,8 +57,8 @@ export interface PointPossibleType {
 	vote: boolean;
 }
 export interface PointHistoryType {
-	['point history'] : any[],
-	savedpoint: number,
+	pointHistory : any[],
+	savedPoint: number,
 }
 export interface InviteResultType {
 	invited: number,

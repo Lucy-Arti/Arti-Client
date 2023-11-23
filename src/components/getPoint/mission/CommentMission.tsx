@@ -16,7 +16,7 @@ const CommentMission = () => {
 					const response = await checkCommentReward();
 					// 당일 출석 모달
 					if (response) {
-						setcommentReward(response.data.reward);
+						setcommentReward(response.data);
 					} else {
 						console.log('댓글 리워드 get 실패');
 					}
