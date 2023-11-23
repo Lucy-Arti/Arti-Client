@@ -49,10 +49,7 @@ const FreindInviteMission = () => {
 						<div className="text">나의 초대 코드</div>
 						<div className="invite-code">{inviteCode}</div>
 					</CodeBox>
-					<div className="row">
 						<Btn onClick={() => handleCopyClipBoard(`${inviteCode}`)}>코드복사</Btn>
-						<Btn>공유하기</Btn>
-					</div>
 				</ContentSection>
 				<Line />
 				<ContentSection>
@@ -236,7 +233,7 @@ const Line = styled.div`
 `;
 
 const Btn = styled.div`
-	width: 48%;
+	width: 100%;
 	border-radius: 5px;
 	background: #ff9d43;
 	text-align: center;
