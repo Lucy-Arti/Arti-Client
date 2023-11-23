@@ -8,12 +8,12 @@ export const USER_INFO_COLUMNS = [
 		Header: '닉네임',
 	},
 	{
-		accessor: 'email',
-		Header: '이메일',
-	},
-	{
 		accessor: 'phone',
 		Header: '전화번호',
+	},
+	{
+		accessor: 'email',
+		Header: '이메일',
 	},
 	{
 		accessor: 'birth',
@@ -21,7 +21,7 @@ export const USER_INFO_COLUMNS = [
 	},
 	{
 		accessor: 'joindate',
-		Header: '가입날짜',
+		Header: '가입일시',
 	},
 	{
 		accessor: 'votecount',
@@ -105,7 +105,118 @@ export const DESIGNER_INFO_COLUMNS = [
 		Header: '소개글',
 	},
 	{
+		accessor: 'about',
+		Header: '인스타그램 링크',
+	},
+	{
+		accessor: 'about',
+		Header: '프로필 사진',
+	},
+	{
 		accessor: 'product',
-		Header: '옷',
+		Header: '등록된 옷',
+	},
+	{
+		accessor: 'product',
+		Header: '등록된 일러스트',
+	},
+];
+
+export const COMMENT_INFO_COLUMNS = [
+	{
+		accessor: 'name',
+		Header: '작성자 member_id',
+	},
+	{
+		accessor: 'about',
+		Header: '작성자 닉네임',
+	},
+	{
+		accessor: 'about',
+		Header: '댓글 내용',
+	},
+	{
+		accessor: 'about',
+		Header: '작성 시간',
+	},
+	{
+		accessor: 'product',
+		Header: '삭제 시간',
+	},
+];
+
+export const POINT_INFO_COLUMNS = [
+	{
+		accessor: 'name',
+		Header: '이름',
+	},
+	{
+		accessor: 'about',
+		Header: '전체 포인트',
+	},
+	{
+		accessor: 'about',
+		Header: '누적 획득 포인트',
+	},
+	{
+		accessor: 'about',
+		Header: '누적 사용 포인트',
+	},
+	{
+		accessor: 'product',
+		Header: '포인트 내역',
+	},
+];
+
+export const REWARD_INFO_COLUMNS = [
+	{
+		accessor: 'name',
+		Header: 'member_id',
+	},
+	{
+		accessor: 'name',
+		Header: '이름',
+	},
+	{
+		accessor: 'about',
+		Header: '구매한 품목',
+	},
+	{
+		accessor: 'about',
+		Header: '구매한 날짜',
+	},
+	{
+		accessor: 'about',
+		Header: '휴대폰 번호',
+	},
+	{
+		accessor: 'product',
+		Header: '주소',
+	},
+	{
+		accessor: 'product',
+		Header: '현재 상태',
+	},
+];
+
+export const IGFOLLOW_INFO_COLUMNS = [
+	{
+		accessor: 'name',
+		Header: 'member_id',
+	},
+	{
+		accessor: 'name',
+		Header: '인스타그램 아이디',
+	},
+];
+
+export const IGSTORY_INFO_COLUMNS = [
+	{
+		accessor: 'name',
+		Header: 'member_id',
+	},
+	{
+		accessor: 'name',
+		Header: '캡쳐 화면',
 	},
 ];
