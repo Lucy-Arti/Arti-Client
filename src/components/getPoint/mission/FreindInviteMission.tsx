@@ -1,9 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from '../PointHeader';
 import styled from 'styled-components';
 import Image from 'next/image';
+import { getInviteFreindResult, getMyInviteCode } from '@/apis/getPoint';
+import { InviteResultType } from '@/types/request';
+import useCopyClipBoard from '@/hooks/useCopyClipBoard';
 
 const FreindInviteMission = () => {
+	const [inviteCode, setinviteCode] = useState<string>();
+	const [inviteResult, setinviteResult] = useState<InviteResultType>();
+	const [isCopy, onCopy] = useCopyClipBoard();
+
+	const handleCopyClipBoard = async (text: string) => {
+		await onCopy(text);
+	};
+
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const getInvite = async () => {
+				try {
+					const codeResponse = await getMyInviteCode();
+					const resultResponse = await getInviteFreindResult();
+					if (codeResponse && codeResponse.data) {
+						setinviteCode(codeResponse.data);
+					}
+					if (resultResponse && resultResponse.data) {
+						setinviteResult(resultResponse.data);
+					} else {
+						console.log('Failed to fetch invite data');
+					}
+				} catch (error) {
+					console.error('Error fetching invite data:', error);
+				}
+			};
+			getInvite();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
+
 	return (
 		<MainWrapper>
 			<Top>
@@ -12,27 +47,22 @@ const FreindInviteMission = () => {
 					<StyledImage src="/img/freindMissionBanner.png" alt="친구초대 미션 배너" fill priority />
 					<CodeBox>
 						<div className="text">나의 초대 코드</div>
-						<div className="invite-code">YGSHG3423J</div>
+						<div className="invite-code">{inviteCode}</div>
 					</CodeBox>
-					<div className="row">
-						<Btn>코드복사</Btn>
-						<Btn>공유하기</Btn>
-					</div>
+						<Btn onClick={() => handleCopyClipBoard(`${inviteCode}`)}>코드복사</Btn>
 				</ContentSection>
 				<Line />
 				<ContentSection>
 					<div className="result-title">친구초대 현황</div>
 					<ResultBox>
 						<Content>
-					
-								<div className="title">초대한 친구</div>
-								<div className="orange">3명</div>
-							
+							<div className="title">초대한 친구</div>
+							<div className="orange">{inviteResult?.invited}명</div>
 						</Content>
 						<div className="line" />
 						<Content>
 							<div className="title">총 누적포인트</div>
-							<div className="orange">3,000P</div>
+							<div className="orange">{inviteResult?.accumulated}P</div>
 						</Content>
 					</ResultBox>
 					<div className="subtitle">참여 방법</div>
@@ -203,7 +233,7 @@ const Line = styled.div`
 `;
 
 const Btn = styled.div`
-	width: 48%;
+	width: 100%;
 	border-radius: 5px;
 	background: #ff9d43;
 	text-align: center;
@@ -246,7 +276,7 @@ const Circle = styled.div`
 `;
 
 const VerticalLine = styled.div`
-  width: 1px;
-  height: 100%;
-  background-color: #fa9a41;
+	width: 1px;
+	height: 100%;
+	background-color: #fa9a41;
 `;
