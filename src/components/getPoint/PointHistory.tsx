@@ -14,7 +14,6 @@ const PointHistory = () => {
 					const response = await getPointHistory();
 					if (response && response.data) {
 						setHistoryList(response.data);
-						console.log(response.data.pointhistory);
 					} else {
 						console.log('Failed to fetch history list');
 					}
@@ -43,27 +42,30 @@ const PointHistory = () => {
 				</PointProfileSection>
 				<Section>
 					{/* 역순으로 배치 */}
-					{historyList?.['point history'].slice().reverse().map((historyItem) => (
-						<>
-							<Mission >
-								<Group>
-									{historyItem.score > 0 ? <img src="/img/plus-circle.png" /> : <img src="/img/minus-circle.png" />}
-									<Text>
-										<div className="mission-name">{historyItem.title}</div>
-										<div className="mission-date">{historyItem.date}</div>
-									</Text>
-								</Group>
-								<Group>
-									{historyItem.score > 0 ? (
-										<div className="point-text plus">+{historyItem.score}P</div>
-									) : (
-										<div className="point-text">{historyItem.score}P</div>
-									)}
-								</Group>
-							</Mission>
-							<Line/>
-						</>
-					))}
+					{historyList?.['point history']
+						.slice()
+						.reverse()
+						.map((historyItem) => (
+							<>
+								<Mission>
+									<Group>
+										{historyItem.score > 0 ? <img src="/img/plus-circle.png" /> : <img src="/img/minus-circle.png" />}
+										<Text>
+											<div className="mission-name">{historyItem.title}</div>
+											<div className="mission-date">{historyItem.created_at.slice(2, 4) + '.' +historyItem.created_at.slice(5, 7) + '.' + historyItem.created_at.slice(8, 10)}</div>
+										</Text>
+									</Group>
+									<Group>
+										{historyItem.score > 0 ? (
+											<div className="point-text plus">+{historyItem.score}P</div>
+										) : (
+											<div className="point-text">{historyItem.score}P</div>
+										)}
+									</Group>
+								</Mission>
+								<Line />
+							</>
+						))}
 				</Section>
 			</MainWrap>
 		</>
@@ -156,6 +158,7 @@ const Text = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding-left: 1.5rem;
+	padding-top: 1.5rem;
 	.mission-name {
 		color: #4d4d4d;
 		font-size: 2.25rem;
