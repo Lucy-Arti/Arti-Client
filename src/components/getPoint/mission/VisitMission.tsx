@@ -20,7 +20,7 @@ const VisitMission = () => {
 
 	useEffect(() => {
 		if (localStorage.getItem('access')) {
-			const chekTodayAttendance = async () => {
+			const checkTodayAttendance = async () => {
 				try {
 					const todayAttendanceResponse = await checkAttendance();
 					const monthResponse = await checkMonthAttendance();
@@ -50,7 +50,7 @@ const VisitMission = () => {
 					console.error('Error fetching attendance data:', error);
 				}
 			};
-			chekTodayAttendance();
+			checkTodayAttendance();
 		} else {
 			console.log('Not logged in user');
 		}

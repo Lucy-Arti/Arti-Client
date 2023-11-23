@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from '../PointHeader';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { checkCommentReward } from '@/apis/getPoint';
 
 const CommentMission = () => {
 	const router = useRouter();
+	const [commentReward, setcommentReward] = useState();
+
+	useEffect(() => {
+		if (localStorage.getItem('access')) {
+			const checkReward = async () => {
+				try {
+					const response = await checkCommentReward();
+					// 당일 출석 모달
+					if (response) {
+						setcommentReward(response.data.reward);
+					} else {
+						console.log('댓글 리워드 get 실패');
+					}
+				} catch (error) {
+					console.error('Error fetching reward data:', error);
+				}
+			};
+			checkReward();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
+
 	return (
 		<MainWrapper>
 			<Top>
@@ -13,7 +37,7 @@ const CommentMission = () => {
 				<ContentSection>
 					<StyledImage src="/img/commentBanner.png" alt="댓글 미션 배너" fill priority />
 					<Span>
-						오늘 <span className="bold">250P</span> 더 획득할 수 있어요
+						오늘 <span className="bold">{commentReward}P</span> 더 획득할 수 있어요
 					</Span>
 					<div className="text1">일러스트/작품에 대한 댓글 남기기</div>
 					<RouteBtn onClick={()=>{router.push('/productlist')}}>댓글 남기고 자동으로 적립하기</RouteBtn>
