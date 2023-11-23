@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { isLoginAtom } from '@/app/recoilContextProvider';
 
 const FollowMission = () => {
-	const [missionPossible, setMissionPossible] = useState(false);
+	const [missionPossible, setMissionPossible] = useState(true);
 	const [userAccount, setUserAccount] = useState('');
 	const isLogged = useRecoilValue(isLoginAtom);
 

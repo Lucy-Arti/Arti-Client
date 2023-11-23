@@ -1,25 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from '../PointHeader';
 import styled from 'styled-components';
 import Image from 'next/image';
+import { getPossibleMissionList, postScreenshot } from '@/apis/getPoint';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/app/recoilContextProvider';
 
 const StoryMission = () => {
-	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [userScreenShot, setUserScreenShot] = useState('');
-	const handleSubmit = () => {
+	const [userScreenShot, setUserScreenShot] = useState<any>();
+	const [missionPossible, setMissionPossible] = useState(true);
+	const isLogged = useRecoilValue(isLoginAtom);
+
+	const handleSubmit = async (event: any) => {
+		event.preventDefault();
+		
 		if (!userScreenShot) {
-			alert('스크린샷을 업로드 해주세요!');
-			return;
+		  alert('스크린샷을 업로드 해주세요!');
+		  return;
 		}
-		setIsSubmitted(true);
-	};
+	  
+		const userConfirmed = window.confirm('스크린샷을 제출하시겠습니까?');
+		if (userConfirmed) {
+		  const formData = new FormData();
+		  formData.append('image', userScreenShot);
+	  
+		  try {
+			await postScreenshot(formData);
+			setMissionPossible(false);
+		  } catch (error) {
+			console.error('Error posting screenshot:', error);
+		  }
+		}
+	  };
+
+	useEffect(() => {
+		if (localStorage.getItem('access') && isLogged) {
+			const getIsMissionPossible = async () => {
+				try {
+					const response = await getPossibleMissionList();
+					if (response && response.data) {
+						setMissionPossible(response.data.mission.story);
+					} else {
+						console.log('Failed to fetch mission data');
+					}
+				} catch (error) {
+					console.error('Error fetching mission data:', error);
+				}
+			};
+			getIsMissionPossible();
+		} else {
+			console.log('Not logged in user');
+		}
+	}, []);
 
 	return (
 		<MainWrapper>
 			<Top>
 				<PointHeader text="인스타그램 스토리 올리기" backTo="/mypage/point" />
-
-				{isSubmitted ? (
+				{!missionPossible ? (
 					<ContentSection>
 						<StyledImage src="/img/storyBanner.png" alt="스토리 올리기 미션 배너" fill priority />
 						<Span>
@@ -56,14 +94,15 @@ const StoryMission = () => {
 							<div className="info">포인트 적립을 위해 캡처 화면을 업로드 해주세요!</div>
 						</Info>
 						<CustomFileInput>
-							<Input type="file" name="screenShot" accept="image/*" onChange={(e) => setUserScreenShot(e.target.value)} />
-							<span>{userScreenShot ? userScreenShot : '사진 선택하기'}</span>
+							<Input
+								type="file"
+								name="screenShot"
+								accept="image/*"
+								onChange={(e) => setUserScreenShot(e.target.files ? e.target.files[0] : null)}
+							/>
+							<span>{userScreenShot ? userScreenShot.name : '사진 선택하기'}</span>
 						</CustomFileInput>
-						<SubmitBtn
-							onClick={() => {
-								handleSubmit();
-							}}
-						>
+						<SubmitBtn type="submit" onClick={handleSubmit}>
 							캡처 화면 업로드하고 인증하기
 						</SubmitBtn>
 					</ContentSection>
@@ -97,7 +136,7 @@ const Top = styled.div`
 	align-items: center;
 `;
 
-const ContentSection = styled.div`
+const ContentSection = styled.form`
 	width: 90%;
 	display: flex;
 	flex-direction: column;
@@ -110,7 +149,7 @@ const ContentSection = styled.div`
 		font-weight: 600;
 		padding-bottom: 0.5rem;
 	}
-	.margintop{
+	.margintop {
 		margin-top: 4rem;
 	}
 	margin-bottom: 5.3rem;
@@ -186,7 +225,11 @@ const Circle = styled.div`
 	border-radius: 50%;
 `;
 
-const SubmitBtn = styled.div`
+const SubmitBtn = styled.button`
+	border: none;
+	outline: none;
+	text-decoration: none;
+	-webkit-appearance: none;
 	margin-top: 1.2rem;
 	margin-bottom: 1.4rem;
 	display: flex;

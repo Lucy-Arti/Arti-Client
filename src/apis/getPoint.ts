@@ -146,3 +146,21 @@ export const postIGAccount = async (userInput: string) => {
 		return false;
 	}
 };
+
+// 스토리 캡쳐 올리기
+export const postScreenshot = async (formData : FormData) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+	  const response = await axios.post(`${baseURL}api/v2/point/capture`, formData, {
+		headers: {
+		  Authorization: `Bearer ${accessToken}`,
+		  "Content-Type": "multipart/form-data",
+		},
+	  });
+	  console.log("스크린샷 업로드 성공:", response.data);
+	  return response;
+	} catch (error) {
+	  console.error("Error sending POST request:", error);
+	  throw error;
+	}
+  };
