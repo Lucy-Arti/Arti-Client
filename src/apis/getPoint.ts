@@ -11,7 +11,7 @@ export const getPossibleMissionList = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -28,7 +28,7 @@ export const getPointHistory = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -45,7 +45,7 @@ export const getMyInviteCode = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -62,7 +62,7 @@ export const getInviteFreindResult = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -82,7 +82,7 @@ export const checkAttendance = async () => {
 				headers: {
 					Authorization: `Bearer ${accessToken}`,
 				},
-			}
+			},
 		);
 		console.log('당일출석: ', response);
 		return response;
@@ -101,7 +101,7 @@ export const checkMonthAttendance = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log('이번 달 출석: ',response);
+		console.log('이번 달 출석: ', response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -118,7 +118,28 @@ export const checkConsecutiveAttendance = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log('연속 출석: ',response);
+		console.log('연속 출석: ', response);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+
+// 인스타 아이디 입력
+export const postIGAccount = async (userInput: string) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.post(
+			`${baseURL}api/v2/point/follow`,
+			{ 'instagram': userInput },
+			{
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
+			},
+		);
+		console.log('인스타그램 아이디 전송 완료', response.data);
 		return response;
 	} catch (error) {
 		console.log(error);

@@ -1,22 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from '../PointHeader';
 import styled from 'styled-components';
 import Image from 'next/image';
+import { getPossibleMissionList, postIGAccount } from '@/apis/getPoint';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/app/recoilContextProvider';
 
 const FollowMission = () => {
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [missionPossible, setMissionPossible] = useState(false);
 	const [userAccount, setUserAccount] = useState('');
-	const handleSubmit = () => {
-		if (!userAccount) {
-			alert('계정을 입력해주세요.');
-			return;
+	const isLogged = useRecoilValue(isLoginAtom);
+
+	useEffect(() => {
+		if (localStorage.getItem('access') && isLogged) {
+			const getIsMissionPossible = async () => {
+				try {
+					const response = await getPossibleMissionList();
+					if (response && response.data) {
+						setMissionPossible(response.data.mission.follow);
+					} else {
+						console.log('Failed to fetch mission data');
+					}
+				} catch (error) {
+					console.error('Error fetching mission data:', error);
+				}
+			};
+			getIsMissionPossible();
+		} else {
+			console.log('Not logged in user');
 		}
+	}, []);
 
-		const userConfirmed = typeof window !== 'undefined' ? window.confirm(`계정 확인 : ${userAccount}`) : false;
+	const handleSubmit = () => {
+		if(!localStorage.getItem('access')){
+			console.log('로그인되지 않은 사용자')
+			return;
+		} else{
+			if (!userAccount) {
+				alert('계정을 입력해주세요.');
+				return;
+			} else{
+				const userConfirmed = typeof window !== 'undefined' ? window.confirm(`계정 확인 : ${userAccount}`) : false;
 
-		if (userConfirmed) {
-			setIsSubmitted(true);
-			// 새로고침하면 useEffect 발동하면서 팔로우 이벤트 신청 여부 검사하고 다른 컴포넌트 띄워주기
+				if (userConfirmed) {
+					const postInput =async(userAccount:string)=>{
+						const postResponse = await postIGAccount(userAccount)
+						if(postResponse){
+							setMissionPossible(true);
+						}
+					}
+					postInput(userAccount);
+				}
+			}
 		}
 	};
 
@@ -24,8 +59,7 @@ const FollowMission = () => {
 		<MainWrapper>
 			<Top>
 				<PointHeader text="인스타그램 팔로우하기" backTo="/mypage/point" />
-
-				{isSubmitted ? (
+				{!missionPossible ? (
 					<ContentSection>
 						<StyledImage src="/img/followBanner.png" alt="팔로우 미션 배너" fill priority />
 						<Span>
@@ -53,10 +87,6 @@ const FollowMission = () => {
 						</div>
 						<div className="text1">@arti_fashion_design 인스타그램 팔로우하기</div>
 						<RouteBtn
-						// onClick={() => {
-
-						// 	router.push('https://instagram.com/arti_fashion_design?igshid=NGVhN2U2NjQ0Yg==');
-						// }}
 						>
 							<a
 								href="https://instagram.com/arti_fashion_design?igshid=NGVhN2U2NjQ0Yg=="
@@ -76,7 +106,7 @@ const FollowMission = () => {
 							name="user"
 							placeholder="ex) arti_fashion_design"
 							value={userAccount}
-							onChange={(e) => setUserAccount(e.target.value)} // 수정: 입력 값 업데이트
+							onChange={(e) => setUserAccount(e.target.value)}
 						/>
 						<SubmitBtn
 							onClick={() => {
