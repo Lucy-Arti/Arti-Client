@@ -42,3 +42,14 @@ export type ProductType = {
 	designerName: string|null,
 	score: number|null
 }
+
+// admin 페이지용 type
+export interface ClothesInfoData {
+	type: string;
+	clothesName:string;
+	designerName:string;
+	commentCount:number;
+	likeCount:number;
+	score: number;
+	purchaseLink: string;
+}

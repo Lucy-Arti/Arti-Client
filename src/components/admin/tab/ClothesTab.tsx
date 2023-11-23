@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { Column } from 'react-table';
 import styled from 'styled-components';
+import { CLOTHES_INFO_COLUMNS } from '../common/columns';
+import { ClothesInfoData } from '@/types/request';
+import { clothesMockData } from '../common/MOCK_DATA';
+import PaginationTable from '../common/PaginationTable';
 
 const ClothesTab = () => {
+	const columns: Column[] = useMemo(() => CLOTHES_INFO_COLUMNS, []);
+	const data: ClothesInfoData[] = useMemo(() => clothesMockData, []);
 	return (
 		<Section>
 			<Top>
 				<div className="title">옷</div>
 				<Btn>+등록하기</Btn>
 			</Top>
-      
+			<PaginationTable columns={columns} data={data} />
 		</Section>
 	);
 };

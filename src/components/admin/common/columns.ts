@@ -66,7 +66,7 @@ export const VOTE_INFO_COLUMNS = [
 
 export const CLOTHES_INFO_COLUMNS = [
 	{
-		accessor: 'productname',
+		accessor: 'type',
 		Header: '구분',
 	},
 	{
@@ -78,7 +78,7 @@ export const CLOTHES_INFO_COLUMNS = [
 		Header: '디자이너',
 	},
 	{
-		accessor: 'designerName',
+		accessor: 'commentCount',
 		Header: '댓글 개수',
 	},
 	{
@@ -90,7 +90,7 @@ export const CLOTHES_INFO_COLUMNS = [
 		Header: '투표 Score',
 	},
 	{
-		accessor: 'finalround',
+		accessor: 'purchaseLink',
 		Header: '구매 링크',
 	},
 ];

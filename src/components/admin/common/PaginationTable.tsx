@@ -24,8 +24,6 @@ const PaginationTable = ({ columns, data }: { columns: any; data: any }) => {
 		setGlobalFilter,
 	} = useTable(
 		{
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
 			columns,
 			data,
 		},
