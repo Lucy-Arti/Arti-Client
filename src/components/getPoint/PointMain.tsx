@@ -13,6 +13,17 @@ const PointMain = () => {
 	const router = useRouter();
 	const isLogged = useRecoilValue(isLoginAtom);
 	const [missionList, setMissionList] = useState<PointPossibleData>();
+	const [currentDate, setCurrentDate] = useState(new Date());
+
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setCurrentDate(new Date());
+		}, 1000); // 1초마다 현재 날짜 갱신
+
+		return () => clearInterval(intervalId); // 컴포넌트가 언마운트되면 interval 제거
+	}, []); // 컴포넌트 마운트 시 한 번만 실행
+
+	const isMonday = currentDate.getDay() === 1;
 
 	useEffect(() => {
 		if (localStorage.getItem('access') && isLogged) {
@@ -131,8 +142,15 @@ const PointMain = () => {
 							<div className="possible-circle" />
 							<div className="mission-name">Arti 태그 후 스토리 업로드</div>
 						</Group>
-						{missionList?.mission.story ? (
+						{/* 미션 안했고 월요일 아님 */}
+						{missionList?.mission.story && !isMonday ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=story`)}>
+								<div className="point-text">500P</div>
+								<StyledFiChevronRight2 size="26px" />
+							</Group>
+						// 미션 안했고 월요일임
+						) : missionList?.mission.story && isMonday ? (
+							<Group onClick={() => alert('월요일에만 가능한 미션이에요!')}>
 								<div className="point-text">500P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
@@ -146,19 +164,15 @@ const PointMain = () => {
 					<MissionTitle>
 						<div>초대 미션</div>
 					</MissionTitle>
-					<Mission $isPossible={missionList?.mission.friend || false}>
+					<Mission $isPossible={true}>
 						<Group>
 							<div className="possible-circle" />
 							<div className="mission-name">친구 초대</div>
 						</Group>
-						{missionList?.mission.friend ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=freind`)}>
 								<div className="point-text">1500P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
-						) : (
-							<img src="/img/check-circle.png" />
-						)}
 					</Mission>
 					<Line />
 					<Mission $isPossible={true}>
