@@ -1,9 +1,13 @@
-// import React from 'react';
+import { useState } from 'react';
 import '@styles/commonStyle.css';
 import { kakaoURL } from './loginInfo';
 import styled from 'styled-components';
 
 const Login = ({ where }: { where: string }) => {
+	const [open, setOpen] = useState(false);
+	const click = () => {
+		setOpen(true);
+	};
 	const handleLogin = () => {
 		if (typeof window !== 'undefined') {
 			window.location.href = kakaoURL;
