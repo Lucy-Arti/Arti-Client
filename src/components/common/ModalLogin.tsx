@@ -59,7 +59,7 @@ const ModalStyle = styled.div`
 	font-weight: bold;
 	background-color: #ffffff;
 	border-radius: 5px;
-	z-index: 1;
+	z-index: 3;
 	@media (min-width: 576px) {
 		width: 60%;
 	}

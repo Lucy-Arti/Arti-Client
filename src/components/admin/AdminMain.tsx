@@ -54,23 +54,25 @@ const AdminMain = () => {
 	};
 	return (
 		<>
-			<Header>
-				<BtnWrapper>
-					<FaHome
-						cursor="pointer"
-						size="26px"
-						onClick={() => {
-							router.push('/');
-						}}
-					/>
-					{adminLabels.map((tabs, index) => (
-						<Btn key={index} onClick={handleClick(tabs.type)}>
-							{tabs.label}
-						</Btn>
-					))}
-				</BtnWrapper>
-			</Header>
-			<Section>{renderComponent()}</Section>
+			<Section>
+				<Header>
+					<BtnWrapper>
+						<FaHome
+							cursor="pointer"
+							size="26px"
+							onClick={() => {
+								router.push('/');
+							}}
+						/>
+						{adminLabels.map((tabs, index) => (
+							<Btn key={index} onClick={handleClick(tabs.type)}>
+								{tabs.label}
+							</Btn>
+						))}
+					</BtnWrapper>
+				</Header>
+				{renderComponent()}
+			</Section>
 		</>
 	);
 };
@@ -84,7 +86,7 @@ const Section = styled.div`
 	align-items: center;
 	justify-content: start;
 	width: 100%;
-	top: 90px;
+	top: 0;
 	right: 50%;
 	bottom: 0;
 	left: 50%;
@@ -94,22 +96,21 @@ const Section = styled.div`
 	background-color: #f4f4f4;
 	z-index: 1;
 	overflow: scroll;
-	padding-top: 7rem;
+	-webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 `;
 
 const Header = styled.div`
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	right: 0;
-	left: 0;
 	width: 100%;
-	height: 90px;
+	height: 9rem;
 	background-color: white;
-	font-size: 2.5rem;
+	font-size: 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 3rem;
 `;
 
 const BtnWrapper = styled.div`
@@ -121,11 +122,11 @@ const BtnWrapper = styled.div`
 
 const Btn = styled.div`
 	margin-left: 3rem;
-    color: var(--Font1, #333);
-font-family: Pretendard;
-font-size: 2.5rem;
-font-style: normal;
-font-weight: 600;
+	color: var(--Font1, #333);
+	font-family: Pretendard;
+	font-size: 2.5rem;
+	font-style: normal;
+	font-weight: 600;
 	cursor: pointer;
 	:hover {
 		color: green;

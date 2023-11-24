@@ -15,6 +15,10 @@ line-height: 2.5rem;
 table td, table th {
     border: 1px solid #ddd;
     padding: 8px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* table tr:nth-child(even){
     background-color: #f2f2f2;
