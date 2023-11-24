@@ -72,8 +72,8 @@ const ClotheUpload = ({ handleModalBtn, designerData, handleRefresh }: any) => {
 
 	return (
 		<ModalSectionWrapper handleModalBtn={handleModalBtn} totalHeight={totalHeight}>
+			<CloseButton onClick={handleModalBtn}><div className='close'>X</div></CloseButton>
 			<Form>
-				<CloseButton onClick={handleModalBtn}>X</CloseButton>
 				<Row>
 					<Label htmlFor="type">구분</Label>
 					<Select id="type" name="type" value={type} onChange={(e) => setType(e.target.value)}>
@@ -143,7 +143,7 @@ const ClotheUpload = ({ handleModalBtn, designerData, handleRefresh }: any) => {
 					/>
 				</Row>
 
-				<Button type="button" onClick={handleSubmit}>Submit</Button>
+				<Button type="button" onClick={handleSubmit}>등록하기</Button>
 			</Form>
 		</ModalSectionWrapper>
 	);
@@ -168,15 +168,18 @@ const ModalSection = styled.div<{ height: number }>`
 	z-index: 3;
 `;
 
-const CloseButton = styled.button`
-	width: 90%;
+const CloseButton = styled.div`
+	width: 45%;
 	display: flex;
 	justify-content: flex-end;
 	font-size: 2.7rem;
-	color: #b5b5bc;
-	background-color: #fdfdfd;
 	border: none;
-	cursor: pointer;
+	position : relative;
+	margin-bottom: -3%;
+	.close{
+		width: 10%;
+		cursor: pointer;
+	}
 `;
 
 const Form = styled.form`

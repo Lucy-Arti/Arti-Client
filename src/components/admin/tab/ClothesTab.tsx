@@ -7,21 +7,32 @@ import PaginationTable from '../common/PaginationTable';
 import { GetAllProductLists } from '@/apis/list';
 import ClotheUpload from '../modal/ClotheUpload';
 import { getAllDesignerList } from '@/apis/admin';
-import { useRouter } from 'next/navigation';
+import ClotheModify from '../modal/ClotheModify';
 
 const ClothesTab = () => {
-	const router = useRouter();
 	const columns: Column[] = useMemo(() => CLOTHES_INFO_COLUMNS, []);
 	const [productData, setProductData] = useState<ClothesInfoData[]>();
 	const [designerData, setDesignerData] = useState<ClothesInfoData[]>();
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedId, setSelectedId] = useState<number>();
+	const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+	const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
 	const [reload, setReload] = useState(false);
 
-	const handleModalBtn = () => {
-		if (isModalOpen) {
-			setIsModalOpen(false);
+	const handleUpdateModalBtn = () => {
+		if (isUpdateModalOpen) {
+			setIsUpdateModalOpen(false);
+			setSelectedId(undefined);
 		} else {
-			setIsModalOpen(true);
+			setIsUpdateModalOpen(true);
+		}
+	};
+
+	const handleModifyModalBtn = () => {
+		if (isModifyModalOpen) {
+			setSelectedId(undefined);
+			setIsModifyModalOpen(false);
+		} else {
+			setIsModifyModalOpen(true);
 		}
 	};
 
@@ -33,13 +44,21 @@ const ClothesTab = () => {
 		}
 	};
 
+	const handleSetSelected = (data: ClothesInfoData) => {
+		const id = data.clothesId
+		setSelectedId(id);
+		console.log(id);
+		handleModifyModalBtn();
+	};
+
 	useEffect(() => {
 		const getData = async () => {
 			try {
 				const productResponse = await GetAllProductLists();
 				const designerResponse = await getAllDesignerList();
 				if (productResponse && productResponse.data) {
-					setProductData(productResponse.data);
+					// 데이터를 최신순으로 저장
+					setProductData(productResponse.data.reverse());
 				} else {
 					console.log('Failed to fetch data');
 				}
@@ -57,12 +76,35 @@ const ClothesTab = () => {
 
 	return (
 		<Section>
-			{isModalOpen ? <ClotheUpload handleModalBtn={handleModalBtn} handleRefresh={handleRefresh} designerData={designerData} /> : <></>}
+			{isUpdateModalOpen ? (
+				<ClotheUpload handleModalBtn={handleUpdateModalBtn} handleRefresh={handleRefresh} designerData={designerData} />
+			) : (
+				<></>
+			)}
+			{selectedId ? (
+				<ClotheModify
+					handleModalBtn={handleModifyModalBtn}
+					handleRefresh={handleRefresh}
+					designerData={designerData}
+					dataId={selectedId}
+				/>
+			) : (
+				<></>
+			)}
 			<Top>
 				<div className="title">옷</div>
-				<Btn onClick={handleModalBtn}>+등록하기</Btn>
+				<Btn onClick={handleUpdateModalBtn}>+등록하기</Btn>
 			</Top>
-			{productData ? <PaginationTable columns={columns} data={productData} /> : <></>}
+			{productData ? (
+				<PaginationTable
+					columns={columns}
+					data={productData}
+					handleModifyModalBtn={handleModifyModalBtn}
+					handleSetSelected={handleSetSelected}
+				/>
+			) : (
+				<></>
+			)}
 		</Section>
 	);
 };
@@ -75,6 +117,7 @@ const Section = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	overflow-y: scroll;
 `;
 const Top = styled.div`
 	width: 100%;
@@ -102,8 +145,8 @@ const Btn = styled.button`
 	gap: 1.25rem;
 	color: var(--white, #fff);
 	font-family: Pretendard;
-	font-size: 2.5rem;
+	font-size: 2rem;
 	font-style: normal;
-	font-weight: 600;
+	font-weight:400;
 	background: #000;
 `;

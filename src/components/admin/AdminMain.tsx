@@ -100,6 +100,7 @@ const Section = styled.div`
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
+	overflow: visible;
 `;
 
 const Header = styled.div`

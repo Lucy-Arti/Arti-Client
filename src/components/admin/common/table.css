@@ -1,7 +1,6 @@
 .table {
     width: 100%;
-    margin: 20px 0;
-    background-color: white;
+    margin-bottom: 8rem;
 }
 table {
     border-collapse: collapse;
@@ -30,5 +29,6 @@ table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: rgb(138, 255, 212);
+    color: white;
+    background-color: #007bff;
 }

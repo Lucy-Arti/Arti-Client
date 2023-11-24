@@ -29,3 +29,19 @@ export const postNewProduct = async (formData: FormData) => {
 		throw error;
 	}
 };
+
+// 옷 정보 수정하기
+export const patchProduct = async (formData: FormData, clothesId:number) => {
+	try {
+		const response = await axios.patch(`${baseURL}api/v1/clothes/${clothesId}`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+		console.log('정보 수정 성공:', response);
+		return response;
+	} catch (error) {
+		console.error('Error sending PATCH request:', error);
+		throw error;
+	}
+};
