@@ -146,13 +146,13 @@ const RankingSection = () => {
 					<TextSection>
 						<div>
 							<Text1>
-								투표를 통해
+								여러분의 투표로
 								<br />
-								특별한 옷들을 만나다
+								제작될 옷이 결정돼요!
 							</Text1>
 							<VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn>
 						</div>
-						<FontSize>투표 기간 : ~ 23.11.20</FontSize>
+						<FontSize>다음 랭킹 시작일 : 23년 12월 05일</FontSize>
 					</TextSection>
 				</BannerSection>
 				<RankingBtnWrapper>

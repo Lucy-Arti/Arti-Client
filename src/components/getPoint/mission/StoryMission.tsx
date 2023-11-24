@@ -110,9 +110,9 @@ const StoryMission = () => {
 			</Top>
 			<MissionFooter>
 				<div className="title">주의사항</div>
-				<div className="detail">- 팔로우를 취소한 후 동일 계정으로 다시 팔로우하면 포인트가 적립되지 않아요.</div>
-				<div className="detail">- 인스타그램 아이디를 정확히 입력해주셔야 포인트 적립이 가능해요.</div>
-				<div className="detail">- 부적절한 방법으로 포인트를 적립하면 포인트 적립이 취소될 수 있어요.</div>
+				<div className="detail">- 월요일에는 불가능한 미션이에요.</div>
+				<div className="detail">- 올려주신 스토리는 아티 인스타그램 계정에서 리그램할 수 있어요.</div>
+				<div className="detail">- 부적절한 방법으로 포인트를 적립하면 포인트 적립이 취소될 수 있어요</div>
 			</MissionFooter>
 		</MainWrapper>
 	);
