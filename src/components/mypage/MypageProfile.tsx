@@ -9,6 +9,7 @@ const MypageProfile = () => {
     const userName = useRecoilValue(userNameAtom);
 	const randomNum = Math.random() * 4;
 	const randomNumFloor = Math.floor(randomNum);
+    const route = useRouter();
   return (
     <ProfileWrapper>
         <UserBox>
@@ -17,7 +18,7 @@ const MypageProfile = () => {
                 {userName}
             </div>
         </UserBox>
-        <IoSettingsOutline className="setting-icon" size="13%" color="#B5B5BC" />
+        <IoSettingsOutline className="setting-icon" size="13%" color="#B5B5BC" onClick={() => route.push('/mypage/settings')} />
     </ProfileWrapper>
   )
 }
