@@ -4,8 +4,8 @@ import PaginationTable from '../common/PaginationTable';
 import styled from 'styled-components';
 import RewardState from '../modal/RewardState';
 import { REWARD_INFO_COLUMNS } from '../common/columns';
-import { RewardInfoData } from '@/types/request';
 import { getAllUserReward } from '@/apis/admin';
+import { RewardInfoData } from '@/types/request';
 
 const RewardTab = () => {
     const columns: Column[] = useMemo(() => REWARD_INFO_COLUMNS, []);

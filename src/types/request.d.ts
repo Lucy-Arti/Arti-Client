@@ -99,7 +99,7 @@ export interface NumAndStrObjectType {
 	[key: number]: string; 
 }
 
-export interface PointInfoData {
+export interface RewardInfoData {
 	id: number;
 	created_at: string;
 	item: {
