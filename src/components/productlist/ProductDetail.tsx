@@ -9,10 +9,7 @@ import { useRecoilValue } from 'recoil';
 import ShareButton from '../common/ShareButton';
 import { isLoginAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
-import Comment from './Comment';
-import CommentInput from './CommentInput';
 import { BiSolidDiscount } from "react-icons/bi";
-import { GetAllCmts } from '@/apis/comments';
 import Comment from './Comment';
 import CommentInput from './CommentInput';
 import { GetAllCmts } from '@/apis/comments';
@@ -471,8 +468,4 @@ const DiscountBtn = styled.div`
 	&:hover{
 		cursor: pointer;
 	}
-`
-const BlankSpace = styled.div`
-	display: flex;
-	height: 120px;
 `
