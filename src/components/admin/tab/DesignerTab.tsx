@@ -54,7 +54,7 @@ const DesignerTab = () => {
 			try {
 				const designerResponse = await getAllDesignerList();
 				if (designerResponse && designerResponse.data) {
-					setDesignerData(designerResponse.data);
+					setDesignerData(designerResponse.data.reverse());
 				} else {
 					console.log('Failed to fetch data');
 				}
@@ -68,22 +68,22 @@ const DesignerTab = () => {
 	return (
 		<Section>
 			{isUpdateModalOpen ? (
-				<DesignerUpload handleModalBtn={handleUpdateModalBtn} handleRefresh={handleRefresh} designerData={designerData} />
+				<DesignerUpload handleModalBtn={handleUpdateModalBtn} handleRefresh={handleRefresh} />
 			) : (
 				<></>
 			)}
 			{selectedId ? (
 				<DesignerModify
-					// handleModalBtn={handleModifyModalBtn}
-					// handleRefresh={handleRefresh}
-					// designerData={designerData}
-					// dataId={selectedId}
+					handleModalBtn={handleModifyModalBtn}
+					handleRefresh={handleRefresh}
+					designerData={designerData}
+					dataId={selectedId}
 				/>
 			) : (
 				<></>
 			)}
 			<Top>
-				<div className="title">옷</div>
+				<div className="title">디자이너</div>
 				<Btn onClick={handleUpdateModalBtn}>+등록하기</Btn>
 			</Top>
 			{designerData ? (

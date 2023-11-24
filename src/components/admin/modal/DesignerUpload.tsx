@@ -25,17 +25,17 @@ const ModalSectionWrapper = ({
 	);
 };
 
-const DesignerUpload = ({ handleModalBtn, designerData, handleRefresh }: any) => {
+const DesignerUpload = ({ handleModalBtn, handleRefresh }: any) => {
 	const totalHeight = document.documentElement.scrollHeight;
 	const [introduce, setIntroduce] = useState<string>('');
 	const [userName, setUserName] = useState<string>('');
-	const [instagram, setInstagram] = useState<string>('https://');
+	const [instagram, setInstagram] = useState<string>('');
 	const [designerProfile, setDesignerProfile] = useState<any>(null);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!userName) {
-			alert('모든 필수 입력값을 입력해주세요. (이름, 인스타주소)');
+			alert('디자이너 이름을 적어주세요');
 			return;
 		}
 
