@@ -79,3 +79,16 @@ export interface ClothesInfoData {
 	preview: string;
 	clothesId:number;
 }
+export interface DesignerInfoData {
+	designerId: number;
+	designerProfile: null | string;
+	instagram:string;
+	introduce:string;
+	productsIdAndNameByDesigner:NumAndStrObjectType;
+	sketchesIdAndNameByDesigner:NumAndStrObjectType;
+	userName:string;
+}
+
+export interface NumAndStrObjectType {
+	[key: number]: string; 
+}

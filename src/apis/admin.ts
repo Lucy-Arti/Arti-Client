@@ -45,3 +45,35 @@ export const patchProduct = async (formData: FormData, clothesId:number) => {
 		throw error;
 	}
 };
+
+// 디자이너 등록하기 
+export const postNewDesigner = async (formData: FormData) => {
+	try {
+		const response = await axios.post(`${baseURL}api/v1/designers`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+		console.log('업로드 성공:', response);
+		return response;
+	} catch (error) {
+		console.error('Error sending POST request:', error);
+		throw error;
+	}
+};
+
+// 디자이너 정보 수정하기
+export const patchDesigner = async (formData: FormData, designerId:number) => {
+	try {
+		const response = await axios.patch(`${baseURL}api/v1/designers/${designerId}`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+		console.log('정보 수정 성공:', response);
+		return response;
+	} catch (error) {
+		console.error('Error sending PATCH request:', error);
+		throw error;
+	}
+};

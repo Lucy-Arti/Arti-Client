@@ -97,27 +97,27 @@ export const CLOTHES_INFO_COLUMNS = [
 
 export const DESIGNER_INFO_COLUMNS = [
 	{
-		accessor: 'name',
+		accessor: 'userName',
 		Header: '이름',
 	},
 	{
-		accessor: 'about',
+		accessor: 'introduce',
 		Header: '소개글',
 	},
 	{
-		accessor: 'about',
+		accessor: 'instagram',
 		Header: '인스타그램 링크',
 	},
 	{
-		accessor: 'about',
+		accessor: 'designerProfile',
 		Header: '프로필 사진',
 	},
 	{
-		accessor: 'product',
+		accessor: 'productsIdAndNameByDesigner',
 		Header: '등록된 옷',
 	},
 	{
-		accessor: 'product',
+		accessor: 'sketchesIdAndNameByDesigner',
 		Header: '등록된 일러스트',
 	},
 ];
