@@ -3,7 +3,7 @@ import './table.css';
 import Search from './Search';
 import React from 'react'
 
-const PaginationTable = ({ columns, data, handleSetSelected, handleModifyModalBtn }: {columns:any; data:any; handleSetSelected:(row:any) => void; handleModifyModalBtn:() => void; }) => {
+const PaginationTable = ({ columns, data, handleSetSelected}: {columns:any; data:any; handleSetSelected:(row:any) => void;}) => {
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -30,11 +30,6 @@ const PaginationTable = ({ columns, data, handleSetSelected, handleModifyModalBt
 		useGlobalFilter,
 		usePagination,
 	);
-
-	const handleRowClick = (row: any) => {
-		console.log('클릭된 행의 데이터:', row.original);
-		handleSetSelected(row.original);
-	};
 
 	const { pageIndex, pageSize } = state;
 	/* eslint-disable react/jsx-key */
