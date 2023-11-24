@@ -205,6 +205,14 @@ const ProductDetail = () => {
 		}
 	};
 
+	const handlePurchaseBtn = () => {
+		if(productDetail?.purchaseLink === null) {
+			console.log('modal 띄우기');
+		} else {
+			window.open(productDetail?.purchaseLink, '_blank');
+		}
+	}
+
 	const route = useRouter();
 
 	return (
@@ -256,7 +264,7 @@ const ProductDetail = () => {
 						<></>
 						:
 						<FlexRow className='purchase-wrapper'>
-							<PurchaseBtn>구매하러가기</PurchaseBtn>
+							<PurchaseBtn onClick={handlePurchaseBtn}>구매하러가기</PurchaseBtn>
 							<DiscountBtn>
 								<BiSolidDiscount size='1.6rem' color='rgba(107, 218, 1, 1)' />
 								<div>할인쿠폰</div>
