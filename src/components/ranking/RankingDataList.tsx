@@ -17,7 +17,7 @@ const Card = styled.div`
 `;
 
 const RankingDataList = (props: RankingDataListPropsType) => {
-	const displayedDatas = props.datas.slice(0, 20);
+	const displayedDatas = (props.datas && props.datas.slice(0, 20)) || [];
 	return (
 		<Card>
 			{props.datas &&
