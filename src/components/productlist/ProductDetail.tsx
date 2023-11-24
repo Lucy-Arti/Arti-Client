@@ -9,6 +9,10 @@ import { useRecoilValue } from 'recoil';
 import ShareButton from '../common/ShareButton';
 import { isLoginAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
+import Comment from './Comment';
+import CommentInput from './CommentInput';
+import { BiSolidDiscount } from "react-icons/bi";
+import { GetAllCmts } from '@/apis/comments';
 
 const ProductDetail = () => {
 	// const { idx } = useParams();
@@ -137,6 +141,18 @@ const ProductDetail = () => {
 							<ShareButton where="product" />
 						</FlexRow>
 					</FlexRow>
+					{
+						productDetail.type === 'sketch' ? 
+						<></>
+						:
+						<FlexRow className='purchase-wrapper'>
+							<PurchaseBtn>구매하러가기</PurchaseBtn>
+							<DiscountBtn>
+								<BiSolidDiscount size='1.6rem' color='rgba(107, 218, 1, 1)' />
+								<div>할인쿠폰</div>
+							</DiscountBtn>
+						</FlexRow>
+					}
 					<GapDesign />
 					<div>
 						<img width="100%" src={`${productDetail.detailImg}`}/>
@@ -181,7 +197,7 @@ const Title = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	width: 70%;
-	font-size: 2rem;
+	font-size: 2.5rem;
 	font-weight: 600;
 	margin-left: 0.5rem;
 `;
@@ -193,6 +209,10 @@ const FlexRow = styled.div`
 	&.icon-box {
 		margin: 0;
 		gap: 1rem;
+	}
+	&.purchase-wrapper{
+		width: 90%;
+		margin: 1rem 2rem 1rem 2rem;
 	}
 `;
 const GapDesign = styled.div`
@@ -211,6 +231,43 @@ const HeartSection = styled.div`
 	color: #ff4b8c;
 `;
 const HeartImg = styled.img`
+	&:hover{
+		cursor: pointer;
+	}
+`
+
+const BlankSpace = styled.div`
+	display: flex;
+	height: 120px;
+`
+
+const PurchaseBtn = styled.div`
+	display: flex;
+	width: 65%;
+	background-color: #A5E865;
+	border-radius: 0.6rem;
+	font-size: 1.5rem;
+	justify-content: center;
+	align-items: center;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	&:hover{
+		cursor: pointer;
+	}
+`
+
+const DiscountBtn = styled.div`
+	display: flex;
+	width: 30%;
+	border-radius: 0.6rem;
+	border: 1px solid rgba(107, 218, 1, 1);
+	color: rgba(107, 218, 1, 1);
+	gap: 1rem;
+	font-size: 1.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	justify-content: center;
+	align-items: center;
 	&:hover{
 		cursor: pointer;
 	}

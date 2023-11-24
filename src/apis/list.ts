@@ -62,3 +62,17 @@ export const postMarked = async (id: number | string, token: string | null) => {
 		return false;
 	}
 };
+
+export const getAllProductByType = async(type:string) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}api/v1/clothes/type/${type}`, {
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+		// console.log(response.data);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+}
