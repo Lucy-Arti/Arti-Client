@@ -42,3 +42,26 @@ export type ProductType = {
 	designerName: string|null,
 	score: number|null
 }
+
+export type CmtsMemberType = {
+	userName: string,
+	profile: string,
+}
+
+export type ReplyType = {
+	id: number,
+	content: string,
+	heart: number|null,
+	createdAt: string,
+	member: CmtsMemberType,
+}
+
+export type CmtsType = {
+	id: number,
+	content: string,
+	heart: number|null,
+	answerCount: number|null,
+	createdAt: string,
+	member: CmtsMemberType,
+	answers: ReplyType[],
+}

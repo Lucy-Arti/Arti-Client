@@ -1,7 +1,16 @@
+import { PostBasicCmts, PostReply } from '@/apis/comments';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const CommentInput = (props:{getFixed:string ,replyName:string, setReplyName:React.Dispatch<React.SetStateAction<string>>}) => {
+interface CommentInputProps {
+    pathname:string,
+    getFixed:string,
+    replyName:string,
+    commentId: number|undefined,
+    setReplyName:React.Dispatch<React.SetStateAction<string>>,
+}
+
+const CommentInput = (props:CommentInputProps) => {
     const [inputCmt, setInputCmt] = useState('');
     const [btnActive, setBtnActive] = useState('');
     const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
@@ -22,6 +31,25 @@ const CommentInput = (props:{getFixed:string ,replyName:string, setReplyName:Rea
             setBtnActive('active');
         }
     }, [inputCmt])
+
+    const postCmts = async(id:string, content:string, commentId:number|undefined) => {
+        if(commentId===undefined) {
+            const result = await PostBasicCmts(id, content);
+            if(result === false){
+                console.log('업로드 실패'); 
+            } else {
+                console.log(result.data);
+            }
+        } else {
+            const result = await PostReply(commentId, content);
+            if(result === false){
+                console.log('업로드 실패'); 
+            } else {
+                console.log(result.data);
+            }
+        }
+    }
+
   return (
     <FlexColumn className={props.getFixed}>
         <CmtInputWrapper>
@@ -30,7 +58,7 @@ const CommentInput = (props:{getFixed:string ,replyName:string, setReplyName:Rea
             </div>
             <InputBox>
                 <input placeholder={holderText} onChange={(e)=>setInputCmt(e.target.value)} />
-                <InputBtn className={btnActive}>버튼</InputBtn>
+                <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>버튼</InputBtn>
             </InputBox>
         </CmtInputWrapper>
     </FlexColumn>

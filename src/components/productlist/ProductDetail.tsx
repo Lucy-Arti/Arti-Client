@@ -28,6 +28,7 @@ const ProductDetail = () => {
 
 	const [getFixed, setGetFixed] = useState('');
 	const [replyName, setReplyName] = useState('');
+	const [commentId, setCommentId] = useState<number>();
 
 	// const ref = createRef<HTMLDivElement>();
 	const heightRef = useRef<HTMLDivElement>(null);
@@ -171,19 +172,10 @@ const ProductDetail = () => {
 			console.log('post 성공');
 		}
 	};
-	const getCmts = async() => {
-		const result = await GetAllCmts(pathname!);
-		if (result === false) {
-			console.log('불러오기 오류 발생');
-		} else {
-			console.log(result.data);
-		}
-	}
 
 	useEffect(() => {
 		getProduct();
 		getMark();
-		getCmts();
 	}, []);
 
 	useEffect(() => {
@@ -278,11 +270,14 @@ const ProductDetail = () => {
 				<div>
 					<Comment 
 						pathname={pathname}
-						setReplyName={setReplyName} />
+						setReplyName={setReplyName}
+						setCommentId={setCommentId} />
 				</div>
 				<CommentInput 
+					pathname={pathname}
 					getFixed={getFixed}
 					replyName={replyName}
+					commentId={commentId}
 					setReplyName={setReplyName} />
 				</>
 			)}
