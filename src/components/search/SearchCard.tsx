@@ -90,9 +90,13 @@ const SearchCard = (props: CardBoxType) => {
 				</Heart>
 			</ImgBox>
 			<Flexraw onClick={() => route.push(`${props.designerId}`)}>
-				<img src="/img/profile-large.png" />
-				<Makebold>{props.designerName}</Makebold>
-				<Fontsize> 디자이너</Fontsize>
+				<ProfileWrapper>
+                    <img width="80%" src="/img/profile-large.png"/>
+                </ProfileWrapper>
+                <ProfileName>
+                    <div className="designer-name">{props.designerName}</div>
+                    <div className="designer-noti">디자이너</div>
+                </ProfileName>
 			</Flexraw>
 			<Header onClick={() => route.push(`/productlist/${props.clothesId}`)}>{props.clothesName}</Header>
 		</CardBox>
@@ -152,3 +156,23 @@ const Box = styled.div`
 	height: 35rem;
 	width: 100%;
 `;
+
+const ProfileWrapper = styled.div`
+    display: flex;
+    width: 10%;
+`
+const ProfileName = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.3rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    & > .designer-name{
+        font-size: 1.5rem;
+        margin-left: 0.3rem;
+        font-weight: 600;
+    }
+    & > .designer-noti{
+        font-size: 1.5rem;
+    }
+`
