@@ -2,34 +2,61 @@
 import React, { useEffect, useState } from 'react';
 import PointHeader from '../getPoint/PointHeader';
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getProductDetail } from '@/apis/pointshop';
+
+type Detail = {
+	brand: string;
+	category: string;
+	delivery: boolean;
+	detail: string;
+	id: number;
+	image: string;
+	price: string;
+	thumnail: string;
+	title: string;
+};
 
 const ShopDetail = () => {
+	const params = useSearchParams();
+	const id = params.get('id');
+	const router = useRouter();
 	const [active, setActive] = useState(false);
-	const point = 620;
+	const [detail, setDetail] = useState<Detail>();
+	const point = 20000;
 
 	useEffect(() => {
-		if (point >= 620) {
-			setActive(true);
-		}
+		const getDetail = async () => {
+			const result = await getProductDetail(id!);
+			setDetail(result.data);
+			if (point >= Number(result.data?.price)) {
+				setActive(true);
+			}
+		};
+		getDetail();
 	}, []);
 
 	const handleSubmit = () => {
-		console.log('구매 성공');
+		if (detail?.delivery) {
+			router.push(`/mypage/shop/delivery?id=${id}`);
+		} else if (!detail?.delivery) {
+			router.push(`/mypage/shop/notDelivery?id=${id}`);
+		}
 	};
 
 	return (
 		<>
 			<PointHeader text="" backTo="/mypage/shop" />
 			<Wrapper>
-				<img src="/img/product_img.png" />
+				<img src={detail?.thumnail} />
 				<ProductTextWrapper>
-					<ProductArti>스타벅스</ProductArti>
-					<ProductName>아이스 아메리카노 T</ProductName>
-					<Point>620P</Point>
+					<ProductArti>{detail?.brand}</ProductArti>
+					<ProductName>{detail?.title}</ProductName>
+					<Point>{detail?.price}</Point>
 				</ProductTextWrapper>
-				<img src="/img/product_img.png" />
-
+				<ImageWrapper>
+					<img src={detail?.image} alt={detail?.detail} />
+				</ImageWrapper>
 				<RouteBtn disabled={!active} onClick={handleSubmit}>
 					{active ? '구매하기' : '포인트가 부족해요'}
 				</RouteBtn>
@@ -51,7 +78,7 @@ const Wrapper = styled.div`
 	margin-bottom: 2rem;
 	img {
 		width: 100%;
-		height: 37rem;
+		height: fit-content;
 	}
 `;
 
@@ -114,4 +141,11 @@ const RouteBtn = styled.div<{ disabled?: boolean }>`
 	position: fixed;
 	bottom: 3rem;
 	z-index: 1;
+`;
+
+const ImageWrapper = styled.div`
+	width: 100%;
+	img {
+		height: fit-content;
+	}
 `;

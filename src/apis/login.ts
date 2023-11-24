@@ -28,18 +28,39 @@ export const postCode = async (body: postCodeBody) => {
 export const getUserInfo = async () => {
 	const accessToken = localStorage.getItem('access');
 
-	const response = await axios.get(
-		`${baseURL}api/v1/kakao/info`,
+	try {
+		const response = await axios.get(
+			`${baseURL}api/v1/kakao/info`,
 
-		{
+			{
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
+			},
+		);
+		console.log('사용자 정보 저장 완료');
+
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const logout = async () => {
+	const accessToken = localStorage.getItem('access');
+
+	try {
+		const result = await axios.post(`${baseURL}api/v1/kakao/logout`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
-		},
-	);
-	console.log('사용자 정보 저장 완료');
+		});
 
-	return response.data;
+		return result.data;
+	} catch (error) {
+		console.error('🚨🚨에러 발생 에러 발생 🚨🚨', error);
+		throw error;
+	}
 };
 
 // export const getNewRefreshToken = async () => {

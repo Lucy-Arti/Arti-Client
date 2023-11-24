@@ -1,32 +1,71 @@
 'use client';
 
 import PointHeader from '../getPoint/PointHeader';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from 'styled-components';
 import { FiChevronRight } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
+import { getBuyList } from '@/apis/pointshop';
 
-const sampleData = {
-	name: '할인쿠폰',
-	date: '23.10.24',
-};
+interface Item {
+	id: number;
+	title: string;
+	brand: string;
+	thumbnail: string;
+	image: string;
+	detail: string;
+	price: number;
+	category: string;
+	delivery: boolean;
+}
+
+interface BuyItem {
+	id: number;
+	name: string | null;
+	address: string | null;
+	phoneNumber: string | null;
+	delivery: boolean;
+	item: Item;
+	status: string | null;
+	created_at: string;
+}
+
+type BuyList = BuyItem[];
 
 const BuyHistory = () => {
 	const router = useRouter();
-	const showDetail = () => {
-		router.push('/mypage/shop/history/detail');
-	};
+	const [buylist, setBuylist] = useState<BuyList>([]);
+
+	useEffect(() => {
+		const getList = async () => {
+			try {
+				const result = await getBuyList();
+				setBuylist(result.data);
+			} catch (error) {
+				throw error;
+			}
+		};
+		getList();
+	}, []);
+
 	return (
 		<>
 			<PointHeader text="구매 내역" backTo="/mypage/shop" />
 			<Wrapper>
-				<ExplainWrapper>
-					<TextWrapper>
-						<Text1>{sampleData.name} 구매</Text1>
-						<Text2>{sampleData.date}</Text2>
-					</TextWrapper>
-					<StyledFiChevronRight size="26px" onClick={showDetail} />
-				</ExplainWrapper>
+				{buylist.map((item) => (
+					<ExplainWrapper key={item.id}>
+						<TextWrapper>
+							<Text1>{item.item.title} 구매</Text1>
+							<Text2>{item.created_at}</Text2>
+						</TextWrapper>
+						<StyledFiChevronRight
+							size="26px"
+							onClick={() => {
+								router.push(`/mypage/shop/history/detail?id=${item.id}`);
+							}}
+						/>
+					</ExplainWrapper>
+				))}
 			</Wrapper>
 		</>
 	);

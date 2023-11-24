@@ -1,10 +1,22 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PointHeader from '../getPoint/PointHeader';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { getProductList } from '@/apis/pointshop';
+
+type Category = {
+	brand: string;
+	category: string;
+	delivery: boolean;
+	detail: string;
+	id: number;
+	image: string;
+	price: string;
+	thumnail: string;
+	title: string;
+};
 
 const point = {
 	point: 620,
@@ -12,32 +24,32 @@ const point = {
 
 const ShopMain = () => {
 	const router = useRouter();
-	const discount = [];
-	const arti_item = [];
-	const giftcorn = [];
+	const [discount, setDiscount] = useState<Category[]>([]);
+	const [arti_item, setArtiItem] = useState<Category[]>([]);
+	const [giftcorn, setGiftcorn] = useState<Category[]>([]);
 
 	const goHistory = () => {
 		router.push('/mypage/shop/history');
 	};
 
-	// useEffect(() => {
-	// 	const getList = async () => {
-	// 		const discountResult = await getProductList('DISCOUNT');
-	// 		const artiItemResult = await getProductList('ARTI_ITEM');
-	// 		const giftcornResult = await getProductList('GIFTCORN');
+	useEffect(() => {
+		const getList = async () => {
+			const discountResult = await getProductList('DISCOUNT');
+			const artiItemResult = await getProductList('ARTI_ITEM');
+			const giftcornResult = await getProductList('GIFTCORN');
 
-	// 		if (discountResult.data) {
-	// 			discount.push(...discountResult.data);
-	// 		}
-	// 		if (artiItemResult.data) {
-	// 			arti_item.push(...artiItemResult.data);
-	// 		}
-	// 		if (giftcornResult.data) {
-	// 			giftcorn.push(...giftcornResult.data);
-	// 		}
-	// 	};
-	// 	getList();
-	// }, []);
+			if (discountResult.data) {
+				setDiscount(discountResult.data);
+			}
+			if (artiItemResult.data) {
+				setArtiItem(artiItemResult.data);
+			}
+			if (giftcornResult.data) {
+				setGiftcorn(giftcornResult.data);
+			}
+		};
+		getList();
+	}, []);
 
 	return (
 		<>
@@ -57,72 +69,46 @@ const ShopMain = () => {
 					<MissionTitle>
 						<Title>할인쿠폰</Title>
 					</MissionTitle>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>ARTI</ProductArti>
-							<ProductName>2000원 할인쿠폰</ProductName>
-							<Point>620P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>ARTI</ProductArti>
-							<ProductName>4000원 할인쿠폰</ProductName>
-							<Point>1240P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
+					{discount.map((item, index) => (
+						<ProductWrapper key={index} onClick={() => router.push(`/mypage/shop/detail?id=${item.id}`)}>
+							<img src={item.thumnail} alt={item.detail}></img>
+							<ProductTextWrapper>
+								<ProductArti>{item.brand}</ProductArti>
+								<ProductName>{item.title}</ProductName>
+								<Point>{item.price}P</Point>
+							</ProductTextWrapper>
+						</ProductWrapper>
+					))}
 				</Section>
 				<Section>
 					<MissionTitle>
 						<Title>아티 굿즈</Title>
 					</MissionTitle>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>ARTI</ProductArti>
-							<ProductName>ARTI 키링 SET</ProductName>
-							<Point>480P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>ARTI</ProductArti>
-							<ProductName>ARTI 리무버블 스티커 SET</ProductName>
-							<Point>480P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>ARTI</ProductArti>
-							<ProductName>ARTI 50x50 담요</ProductName>
-							<Point>780P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
+					{arti_item.map((item, index) => (
+						<ProductWrapper key={index} onClick={() => router.push(`/mypage/shop/detail?id=${item.id}`)}>
+							<img src={item.thumnail} alt={item.detail}></img>
+							<ProductTextWrapper>
+								<ProductArti>{item.brand}</ProductArti>
+								<ProductName>{item.title}</ProductName>
+								<Point>{item.price}P</Point>
+							</ProductTextWrapper>
+						</ProductWrapper>
+					))}
 				</Section>
 				<Section>
 					<MissionTitle>
 						<Title>기프티콘</Title>
 					</MissionTitle>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>스타벅스</ProductArti>
-							<ProductName>아이스 아메리카노</ProductName>
-							<Point>120000P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
-					<ProductWrapper>
-						<img src="/img/product_img.png"></img>
-						<ProductTextWrapper>
-							<ProductArti>GS25</ProductArti>
-							<ProductName>비타500</ProductName>
-							<Point>15P</Point>
-						</ProductTextWrapper>
-					</ProductWrapper>
+					{giftcorn.map((item, index) => (
+						<ProductWrapper key={index} onClick={() => router.push(`/mypage/shop/detail?id=${item.id}`)}>
+							<img src={item.thumnail} alt={item.detail}></img>
+							<ProductTextWrapper>
+								<ProductArti>{item.brand}</ProductArti>
+								<ProductName>{item.title}</ProductName>
+								<Point>{item.price}P</Point>
+							</ProductTextWrapper>
+						</ProductWrapper>
+					))}
 				</Section>
 			</Wrapper>
 		</>
