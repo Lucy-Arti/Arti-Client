@@ -70,8 +70,12 @@ export interface ClothesInfoData {
 	type: string;
 	clothesName:string;
 	designerName:string;
+	designerId:number;
 	commentCount:number;
 	likeCount:number;
 	score: number;
 	purchaseLink: string;
+	detailImg: string;
+	preview: string;
+	clothesId:number;
 }

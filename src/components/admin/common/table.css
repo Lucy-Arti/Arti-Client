@@ -1,7 +1,6 @@
 .table {
     width: 100%;
-    margin: 20px 0;
-    background-color: white;
+    margin-bottom: 8rem;
 }
 table {
     border-collapse: collapse;
@@ -15,6 +14,10 @@ line-height: 2.5rem;
 table td, table th {
     border: 1px solid #ddd;
     padding: 8px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* table tr:nth-child(even){
     background-color: #f2f2f2;
@@ -26,5 +29,6 @@ table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: rgb(138, 255, 212);
+    color: white;
+    background-color: #007bff;
 }

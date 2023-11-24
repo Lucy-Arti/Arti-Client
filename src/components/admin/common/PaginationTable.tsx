@@ -3,7 +3,7 @@ import './table.css';
 import Search from './Search';
 import React from 'react'
 
-const PaginationTable = ({ columns, data }: { columns: any; data: any }) => {
+const PaginationTable = ({ columns, data, handleSetSelected, handleModifyModalBtn }: {columns:any; data:any; handleSetSelected:(row:any) => void; handleModifyModalBtn:() => void; }) => {
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -32,19 +32,8 @@ const PaginationTable = ({ columns, data }: { columns: any; data: any }) => {
 	);
 
 	const handleRowClick = (row: any) => {
-		if (typeof row.original === 'object') {
-			const keyValuePairs = [];
-			for (const key in row.original) {
-				if (Object.prototype.hasOwnProperty.call(row.original, key)) {
-					const value = row.original[key];
-					keyValuePairs.push(`${key}: ${value}`);
-				}
-			}
-			const resultString = keyValuePairs.join('\n');
-			alert(`${resultString}`);
-		} else {
-			console.log('클릭된 행의 데이터:', row.original);
-		}
+		console.log('클릭된 행의 데이터:', row.original);
+		handleSetSelected(row.original);
 	};
 
 	const { pageIndex, pageSize } = state;
@@ -68,7 +57,7 @@ const PaginationTable = ({ columns, data }: { columns: any; data: any }) => {
 						{page.map((row: any) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} onClick={() => handleRowClick(row)}>
+								<tr {...row.getRowProps()} onClick={() => {handleSetSelected(row.original);}}>
 									{row.cells.map((cell: any) => {
 										return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
 									})}
