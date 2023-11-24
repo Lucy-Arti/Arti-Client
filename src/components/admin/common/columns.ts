@@ -97,27 +97,27 @@ export const CLOTHES_INFO_COLUMNS = [
 
 export const DESIGNER_INFO_COLUMNS = [
 	{
-		accessor: 'name',
+		accessor: 'userName',
 		Header: '이름',
 	},
 	{
-		accessor: 'about',
+		accessor: 'introduce',
 		Header: '소개글',
 	},
 	{
-		accessor: 'about',
+		accessor: 'instagram',
 		Header: '인스타그램 링크',
 	},
 	{
-		accessor: 'about',
+		accessor: 'designerProfile',
 		Header: '프로필 사진',
 	},
 	{
-		accessor: 'product',
+		accessor: 'productsIdAndNameByDesigner',
 		Header: '등록된 옷',
 	},
 	{
-		accessor: 'product',
+		accessor: 'sketchesIdAndNameByDesigner',
 		Header: '등록된 일러스트',
 	},
 ];
@@ -147,30 +147,30 @@ export const COMMENT_INFO_COLUMNS = [
 
 export const POINT_INFO_COLUMNS = [
 	{
-		accessor: 'name',
-		Header: '이름',
+		accessor: 'memberId',
+		Header: '유저 id',
 	},
 	{
-		accessor: 'about',
+		accessor: 'currentPoint',
 		Header: '전체 포인트',
 	},
 	{
-		accessor: 'about',
+		accessor: 'accumulatedGivenPoint',
 		Header: '누적 획득 포인트',
 	},
 	{
-		accessor: 'about',
+		accessor: 'accumulatedUsedPoint',
 		Header: '누적 사용 포인트',
 	},
 	{
-		accessor: 'product',
+		accessor: 'history',
 		Header: '포인트 내역',
 	},
 ];
 
 export const REWARD_INFO_COLUMNS = [
 	{
-		accessor: 'name',
+		accessor: 'id',
 		Header: 'member_id',
 	},
 	{
@@ -178,23 +178,23 @@ export const REWARD_INFO_COLUMNS = [
 		Header: '이름',
 	},
 	{
-		accessor: 'about',
+		accessor: 'item.title',
 		Header: '구매한 품목',
 	},
 	{
-		accessor: 'about',
+		accessor: 'item.created_at',
 		Header: '구매한 날짜',
 	},
 	{
-		accessor: 'about',
+		accessor: 'phoneNumber',
 		Header: '휴대폰 번호',
 	},
 	{
-		accessor: 'product',
+		accessor: 'address',
 		Header: '주소',
 	},
 	{
-		accessor: 'product',
+		accessor: 'status',
 		Header: '현재 상태',
 	},
 ];

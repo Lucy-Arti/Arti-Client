@@ -80,7 +80,47 @@ export interface ClothesInfoData {
 	clothesId:number;
 }
 
+export interface DesignerInfoData {
+	designerId: number;
+	designerProfile: null | string;
+	instagram:string;
+	introduce:string;
+	productsIdAndNameByDesigner:NumAndStrObjectType;
+	sketchesIdAndNameByDesigner:NumAndStrObjectType;
+	userName:string;
+}
+export interface PointInfoData {
+	memberId: number;
+	currentPoint: number;
+	accumulatedGivenPoint: number;
+	accumulatedUsedPoint: number;
+}
 
+export interface NumAndStrObjectType {
+	[key: number]: string; 
+}
+
+export interface RewardInfoData {
+	id: number;
+	created_at: string;
+	item: {
+	  id: number;
+	  title: string;
+	  brand: string;
+	  thumnail: string;
+	  image: string;
+	  detail: string;
+	  price: number;
+	  category: string;
+	  delivery: boolean;
+	};
+	name: string;
+	address: string;
+	phoneNumber: string;
+	delivery: boolean;
+	status: any;
+  }
+  
 export type CmtsMemberType = {
 	userName: string,
 	profile: string,
@@ -103,3 +143,4 @@ export type CmtsType = {
 	member: CmtsMemberType,
 	answers: ReplyType[],
 }
+

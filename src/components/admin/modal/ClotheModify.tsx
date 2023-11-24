@@ -1,6 +1,5 @@
 import { patchProduct, postNewProduct } from '@/apis/admin';
 import { GetProductDetail } from '@/apis/list';
-import { ClothesInfoData } from '@/types/request';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 

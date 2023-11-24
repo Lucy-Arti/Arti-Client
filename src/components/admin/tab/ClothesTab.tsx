@@ -99,7 +99,6 @@ const ClothesTab = () => {
 				<PaginationTable
 					columns={columns}
 					data={productData}
-					handleModifyModalBtn={handleModifyModalBtn}
 					handleSetSelected={handleSetSelected}
 				/>
 			) : (

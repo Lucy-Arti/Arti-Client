@@ -1,9 +1,17 @@
 import { useGlobalFilter, usePagination, useTable } from 'react-table';
 import './table.css';
 import Search from './Search';
-import React from 'react'
+import React from 'react';
 
-const PaginationTable = ({ columns, data, handleSetSelected}: {columns:any; data:any; handleSetSelected:(row:any) => void;}) => {
+const DesignerPagination = ({
+	columns,
+	data,
+	handleSetSelected,
+}: {
+	columns: any;
+	data: any;
+	handleSetSelected: (row: any) => void;
+}) => {
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -52,9 +60,20 @@ const PaginationTable = ({ columns, data, handleSetSelected}: {columns:any; data
 						{page.map((row: any) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} onClick={() => {handleSetSelected(row.original);}}>
+								<tr
+									{...row.getRowProps()}
+									onClick={() => {
+										handleSetSelected(row.original);
+									}}
+								>
 									{row.cells.map((cell: any) => {
-										return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+										return (
+											<td {...cell.getCellProps()} key={cell.column.id}>
+												{typeof cell.value === 'object' && cell.value
+													? Object.entries(cell.value).map(([id, value]) => <span key={id}>{`${id}: ${value}`}</span>)
+													: cell.render('Cell')}
+											</td>
+										);
 									})}
 								</tr>
 							);
@@ -114,4 +133,4 @@ const PaginationTable = ({ columns, data, handleSetSelected}: {columns:any; data
 	/* eslint-enable react/jsx-key */
 };
 
-export default PaginationTable;
+export default DesignerPagination;
