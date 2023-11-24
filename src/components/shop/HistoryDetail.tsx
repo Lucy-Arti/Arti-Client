@@ -1,56 +1,87 @@
 'use client';
 
 import PointHeader from '../getPoint/PointHeader';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getBuyListDetail } from '@/apis/pointshop';
 
-const sampleData = {
-	user: '백은비',
-	name: '할인쿠폰',
-	date: '23.10.24',
-	point: '3000P',
-	phoneNum: '01085071301',
-	address: '서울시 동작구 어쩌구',
-	status: '상품 발송이 완료되었어요!',
+type Item = {
+	id: number;
+	title: string;
+	brand: string;
+	thumbnail: string;
+	image: string;
+	detail: string;
+	price: number;
+	category: string;
+	delivery: boolean;
+};
+
+type BuyItem = {
+	id: number;
+	name: string | null;
+	address: string | null;
+	phoneNumber: string | null;
+	delivery: boolean;
+	item: Item;
+	status: string | null;
+	created_at: string;
 };
 
 const HistoryDetail = () => {
 	const router = useRouter();
+	const params = useSearchParams();
+	const id = params.get('id');
+	const [detail, setDetail] = useState<BuyItem>();
+
+	useEffect(() => {
+		const getDetail = async () => {
+			const result = await getBuyListDetail(id!);
+			setDetail(result.data);
+		};
+		getDetail();
+	}, []);
+
+	if (!detail) {
+		return null;
+	}
 
 	return (
 		<HistoryDetailSection>
 			<PointHeader text="구매 정보 확인" backTo="/mypage/shop/history" />
-			<StatusText>현재 상태 • {sampleData.status}</StatusText>
+			<StatusText>현재 상태 • {detail?.status}</StatusText>
 			<Wrapper>
 				<ExplainWrapper>
-					<Name>{sampleData.user}</Name>
+					<Name>{detail?.name}</Name>
 					<Table>
 						<tbody>
 							<TableRow>
 								<TableLabel>구매한 품목</TableLabel>
-								<TableValue>{sampleData.name}</TableValue>
+								<TableValue>{detail?.item?.title}</TableValue>
 							</TableRow>
 							<TableRow>
 								<TableLabel>사용 포인트</TableLabel>
-								<TableValue>{sampleData.point}</TableValue>
+								<TableValue>{detail?.item?.price}P</TableValue>
 							</TableRow>
 							<TableRow>
 								<TableLabel>전화번호</TableLabel>
-								<TableValue>{sampleData.phoneNum}</TableValue>
+								<TableValue>{detail?.phoneNumber}</TableValue>
 							</TableRow>
 							<TableRow>
 								<TableLabel>구매한 날짜</TableLabel>
-								<TableValue>{sampleData.date}</TableValue>
+								<TableValue>{detail?.created_at}</TableValue>
 							</TableRow>
 							<TableRow>
 								<TableLabel>배송지</TableLabel>
-								<TableValue>{sampleData.address}</TableValue>
+								<TableValue>{detail?.address}</TableValue>
 							</TableRow>
 						</tbody>
 					</Table>
 				</ExplainWrapper>
-				<Modify>주소, 전화번호 수정이 필요하신가요?</Modify>
+				<a href="https://arti.channel.io" target="_blank" rel="noopener noreferrer">
+					<Modify>주소, 전화번호 수정이 필요하신가요?</Modify>
+				</a>
 			</Wrapper>
 		</HistoryDetailSection>
 	);
@@ -87,7 +118,7 @@ const ExplainWrapper = styled.div`
 `;
 
 const StatusText = styled.div`
-width: 80%;
+	width: 80%;
 	display: flex;
 	color: black;
 	font-size: 2rem;
@@ -127,6 +158,7 @@ const TableLabel = styled.td`
 	font-weight: 600;
 	font-size: 2rem;
 	padding: 1rem;
+	width: 30%;
 `;
 
 const TableValue = styled.td`

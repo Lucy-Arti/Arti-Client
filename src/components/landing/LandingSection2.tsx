@@ -17,7 +17,7 @@ const LandingSectionContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: 10px;
+	margin-top: 3rem;
 `;
 
 const BannerSection = styled.div`
@@ -121,7 +121,6 @@ const Row = styled.div`
 	font-size: 1.5rem;
 	&.black {
 		color: black;
-
 	}
 	img {
 		width: 1.7rem;
@@ -163,7 +162,7 @@ const LandingSection2 = () => {
 	return (
 		<LandingSectionContainer>
 			<BannerSection>
-				<Introduce>With Arti</Introduce>
+				<Introduce>Designers</Introduce>
 				<More
 					onClick={() => {
 						router.push('productlist');

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import ModalProductSaved from "../common/ModalProductSaved";
 import ModalProductUnsaved from "../common/ModalProductUnsaved";
 import ModalLogin from "../common/ModalLogin";
-import { GetAllProductLists } from "@/apis/list";
+import { GetAllProductLists, getAllProductByType } from "@/apis/list";
 import styled from "styled-components";
 
 export type ProductType = {
@@ -19,7 +19,10 @@ export type ProductType = {
 	preview: string|null,
 	designerId: number|null,
 	designerName: string|null,
-	score: number|null
+	score: number|null,
+	commentCount: number,
+	purchaseLink: string|null,
+	type:string,
 }
 
 const ListView = () => {
@@ -32,23 +35,27 @@ const ListView = () => {
 
 	const [sketchTab, setSketchTab] = useState('active');
 	const [productTab, setProductTab] = useState('');
+	const [activatedTab, setActivatedTab] = useState('sketch');
 
-	const handleTabBtn = async(tab:string) => {
+	const handleTabBtn = (tab:string) => {
 		if(tab === 'sketch') {
 			if(sketchTab === '') {
 				setSketchTab('active');
 				setProductTab('');
+				setActivatedTab(tab);
 			}
 		} else {
 			if(productTab === '') {
 				setProductTab('active');
 				setSketchTab('');
+				setActivatedTab(tab);
 			}
 		}
 	}
 
-	const getProducts = async() => {
-		const result = await GetAllProductLists();
+	const getProducts = async(type:string) => {
+		// const result = await GetAllProductLists();
+		const result = await getAllProductByType(type);
 		if(result===false) {
             console.log('불러오기 오류 발생');
         } else {
@@ -61,12 +68,14 @@ const ListView = () => {
 				newArr = newArr.concat(element);
 			}
             // setProducts(products.concat(result.data));
-            setProducts(products.concat(newArr));
+			console.log(newArr);
+            setProducts(productList.concat(newArr));
         }
 	}
 	useEffect(()=>{
-		getProducts();
-	}, [])
+		// setProducts(productList);
+		getProducts(activatedTab);
+	}, [activatedTab])
 
   return (
 	<>

@@ -7,18 +7,24 @@ const { persistAtom } = recoilPersist();
 
 export const isLoginAtom = atom({
 	key: 'isLogin',
-	default: false,
+	default: true,
 	effects_UNSTABLE: [persistAtom],
 });
 
 export const userNameAtom = atom({
 	key: 'userName',
-	default: '',
+	default: '1234',
 	effects_UNSTABLE: [persistAtom],
 });
 
 export const userEmailAtom = atom({
 	key: 'userEmail',
+	default: '1234',
+	effects_UNSTABLE: [persistAtom],
+});
+
+export const userPhotoAtom = atom({
+	key: 'userPhoto',
 	default: '',
 	effects_UNSTABLE: [persistAtom],
 });
