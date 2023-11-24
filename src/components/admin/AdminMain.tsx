@@ -18,7 +18,7 @@ const adminLabels = [
 	{ label: '디자이너', type: 'designer' },
 	{ label: '댓글', type: 'comment' },
 	{ label: '포인트', type: 'point' },
-	{ label: '요청 처리', type: 'request' },
+	{ label: '요청 처리', type: 'request&option=reward' },
 ];
 
 const AdminMain = () => {
