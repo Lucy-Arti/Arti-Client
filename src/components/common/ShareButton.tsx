@@ -3,7 +3,7 @@ import { BiShareAlt } from 'react-icons/bi';
 import styled from 'styled-components';
 
 const ShareButton = ({ where }: { where: string }) => {
-	const link = location.href;
+	const link = typeof window !== 'undefined' ? window.location.href : '';
 	const handleShareClick = React.useCallback(async () => {
 		try {
 			if (navigator.share) {

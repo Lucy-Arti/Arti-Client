@@ -10,20 +10,24 @@ const MypageExternalContent = () => {
 
 	return (
 		<ColumnSort>
-			{/* <div css={menulist}>
-            <div className="text">이벤트</div>
-            <FiChevronRight size="26px" />
-        </div>
-        <div css={menulist}>
-            <div className="text">자주 묻는 질문</div>
-            <FiChevronRight size="26px" />
-        </div> */}
-			<MenuList onClick={() => onClickToExternel('https://arti.channel.io/')}>
+			<MenuList>
+				<div className="text" onClick={() => onClickToExternel('https://lucy-team.notion.site/EVENT-b3be6ffb61b847e1a418e4bb9d6cb121')}>이벤트</div>
+				<FiChevronRight size="26px" />
+			</MenuList>
+			<MenuList>
+				<div className="text" onClick={() => onClickToExternel('https://lucy-team.notion.site/FAQ-6c7d647e96374577be3f817adbde5637')}>자주 묻는 질문</div>
+				<FiChevronRight size="26px" />
+			</MenuList>
+			<MenuList onClick={() => onClickToExternel('https://arti.channel.io/home')}>
 				<div className="text">1:1문의</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
-			<MenuList className="last" onClick={() => onClickToExternel('https://forms.gle/rK4TQXT6uSXzDCrL8')}>
-				<div className="text">입점 신청</div>
+			<MenuList>
+				<div className="text">초대코드 입력</div>
+				<FiChevronRight size="26px" />
+			</MenuList>
+			<MenuList className="last" onClick={() => onClickToExternel('https://arti.channel.io/home')}>
+				<div className="text">디자이너 참여 신청</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
 		</ColumnSort>

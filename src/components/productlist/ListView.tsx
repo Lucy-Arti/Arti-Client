@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import ModalProductSaved from "../common/ModalProductSaved";
 import ModalProductUnsaved from "../common/ModalProductUnsaved";
 import ModalLogin from "../common/ModalLogin";
-import { GetAllProductLists } from "@/apis/list";
+import { GetAllProductLists, getAllProductByType } from "@/apis/list";
 import styled from "styled-components";
 
 export type ProductType = {
@@ -19,7 +19,10 @@ export type ProductType = {
 	preview: string|null,
 	designerId: number|null,
 	designerName: string|null,
-	score: number|null
+	score: number|null,
+	commentCount: number,
+	purchaseLink: string|null,
+	type:string,
 }
 
 const ListView = () => {
@@ -30,8 +33,29 @@ const ListView = () => {
 	const [products, setProducts] = useState<ProductType[]>(productList);
 	// const [products, setProducts] = useState([]);
 
-	const getProducts = async() => {
-		const result = await GetAllProductLists();
+	const [sketchTab, setSketchTab] = useState('active');
+	const [productTab, setProductTab] = useState('');
+	const [activatedTab, setActivatedTab] = useState('sketch');
+
+	const handleTabBtn = (tab:string) => {
+		if(tab === 'sketch') {
+			if(sketchTab === '') {
+				setSketchTab('active');
+				setProductTab('');
+				setActivatedTab(tab);
+			}
+		} else {
+			if(productTab === '') {
+				setProductTab('active');
+				setSketchTab('');
+				setActivatedTab(tab);
+			}
+		}
+	}
+
+	const getProducts = async(type:string) => {
+		// const result = await GetAllProductLists();
+		const result = await getAllProductByType(type);
 		if(result===false) {
             console.log('불러오기 오류 발생');
         } else {
@@ -44,12 +68,14 @@ const ListView = () => {
 				newArr = newArr.concat(element);
 			}
             // setProducts(products.concat(result.data));
-            setProducts(products.concat(newArr));
+			console.log(newArr);
+            setProducts(productList.concat(newArr));
         }
 	}
 	useEffect(()=>{
-		getProducts();
-	}, [])
+		// setProducts(productList);
+		getProducts(activatedTab);
+	}, [activatedTab])
 
   return (
 	<>
@@ -58,6 +84,12 @@ const ListView = () => {
 				<Header where='main'/>
 			</FlexColumn>
 			<NavBar />
+			<FlexColumn>
+				<TabWrapper>
+					<TabBtn className={sketchTab} onClick={() => {handleTabBtn('sketch')}}>일러스트</TabBtn>
+					<TabBtn className={productTab} onClick={() => {handleTabBtn('product')}}>작품</TabBtn>
+				</TabWrapper>
+			</FlexColumn>
 		</Fixed>
 		{
 			(loginModalIsOpen === true) && 
@@ -116,8 +148,34 @@ const Fixed = styled.div`
 	}
 `;
 
+const TabWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 90%;
+	background-color: rgba(240, 240, 240, 1);
+	margin-bottom: 2rem;
+	border-radius: 5px;
+`;
+
+const TabBtn = styled.div`
+	display: flex;
+	width: 50%;
+	height: 5rem;
+	background-color: rgba(240, 240, 240, 1);
+	color: rgba(168, 168, 168, 1);
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	border: 1px solid rgba(240, 240, 240, 1);
+	font-size: 2rem;
+	&.active{
+		background-color: white;
+		color: black;
+	}
+`
+
 const ForBlank = styled.div`
-	height: 120px;
+	height: 180px;
 `
 const GridWrapper = styled.div`
 	display: grid;

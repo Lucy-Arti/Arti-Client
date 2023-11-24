@@ -11,7 +11,7 @@ const VoteMission = () => {
 			<Top>
 				<PointHeader text="투표하기" backTo="/mypage/point" />
 				<ContentSection>
-					<StyledImage src="/img/voteMissionBanner.png" alt="댓글 미션 배너" fill priority />
+					<StyledImage src="/img/voteMissionBanner.png" alt="투표 미션 배너" fill priority />
 					<Span>
 						오늘 <span className="bold">250P</span> 더 획득할 수 있어요
 					</Span>
