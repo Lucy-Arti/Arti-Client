@@ -170,7 +170,7 @@ export const POINT_INFO_COLUMNS = [
 
 export const REWARD_INFO_COLUMNS = [
 	{
-		accessor: 'name',
+		accessor: 'id',
 		Header: 'member_id',
 	},
 	{
@@ -178,23 +178,23 @@ export const REWARD_INFO_COLUMNS = [
 		Header: '이름',
 	},
 	{
-		accessor: 'about',
+		accessor: 'item.title',
 		Header: '구매한 품목',
 	},
 	{
-		accessor: 'about',
+		accessor: 'item.created_at',
 		Header: '구매한 날짜',
 	},
 	{
-		accessor: 'about',
+		accessor: 'phoneNumber',
 		Header: '휴대폰 번호',
 	},
 	{
-		accessor: 'product',
+		accessor: 'address',
 		Header: '주소',
 	},
 	{
-		accessor: 'product',
+		accessor: 'status',
 		Header: '현재 상태',
 	},
 ];

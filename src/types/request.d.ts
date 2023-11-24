@@ -99,3 +99,24 @@ export interface NumAndStrObjectType {
 	[key: number]: string; 
 }
 
+export interface PointInfoData {
+	id: number;
+	created_at: string;
+	item: {
+	  id: number;
+	  title: string;
+	  brand: string;
+	  thumnail: string;
+	  image: string;
+	  detail: string;
+	  price: number;
+	  category: string;
+	  delivery: boolean;
+	};
+	name: string;
+	address: string;
+	phoneNumber: string;
+	delivery: boolean;
+	status: any;
+  }
+  

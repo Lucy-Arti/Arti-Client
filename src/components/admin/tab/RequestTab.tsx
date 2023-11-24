@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import RewardTab from './RewardTab';
 
 const RequestTab = () => {
-  return (
-    <div>RequestTab</div>
-  )
-}
+	return (
+		<>
+			<RewardTab />
+		</>
+	);
+};
 
-export default RequestTab
+export default RequestTab;
