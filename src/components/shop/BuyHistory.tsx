@@ -88,6 +88,8 @@ const ExplainWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	padding: 1.5rem;
+	border-bottom: 2px solid #f9f9f9;
 `;
 
 const TextWrapper = styled.div`

@@ -79,7 +79,9 @@ const HistoryDetail = () => {
 						</tbody>
 					</Table>
 				</ExplainWrapper>
-				<Modify>주소, 전화번호 수정이 필요하신가요?</Modify>
+				<a href="https://arti.channel.io" target="_blank" rel="noopener noreferrer">
+					<Modify>주소, 전화번호 수정이 필요하신가요?</Modify>
+				</a>
 			</Wrapper>
 		</HistoryDetailSection>
 	);
