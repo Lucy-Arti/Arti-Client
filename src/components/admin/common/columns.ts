@@ -147,23 +147,23 @@ export const COMMENT_INFO_COLUMNS = [
 
 export const POINT_INFO_COLUMNS = [
 	{
-		accessor: 'name',
-		Header: '이름',
+		accessor: 'memberId',
+		Header: '유저 id',
 	},
 	{
-		accessor: 'about',
+		accessor: 'currentPoint',
 		Header: '전체 포인트',
 	},
 	{
-		accessor: 'about',
+		accessor: 'accumulatedGivenPoint',
 		Header: '누적 획득 포인트',
 	},
 	{
-		accessor: 'about',
+		accessor: 'accumulatedUsedPoint',
 		Header: '누적 사용 포인트',
 	},
 	{
-		accessor: 'product',
+		accessor: 'history',
 		Header: '포인트 내역',
 	},
 ];

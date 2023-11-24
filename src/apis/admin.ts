@@ -77,3 +77,31 @@ export const patchDesigner = async (formData: FormData, designerId:number) => {
 		throw error;
 	}
 };
+
+// 사용자 포인트 리스트 가져오기
+export const getAllUserPointList = async () => {
+	try {
+		const response = await axios.get(`${baseURL}api/v2/point/info`);
+		console.log(response);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+
+// 포인트 업데이트하기
+export const givePoint = async (formData: FormData) => {
+	try {
+		const response = await axios.post(`${baseURL}api/v2/point/admin`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+		console.log('업로드 성공:', response);
+		return response;
+	} catch (error) {
+		console.error('Error sending POST request:', error);
+		throw error;
+	}
+};

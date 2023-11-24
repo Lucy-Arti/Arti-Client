@@ -88,7 +88,14 @@ export interface DesignerInfoData {
 	sketchesIdAndNameByDesigner:NumAndStrObjectType;
 	userName:string;
 }
+export interface PointInfoData {
+	memberId: number;
+	currentPoint: number;
+	accumulatedGivenPoint: number;
+	accumulatedUsedPoint: number;
+}
 
 export interface NumAndStrObjectType {
 	[key: number]: string; 
 }
+

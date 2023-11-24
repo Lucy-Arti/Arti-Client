@@ -43,7 +43,12 @@ const DesignerUpload = ({ handleModalBtn, handleRefresh }: any) => {
 		formData.append('userName', userName);
 		formData.append('introduce', introduce);
 		formData.append('instagram', instagram);
-		formData.append('designerProfile', designerProfile);
+		if(designerProfile){
+			formData.append('designerProfile', designerProfile);
+		}
+		if(instagram){
+			formData.append('instagram', instagram);
+		}
 
 		const userConfirmed = window.confirm(`${userName} 디자이너를 등록 하시겠습니까?`);
 		if (userConfirmed) {
@@ -56,6 +61,7 @@ const DesignerUpload = ({ handleModalBtn, handleRefresh }: any) => {
 				console.error('Error add designer:', error);
 			}
 		} else {
+			alert('프로필을 넣어주세요!');
 			return;
 		}
 	};
