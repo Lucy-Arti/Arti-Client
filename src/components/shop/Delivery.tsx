@@ -274,7 +274,7 @@ const InputWrapper = styled.div`
 `;
 
 const PostCodeBtn = styled.button`
-	width: 30%;
+	width: 20%;
 	font-size: 1.5rem;
 	color: black;
 	border-radius: 0.875rem;
