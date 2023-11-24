@@ -8,6 +8,7 @@ import './landing.css';
 import { EffectCube, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { FiChevronRight } from 'react-icons/fi';
 
 const LandingSectionContainer = styled.div`
 	width: 100%;
@@ -92,10 +93,71 @@ const LandingSection = () => {
 							<img src={selectedImage + '4.png'} alt="landing4" />
 						</a>
 					</StyledSwiperSlide>
+					<StyledSwiperSlide
+						onClick={() => {
+							router.push('/wadiz');
+						}}
+					>
+						<img src={selectedImage + '5.png'} alt="landing5" />
+					</StyledSwiperSlide>
 				</Swiper>
 			</BannerSection>
+			<ExplainWrapper>
+				<TextWrapper>
+					<Text1>Arti가 처음이신가요?</Text1>
+					<Text2>Arti를 소개합니다.</Text2>
+				</TextWrapper>
+				<StyledFiChevronRight
+					size="26px"
+					onClick={() => {
+						router.push('/introduce');
+					}}
+				/>
+			</ExplainWrapper>
 		</LandingSectionContainer>
 	);
 };
 
 export default LandingSection;
+
+const ExplainWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 83%;
+	padding: 2rem;
+	border-radius: 1.25rem;
+	background: #f0f0f0;
+`;
+
+const TextWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+const Text1 = styled.div`
+	width: 100%;
+	justify-content: flex-start;
+	color: #9e9e9e;
+	font-size: 1.5rem;
+	font-style: normal;
+	font-weight: 400;
+	font-family: 'Pretendard Variable';
+	margin-bottom: 0.5rem;
+`;
+
+const Text2 = styled.div`
+	width: 100%;
+	display: flex;
+	color: black;
+	font-size: 2rem;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.2rem;
+	font-weight: 600;
+	font-family: 'Pretendard Variable';
+`;
+
+const StyledFiChevronRight = styled(FiChevronRight)`
+	cursor: pointer;
+	margin-top: 1.5rem;
+`;

@@ -4,11 +4,12 @@ import LandingSection from './LandingSection';
 import LandingSection2 from './LandingSection2';
 import { getUserInfo } from '@/apis/login';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { userEmailAtom, userNameAtom, userRoleAtom } from '@/app/recoilContextProvider';
+import { userEmailAtom, userNameAtom, userPhotoAtom, userRoleAtom } from '@/app/recoilContextProvider';
 
 const LandingHome = () => {
 	const setUserEmail = useSetRecoilState(userEmailAtom);
 	const setRole = useSetRecoilState(userRoleAtom);
+	const setPhoto = useSetRecoilState(userPhotoAtom);
 	const [userName, setUserName] = useRecoilState(userNameAtom);
 
 	useEffect(() => {
@@ -18,6 +19,7 @@ const LandingHome = () => {
 				console.log(data);
 				setUserEmail(data.email);
 				setUserName(data.userName);
+				setPhoto(data.profile);
 				setRole(data.role);
 			};
 			getUserProfile();

@@ -23,6 +23,12 @@ export const userEmailAtom = atom({
 	effects_UNSTABLE: [persistAtom],
 });
 
+export const userPhotoAtom = atom({
+	key: 'userPhoto',
+	default: '',
+	effects_UNSTABLE: [persistAtom],
+});
+
 export const userRoleAtom = atom({
 	key: 'userRole',
 	default: '',
