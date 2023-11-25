@@ -9,11 +9,12 @@ const FooterSection = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 4rem;
+	margin-top: 1.5rem;
 `;
 
 const ContentSection = styled.div`
 	width: 100%;
-	height: 11.75rem;
+	height: 11rem;
 	background-color: white;
 	border-top: 1px #f0f0f0 solid;
 	border-radius: 5px;
@@ -45,6 +46,7 @@ const Footer: React.FC = () => {
 		<FooterSection>
 			<ContentSection>
 				<BoldTextStyle>Contact</BoldTextStyle>
+				<TextStyle1>Every Clothes Is Worth It, Arti</TextStyle1>
 				<TextStyle2>문의 : lucyteam0806@gmail.com</TextStyle2>
 				<TextStyle1>카카오톡 채널 : 루시 LUCY</TextStyle1>
 			</ContentSection>
