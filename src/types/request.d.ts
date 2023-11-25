@@ -132,6 +132,7 @@ export type ReplyType = {
 	heart: number|null,
 	createdAt: string,
 	member: CmtsMemberType,
+	like: boolean,
 }
 
 export type CmtsType = {
@@ -142,5 +143,6 @@ export type CmtsType = {
 	createdAt: string,
 	member: CmtsMemberType,
 	answers: ReplyType[],
+	like: boolean,
 }
 

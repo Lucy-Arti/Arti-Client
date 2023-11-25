@@ -27,18 +27,18 @@ const CommentBox = (props:CommentBoxProps) => {
     const handleHeartClick = async(id:number, type:string) => {
         if(type === 'comment'){
             const result = await PutHeartOnCmt(id);
-            if(result === false){
-                console.log('좋아요 업로드 실패');
-            } else {
-                console.log('좋아요 업로드 완료');
-            }
+            // if(result === false){
+            //     console.log('좋아요 업로드 실패');
+            // } else {
+            //     console.log('좋아요 업로드 완료');
+            // }
         } else {
             const result = await PostHeartOnReply(id);
-            if(result === false){
-                console.log('좋아요 업로드 실패');
-            } else {
-                console.log('좋아요 업로드 완료');
-            }
+            // if(result === false){
+            //     console.log('좋아요 업로드 실패');
+            // } else {
+            //     console.log('좋아요 업로드 완료');
+            // }
         }
     }
   return (
@@ -61,7 +61,12 @@ const CommentBox = (props:CommentBoxProps) => {
                 <CmtUtils>
                     <UtilIconTextBox isclicked={replyOn} onClick={() => handleHeartClick(props.allCmts.id, 'comment')}>
                         <div className='img-box'>
-                            <img src='/img/cmt-blankHeart.png' width='100%' />
+                            {
+                                props.allCmts.like === false ? 
+                                <img src='/img/cmt-blankHeart.png' width='100%' />
+                                :
+                                <img src='/img/cmt-fullHeart.png' width='100%' />
+                            }
                         </div>
                         {
                             props.allCmts.heart === null ? <div>{`좋아요 0`}</div> : <div>{`좋아요 ${props.allCmts.heart}`}</div>
@@ -101,7 +106,12 @@ const CommentBox = (props:CommentBoxProps) => {
                             <CmtUtils>
                                 <UtilIconTextBox isclicked={replyOn} onClick={() => handleHeartClick(element.id, 'reply')}>
                                     <div className='img-box'>
+                                    {
+                                        element.like === false ? 
                                         <img src='/img/cmt-blankHeart.png' width='100%' />
+                                        :
+                                        <img src='/img/cmt-fullHeart.png' width='100%' />
+                                    }
                                     </div>
                                     {
                                         element.heart === null ? <div>좋아요 0</div> : <div>{`좋아요 ${element.heart}`}</div>
