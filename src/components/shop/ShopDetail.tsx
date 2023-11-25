@@ -52,7 +52,10 @@ const ShopDetail = () => {
 				<ProductTextWrapper>
 					<ProductArti>{detail?.brand}</ProductArti>
 					<ProductName>{detail?.title}</ProductName>
-					<Point>{detail?.price}</Point>
+					<Point>
+						<img src="/img/databasegreen.png" />
+						{detail?.price}P
+					</Point>
 				</ProductTextWrapper>
 				<ImageWrapper>
 					<img src={detail?.image} alt={detail?.detail} />
@@ -86,35 +89,46 @@ const ProductTextWrapper = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: center;
+	align-items: center;
 `;
 
 const ProductArti = styled.div`
 	color: #9e9e9e;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	font-style: 'Pretendard Variable';
 	font-weight: 400;
-	padding-left: 2rem;
-	padding-top: 1rem;
-	padding-bottom: 0.5rem;
+	width: 90%;
+	margin-top: 3rem;
 `;
 
 const ProductName = styled.div`
 	color: var(--black, #383838);
-	font-size: 2.04rem;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 20px;
-	padding-left: 2rem;
-`;
-
-const Point = styled.div`
-	color: #a8a8a8;
-	text-align: right;
-	font-size: 1.75rem;
+	font-family: Pretendard Variable;
+	font-size: 2.5rem;
 	font-style: normal;
 	font-weight: 600;
-	padding: 1rem;
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+`;
+
+const Point = styled.span`
+	color: var(--lime, #6bda01);
+	font-family: Pretendard Variable;
+	font-size: 2.5rem;
+	font-style: normal;
+	font-weight: 600;
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	img {
+		width: 2.5rem;
+		padding-bottom: 0.3rem;
+		padding-right: 1rem;
+	}
 `;
 
 const BtnWrapper = styled.div`
