@@ -68,7 +68,7 @@ const FreindInviteMission = () => {
 					<div className="subtitle">참여 방법</div>
 					<Info>
 						<Circle />
-						<div className="info">댓글 1개당 50P | 하루 최대 250P 획득 가능</div>
+						<div className="info">친구에게 내 초대 코드 보내기</div>
 					</Info>
 					<Info>
 						<Circle />
