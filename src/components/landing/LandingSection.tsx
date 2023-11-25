@@ -80,25 +80,25 @@ const LandingSection = () => {
 					autoplay={{ delay: 2500, disableOnInteraction: false }}
 				>
 					<StyledSwiperSlide>
-						<img src={selectedImage + '1.png'} alt="landing1" />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide>
-						<img src={selectedImage + '2.png'} alt="landing2" onClick={handleClick(`/vote`)} />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide>
-						<img src={selectedImage + '3.png'} alt="landing3" />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide>
-						<a href="https://arti.channel.io" target="_blank" rel="noopener noreferrer">
-							<img src={selectedImage + '4.png'} alt="landing4" />
-						</a>
+						<img src={selectedImage + '1.png'} alt="landing1" onClick={handleClick(`/vote`)} />
 					</StyledSwiperSlide>
 					<StyledSwiperSlide
 						onClick={() => {
 							router.push('/wadiz');
 						}}
 					>
-						<img src={selectedImage + '5.png'} alt="landing5" />
+						<img src={selectedImage + '2.png'} alt="landing2" />
+					</StyledSwiperSlide>
+					<StyledSwiperSlide>
+						<img src={selectedImage + '3.png'} alt="landing3" />
+					</StyledSwiperSlide>
+					<StyledSwiperSlide>
+						<img src={selectedImage + '4.png'} alt="landing4" />
+					</StyledSwiperSlide>
+					<StyledSwiperSlide>
+						<a href="https://bit.ly/designerbannertomakeclothes" target="_blank" rel="noopener noreferrer">
+							<img src={selectedImage + '5.png'} alt="landing5" />
+						</a>
 					</StyledSwiperSlide>
 				</Swiper>
 			</BannerSection>
