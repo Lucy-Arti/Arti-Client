@@ -7,7 +7,7 @@ import { checkAttendance, checkMonthAttendance, checkConsecutiveAttendance } fro
 
 const VisitMission = () => {
 	const [showModal, setShowModal] = useState(false);
-	const [monthVisit, setMonthVisit] = useState<number>();
+	const [monthVisit, setMonthVisit] = useState<any>();
 	const [consecutiveVisit, setConsecutiveVisit] = useState<number>();
 
 	useEffect(() => {
@@ -66,13 +66,13 @@ const VisitMission = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">390P</div>
+							<div className="text">{monthVisit?.point}P</div>
 						</UserPoint>
 					</Text2>
 				</PointAlert>
 				<BoxTopDesign>
 					<Span>
-						이번 달 출석 <span className="bold">{monthVisit}일</span> 완료
+						이번 달 출석 <span className="bold">{monthVisit?.total}일</span> 완료
 					</Span>
 					<div className="mascot-image">
 						<StyledImage src="/img/visittopimage.png" alt="출석체크 타이틀 마스코트" fill priority />
