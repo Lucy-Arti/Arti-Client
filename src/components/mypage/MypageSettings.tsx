@@ -3,13 +3,15 @@ import React from 'react'
 import Header from '../common/Header'
 import styled from 'styled-components'
 import { FiChevronRight } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
 
 const MypageSettings = () => {
+    const route = useRouter();
   return (
     <>
         <Header where="내 정보 수정" />
         <ArticleWrapper>
-            <ListBox className='with-bottom'>
+            <ListBox className='with-bottom' onClick={() => route.push('/mypage/settings/editprofile')}>
                 <div>프로필 수정</div>
                 <FiChevronRight size="26px" />
             </ListBox>
