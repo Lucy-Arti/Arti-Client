@@ -28,7 +28,7 @@ const MypageBasicView = () => {
 						<BtnWrapper>
 							<BtnStyle onClick={() => route.push('/mypage/voted')}>
 								<img width="35rem" src="/img/mypage-checkfile.png" />
-								<div>투표한 옷</div>
+								<div>투표한 일러스트</div>
 							</BtnStyle>
 							<BtnStyle onClick={() => route.push('/mypage/recent')}>
 								<img width="35rem" src="/img/mypage-collection.png" />

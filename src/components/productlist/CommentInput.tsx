@@ -7,6 +7,7 @@ interface CommentInputProps {
     getFixed:string,
     replyName:string,
     commentId: number|undefined,
+    setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
 }
 
@@ -20,7 +21,7 @@ const CommentInput = (props:CommentInputProps) => {
         if(props.replyName === ''){
             setHolderText('자유롭게 의견을 남겨주세요.');
         } else {
-            setHolderText(`${props.replyName}님에게 답글 남기는 증`);
+            setHolderText(`${props.replyName}님에게 답글 남기는 중`);
         }
     }, [props.replyName])
 
@@ -32,6 +33,14 @@ const CommentInput = (props:CommentInputProps) => {
         }
     }, [inputCmt])
 
+    const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setInputCmt(e.target.value);
+    }
+
+    const resetInput = () => {
+        setInputCmt('');
+    }
+
     const postCmts = async(id:string, content:string, commentId:number|undefined) => {
         if(commentId===undefined) {
             const result = await PostBasicCmts(id, content);
@@ -39,6 +48,9 @@ const CommentInput = (props:CommentInputProps) => {
                 console.log('업로드 실패'); 
             } else {
                 console.log(result.data);
+                // setInputCmt(null);
+                resetInput();
+                props.setReRenderCmts(true);
             }
         } else {
             const result = await PostReply(commentId, content);
@@ -46,6 +58,9 @@ const CommentInput = (props:CommentInputProps) => {
                 console.log('업로드 실패'); 
             } else {
                 console.log(result.data);
+                // setInputCmt(null);
+                resetInput();
+                props.setReRenderCmts(true);
             }
         }
     }
@@ -57,7 +72,8 @@ const CommentInput = (props:CommentInputProps) => {
                 <img src='/img/myProfile-1.png' width='100%' />
             </div>
             <InputBox>
-                <input placeholder={holderText} onChange={(e)=>setInputCmt(e.target.value)} />
+                {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
+                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} />
                 <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>버튼</InputBtn>
             </InputBox>
         </CmtInputWrapper>
