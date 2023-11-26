@@ -19,16 +19,12 @@ type Category = {
 	title: string;
 };
 
-const point = {
-	point: 620,
-};
-
 const ShopMain = () => {
 	const router = useRouter();
 	const [discount, setDiscount] = useState<Category[]>([]);
 	const [arti_item, setArtiItem] = useState<Category[]>([]);
 	const [giftcorn, setGiftcorn] = useState<Category[]>([]);
-	const [monthVisit, setMonthVisit] = useState<any>();
+	const [point, setPoint] = useState<any>();
 
 	const goHistory = () => {
 		router.push('/mypage/shop/history');
@@ -51,20 +47,19 @@ const ShopMain = () => {
 			}
 		};
 		if (localStorage.getItem('access')) {
-			const checkTodayAttendance = async () => {
+			const getPoint = async () => {
 				try {
-					const monthResponse = await checkMonthAttendance();
-					// 이번 달 출석
-					if (monthResponse) {
-						setMonthVisit(monthResponse.data);
+					const result = await checkMonthAttendance();
+					if (result) {
+						setPoint(result.data);
 					} else {
-						console.log('월 출석 데이터 패치 실패');
+						console.log('포인트 데이터 패칭 실패');
 					}
 				} catch (error) {
 					console.error('Error fetching attendance data:', error);
 				}
 			};
-			checkTodayAttendance();
+			getPoint();
 		} else {
 			console.log('Not logged in user');
 		}
@@ -80,7 +75,7 @@ const ShopMain = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">{monthVisit?.point}P</div>
+							<div className="text">{point?.point}P</div>
 						</UserPoint>
 						<HistoryBtn onClick={goHistory}>구매 내역</HistoryBtn>
 					</Text2>
