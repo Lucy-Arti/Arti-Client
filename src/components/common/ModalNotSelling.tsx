@@ -24,7 +24,7 @@ const ModalNotSelling = (props:{setModalIsOpen: React.Dispatch<React.SetStateAct
 						확인
 					</ButtonStyle>
 					<ButtonStyle onClick={(e) => handleCloseModalWithCmt(e)} isRightButton={true}>
-						로그인하기
+						댓글 달기
 					</ButtonStyle>
 				</ButtonWrapper>
 			</ModalStyle>
