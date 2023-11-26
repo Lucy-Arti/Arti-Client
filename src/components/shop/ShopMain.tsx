@@ -162,11 +162,10 @@ const HistoryBtn = styled.div`
 	border-radius: 5.625px;
 	border: 0.563px solid #d9d9d9;
 	color: var(--navbar, #888);
-	font-size: 1.2rem;
+	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
-	margin-top: 1rem;
 	padding: 0.5rem 1rem;
 	cursor: pointer;
 `;
