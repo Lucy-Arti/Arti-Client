@@ -52,6 +52,10 @@ const CommentBox = (props:CommentBoxProps) => {
         }
     }
 
+    const editCmt = async(id:number, type:string) => {
+
+    }
+
   return (
     <CmtWrapper className='inside-wrapper'>
         <CmtBox>
@@ -66,7 +70,7 @@ const CommentBox = (props:CommentBoxProps) => {
             <CmtContentBox>
                 <CmtProfile>
                     <div className='profile-name'>{props.allCmts.member.userName}</div>
-                    <div className='cmt-time'> {`• ${props.allCmts.createdAt}`}</div>
+                    <div className='cmt-time'> {`• ${props.allCmts.createdAt.split('T')[0]}`}</div>
                 </CmtProfile>
                 <div className='content'>{props.allCmts.content}</div>
                 <CmtUtils>
@@ -111,7 +115,7 @@ const CommentBox = (props:CommentBoxProps) => {
                         <CmtContentBox>
                             <CmtProfile>
                                 <div className='profile-name'>{element.member.userName}</div>
-                                <div className='cmt-time'>{` • ${element.createdAt}`}</div>
+                                <div className='cmt-time'>{` • ${element.createdAt.split('T')[0]}`}</div>
                             </CmtProfile>
                             <div className='content'>{element.content}</div>
                             <CmtUtils>
@@ -130,6 +134,7 @@ const CommentBox = (props:CommentBoxProps) => {
                                 </UtilIconTextBox>
                             </CmtUtils>
                         </CmtContentBox>
+                        <StyledVscKebabVertical size="2rem" />
                     </CmtBox>
                 )
             })
@@ -165,10 +170,15 @@ const CmtBox = styled.div`
     & > .profile-box{
         display: flex;
         width: 3rem;
-        height: fit-content;
+        height: 3rem;
         border-radius: 20px;
         background-color: white;
         overflow: hidden;
+        & > img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 `
 
@@ -187,6 +197,7 @@ const CmtProfile = styled.div`
     display: flex;
     flex-direction: row;
     gap: 0.6rem;
+    flex-wrap: wrap;
     & > .profile-name{
         font-size: 1.75rem;
     }
