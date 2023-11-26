@@ -228,13 +228,14 @@ const UserNameWrapper = styled.div`
 
 const UserNameInput = styled.input`
     display: flex;
-    width: 100%;
+    width: 99%;
     border-radius: 6px;
     border : 1px solid #BDBDBD;
     font-size: 2rem;
     color: rgba(56, 56, 56, 1);
     font-weight: 500;
-    padding: 1rem 0.5rem 1rem 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 `
 
 const CompletedBtn = styled.div`
@@ -243,6 +244,7 @@ const CompletedBtn = styled.div`
     justify-content: center;
     align-items: center;
     color: rgba(168, 168, 168, 1);
+    border : 1px solid #F0F0F0;
     font-size: 2rem;
     font-weight: 500;
     border-radius: 0.875rem;
@@ -253,6 +255,7 @@ const CompletedBtn = styled.div`
     &.active{
         color: black;
         background-color: rgba(165, 232, 101, 1);
+        border : 1px solid rgba(165, 232, 101, 1);
         &:hover{
             cursor: pointer;
         }
