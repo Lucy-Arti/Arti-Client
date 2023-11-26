@@ -80,7 +80,6 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 2px solid #f9f9f9;
 	padding: 1.5rem;
 `;
 
@@ -89,7 +88,6 @@ const ExplainWrapper = styled.div`
 	justify-content: space-between;
 	width: 100%;
 	padding: 1.5rem;
-	border-bottom: 2px solid #f9f9f9;
 `;
 
 const TextWrapper = styled.div`
