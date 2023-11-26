@@ -5,6 +5,7 @@ import PointHeader from '../getPoint/PointHeader';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { getProductList } from '@/apis/pointshop';
+import { checkMonthAttendance } from '@/apis/getPoint';
 
 type Category = {
 	brand: string;
@@ -27,6 +28,7 @@ const ShopMain = () => {
 	const [discount, setDiscount] = useState<Category[]>([]);
 	const [arti_item, setArtiItem] = useState<Category[]>([]);
 	const [giftcorn, setGiftcorn] = useState<Category[]>([]);
+	const [monthVisit, setMonthVisit] = useState<any>();
 
 	const goHistory = () => {
 		router.push('/mypage/shop/history');
@@ -48,6 +50,24 @@ const ShopMain = () => {
 				setGiftcorn(giftcornResult.data);
 			}
 		};
+		if (localStorage.getItem('access')) {
+			const checkTodayAttendance = async () => {
+				try {
+					const monthResponse = await checkMonthAttendance();
+					// 이번 달 출석
+					if (monthResponse) {
+						setMonthVisit(monthResponse.data);
+					} else {
+						console.log('월 출석 데이터 패치 실패');
+					}
+				} catch (error) {
+					console.error('Error fetching attendance data:', error);
+				}
+			};
+			checkTodayAttendance();
+		} else {
+			console.log('Not logged in user');
+		}
 		getList();
 	}, []);
 
@@ -60,7 +80,7 @@ const ShopMain = () => {
 					<Text2>
 						<UserPoint>
 							<img src="/img/database.png" />
-							<div className="text">{point.point}P</div>
+							<div className="text">{monthVisit?.point}P</div>
 						</UserPoint>
 						<HistoryBtn onClick={goHistory}>구매 내역</HistoryBtn>
 					</Text2>
