@@ -52,7 +52,7 @@ const Comment = (props:CommentProps) => {
                 </CmtInfo>
                 {
                     allCmts.length === 0 ? 
-                    <div>댓글을 작성해주세요</div>
+                    <div className='no-comments'>아직 댓글이 없습니다.</div>
                     :
                     allCmts.map((element:CmtsType, idx) => {
                         return(
@@ -104,6 +104,13 @@ const CmtWrapper = styled.div`
         margin-bottom: 2rem;
         gap: 2rem;
         align-items: flex-end;
+    }
+    & > .no-comments{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
     }
 `
 

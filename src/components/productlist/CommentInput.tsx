@@ -1,5 +1,7 @@
 import { PostBasicCmts, PostReply } from '@/apis/comments';
+import { userPhotoAtom } from '@/app/recoilContextProvider';
 import React, { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components'
 
 interface CommentInputProps {
@@ -15,6 +17,7 @@ const CommentInput = (props:CommentInputProps) => {
     const [inputCmt, setInputCmt] = useState('');
     const [btnActive, setBtnActive] = useState('');
     const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
+    const userProfile = useRecoilValue(userPhotoAtom);
 
     //button onclick시 내용 없으면 안 넘어가도록
     useEffect(()=>{
@@ -69,7 +72,7 @@ const CommentInput = (props:CommentInputProps) => {
     <FlexColumn className={props.getFixed}>
         <CmtInputWrapper>
             <div className='profile-img'>
-                <img src='/img/myProfile-1.png' width='100%' />
+                <img src={userProfile} width='100%' />
             </div>
             <InputBox>
                 {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
@@ -109,7 +112,13 @@ const CmtInputWrapper = styled.div`
     padding-bottom: 1rem;
     & > .profile-img{
         width: 3rem;
-        height: fit-content;
+        height: 3rem;
+        border-radius: 15px;
+        overflow: hidden;
+        & > img{
+            width: 100%;
+            object-fit: cover;
+        }
     }
 `
 

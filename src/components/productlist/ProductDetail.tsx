@@ -13,12 +13,14 @@ import { BiSolidDiscount } from "react-icons/bi";
 import Comment from './Comment';
 import CommentInput from './CommentInput';
 import { GetAllCmts } from '@/apis/comments';
+import ModalNotSelling from '../common/ModalNotSelling';
 
 const ProductDetail = () => {
 	const withslashpathname  = usePathname();
 	const pathname = withslashpathname.replace('/productlist/', '');
 	const [markState, setMarkState] = useState(false);
 	const [like, setLikeNum] = useState<number | null>(null);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -208,7 +210,7 @@ const ProductDetail = () => {
 
 	const handlePurchaseBtn = () => {
 		if(productDetail?.purchaseLink === null) {
-			console.log('modal 띄우기');
+			setModalIsOpen(true);
 		} else {
 			window.open(productDetail?.purchaseLink, '_blank');
 		}
@@ -223,6 +225,9 @@ const ProductDetail = () => {
 					<Header where="detail" />
 				</FlexColumn>
 			</Fixed>
+			{
+				modalIsOpen === true && <ModalNotSelling setModalIsOpen={setModalIsOpen} onClick={()=>handleTabBtn('comment')} />
+			}
 			<ForBlank />
 			{productDetail && (
 				<>
@@ -265,7 +270,7 @@ const ProductDetail = () => {
 						<></>
 						:
 						<FlexRow className='purchase-wrapper'>
-							<PurchaseBtn onClick={handlePurchaseBtn}>구매하러가기</PurchaseBtn>
+							<PurchaseBtn onClick={handlePurchaseBtn}>댓글 달기</PurchaseBtn>
 							<DiscountBtn>
 								<BiSolidDiscount size='1.6rem' color='rgba(107, 218, 1, 1)' />
 								<div>할인쿠폰</div>
