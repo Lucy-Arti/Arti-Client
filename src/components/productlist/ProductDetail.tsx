@@ -270,7 +270,7 @@ const ProductDetail = () => {
 						<></>
 						:
 						<FlexRow className='purchase-wrapper'>
-							<PurchaseBtn onClick={handlePurchaseBtn}>댓글 달기</PurchaseBtn>
+							<PurchaseBtn onClick={handlePurchaseBtn}>구매하러 가기</PurchaseBtn>
 							<DiscountBtn>
 								<BiSolidDiscount size='1.6rem' color='rgba(107, 218, 1, 1)' />
 								<div>할인쿠폰</div>
