@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Header from '../common/Header'
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
