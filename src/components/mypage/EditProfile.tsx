@@ -74,6 +74,7 @@ const EditProfile = () => {
                         setBtnActivate('');
                     } else {
                         setUserProfile(responseImg.customProfile);
+                        setUserName(responseName.nickName);
                         setEditDone(true);
                     }
                 }
