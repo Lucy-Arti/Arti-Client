@@ -116,7 +116,7 @@ const DesignerDetail = () => {
 						<div className='instagram-noti'>인스타그램에서 새로운 옷들을 발견해 보세요!</div>
 					</DesignerProfile>
 					<div className='designer-profile-img'>
-						<img width="100%" src={designerInfo?.designerProfile === null ? `/img/myProfile-${randomNumFloor}.png` : designerInfo?.designerProfile} />
+						<img src={designerInfo?.designerProfile === null ? `/img/myProfile-${randomNumFloor}.png` : designerInfo?.designerProfile} />
 					</div>
 				</InfoWrapper>
 				<InstaBtn onClick={()=>onClickToExternel(designerInfo?.instagram!)}><FaInstagram size="2rem" />디자이너 인스타그램 구경하기</InstaBtn>
@@ -220,8 +220,16 @@ const InfoWrapper = styled.div`
     margin-top: 2rem;
 	margin-bottom: 1rem;
 	& > .designer-profile-img{
-		width: 18%;
+		width: 8rem;
+		height: 8rem;
+		border-radius: 50px;
+		overflow: hidden;
     	margin-left: 5rem;
+		& > img{
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+		}
 	}
 `;
 const DesignerProfile = styled.div`
