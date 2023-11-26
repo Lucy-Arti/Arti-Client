@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { VscKebabVertical } from 'react-icons/vsc'
 import styled from 'styled-components'
 import {CmtsType} from '@/types/request'
 import {  PostHeartOnReply, PutHeartOnCmt } from '@/apis/comments'
 
 interface CommentBoxProps {
+    allCmts:CmtsType,
+    rerenderCmts:boolean,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
     setCommentId: React.Dispatch<React.SetStateAction<number|undefined>>,
-    allCmts:CmtsType,
+    setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
 const CommentBox = (props:CommentBoxProps) => {
     const [replyOn, setReplyOn] = useState(false);
+
+    useEffect(()=>{
+        setReplyOn(false);
+    }, [props.rerenderCmts === true]);
+    
     const handleReplyClick = (username:string, commentId:number) => {
         if(replyOn===false){
             setReplyOn(true);
@@ -24,9 +31,11 @@ const CommentBox = (props:CommentBoxProps) => {
             props.setCommentId(undefined);
         }
     }
+
     const handleHeartClick = async(id:number, type:string) => {
         if(type === 'comment'){
             const result = await PutHeartOnCmt(id);
+            props.setReRenderCmts(true);
             // if(result === false){
             //     console.log('좋아요 업로드 실패');
             // } else {
@@ -34,6 +43,7 @@ const CommentBox = (props:CommentBoxProps) => {
             // }
         } else {
             const result = await PostHeartOnReply(id);
+            props.setReRenderCmts(true);
             // if(result === false){
             //     console.log('좋아요 업로드 실패');
             // } else {
@@ -41,6 +51,7 @@ const CommentBox = (props:CommentBoxProps) => {
             // }
         }
     }
+
   return (
     <CmtWrapper className='inside-wrapper'>
         <CmtBox>

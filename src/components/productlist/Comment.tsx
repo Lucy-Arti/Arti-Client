@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 import {CgInfo} from 'react-icons/cg'
 import { FiChevronRight } from 'react-icons/fi';
@@ -9,6 +9,8 @@ import CommentBox from './CommentBox';
 
 interface CommentProps{
     pathname:string,
+    rerenderCmts:boolean,
+    setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
     setCommentId:React.Dispatch<React.SetStateAction<number|undefined>>,
 }
@@ -17,6 +19,8 @@ const Comment = (props:CommentProps) => {
     const [allCmts, setAllCmts] = useState<CmtsType[]>();
 
     const viewHeightNum = document.documentElement.clientHeight;
+    const heightRef = useRef<HTMLDivElement>(null);
+
     const getCmts = async() => {
 		const result = await GetAllCmts(props.pathname!);
 		if (result === false) {
@@ -30,10 +34,11 @@ const Comment = (props:CommentProps) => {
     useEffect(() => {
         // console.log(viewHeightNum);
         getCmts();
-    }, []);
+        props.setReRenderCmts(false);
+    }, [props.rerenderCmts === true]);
 
   return (
-    <FlexColumn styledheight={viewHeightNum}>
+    <FlexColumn ref={heightRef} styledheight={viewHeightNum} currentheight={heightRef.current?.offsetHeight!}>
         { allCmts && 
             <>
             <div className='cmt-header'>{`댓글 ${allCmts.length}`}</div>
@@ -51,7 +56,13 @@ const Comment = (props:CommentProps) => {
                     :
                     allCmts.map((element:CmtsType, idx) => {
                         return(
-                            <CommentBox key={idx} setReplyName={props.setReplyName} setCommentId={props.setCommentId} allCmts={element} />
+                            <CommentBox 
+                            key={idx} 
+                            allCmts={element}
+                            rerenderCmts={props.rerenderCmts}
+                            setReplyName={props.setReplyName} 
+                            setCommentId={props.setCommentId} 
+                            setReRenderCmts={props.setReRenderCmts} />
                         );
                     })
                 }
@@ -64,12 +75,12 @@ const Comment = (props:CommentProps) => {
 
 export default Comment
 
-const FlexColumn = styled.div<{styledheight:number}>`
+const FlexColumn = styled.div<{styledheight:number, currentheight:number}>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
     @media (min-height: ${props=>`${props.styledheight}px`}) {
-		height: ${props=>`${props.styledheight}px`};
+		height: ${props=> props.styledheight > props.currentheight ? `${props.styledheight}px` : `${props.currentheight + 110}px`};
 	}
     gap: 2rem;
     & > .cmt-header {
@@ -80,6 +91,7 @@ const FlexColumn = styled.div<{styledheight:number}>`
         font-weight: 600;
         font-size: 2rem;
         padding-bottom: 0;
+        margin-bottom:0;
     }
 `;
 

@@ -30,6 +30,7 @@ const ProductDetail = () => {
 	const [getFixed, setGetFixed] = useState('');
 	const [replyName, setReplyName] = useState('');
 	const [commentId, setCommentId] = useState<number>();
+	const [rerenderCmts, setReRenderCmts] = useState(false);
 
 	// const ref = createRef<HTMLDivElement>();
 	const heightRef = useRef<HTMLDivElement>(null);
@@ -288,17 +289,18 @@ const ProductDetail = () => {
 					<BlankSpace ref={towardCmtRef} />
 					<GapDesign />
 				</HeightWrapper>
-				<div>
-					<Comment 
-						pathname={pathname}
-						setReplyName={setReplyName}
-						setCommentId={setCommentId} />
-				</div>
+				<Comment 
+					pathname={pathname}
+					rerenderCmts={rerenderCmts}
+					setReRenderCmts={setReRenderCmts}
+					setReplyName={setReplyName}
+					setCommentId={setCommentId} />
 				<CommentInput 
 					pathname={pathname}
 					getFixed={getFixed}
 					replyName={replyName}
 					commentId={commentId}
+					setReRenderCmts={setReRenderCmts}
 					setReplyName={setReplyName} />
 				</>
 			)}
