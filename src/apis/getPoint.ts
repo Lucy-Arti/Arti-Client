@@ -101,7 +101,7 @@ export const checkMonthAttendance = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		console.log('이번 달 출석: ', response);
+		// console.log('이번 달 출석: ', response);
 		return response;
 	} catch (error) {
 		console.log(error);

@@ -13,18 +13,22 @@ const LandingHome = () => {
 	const [userName, setUserName] = useRecoilState(userNameAtom);
 
 	useEffect(() => {
-		if (localStorage.getItem('access') && userName === '') {
+		if (localStorage.getItem('access')) {
 			const getUserProfile = async () => {
 				const data = await getUserInfo();
 				console.log(data);
 				setUserEmail(data.email);
-				setUserName(data.userName);
-				setPhoto(data.profile);
-				setRole(data.role);
+				setUserName(data.nickname);
+				if(data.customProfile){
+					setPhoto(data.customProfile);
+				} else {
+					setPhoto(data.profile);
+				}
+				setRole(data.userRole);
 			};
 			getUserProfile();
 		}
-	}, [userName]);
+	}, []);
 
 	return (
 		<>

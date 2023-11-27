@@ -10,6 +10,8 @@ import DesignerTab from './tab/DesignerTab';
 import CommentTab from './tab/CommentTab';
 import PointTab from './tab/PointTab';
 import RequestTab from './tab/RequestTab';
+import { useRecoilState } from 'recoil';
+import { userRoleAtom } from '@/app/recoilContextProvider';
 
 const adminLabels = [
 	{ label: '사용자', type: 'user' },
@@ -22,6 +24,7 @@ const adminLabels = [
 ];
 
 const AdminMain = () => {
+	const [role, setRole] = useRecoilState(userRoleAtom);
 	const router = useRouter();
 	const params = useSearchParams();
 	const type = params.get('type');
@@ -54,25 +57,29 @@ const AdminMain = () => {
 	};
 	return (
 		<>
-			<Section>
-				<Header>
-					<BtnWrapper>
-						<FaHome
-							cursor="pointer"
-							size="26px"
-							onClick={() => {
-								router.push('/');
-							}}
-						/>
-						{adminLabels.map((tabs, index) => (
-							<Btn key={index} onClick={handleClick(tabs.type)}>
-								{tabs.label}
-							</Btn>
-						))}
-					</BtnWrapper>
-				</Header>
-				{renderComponent()}
-			</Section>
+			{role === 'ROLE_ADMIN' ? (
+				<Section>
+					<Header>
+						<BtnWrapper>
+							<FaHome
+								cursor="pointer"
+								size="26px"
+								onClick={() => {
+									router.push('/');
+								}}
+							/>
+							{adminLabels.map((tabs, index) => (
+								<Btn key={index} onClick={handleClick(tabs.type)}>
+									{tabs.label}
+								</Btn>
+							))}
+						</BtnWrapper>
+					</Header>
+					{renderComponent()}
+				</Section>
+			) : (
+				<>잘못된 접근입니다.</>
+			)}
 		</>
 	);
 };
@@ -97,9 +104,9 @@ const Section = styled.div`
 	z-index: 1;
 	overflow: scroll;
 	-webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
 	overflow: visible;
 `;
 
