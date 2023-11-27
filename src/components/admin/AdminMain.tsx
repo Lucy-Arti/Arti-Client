@@ -63,7 +63,7 @@ const AdminMain = () => {
 						<BtnWrapper>
 							<FaHome
 								cursor="pointer"
-								size="26px"
+								size='3rem'
 								onClick={() => {
 									router.push('/');
 								}}
