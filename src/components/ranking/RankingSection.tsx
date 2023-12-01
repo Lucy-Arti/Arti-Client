@@ -69,32 +69,18 @@ const RankingBtnWrapper = styled.div`
 	display: flex;
 	width: 100%;
 	font-size: 2rem;
-	font-weight: 600;
+	font-weight: 500;
 	color: #c6c6c6;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 	margin-top: 2.8rem;
 `;
 
-// const RankingBtn = styled.div<{ active: boolean }>`
-// 	width: 50%;
-// 	display: inline-block;
-// 	font-size: 2rem;
-// 	justify-content: center;
-// 	padding: 1rem;
-// 	border-bottom: 1px solid ${(props) => (props.active ? 'black' : '#c6c6c6')};
-// 	text-align: center;
-// 	color: ${(props) => (props.active ? 'black' : '#c6c6c6')};
-// `;
-
 const RankingBtn = styled.div`
-	width: 50%;
+	width: 100%;
 	display: inline-block;
 	font-size: 2rem;
-	justify-content: center;
-	padding: 1rem;
-	border-bottom: 1px solid black;
-	text-align: center;
+	justify-content: start;
 	color: black;
 `;
 
@@ -161,7 +147,7 @@ const RankingSection = () => {
 						{tabs.label}
 					</RankingBtn>
 				))} */}
-					<RankingBtn>전체 랭킹</RankingBtn>
+					<RankingBtn>실시간 랭킹</RankingBtn>
 				</RankingBtnWrapper>
 				<TotalRank />
 			</RankingSectionWrapper>

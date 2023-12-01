@@ -53,14 +53,14 @@ const UserVoting = () => {
 				}
 			} else {
 				if (progress === 2) {
-					console.log(selectedItems);
+					// console.log(selectedItems);
 					const clothesIdArray = selectedItems.map((item) => item.clothesId);
 					setBody((prevBody) => ({
 						...prevBody,
 						first: clothesIdArray[0], // 4강까지 올라온 아이템 리스트 업데이트
 					}));
 				} else {
-					console.log(selectedItems);
+					// console.log(selectedItems);
 					const clothesIdArray = selectedItems.map((item) => item.clothesId);
 					if (progress === 0) {
 						setBody((prevBody) => ({
@@ -90,7 +90,7 @@ const UserVoting = () => {
 	}, [selectedItems, roundList]);
 
 	useEffect(() => {
-		console.log(apiBody);
+		// console.log(apiBody);
 		if (apiBody.first) {
 			const body = {
 				fourth: apiBody.fourth.filter((id) => !apiBody.second.includes(id)),
@@ -100,7 +100,7 @@ const UserVoting = () => {
 			// console.log(body);
 			postMatchList(body)
 				.then((response) => {
-					console.log('투표결과 전송 완료:', response.data);
+					// console.log('투표결과 전송 완료:', response.data);
 					const encodedData = encodeURIComponent(selectedItems[0].clothesName);
 					setTimeout(() => {
 						route.push(`userPick?p=${encodedData}&id=${selectedItems[0].clothesId}`);

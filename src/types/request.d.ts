@@ -124,6 +124,7 @@ export interface RewardInfoData {
 export type CmtsMemberType = {
 	userName: string,
 	profile: string,
+	customProfile: string|null,
 }
 
 export type ReplyType = {

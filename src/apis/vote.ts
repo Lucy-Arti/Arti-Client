@@ -50,7 +50,7 @@ export const getVoteDataList = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		console.log('대진 옷 불러오기 성공', response);
+		// console.log('대진 옷 불러오기 성공', response);
 		return response;
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
@@ -81,7 +81,7 @@ export const postMatchList = async (body: VoteData) => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		console.log('투표 결과 업데이트', response.data);
+		// console.log('투표 결과 업데이트', response.data);
 		return response.data;
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
