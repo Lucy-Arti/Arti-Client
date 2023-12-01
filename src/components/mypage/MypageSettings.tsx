@@ -26,7 +26,7 @@ const MypageSettings = () => {
 		<>
 			<Header where="내 정보 수정" />
 			<ArticleWrapper>
-				<ListBox className="with-bottom">
+				<ListBox className="with-bottom" onClick={() => router.push('/mypage/settings/editprofile')}>
 					<div>프로필 수정</div>
 					<FiChevronRight size="26px" />
 				</ListBox>
@@ -53,7 +53,7 @@ const ListBox = styled.div`
 	flex-direction: row;
 	width: 90%;
 	justify-content: space-between;
-	padding: 1rem 0rem 1rem 1rem;
+	padding: 2rem 0rem 2rem 1rem;
 	font-size: 2rem;
 	font-weight: 400;
 	&.with-bottom {

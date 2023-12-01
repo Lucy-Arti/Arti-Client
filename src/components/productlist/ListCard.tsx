@@ -79,8 +79,8 @@ const ListCard = (props:CardBoxType) => {
 
   return (
         <CardBox>
-            <ImgBox $preview={props.preview} onClick={() => route.push(`/productlist/${props.clothesId}`)}>
-                {/* <GetHeight onClick={() => (`/${props.clothesId}`)} /> */}
+            <ImgBox $preview={props.preview!}>
+                <GetHeight onClick={() => route.push(`/productlist/${props.clothesId}`)} />
                 <div>
                     {
                         markState === true ?
@@ -110,7 +110,7 @@ const CardBox = styled.div`
     flex-direction: column;
     height: fit-content;
 `
-const ImgBox = styled.div<{$preview: string|null}>`
+const ImgBox = styled.div<{$preview: string}>`
     display: flex;
     border-radius: 10px;
     background-image : ${(props) => `url(${props.$preview})`};
@@ -156,7 +156,7 @@ const ImgDesign = styled.img`
     margin : 1rem;
 `
 const Header = styled.div`
-font-size: 2rem;
-font-weight: 600;
-margin: 1rem 1rem 2rem 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 1rem 2rem 1rem;
 `

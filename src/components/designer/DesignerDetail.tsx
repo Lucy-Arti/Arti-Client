@@ -15,6 +15,8 @@ import {FaInstagram} from 'react-icons/fa'
 type DesignerProfType = {
 	userName: string;
 	introduce: string;
+	instagram: string|null;
+	designerProfile: string|null;
 };
 
 const DesignerDetail = () => {
@@ -28,23 +30,35 @@ const DesignerDetail = () => {
 
 	const [sketchTab, setSketchTab] = useState('active');
 	const [productTab, setProductTab] = useState('');
+	const [currentTab, setCurrentTab] = useState('sketch');
 
 	const [products, setProducts] = useState<ProductType[]>(productList);
-	const [designerProfile, setDesignerProfile] = useState<DesignerProfType>();
+	const [sketches, setSketches] = useState<ProductType[]>(productList);
+	const [designerInfo, setDesignerInfo] = useState<DesignerProfType>();
 
 	const randomNum = Math.random() * 4;
 	const randomNumFloor = Math.floor(randomNum);
+
+	const onClickToExternel = (url: string|null) => {
+		if (url === null) {
+			alert('인스타그램 주소가 없습니다.');
+		} else if (typeof window !== 'undefined') {
+			window.open(url, '_blank');
+		}
+	};
 
 	const handleTabBtn = async(tab:string) => {
 		if(tab === 'sketch') {
 			if(sketchTab === '') {
 				setSketchTab('active');
 				setProductTab('');
+				setCurrentTab('sketch');
 			}
 		} else {
 			if(productTab === '') {
 				setProductTab('active');
 				setSketchTab('');
+				setCurrentTab('product');
 			}
 		}
 	}
@@ -54,7 +68,7 @@ const DesignerDetail = () => {
 		if (result === false) {
 			console.log('불러오기 오류 발생');
 		} else {
-			setDesignerProfile(result.data);
+			setDesignerInfo(result.data);
 		}
 	};
 
@@ -63,7 +77,18 @@ const DesignerDetail = () => {
 		if (result === false) {
 			console.log('불러오기 오류 발생');
 		} else {
-			setProducts(products.concat(result.data));
+			const sketchArr: ProductType[] = [];
+			const productArr: ProductType[] = [];
+			for (let i=0;i<result.data.length;i++){
+				if(result.data[i].type === 'sketch'){
+					sketchArr.push(result.data[i]);
+				} else {
+					setProducts(products.concat(result.data[i]));
+					productArr.push(result.data[i]);
+				}
+			}
+			setProducts(productList.concat(productArr));
+			setSketches(productList.concat(sketchArr));
 		}
 	};
 
@@ -82,7 +107,7 @@ const DesignerDetail = () => {
 					<DesignerProfile>
 						<DesignerBox>
 							<div className='designerName'>
-								{designerProfile?.userName}
+								{designerInfo?.userName}
 							</div>
 							<div>
 								디자이너
@@ -91,16 +116,16 @@ const DesignerDetail = () => {
 						<div className='instagram-noti'>인스타그램에서 새로운 옷들을 발견해 보세요!</div>
 					</DesignerProfile>
 					<div className='designer-profile-img'>
-						<img width="100%" src={`/img/myProfile-${randomNumFloor}.png`} />
+						<img src={designerInfo?.designerProfile === null ? `/img/myProfile-${randomNumFloor}.png` : designerInfo?.designerProfile} />
 					</div>
 				</InfoWrapper>
-				<InstaBtn><FaInstagram size="2rem" />디자이너 인스타그램 구경하기</InstaBtn>
+				<InstaBtn onClick={()=>onClickToExternel(designerInfo?.instagram!)}><FaInstagram size="2rem" />디자이너 인스타그램 구경하기</InstaBtn>
 				<DesignerIntro>
 					<div className='title'>💁 디자이너 소개</div>
 					<IntroBox>
 						<div className='content'>
-							{designerProfile?.introduce &&
-								designerProfile.introduce.split('\n').map((line, index) => (
+							{designerInfo?.introduce &&
+								designerInfo.introduce.split('\n').map((line, index) => (
 								<div key={index}>
 									{line}
 									<br />
@@ -117,24 +142,46 @@ const DesignerDetail = () => {
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<GridWrapper>
-				{products.map((product: ProductType, order: number) => (
-					<SearchCard
-						key={order}
-						clothesId={product.clothesId}
-						createdAt={product.createdAt}
-						updatedAt={product.updatedAt}
-						detailImg={product.detailImg}
-						likeCount={product.likeCount}
-						clothesName={product.clothesName}
-						preview={product.preview}
-						designerId={product.designerId}
-						designerName={product.designerName}
-						score={product.score}
-						setSavedModalIsOpen={setSavedModalIsOpen}
-						setUnsavedModalIsOpen={setUnsavedModalIsOpen}
-						setLoginModalIsOpen={setLoginModalIsOpen}
-					/>
-				))}
+				{
+					currentTab === 'product' ? 
+					products.length !== 0 && products.map((product: ProductType, order: number) => (
+						<SearchCard
+							key={order}
+							clothesId={product.clothesId}
+							createdAt={product.createdAt}
+							updatedAt={product.updatedAt}
+							detailImg={product.detailImg}
+							likeCount={product.likeCount}
+							clothesName={product.clothesName}
+							preview={product.preview}
+							designerId={product.designerId}
+							designerName={product.designerName}
+							score={product.score}
+							setSavedModalIsOpen={setSavedModalIsOpen}
+							setUnsavedModalIsOpen={setUnsavedModalIsOpen}
+							setLoginModalIsOpen={setLoginModalIsOpen}
+						/>
+					))
+					:
+					sketches.length !== 0 && sketches.map((product: ProductType, order: number) => (
+						<SearchCard
+							key={order}
+							clothesId={product.clothesId}
+							createdAt={product.createdAt}
+							updatedAt={product.updatedAt}
+							detailImg={product.detailImg}
+							likeCount={product.likeCount}
+							clothesName={product.clothesName}
+							preview={product.preview}
+							designerId={product.designerId}
+							designerName={product.designerName}
+							score={product.score}
+							setSavedModalIsOpen={setSavedModalIsOpen}
+							setUnsavedModalIsOpen={setUnsavedModalIsOpen}
+							setLoginModalIsOpen={setLoginModalIsOpen}
+						/>
+					))
+				}
 			</GridWrapper>
 			<Footer />
 		</DesignerSection>
@@ -173,8 +220,16 @@ const InfoWrapper = styled.div`
     margin-top: 2rem;
 	margin-bottom: 1rem;
 	& > .designer-profile-img{
-		width: 18%;
+		width: 8rem;
+		height: 8rem;
+		border-radius: 50px;
+		overflow: hidden;
     	margin-left: 5rem;
+		& > img{
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+		}
 	}
 `;
 const DesignerProfile = styled.div`
@@ -264,6 +319,7 @@ const GridBtn = styled.div`
 `
 const GridWrapper = styled.div`
     display: grid;
+	width: 90%;
     margin: 2rem;
     /* border: 1px solid black; */
     grid-template-columns: repeat(2, 1fr);

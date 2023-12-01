@@ -80,15 +80,13 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 2px solid #f9f9f9;
-	padding: 1.5rem;
 `;
 
 const ExplainWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
-	padding: 1.5rem;
+	width: 95%;
+	padding: 1.2rem;
 	border-bottom: 2px solid #f9f9f9;
 `;
 
@@ -121,5 +119,4 @@ const Text2 = styled.div`
 const StyledFiChevronRight = styled(FiChevronRight)`
 	cursor: pointer;
 	margin-top: 0.4rem;
-	margin-right: 3rem;
 `;

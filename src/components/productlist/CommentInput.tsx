@@ -1,5 +1,7 @@
 import { PostBasicCmts, PostReply } from '@/apis/comments';
+import { userPhotoAtom } from '@/app/recoilContextProvider';
 import React, { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components'
 
 interface CommentInputProps {
@@ -7,6 +9,7 @@ interface CommentInputProps {
     getFixed:string,
     replyName:string,
     commentId: number|undefined,
+    setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
 }
 
@@ -14,13 +17,14 @@ const CommentInput = (props:CommentInputProps) => {
     const [inputCmt, setInputCmt] = useState('');
     const [btnActive, setBtnActive] = useState('');
     const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
+    const userProfile = useRecoilValue(userPhotoAtom);
 
     //button onclick시 내용 없으면 안 넘어가도록
     useEffect(()=>{
         if(props.replyName === ''){
             setHolderText('자유롭게 의견을 남겨주세요.');
         } else {
-            setHolderText(`${props.replyName}님에게 답글 남기는 증`);
+            setHolderText(`${props.replyName}님에게 답글 남기는 중`);
         }
     }, [props.replyName])
 
@@ -32,6 +36,14 @@ const CommentInput = (props:CommentInputProps) => {
         }
     }, [inputCmt])
 
+    const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setInputCmt(e.target.value);
+    }
+
+    const resetInput = () => {
+        setInputCmt('');
+    }
+
     const postCmts = async(id:string, content:string, commentId:number|undefined) => {
         if(commentId===undefined) {
             const result = await PostBasicCmts(id, content);
@@ -39,6 +51,9 @@ const CommentInput = (props:CommentInputProps) => {
                 console.log('업로드 실패'); 
             } else {
                 console.log(result.data);
+                // setInputCmt(null);
+                resetInput();
+                props.setReRenderCmts(true);
             }
         } else {
             const result = await PostReply(commentId, content);
@@ -46,6 +61,9 @@ const CommentInput = (props:CommentInputProps) => {
                 console.log('업로드 실패'); 
             } else {
                 console.log(result.data);
+                // setInputCmt(null);
+                resetInput();
+                props.setReRenderCmts(true);
             }
         }
     }
@@ -54,10 +72,11 @@ const CommentInput = (props:CommentInputProps) => {
     <FlexColumn className={props.getFixed}>
         <CmtInputWrapper>
             <div className='profile-img'>
-                <img src='/img/myProfile-1.png' width='100%' />
+                <img src={userProfile} width='100%' />
             </div>
             <InputBox>
-                <input placeholder={holderText} onChange={(e)=>setInputCmt(e.target.value)} />
+                {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
+                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} />
                 <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>버튼</InputBtn>
             </InputBox>
         </CmtInputWrapper>
@@ -93,7 +112,13 @@ const CmtInputWrapper = styled.div`
     padding-bottom: 1rem;
     & > .profile-img{
         width: 3rem;
-        height: fit-content;
+        height: 3rem;
+        border-radius: 15px;
+        overflow: hidden;
+        & > img{
+            width: 100%;
+            object-fit: cover;
+        }
     }
 `
 
