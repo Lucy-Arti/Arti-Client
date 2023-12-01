@@ -1,6 +1,7 @@
 'use client';
 import styled from 'styled-components';
 import { FaInstagram } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const FooterSection = styled.div`
 	width: 100%;
@@ -55,7 +56,26 @@ const TextStyle2 = styled(TextStyle1)`
 	color: #666;
 `;
 
+const Btn = styled.button`
+	width: 120px;
+	height: 45px;
+	background-color: white;
+	color: grey;
+	border: none;
+	border-radius: 10px;
+	display: center;
+	justify-content: center;
+	align-items: center;
+	font-size: 8px;
+	margin-left: 1.9rem;
+	cursor: pointer;
+	&:hover {
+		color: rgba(107, 218, 1, 1);
+	}
+`;
+
 const Footer: React.FC = () => {
+	const route = useRouter();
 	return (
 		<FooterSection>
 			<ContentSection as={TextStyle1}>
@@ -114,6 +134,13 @@ const Footer: React.FC = () => {
 					</a>
 				</span>
 			</ContentSection>
+			<Btn
+				onClick={() => {
+					route.push('/mypage');
+				}}
+			>
+				회원가입 / 로그인
+			</Btn>
 		</FooterSection>
 	);
 };
