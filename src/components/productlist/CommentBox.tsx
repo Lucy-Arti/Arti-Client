@@ -3,6 +3,11 @@ import { VscKebabVertical } from 'react-icons/vsc'
 import styled from 'styled-components'
 import {CmtsType} from '@/types/request'
 import {  PostHeartOnReply, PutHeartOnCmt } from '@/apis/comments'
+import ModalEditComment from '../common/ModalEditComment'
+import { useRecoilValue } from 'recoil'
+import { userNameAtom } from '@/app/recoilContextProvider'
+import ModalCannotEdit from '../common/ModalCannotEdit'
+import CommentEdit from './CommentEdit'
 
 interface CommentBoxProps {
     allCmts:CmtsType,
@@ -15,6 +20,14 @@ interface CommentBoxProps {
 
 const CommentBox = (props:CommentBoxProps) => {
     const [replyOn, setReplyOn] = useState(false);
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [canEdit, setCanEdit] = useState(true);
+    const [editCompoOpen, setEditCompoOpen] = useState(false);
+    const [editIsReply, setEditIsReply] = useState(false);
+    const [forEditId, setForEditId] = useState<number>();
+    const [forEditContent, setForEditContent] = useState('');
+
+    const userName = useRecoilValue(userNameAtom);
 
     useEffect(()=>{
         setReplyOn(false);
@@ -52,19 +65,54 @@ const CommentBox = (props:CommentBoxProps) => {
         }
     }
 
-    const editCmt = async(id:number, type:string) => {
-
+    const checkCanEdit = (name:string, id:number, content:string, isReply:boolean) => {
+        if(name === userName){
+            if(isReply) {
+                setEditIsReply(true);
+            }
+            setForEditId(id);
+            setForEditContent(content);
+            setCanEdit(true);
+            setOpenEditModal(true);
+        } else {
+            setCanEdit(false);
+            setTimeout(() => {
+                setCanEdit(true);
+            }, 1000);
+        }
     }
 
   return (
     <CmtWrapper className='inside-wrapper'>
+        {
+            openEditModal && 
+            <ModalEditComment
+            openEditModal={openEditModal} 
+            setOpenEditModal={setOpenEditModal} 
+            setEditCompoOpen={setEditCompoOpen} />
+        }
+        {
+            canEdit===false && <ModalCannotEdit canEdit={canEdit} setCanEdit={setCanEdit} />
+        }
+        {
+            editCompoOpen && 
+            <CommentEdit 
+            commentId={forEditId!} 
+            content={forEditContent}
+            isReply={editIsReply}
+            setEditCompoOpen={setEditCompoOpen}
+            setReRenderCmts={props.setReRenderCmts} />
+        }
         <CmtBox>
             <div className='profile-box'>
                 {
-                    props.allCmts.member.profile === null ?
+                    (props.allCmts.member.customProfile === null && props.allCmts.member.profile === null )?
                     <img src='/img/myProfile-1.png' width='100%' />
                     :
+                    (props.allCmts.member.customProfile === null ?
                     <img src={props.allCmts.member.profile} width='100%' />
+                    :
+                    <img src={props.allCmts.member.customProfile} width='100%' />)
                 }
             </div>
             <CmtContentBox>
@@ -95,7 +143,7 @@ const CommentBox = (props:CommentBoxProps) => {
                     </UtilIconTextBox>
                 </CmtUtils>
             </CmtContentBox>
-            <StyledVscKebabVertical size="2rem" />
+            <StyledVscKebabVertical size="2rem" onClick={() =>checkCanEdit(props.allCmts.member.userName, props.allCmts.id, props.allCmts.content, false)} />
         </CmtBox>
         {
             props.allCmts.answers.length === 0 ? 
@@ -106,10 +154,13 @@ const CommentBox = (props:CommentBoxProps) => {
                     <CmtBox key={idx} className='reply-box'>
                         <div className='profile-box'>
                         {
-                            element.member.profile === null ?
+                            (element.member.customProfile === null && element.member.profile === null )?
                             <img src='/img/myProfile-1.png' width='100%' />
                             :
+                            (element.member.customProfile === null ?
                             <img src={element.member.profile} width='100%' />
+                            :
+                            <img src={element.member.customProfile} width='100%' />)
                         }
                         </div>
                         <CmtContentBox>
@@ -134,7 +185,7 @@ const CommentBox = (props:CommentBoxProps) => {
                                 </UtilIconTextBox>
                             </CmtUtils>
                         </CmtContentBox>
-                        <StyledVscKebabVertical size="2rem" />
+                        <StyledVscKebabVertical size="2rem" onClick={() => checkCanEdit(element.member.userName, element.id, element.content, true)} />
                     </CmtBox>
                 )
             })

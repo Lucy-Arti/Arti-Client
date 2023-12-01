@@ -1,105 +1,105 @@
-import { PostBasicCmts, PostReply } from '@/apis/comments';
+import { PostReply, editCmt, editReply } from '@/apis/comments';
 import { userPhotoAtom } from '@/app/recoilContextProvider';
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-interface CommentInputProps {
-    pathname:string,
-    getFixed:string,
-    replyName:string,
-    commentId: number|undefined,
-    setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
-    setReplyName:React.Dispatch<React.SetStateAction<string>>,
-}
-
-const CommentInput = (props:CommentInputProps) => {
-    const [inputCmt, setInputCmt] = useState('');
+const CommentEdit = (
+    props:{
+        commentId:number, 
+        content:string,
+        isReply:boolean,
+        setEditCompoOpen:React.Dispatch<React.SetStateAction<boolean>>,
+        setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
+    }) => {
+    const [edittedCmt, setEdittedCmt] = useState(props.content);
     const [btnActive, setBtnActive] = useState('');
-    const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
     const userProfile = useRecoilValue(userPhotoAtom);
+    const totalHeight = document.documentElement.scrollHeight;
 
     //button onclick시 내용 없으면 안 넘어가도록
     useEffect(()=>{
-        if(props.replyName === ''){
-            setHolderText('자유롭게 의견을 남겨주세요.');
-        } else {
-            setHolderText(`${props.replyName}님에게 답글 남기는 중`);
-        }
-    }, [props.replyName])
-
-    useEffect(()=>{
-        if(inputCmt === ''){
+        if(edittedCmt === ''){
             setBtnActive('');
         } else {
             setBtnActive('active');
         }
-    }, [inputCmt])
+    }, [edittedCmt])
 
     const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setInputCmt(e.target.value);
+        setEdittedCmt(e.target.value);
     }
 
-    const resetInput = () => {
-        setInputCmt('');
-    }
-
-    const postCmts = async(id:string, content:string, commentId:number|undefined) => {
-        if(commentId===undefined) {
-            const result = await PostBasicCmts(id, content);
+    const editComment = async(e:React.MouseEvent, id:number, content:string) => {
+        e.stopPropagation();
+        if(props.isReply){
+            const result = await editReply(id, content);
             if(result === false){
                 console.log('업로드 실패'); 
             } else {
                 console.log(result.data);
-                // setInputCmt(null);
-                resetInput();
                 props.setReRenderCmts(true);
             }
+            props.setEditCompoOpen(false);
         } else {
-            const result = await PostReply(commentId, content);
+            const result = await editCmt(id, content);
             if(result === false){
                 console.log('업로드 실패'); 
             } else {
                 console.log(result.data);
-                // setInputCmt(null);
-                resetInput();
                 props.setReRenderCmts(true);
             }
+            props.setEditCompoOpen(false);
         }
     }
 
   return (
-    <FlexColumn className={props.getFixed}>
-        <CmtInputWrapper>
+    <FlexColumn height={totalHeight} onClick={() => props.setEditCompoOpen(false)}>
+        <CmtBackgroundColor>
+        <CmtInputWrapper onClick={(e) => e.stopPropagation()}>
             <div className='profile-img'>
                 <img src={userProfile} width='100%' />
             </div>
             <InputBox>
                 {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
-                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} />
-                <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>입력</InputBtn>
+                <input value={edittedCmt} onChange={(e)=>onChangeInput(e)} />
+                <InputBtn className={btnActive} onClick={(e)=>{editComment(e,props.commentId, edittedCmt)}}>수정</InputBtn>
             </InputBox>
         </CmtInputWrapper>
+        </CmtBackgroundColor>
     </FlexColumn>
   )
 }
 
-export default CommentInput
+export default CommentEdit
 
-const FlexColumn = styled.div`
+const FlexColumn = styled.div<{ height: number }>`
+	position: fixed;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    width: 100%;
-    &.active{
-        position: fixed;
-		bottom: 0px;
-        z-index: 1;
-		@media (min-width: 576px) {
-			width: 576px;
-		}
-    }
+	justify-content: flex-end;
+	width: 100%;
+	top: 0;
+	right: 50%;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	height: ${(props) => props.height};
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 10;
+	@media (min-width: 576px) {
+		width: 576px;
+	}
 `;
+
+const CmtBackgroundColor = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+`
 
 const CmtInputWrapper = styled.div`
     display: flex;
