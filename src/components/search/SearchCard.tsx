@@ -41,7 +41,7 @@ const SearchCard = (props: CardBoxType) => {
 			console.log('불러오기 오류 발생');
 			//나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
 		} else {
-			console.log('post 성공');
+			// console.log('post 성공');
 			if (markState) {
 				setMarkState(false);
 			} else {

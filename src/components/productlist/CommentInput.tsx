@@ -50,7 +50,7 @@ const CommentInput = (props:CommentInputProps) => {
             if(result === false){
                 console.log('업로드 실패'); 
             } else {
-                console.log(result.data);
+                // console.log(result.data);
                 // setInputCmt(null);
                 resetInput();
                 props.setReRenderCmts(true);
@@ -60,7 +60,7 @@ const CommentInput = (props:CommentInputProps) => {
             if(result === false){
                 console.log('업로드 실패'); 
             } else {
-                console.log(result.data);
+                // console.log(result.data);
                 // setInputCmt(null);
                 resetInput();
                 props.setReRenderCmts(true);

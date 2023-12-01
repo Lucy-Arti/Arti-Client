@@ -20,7 +20,7 @@ const VoteMain = () => {
 	const route = useRouter();
 	const handleClick = (page: string) => {
 		if (possible) {
-			console.log('투표가 가능해요');
+			// console.log('투표가 가능해요');
 			route.push(page);
 		} else {
 			alert('1일 1회 투표가 가능해요. 내일 다시 투표해주세요!');

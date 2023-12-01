@@ -44,7 +44,7 @@ const PointTab = () => {
 	const handleSetSelected = (data: PointInfoData) => {
 		const id = data.memberId;
 		setSelectedId(id);
-		console.log(id);
+		// console.log(id);
 		handleModifyModalBtn();
 	};
 	useEffect(() => {
@@ -81,8 +81,8 @@ const PointTab = () => {
 				<></>
 			)} */}
 			<Top>
-				<div className="title">디자이너</div>
-				<Btn onClick={handleUpdateModalBtn}>+등록하기</Btn>
+				<div className="title">포인트</div>
+				<Btn onClick={handleUpdateModalBtn}>+지급하기</Btn>
 			</Top>
 			{pointData ? (
 				<PaginationTable columns={columns} data={pointData} handleSetSelected={handleSetSelected} />

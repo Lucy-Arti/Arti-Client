@@ -76,7 +76,7 @@ const PointGive = ({ handleModalBtn, handleRefresh }: any) => {
 
 
 				<Button type="button" onClick={handleSubmit}>
-					등록하기
+					지급하기
 				</Button>
 			</Form>
 		</ModalSectionWrapper>

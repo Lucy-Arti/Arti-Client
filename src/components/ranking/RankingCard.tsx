@@ -143,7 +143,7 @@ const RankingCard = (props: RankingCardPropsType) => {
 		if (result === false) {
 			console.log('불러오기 오류 발생');
 		} else {
-			console.log('post 성공');
+			// console.log('post 성공');
 			if (markState) {
 				setMarkState(false);
 			} else {
