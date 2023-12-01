@@ -30,7 +30,7 @@ const AdminMain = () => {
 	const type = params.get('type');
 
 	const renderComponent = () => {
-		console.log(type);
+		// console.log(type);
 		switch (type) {
 			case 'user':
 				return <UserTab />;

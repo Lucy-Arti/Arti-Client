@@ -18,7 +18,7 @@ const CommentMission = () => {
 					if (response) {
 						setcommentReward(response.data);
 					} else {
-						console.log('댓글 리워드 get 실패');
+						// console.log('댓글 리워드 get 실패');
 					}
 				} catch (error) {
 					console.error('Error fetching reward data:', error);

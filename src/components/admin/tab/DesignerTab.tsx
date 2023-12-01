@@ -46,7 +46,7 @@ const DesignerTab = () => {
 	const handleSetSelected = (data: DesignerInfoData) => {
 		const id = data.designerId;
 		setSelectedId(id);
-		console.log(id);
+		// console.log(id);
 		handleModifyModalBtn();
 	};
 	useEffect(() => {

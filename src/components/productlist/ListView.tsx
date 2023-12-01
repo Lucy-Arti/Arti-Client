@@ -68,7 +68,7 @@ const ListView = () => {
 				newArr = newArr.concat(element);
 			}
             // setProducts(products.concat(result.data));
-			console.log(newArr);
+			// console.log(newArr);
             setProducts(productList.concat(newArr));
         }
 	}

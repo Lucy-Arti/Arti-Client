@@ -44,7 +44,7 @@ const PointTab = () => {
 	const handleSetSelected = (data: PointInfoData) => {
 		const id = data.memberId;
 		setSelectedId(id);
-		console.log(id);
+		// console.log(id);
 		handleModifyModalBtn();
 	};
 	useEffect(() => {

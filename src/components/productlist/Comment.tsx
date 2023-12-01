@@ -26,7 +26,7 @@ const Comment = (props:CommentProps) => {
 		if (result === false) {
 			console.log('불러오기 오류 발생');
 		} else {
-			console.log(result.data);
+			// console.log(result.data);
             setAllCmts(result.data);
 		}
 	}

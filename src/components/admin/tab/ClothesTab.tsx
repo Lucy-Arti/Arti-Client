@@ -47,7 +47,7 @@ const ClothesTab = () => {
 	const handleSetSelected = (data: ClothesInfoData) => {
 		const id = data.clothesId
 		setSelectedId(id);
-		console.log(id);
+		// console.log(id);
 		handleModifyModalBtn();
 	};
 

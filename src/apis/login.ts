@@ -13,14 +13,14 @@ const baseURL = `https://arti-fashion.shop/`;
 export const postCode = async (body: postCodeBody) => {
 	try {
 		const response = await axios.post(`${baseURL}api/v1/kakao/login`, body);
-		console.log('인가코드 전송 및 전용 토큰 응답');
+		// console.log('인가코드 전송 및 전용 토큰 응답');
 		const accessToken = response.data.accessToken;
 		const refreshToken = response.data.refreshToken;
 
 		localStorage.setItem('access', accessToken);
 		localStorage.setItem('refresh', refreshToken);
 	} catch (error) {
-		console.error('🚨🚨에러 발생 에러 발생 🚨🚨', error);
+		console.error('에러 발생', error);
 		throw error;
 	}
 };
@@ -38,7 +38,7 @@ export const getUserInfo = async () => {
 				},
 			},
 		);
-		console.log('사용자 정보 저장 완료');
+		// console.log('사용자 정보 저장 완료');
 
 		return response.data;
 	} catch (error) {
@@ -58,7 +58,7 @@ export const logout = async () => {
 
 		return result.data;
 	} catch (error) {
-		console.error('🚨🚨에러 발생 에러 발생 🚨🚨', error);
+		console.error('에러 발생', error);
 		throw error;
 	}
 };

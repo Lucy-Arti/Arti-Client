@@ -44,7 +44,7 @@ const RewardTab = () => {
 	const handleSetSelected = (data: RewardInfoData) => {
 		const id = data.id;
 		setSelectedId(id);
-		console.log(id);
+		// console.log(id);
 		handleModifyModalBtn();
 	};
 	useEffect(() => {

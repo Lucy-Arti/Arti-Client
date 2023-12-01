@@ -16,7 +16,7 @@ const LandingHome = () => {
 		if (localStorage.getItem('access')) {
 			const getUserProfile = async () => {
 				const data = await getUserInfo();
-				console.log(data);
+				// console.log(data);
 				setUserEmail(data.email);
 				setUserName(data.nickname);
 				if(data.customProfile){
