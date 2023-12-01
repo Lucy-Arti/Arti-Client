@@ -112,3 +112,37 @@ export const PostHeartOnReply = async(id:number) => {
 		// return false;
 	}
 }
+
+export const editCmt = async(commentId: number, content:string) => {
+	const accessToken = localStorage.getItem('access');
+	const data = {
+		"content":content
+	};
+	try {
+		const response = await axios.put(`${baseURL}api/v2/comment/${commentId}`, data, {
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+		// console.log(response.data);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+
+export const editReply = async(answerId: number, content:string) => {
+	const accessToken = localStorage.getItem('access');
+	const data = {
+		"content":content
+	};
+	try {
+		const response = await axios.put(`${baseURL}api/v2/comment/answer/${answerId}`, data, {
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+		// console.log(response.data);
+		return response;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
