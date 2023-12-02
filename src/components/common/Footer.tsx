@@ -67,7 +67,7 @@ const Btn = styled.button`
 	justify-content: center;
 	align-items: center;
 	font-size: 8px;
-	margin-left: 1.9rem;
+	/* margin-left: 1.9rem; */
 	cursor: pointer;
 	&:hover {
 		color: rgba(107, 218, 1, 1);

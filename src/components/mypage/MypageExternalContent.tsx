@@ -53,6 +53,7 @@ const MenuList = styled.div`
 	}
 	&.last {
 		border-bottom: none;
+		margin-bottom: 12rem;
 	}
 	&:hover {
 		cursor: pointer;
