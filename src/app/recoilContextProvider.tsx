@@ -7,13 +7,13 @@ const { persistAtom } = recoilPersist();
 
 export const isLoginAtom = atom({
 	key: 'isLogin',
-	default: true,
+	default: false,
 	effects_UNSTABLE: [persistAtom],
 });
 
 export const userNameAtom = atom({
 	key: 'userName',
-	default: '1234',
+	default: '',
 	effects_UNSTABLE: [persistAtom],
 });
 
