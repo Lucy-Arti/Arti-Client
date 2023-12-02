@@ -51,7 +51,7 @@ const LandingSection = () => {
 				window.removeEventListener('resize', handleResize);
 			};
 		}
-	}, [window]);
+	}, []);
 
 	const handleClick = (page: string) => {
 		return () => {
