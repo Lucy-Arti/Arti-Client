@@ -37,7 +37,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const LandingSection = () => {
-	const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+	const [windowWidth, setWindowWidth] = useState(0);
 	const router = useRouter();
 
 	const handleResize = () => {
@@ -46,6 +46,7 @@ const LandingSection = () => {
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
+			setWindowWidth(window.innerWidth);
 			window.addEventListener('resize', handleResize);
 			return () => {
 				window.removeEventListener('resize', handleResize);
@@ -60,48 +61,52 @@ const LandingSection = () => {
 	};
 
 	// 화면 너비 576px 이상이면 데스크탑 이미지 사용
-	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : '/img/mobileBanner';
+	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : windowWidth > 0 ? '/img/mobileBanner' : '';
 
 	return (
 		<LandingSectionContainer>
-			<BannerSection>
-				<Swiper
-					grabCursor={true}
-					cubeEffect={{
-						shadow: false,
-						slideShadows: false,
-						shadowOffset: 0,
-						shadowScale: 0,
-					}}
-					effect={'cube'}
-					pagination={true}
-					modules={[EffectCube, Pagination, Autoplay]}
-					className="mySwiper"
-					autoplay={{ delay: 2500, disableOnInteraction: false }}
-				>
-					<StyledSwiperSlide>
-						<img src={selectedImage + '1.png'} alt="landing1" onClick={handleClick(`/vote`)} />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide
-						onClick={() => {
-							router.push('/wadiz');
+			{windowWidth ? (
+				<BannerSection>
+					<Swiper
+						grabCursor={true}
+						cubeEffect={{
+							shadow: false,
+							slideShadows: false,
+							shadowOffset: 0,
+							shadowScale: 0,
 						}}
+						effect={'cube'}
+						pagination={true}
+						modules={[EffectCube, Pagination, Autoplay]}
+						className="mySwiper"
+						autoplay={{ delay: 2500, disableOnInteraction: false }}
 					>
-						<img src={selectedImage + '2.png'} alt="landing2" />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide>
-						<img src={selectedImage + '3.png'} alt="landing3" />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide>
-						<img src={selectedImage + '4.png'} alt="landing4" />
-					</StyledSwiperSlide>
-					<StyledSwiperSlide>
-						<a href="https://bit.ly/designerbannertomakeclothes" target="_blank" rel="noopener noreferrer">
-							<img src={selectedImage + '5.png'} alt="landing5" />
-						</a>
-					</StyledSwiperSlide>
-				</Swiper>
-			</BannerSection>
+						<StyledSwiperSlide>
+							<img src={selectedImage + '1.png'} alt="landing1" onClick={handleClick(`/vote`)} />
+						</StyledSwiperSlide>
+						<StyledSwiperSlide
+							onClick={() => {
+								router.push('/wadiz');
+							}}
+						>
+							<img src={selectedImage + '2.png'} alt="landing2" />
+						</StyledSwiperSlide>
+						<StyledSwiperSlide>
+							<img src={selectedImage + '3.png'} alt="landing3" />
+						</StyledSwiperSlide>
+						<StyledSwiperSlide>
+							<img src={selectedImage + '4.png'} alt="landing4" />
+						</StyledSwiperSlide>
+						<StyledSwiperSlide>
+							<a href="https://bit.ly/designerbannertomakeclothes" target="_blank" rel="noopener noreferrer">
+								<img src={selectedImage + '5.png'} alt="landing5" />
+							</a>
+						</StyledSwiperSlide>
+					</Swiper>
+				</BannerSection>
+			) : (
+				<></>
+			)}
 			<ExplainWrapper>
 				<TextWrapper>
 					<Text1>Arti가 처음이신가요?</Text1>
