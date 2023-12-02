@@ -20,6 +20,7 @@ const Comment = (props:CommentProps) => {
 
     const viewHeightNum = document.documentElement.clientHeight;
     const heightRef = useRef<HTMLDivElement>(null);
+    const currentHeight = heightRef.current?.offsetHeight;
 
     const getCmts = async() => {
 		const result = await GetAllCmts(props.pathname!);
@@ -38,7 +39,7 @@ const Comment = (props:CommentProps) => {
     }, [props.rerenderCmts === true]);
 
   return (
-    <FlexColumn ref={heightRef} styledheight={viewHeightNum} currentheight={heightRef.current?.offsetHeight!}>
+    <FlexColumn ref={heightRef} styledheight={viewHeightNum}>
         { allCmts && 
             <>
             <div className='cmt-header'>{`댓글 ${allCmts.length}`}</div>
@@ -69,18 +70,20 @@ const Comment = (props:CommentProps) => {
             </CmtWrapper>
             </>
         }
+        <div className='empty' />
     </FlexColumn>
   )
 }
 
 export default Comment
 
-const FlexColumn = styled.div<{styledheight:number, currentheight:number}>`
+const FlexColumn = styled.div<{styledheight:number}>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
     @media (min-height: ${props=>`${props.styledheight}px`}) {
-		height: ${props=> props.styledheight > props.currentheight ? `${props.styledheight}px` : `${props.currentheight + 110}px`};
+        min-height: ${props=>`${props.styledheight}px`};
+		height: auto;
 	}
     gap: 2rem;
     & > .cmt-header {
@@ -92,6 +95,10 @@ const FlexColumn = styled.div<{styledheight:number, currentheight:number}>`
         font-size: 2rem;
         padding-bottom: 0;
         margin-bottom:0;
+    }
+    & > .empty {
+        width: 100%;
+        height: 120px;
     }
 `;
 
