@@ -1,4 +1,1 @@
-## Arti-Client
-
-- v.1.0.0 : release/v1 branch
-- v.2.0.0 : release/v2 branch << current
+🔥Lucy의 Arti Project Client 팀 Next.js 마이그레이션 레포지토리 입니다🔥
