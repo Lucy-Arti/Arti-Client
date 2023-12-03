@@ -4,11 +4,15 @@ const baseURL = `https://arti-fashion.shop/`;
 export const GetAllCmts = async (id: string) => {
     const accessToken = localStorage.getItem('access');
 	try {
-		const response = await axios.get(`${baseURL}api/v2/comment/${id}`, {
-			headers: { Authorization: `Bearer ${accessToken}` },
-		});
-		// console.log(response.data);
-		return response;
+		if(accessToken){
+			const response = await axios.get(`${baseURL}api/v2/comment/${id}`, {
+				headers: { Authorization: `Bearer ${accessToken}` },
+			});
+			return response;
+		} else {
+			const response = await axios.get(`${baseURL}api/v2/comment/${id}`);
+			return response;
+		}
 	} catch (error) {
 		console.log(error);
 		return false;

@@ -33,8 +33,8 @@ const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetState
 
 	const onClickInviteEvent = () => {
 		console.log(canAccess);
-		if(canAccess === true){
-			route.push('/invitedby');
+		if(canAccess === false){
+			route.push('/mypage/invitedby');
 		} else {
 			props.setModalOpen(true);
 			setTimeout(() => {
