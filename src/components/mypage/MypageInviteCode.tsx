@@ -157,7 +157,7 @@ const WarningText = styled.div`
 
 const ConfirmBtn = styled.div`
     display: flex;
-    width: 80%;
+    width: 87%;
     height: 6rem;
     justify-content: center;
     align-items: center;
@@ -169,9 +169,8 @@ const ConfirmBtn = styled.div`
     margin-bottom: 5rem;
     position: absolute;
     bottom: 0%;
-    left: 10%;
-    @media (min-width: 576px) {
-		width: 576px;
+    @media (min-width: 512px) {
+		width: 490px;
 	}
     &.active{
         color: black;
