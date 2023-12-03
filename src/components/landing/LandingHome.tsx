@@ -22,7 +22,11 @@ const LandingHome = () => {
 				if(data.customProfile){
 					setPhoto(data.customProfile);
 				} else {
-					setPhoto(data.profile);
+					if(data.profile === "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg") {
+						setPhoto('/img/profile-large.png');
+					} else {
+						setPhoto(data.profile);
+					}
 				}
 				setRole(data.userRole);
 			};
