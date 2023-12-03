@@ -14,6 +14,7 @@ import Comment from './Comment';
 import CommentInput from './CommentInput';
 import { GetAllCmts } from '@/apis/comments';
 import ModalNotSelling from '../common/ModalNotSelling';
+import ModalLogin from '../common/ModalLogin';
 
 const ProductDetail = () => {
 	const withslashpathname  = usePathname();
@@ -21,6 +22,7 @@ const ProductDetail = () => {
 	const [markState, setMarkState] = useState(false);
 	const [like, setLikeNum] = useState<number | null>(null);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -39,6 +41,8 @@ const ProductDetail = () => {
 	const towardCmtRef = useRef<HTMLDivElement>(null);
 	const towardDetailRef = useRef<HTMLDivElement>(null);
 	const commentHeightRef = useRef<HTMLDivElement>(null);
+
+	const route = useRouter();
 
 	// const innerHeight = ref?.current?.clientHeight;
 	// const scrollHeight = ref?.current?.scrollHeight;
@@ -204,7 +208,7 @@ const ProductDetail = () => {
 				postMark();
 			}
 		} else {
-			alert('로그인 후 저장이 가능합니다!');
+			setLoginModalIsOpen(true);
 		}
 	};
 
@@ -216,7 +220,13 @@ const ProductDetail = () => {
 		}
 	}
 
-	const route = useRouter();
+	const handleDiscountBtn = () => {
+		if(isUser) {
+			route.push('/mypage/shop/detail?id=1');
+		} else {
+			setLoginModalIsOpen(true);
+		}
+	}
 
 	return (
 		<>
@@ -227,6 +237,9 @@ const ProductDetail = () => {
 			</Fixed>
 			{
 				modalIsOpen === true && <ModalNotSelling setModalIsOpen={setModalIsOpen} onClick={()=>handleTabBtn('comment')} />
+			}
+			{
+				loginModalIsOpen === true && <ModalLogin setLoginModalIsOpen={setLoginModalIsOpen} />
 			}
 			<ForBlank />
 			{productDetail && (
@@ -271,7 +284,7 @@ const ProductDetail = () => {
 						:
 						<FlexRow className='purchase-wrapper'>
 							<PurchaseBtn onClick={handlePurchaseBtn}>구매하러 가기</PurchaseBtn>
-							<DiscountBtn>
+							<DiscountBtn onClick={handleDiscountBtn}>
 								<BiSolidDiscount size='1.6rem' color='rgba(107, 218, 1, 1)' />
 								<div>할인쿠폰</div>
 							</DiscountBtn>
@@ -299,7 +312,8 @@ const ProductDetail = () => {
 					rerenderCmts={rerenderCmts}
 					setReRenderCmts={setReRenderCmts}
 					setReplyName={setReplyName}
-					setCommentId={setCommentId} />
+					setCommentId={setCommentId}
+					setLoginModalIsOpen={setLoginModalIsOpen} />
 				<CommentInput 
 					pathname={pathname}
 					getFixed={getFixed}
