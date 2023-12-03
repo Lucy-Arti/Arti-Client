@@ -23,6 +23,7 @@ const ProductDetail = () => {
 	const [like, setLikeNum] = useState<number | null>(null);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+	const [loginModalPurpose, setLoginModalPurpose] = useState<string|undefined>(undefined);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -224,6 +225,7 @@ const ProductDetail = () => {
 		if(isUser) {
 			route.push('/mypage/shop/detail?id=1');
 		} else {
+			setLoginModalPurpose('이용');
 			setLoginModalIsOpen(true);
 		}
 	}
@@ -239,7 +241,7 @@ const ProductDetail = () => {
 				modalIsOpen === true && <ModalNotSelling setModalIsOpen={setModalIsOpen} onClick={()=>handleTabBtn('comment')} />
 			}
 			{
-				loginModalIsOpen === true && <ModalLogin setLoginModalIsOpen={setLoginModalIsOpen} />
+				loginModalIsOpen === true && <ModalLogin purpose={loginModalPurpose} setLoginModalIsOpen={setLoginModalIsOpen} />
 			}
 			<ForBlank />
 			{productDetail && (
@@ -313,7 +315,8 @@ const ProductDetail = () => {
 					setReRenderCmts={setReRenderCmts}
 					setReplyName={setReplyName}
 					setCommentId={setCommentId}
-					setLoginModalIsOpen={setLoginModalIsOpen} />
+					setLoginModalIsOpen={setLoginModalIsOpen}
+					setLoginModalPurpose={setLoginModalPurpose} />
 				<CommentInput 
 					pathname={pathname}
 					getFixed={getFixed}

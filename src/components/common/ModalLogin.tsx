@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-const ModalLogin = (props: { setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const ModalLogin = (props: {
+	purpose?:string|undefined,
+	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}) => {
 	const route = useRouter();
 	const totalHeight = document.documentElement.scrollHeight;
 
@@ -10,8 +13,7 @@ const ModalLogin = (props: { setLoginModalIsOpen: React.Dispatch<React.SetStateA
 		<ModalSection height={totalHeight}>
 			<ModalStyle>
 				<Content>
-					로그인 후<br/>
-					저장할 수 있어요
+					{`로그인 후 ${<br />}${props.purpose ? props.purpose : '저장'}할 수 있어요`}
 				</Content>
 				<ButtonWrapper>
 					<ButtonStyle onClick={() => props.setLoginModalIsOpen(false)} isRightButton={false}>

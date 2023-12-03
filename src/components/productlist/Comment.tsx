@@ -17,6 +17,7 @@ interface CommentProps{
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
     setCommentId:React.Dispatch<React.SetStateAction<number|undefined>>,
     setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoginModalPurpose: React.Dispatch<React.SetStateAction<string|undefined>>,
 }
 
 const Comment = (props:CommentProps) => {
@@ -48,6 +49,7 @@ const Comment = (props:CommentProps) => {
         if(isUser){
             route.push('/mypage/point');
         } else {
+            props.setLoginModalPurpose('이용');
             props.setLoginModalIsOpen(true);
         }
     }
