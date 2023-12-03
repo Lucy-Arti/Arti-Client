@@ -1,4 +1,3 @@
-'use client'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Header from '../common/Header';
@@ -9,7 +8,6 @@ import { useRouter } from 'next/navigation';
 
 const MypageInviteCode = () => {
     const userName = useRecoilValue(userNameAtom);
-    const clientHeight = document.documentElement.clientHeight;
     const [inputText, setInputText] = useState('');
     const [btnActive, setBtnActive] = useState(false);
     const [errorOccur, setErrorOccur] = useState(false);
@@ -51,7 +49,7 @@ const MypageInviteCode = () => {
   return (
         goNext === true ? 
         <FlexColumn className='wrapper'>
-            <ContentWrapper className='confirm-wrapper' height={clientHeight}>
+            <ContentWrapper className='confirm-wrapper'>
                 <ConfirmImageWrapper>
                     <div className='img-box'>
                         <img src="/img/check-circle2.png" />
@@ -70,7 +68,7 @@ const MypageInviteCode = () => {
             <Header where="초대코드 입력" />
         </FlexColumn>
         <FlexColumn className='wrapper'>
-                <ContentWrapper height={clientHeight}>
+                <ContentWrapper>
                     <TextInputAllOne>
                         <TextWrapper>
                             <div>{userName} 님을 초대해주신 분의</div>
@@ -108,15 +106,11 @@ const FlexColumn = styled.div`
     }
 `;
 
-const ContentWrapper = styled.div<{height:number}>`
+const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 85%;
-    height: ${props => `${props.height-100}px`};
     justify-content: space-between;
-    &.confirm-wrapper{
-        height: ${props => `${props.height}px`};
-    }
 `
 
 const TextInputAllOne = styled.div`
@@ -163,7 +157,7 @@ const WarningText = styled.div`
 
 const ConfirmBtn = styled.div`
     display: flex;
-    width: 100%;
+    width: 80%;
     height: 6rem;
     justify-content: center;
     align-items: center;
@@ -173,6 +167,12 @@ const ConfirmBtn = styled.div`
     font-size: 2rem;
     font-weight: 500;
     margin-bottom: 5rem;
+    position: absolute;
+    bottom: 0%;
+    left: 10%;
+    @media (min-width: 576px) {
+		width: 576px;
+	}
     &.active{
         color: black;
         background-color: rgba(165, 232, 101, 1);
