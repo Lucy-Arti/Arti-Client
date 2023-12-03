@@ -118,18 +118,7 @@ const EditProfile = () => {
     <Header where="프로필 수정" />
     <ArticleWrapper>
         {
-            // userProfile === '' ? 
-            // <>
-            // <ImgWrapper>
-            //     <img src="/img/profile-large.png" />
-            //     <EditBox className='use-image' htmlFor="input-file">
-            //         <LuCamera size="60%" />
-            //     </EditBox>
-            //     <input type="file" name="image_URL" id="input-file" accept='image/*'
-		    //     style={{ display : "none" }} ref={fileInput} onChange={(e) => handleImage(e)} />
-            // </ImgWrapper>
-            // </>
-            // :
+            image&&
             <ImgBox $userprofile={image}>
                 <EditBox htmlFor="input-file">
                     <LuCamera size="60%" />
