@@ -6,6 +6,9 @@ import { VscKebabVertical } from "react-icons/vsc";
 import { GetAllCmts } from '@/apis/comments';
 import {CmtsType} from '@/types/request'
 import CommentBox from './CommentBox';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/app/recoilContextProvider';
+import { useRouter } from 'next/navigation';
 
 interface CommentProps{
     pathname:string,
@@ -13,6 +16,7 @@ interface CommentProps{
     setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
     setCommentId:React.Dispatch<React.SetStateAction<number|undefined>>,
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const Comment = (props:CommentProps) => {
@@ -21,6 +25,8 @@ const Comment = (props:CommentProps) => {
     const viewHeightNum = document.documentElement.clientHeight;
     const heightRef = useRef<HTMLDivElement>(null);
     const currentHeight = heightRef.current?.offsetHeight;
+    const isUser = useRecoilValue(isLoginAtom);
+    const route = useRouter();
 
     const getCmts = async() => {
 		const result = await GetAllCmts(props.pathname!);
@@ -38,18 +44,26 @@ const Comment = (props:CommentProps) => {
         props.setReRenderCmts(false);
     }, [props.rerenderCmts === true]);
 
+    const handleCommentPointInfo = () => {
+        if(isUser){
+            route.push('/mypage/point');
+        } else {
+            props.setLoginModalIsOpen(true);
+        }
+    }
+
   return (
     <FlexColumn ref={heightRef} styledheight={viewHeightNum}>
         { allCmts && 
             <>
             <div className='cmt-header'>{`댓글 ${allCmts.length}`}</div>
             <CmtWrapper>
-                <CmtInfo>
+                <CmtInfo onClick={handleCommentPointInfo}>
                     <div className='left-side'>
-                        <CgInfo />
+                        <CgInfo size='2rem' color='rgba(147, 147, 147, 1)' />
                         <div>댓글을 작성하고 포인트를 받아보세요!</div>
                     </div>
-                    <FiChevronRight />
+                    <FiChevronRight size='2rem' color='rgba(170, 170, 170, 1)' />
                 </CmtInfo>
                 {
                     allCmts.length === 0 ? 
@@ -129,11 +143,17 @@ const CmtInfo = styled.div`
     font-size: 1.5rem;
     font-weight: 400;
     padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 3rem;
     & > .left-side{
         display: flex;
         flex-direction: row;
         gap: 1rem;
+    }
+    &:hover{
+        cursor: pointer;
     }
 `;
