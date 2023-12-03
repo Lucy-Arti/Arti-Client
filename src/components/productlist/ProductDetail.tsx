@@ -317,7 +317,9 @@ const ProductDetail = () => {
 					setCommentId={setCommentId}
 					setLoginModalIsOpen={setLoginModalIsOpen}
 					setLoginModalPurpose={setLoginModalPurpose} />
-				<CommentInput 
+				{
+					isUser ?
+					<CommentInput 
 					pathname={pathname}
 					getFixed={getFixed}
 					replyName={replyName}
@@ -326,6 +328,10 @@ const ProductDetail = () => {
 					setReRenderCmts={setReRenderCmts}
 					setReplyName={setReplyName}
 					setCommentId={setCommentId} />
+					:
+					<></>
+
+				}
 				</>
 			)}
 		</>

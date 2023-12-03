@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const ModalLogin = (props: {
@@ -8,12 +8,20 @@ const ModalLogin = (props: {
 }) => {
 	const route = useRouter();
 	const totalHeight = document.documentElement.scrollHeight;
+	const [info, setInfo] = useState('저장');
+
+	useEffect(()=>{
+		if(props.purpose){
+			setInfo(props.purpose);
+		}
+	}, [])
 
 	return (
 		<ModalSection height={totalHeight}>
 			<ModalStyle>
 				<Content>
-					{`로그인 후 ${<br />}${props.purpose ? props.purpose : '저장'}할 수 있어요`}
+					{`로그인 후 
+					${info}할 수 있어요`}
 				</Content>
 				<ButtonWrapper>
 					<ButtonStyle onClick={() => props.setLoginModalIsOpen(false)} isRightButton={false}>

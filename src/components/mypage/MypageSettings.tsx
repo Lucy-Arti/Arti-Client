@@ -15,6 +15,8 @@ const MypageSettings = () => {
 	const router = useRouter();
 
 	const logout = () => {
+		localStorage.removeItem('access');
+		localStorage.removeItem('refresh');
 		setUserEmail('');
 		setRole('');
 		setUserEmail('');
