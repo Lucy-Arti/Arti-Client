@@ -31,12 +31,14 @@ const CommentBox = (props:CommentBoxProps) => {
 
     useEffect(()=>{
         setReplyOn(false);
-    }, [props.rerenderCmts === true]);
+        props.setReplyName(() => '');
+        props.setCommentId(() => undefined);
+    }, [props.rerenderCmts]);
     
-    const handleReplyClick = (username:string, commentId:number) => {
+    const handleReplyClick = (nickname:string, commentId:number) => {
         if(replyOn===false){
             setReplyOn(true);
-            props.setReplyName(username);
+            props.setReplyName(nickname);
             props.setCommentId(commentId);
         } else {
             setReplyOn(false);
@@ -135,7 +137,7 @@ const CommentBox = (props:CommentBoxProps) => {
                             props.allCmts.heart === null ? <div>{`좋아요 0`}</div> : <div>{`좋아요 ${props.allCmts.heart}`}</div>
                         }
                     </UtilIconTextBox>
-                    <UtilIconTextBox className='reply-icon' isclicked={replyOn} onClick={() => handleReplyClick(props.allCmts.member.userName, props.allCmts.id)}>
+                    <UtilIconTextBox className='reply-icon' isclicked={replyOn} onClick={() => handleReplyClick(props.allCmts.member.nickname, props.allCmts.id)}>
                         <div className='img-box'>
                             <img src='/img/chat-alt.png' width='100%' />
                         </div>

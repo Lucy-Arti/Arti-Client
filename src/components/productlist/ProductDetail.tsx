@@ -305,8 +305,10 @@ const ProductDetail = () => {
 					getFixed={getFixed}
 					replyName={replyName}
 					commentId={commentId}
+					rerenderCmts={rerenderCmts}
 					setReRenderCmts={setReRenderCmts}
-					setReplyName={setReplyName} />
+					setReplyName={setReplyName}
+					setCommentId={setCommentId} />
 				</>
 			)}
 		</>

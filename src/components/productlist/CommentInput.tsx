@@ -9,8 +9,10 @@ interface CommentInputProps {
     getFixed:string,
     replyName:string,
     commentId: number|undefined,
+    rerenderCmts:boolean,
     setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
+    setCommentId: React.Dispatch<React.SetStateAction<number|undefined>>,
 }
 
 const CommentInput = (props:CommentInputProps) => {
@@ -18,6 +20,12 @@ const CommentInput = (props:CommentInputProps) => {
     const [btnActive, setBtnActive] = useState('');
     const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
     const userProfile = useRecoilValue(userPhotoAtom);
+
+    useEffect(()=>{
+        console.log('commentinput rerender');
+        props.setReplyName(() => '');
+        props.setCommentId(() => undefined);
+    }, [props.rerenderCmts]);
 
     //button onclick시 내용 없으면 안 넘어가도록
     useEffect(()=>{
@@ -42,10 +50,13 @@ const CommentInput = (props:CommentInputProps) => {
 
     const resetInput = () => {
         setInputCmt('');
-        props.setReplyName('');
+        // props.setReplyName('');
+        // props.setCommentId(undefined);
+        // setNewCmtId(() => undefined);
     }
 
     const postCmts = async(id:string, content:string, commentId:number|undefined) => {
+        console.log(id, content, commentId);
         if(commentId===undefined) {
             const result = await PostBasicCmts(id, content);
             if(result === false){
@@ -79,6 +90,7 @@ const CommentInput = (props:CommentInputProps) => {
                 {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
                 <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} />
                 <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>입력</InputBtn>
+                {/* <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, newCmtId)}}>입력</InputBtn> */}
             </InputBox>
         </CmtInputWrapper>
     </FlexColumn>
