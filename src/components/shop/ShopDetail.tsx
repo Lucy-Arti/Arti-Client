@@ -4,6 +4,7 @@ import PointHeader from '../getPoint/PointHeader';
 import styled from 'styled-components';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getProductDetail } from '@/apis/pointshop';
+import { checkMonthAttendance } from '@/apis/getPoint';
 
 type Detail = {
 	brand: string;
@@ -17,20 +18,31 @@ type Detail = {
 	title: string;
 };
 
+type Point = {
+	total: string;
+	point: string;
+};
+
 const ShopDetail = () => {
 	const params = useSearchParams();
 	const id = params.get('id');
 	const router = useRouter();
 	const [active, setActive] = useState(false);
 	const [detail, setDetail] = useState<Detail>();
-	const point = 20000;
+	const [point, setPoint] = useState<any>();
 
 	useEffect(() => {
 		const getDetail = async () => {
 			const result = await getProductDetail(id!);
 			setDetail(result.data);
-			if (point >= Number(result.data?.price)) {
-				setActive(true);
+			const response = await checkMonthAttendance();
+			if (response) {
+				setPoint(response.data.point);
+				if (response.data.point >= Number(result.data?.price)) {
+					setActive(true);
+				}
+			} else {
+				console.log('포인트 데이터 패칭 실패');
 			}
 		};
 		getDetail();

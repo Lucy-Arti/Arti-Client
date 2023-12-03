@@ -31,9 +31,7 @@ export const getProductDetail = async (id: string) => {
 };
 
 export const buyItem = async (body: BuyData) => {
-	// const accessToken = localStorage.getItem('access');
-	const accessToken =
-		'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTgwMTg3Mzc4IiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMDY2NjUyNSwiZXhwIjozMzIwNjY2NTI1fQ.puFN2Y6jGx4E1DUWoOyvqwm0IvwS0TlaGAuNCzuNSPmwfCRBhNN1E-16paJLadLKA6knzzPa3fbGhES9NLICug';
+	const accessToken = localStorage.getItem('access');
 	try {
 		const result = await axios.post(`${baseURL}api/v2/buy`, body, {
 			headers: {
@@ -46,9 +44,7 @@ export const buyItem = async (body: BuyData) => {
 };
 
 export const getBuyList = async () => {
-	// const accessToken = localStorage.getItem('access');
-	const accessToken =
-		'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTgwMTg3Mzc4IiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMDY2NjUyNSwiZXhwIjozMzIwNjY2NTI1fQ.puFN2Y6jGx4E1DUWoOyvqwm0IvwS0TlaGAuNCzuNSPmwfCRBhNN1E-16paJLadLKA6knzzPa3fbGhES9NLICug';
+	const accessToken = localStorage.getItem('access');
 	try {
 		const result = await axios.get(`${baseURL}api/v2/buy`, {
 			headers: {

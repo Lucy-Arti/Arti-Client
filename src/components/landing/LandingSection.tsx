@@ -107,17 +107,16 @@ const LandingSection = () => {
 			) : (
 				<></>
 			)}
-			<ExplainWrapper>
+			<ExplainWrapper
+				onClick={() => {
+					router.push('/introduce');
+				}}
+			>
 				<TextWrapper>
 					<Text1>Arti가 처음이신가요?</Text1>
 					<Text2>Arti를 소개합니다.</Text2>
 				</TextWrapper>
-				<StyledFiChevronRight
-					size="26px"
-					onClick={() => {
-						router.push('/introduce');
-					}}
-				/>
+				<StyledFiChevronRight size="26px" />
 			</ExplainWrapper>
 		</LandingSectionContainer>
 	);
@@ -132,6 +131,7 @@ const ExplainWrapper = styled.div`
 	padding: 2rem;
 	border-radius: 1.25rem;
 	background: #f0f0f0;
+	cursor: pointer;
 `;
 
 const TextWrapper = styled.div`
@@ -155,11 +155,11 @@ const Text2 = styled.div`
 	display: flex;
 	color: black;
 	font-size: 2rem;
+	font-family: 'Pretendard Variable' !important;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 0.2rem;
 	font-weight: 600;
-	font-family: 'Pretendard Variable';
 `;
 
 const StyledFiChevronRight = styled(FiChevronRight)`
