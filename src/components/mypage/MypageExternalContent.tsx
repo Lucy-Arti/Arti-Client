@@ -10,12 +10,12 @@ const MypageExternalContent = () => {
 
 	return (
 		<ColumnSort>
-			<MenuList>
-				<div className="text" onClick={() => onClickToExternel('https://lucy-team.notion.site/EVENT-b3be6ffb61b847e1a418e4bb9d6cb121')}>이벤트</div>
+			<MenuList onClick={() => onClickToExternel('https://lucy-team.notion.site/EVENT-b3be6ffb61b847e1a418e4bb9d6cb121')}>
+				<div className="text">이벤트</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
-			<MenuList>
-				<div className="text" onClick={() => onClickToExternel('https://lucy-team.notion.site/FAQ-6c7d647e96374577be3f817adbde5637')}>자주 묻는 질문</div>
+			<MenuList onClick={() => onClickToExternel('https://lucy-team.notion.site/FAQ-6c7d647e96374577be3f817adbde5637')}>
+				<div className="text">자주 묻는 질문</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
 			<MenuList onClick={() => onClickToExternel('https://arti.channel.io/home')}>

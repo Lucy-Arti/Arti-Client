@@ -31,12 +31,14 @@ const CommentBox = (props:CommentBoxProps) => {
 
     useEffect(()=>{
         setReplyOn(false);
-    }, [props.rerenderCmts === true]);
+        props.setReplyName(() => '');
+        props.setCommentId(() => undefined);
+    }, [props.rerenderCmts]);
     
-    const handleReplyClick = (username:string, commentId:number) => {
+    const handleReplyClick = (nickname:string, commentId:number) => {
         if(replyOn===false){
             setReplyOn(true);
-            props.setReplyName(username);
+            props.setReplyName(nickname);
             props.setCommentId(commentId);
         } else {
             setReplyOn(false);
@@ -117,7 +119,7 @@ const CommentBox = (props:CommentBoxProps) => {
             </div>
             <CmtContentBox>
                 <CmtProfile>
-                    <div className='profile-name'>{props.allCmts.member.userName}</div>
+                    <div className='profile-name'>{props.allCmts.member.nickname}</div>
                     <div className='cmt-time'> {`• ${props.allCmts.createdAt.split('T')[0]}`}</div>
                 </CmtProfile>
                 <div className='content'>{props.allCmts.content}</div>
@@ -135,7 +137,7 @@ const CommentBox = (props:CommentBoxProps) => {
                             props.allCmts.heart === null ? <div>{`좋아요 0`}</div> : <div>{`좋아요 ${props.allCmts.heart}`}</div>
                         }
                     </UtilIconTextBox>
-                    <UtilIconTextBox className='reply-icon' isclicked={replyOn} onClick={() => handleReplyClick(props.allCmts.member.userName, props.allCmts.id)}>
+                    <UtilIconTextBox className='reply-icon' isclicked={replyOn} onClick={() => handleReplyClick(props.allCmts.member.nickname, props.allCmts.id)}>
                         <div className='img-box'>
                             <img src='/img/chat-alt.png' width='100%' />
                         </div>
@@ -143,7 +145,7 @@ const CommentBox = (props:CommentBoxProps) => {
                     </UtilIconTextBox>
                 </CmtUtils>
             </CmtContentBox>
-            <StyledVscKebabVertical size="2rem" onClick={() =>checkCanEdit(props.allCmts.member.userName, props.allCmts.id, props.allCmts.content, false)} />
+            <StyledVscKebabVertical size="2rem" onClick={() =>checkCanEdit(props.allCmts.member.nickname, props.allCmts.id, props.allCmts.content, false)} />
         </CmtBox>
         {
             props.allCmts.answers.length === 0 ? 
@@ -165,7 +167,7 @@ const CommentBox = (props:CommentBoxProps) => {
                         </div>
                         <CmtContentBox>
                             <CmtProfile>
-                                <div className='profile-name'>{element.member.userName}</div>
+                                <div className='profile-name'>{element.member.nickname}</div>
                                 <div className='cmt-time'>{` • ${element.createdAt.split('T')[0]}`}</div>
                             </CmtProfile>
                             <div className='content'>{element.content}</div>
@@ -185,7 +187,7 @@ const CommentBox = (props:CommentBoxProps) => {
                                 </UtilIconTextBox>
                             </CmtUtils>
                         </CmtContentBox>
-                        <StyledVscKebabVertical size="2rem" onClick={() => checkCanEdit(element.member.userName, element.id, element.content, true)} />
+                        <StyledVscKebabVertical size="2rem" onClick={() => checkCanEdit(element.member.nickname, element.id, element.content, true)} />
                     </CmtBox>
                 )
             })
