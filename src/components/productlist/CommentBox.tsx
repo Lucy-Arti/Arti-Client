@@ -108,7 +108,7 @@ const CommentBox = (props:CommentBoxProps) => {
         <CmtBox>
             <div className='profile-box'>
                 {
-                    (props.allCmts.member.customProfile === null && props.allCmts.member.profile === null )?
+                    (props.allCmts.member.customProfile === null && props.allCmts.member.profile === "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg" )?
                     <img src='/img/myProfile-1.png' width='100%' />
                     :
                     (props.allCmts.member.customProfile === null ?
@@ -156,7 +156,7 @@ const CommentBox = (props:CommentBoxProps) => {
                     <CmtBox key={idx} className='reply-box'>
                         <div className='profile-box'>
                         {
-                            (element.member.customProfile === null && element.member.profile === null )?
+                            (element.member.customProfile === null && element.member.profile === "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg" )?
                             <img src='/img/myProfile-1.png' width='100%' />
                             :
                             (element.member.customProfile === null ?
