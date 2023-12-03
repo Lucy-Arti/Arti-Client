@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const MypageInviteCode = () => {
     const userName = useRecoilValue(userNameAtom);
-    const clientHeight = document.documentElement.clientHeight;
+    const clientHeight = document.documentElement.scrollHeight;
     const [inputText, setInputText] = useState('');
     const [btnActive, setBtnActive] = useState(false);
     const [errorOccur, setErrorOccur] = useState(false);
