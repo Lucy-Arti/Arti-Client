@@ -6,7 +6,6 @@ const baseURL = `https://arti-fashion.shop/`;
 export const postCode = async (body: postCodeBody) => {
 	try {
 		const response = await axios.post(`${baseURL}api/v1/kakao/login`, body);
-		// console.log('인가코드 전송 및 전용 토큰 응답');
 		const accessToken = response.data.accessToken;
 		const refreshToken = response.data.refreshToken;
 
@@ -31,7 +30,6 @@ export const getUserInfo = async () => {
 				},
 			},
 		);
-		// console.log('사용자 정보 저장 완료');
 
 		return response.data;
 	} catch (error) {

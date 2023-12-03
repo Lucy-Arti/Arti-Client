@@ -5,7 +5,6 @@ const baseURL = `https://arti-fashion.shop/`;
 export const GetAllProductLists = async () => {
 	try {
 		const response = await axios.get(`${baseURL}api/v1/clothes`);
-		// console.log(response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -16,7 +15,6 @@ export const GetAllProductLists = async () => {
 export const GetProductDetail = async (id: string) => {
 	try {
 		const response = await axios.get(`${baseURL}api/v1/clothes/${id}`);
-		// console.log(response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -28,7 +26,6 @@ export const GetProductDetailByUser = async (id: string, token: string | null) =
 		const response = await axios.get(`${baseURL}api/v1/recent/${id}`, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
-		// console.log(response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -41,7 +38,6 @@ export const getMarked = async (id: number | string, token: string | null) => {
 		const response = await axios.get(`${baseURL}api/v1/likes/${id}/member`, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
-		// console.log(response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -55,7 +51,6 @@ export const postMarked = async (id: number | string, token: string | null) => {
 		const response = await axios.post(`${baseURL}api/v1/likes/${id}`, data, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
-		// console.log(response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -63,16 +58,15 @@ export const postMarked = async (id: number | string, token: string | null) => {
 	}
 };
 
-export const getAllProductByType = async(type:string) => {
+export const getAllProductByType = async (type: string) => {
 	const accessToken = localStorage.getItem('access');
 	try {
 		const response = await axios.get(`${baseURL}api/v1/clothes/type/${type}`, {
 			headers: { Authorization: `Bearer ${accessToken}` },
 		});
-		// console.log(response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
 		return false;
 	}
-}
+};
