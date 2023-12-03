@@ -19,7 +19,7 @@ const LandingHome = () => {
 				// console.log(data);
 				setUserEmail(data.email);
 				setUserName(data.nickname);
-				if(data.customProfile){
+				if(data.customProfile !== null){
 					setPhoto(data.customProfile);
 				} else {
 					if(data.profile === "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg") {
