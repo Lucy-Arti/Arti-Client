@@ -3,13 +3,6 @@ import axios from 'axios';
 
 const baseURL = `https://arti-fashion.shop/`;
 
-// export const postCode = (body: object) => {
-// 	const data = axios
-// 		.post(`http://lucy-arti.kro.kr:8080/auth/kakao/login`, body)
-// 		.then((res) => console.log(res))
-// 		.catch((err) => console.log(err));
-// };
-
 export const postCode = async (body: postCodeBody) => {
 	try {
 		const response = await axios.post(`${baseURL}api/v1/kakao/login`, body);
