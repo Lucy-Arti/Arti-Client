@@ -42,6 +42,7 @@ const CommentInput = (props:CommentInputProps) => {
 
     const resetInput = () => {
         setInputCmt('');
+        props.setReplyName('');
     }
 
     const postCmts = async(id:string, content:string, commentId:number|undefined) => {

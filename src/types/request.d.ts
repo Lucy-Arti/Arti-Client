@@ -125,6 +125,7 @@ export type CmtsMemberType = {
 	userName: string,
 	profile: string,
 	customProfile: string|null,
+	nickname: string,
 }
 
 export type ReplyType = {
