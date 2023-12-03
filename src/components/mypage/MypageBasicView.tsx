@@ -10,15 +10,21 @@ import styled from "styled-components";
 import MypageProfile from "./MypageProfile";
 import MypagePointUtils from "./MypagePointUtils";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import ModalCannotInvite from "../common/ModalCannotInvite";
 
 const MypageBasicView = () => {
     const isLogin = useRecoilValue(isLoginAtom);
+	const [modalOpen, setModalOpen] = useState(false);
 	const route = useRouter();
 
   return (
     <>
 			<Header where="main" />
 			<NavBar />
+			{
+				modalOpen && <ModalCannotInvite />
+			}
 			{
 				(isLogin) ? 
 				<ArticleWrapper>
@@ -41,7 +47,7 @@ const MypageBasicView = () => {
 						</BtnWrapper>
 					</ColumnWithWidthSort>
 					<div className="mypage-gap" />
-					<MypageExternalContent />
+					<MypageExternalContent setModalOpen={setModalOpen} />
 				</ArticleWrapper>
 				:
 				<div>

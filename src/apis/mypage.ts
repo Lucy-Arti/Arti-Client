@@ -93,3 +93,31 @@ export const EditProfileImg = async(data:FormData) => {
         return false;
     }
 }
+
+export const CanInvite = async() => {
+    const accessToken = localStorage.getItem('access');
+    try{
+        const response = await axios.get(`${baseURL}api/v2/point/invited`,{
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+        return response;
+    } catch(error) {
+        return false;
+    }
+}
+
+export const PostInviteCode = async(inviteCode:string) => {
+    const data = {
+        "code": inviteCode,
+    }
+    const accessToken = localStorage.getItem('access');
+    try {
+		const response = await axios.post(`${baseURL}api/v2/point/invited`, data, {
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+		return response.data;
+    
+	} catch (error) {
+        return false;
+    }
+}

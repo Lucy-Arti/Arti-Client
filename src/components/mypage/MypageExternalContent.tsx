@@ -1,12 +1,47 @@
+'use client'
+import { CanInvite } from '@/apis/mypage';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import styled from 'styled-components';
+import ModalCannotInvite from '../common/ModalCannotInvite';
 
-const MypageExternalContent = () => {
+const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetStateAction<boolean>>}) => {
+	const route = useRouter();
+	const [canAccess, setCanAccess] = useState<boolean>(false);
+
+	useEffect(() => {
+		canInvite();
+	}, [])
+
 	const onClickToExternel = (url: string) => {
 		if (typeof window !== 'undefined') {
 			window.open(url, '_blank');
 		}
 	};
+
+	const canInvite = async() => {
+		const response = await CanInvite();
+		if(response === false){
+			console.log("api 연결 실패");
+		} else {
+			console.log('response 받음')
+			setCanAccess(response.data);
+			console.log(response.data);
+		}
+	}
+
+	const onClickInviteEvent = () => {
+		console.log(canAccess);
+		if(canAccess === true){
+			route.push('/invitedby');
+		} else {
+			props.setModalOpen(true);
+			setTimeout(() => {
+                props.setModalOpen(false);
+            }, 1000);
+		}
+	}
 
 	return (
 		<ColumnSort>
@@ -22,7 +57,7 @@ const MypageExternalContent = () => {
 				<div className="text">1:1문의</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
-			<MenuList>
+			<MenuList onClick={onClickInviteEvent}>
 				<div className="text">초대코드 입력</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
