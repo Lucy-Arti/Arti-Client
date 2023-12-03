@@ -111,9 +111,9 @@ const CmtInputWrapper = styled.div`
     padding-top: 1rem;
     padding-bottom: 1rem;
     & > .profile-img{
-        width: 3rem;
-        height: 3rem;
-        border-radius: 15px;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 20px;
         overflow: hidden;
         & > img{
             width: 100%;
@@ -124,18 +124,18 @@ const CmtInputWrapper = styled.div`
 
 const InputBox = styled.div`
     display: flex;
-    width: 90%;
+    width: 87%;
     flex-direction: row;
     align-items: center;
     border: 1px solid rgba(168, 168, 168, 1);
     border-radius: 5px;
-    height: 4.5rem;
+    height: 5rem;
     & > input{
         width: 80%;
         padding-left: 1rem;
         border: none;
         height: fit-content;
-        font-size: 1.5rem;
+        font-size: 2rem;
         &:focus{
             outline: none;
         }
@@ -145,10 +145,10 @@ const InputBox = styled.div`
 const InputBtn = styled.div`
     display: flex;
     width: 15%;
-    height: 2.5rem;
+    height: 3rem;
     border: none;
     border-radius: 5px;
-    font-size: 1.5rem;
+    font-size: 2rem;
     align-items: center;
     justify-content: center;
     background-color: rgba(240, 240, 240, 1);
