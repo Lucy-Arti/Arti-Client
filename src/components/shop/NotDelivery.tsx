@@ -3,11 +3,23 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import DeliveryHeader from './DeliveryHeader';
-// import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { buyItem } from '@/apis/pointshop';
+
+interface BuyData {
+	name: string;
+	address?: string;
+	phoneNumber: string;
+	delivery: boolean;
+	itemId: number;
+}
 
 const NotDelivery = () => {
 	const [name, setName] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
+	const params = useSearchParams();
+	const id = params.get('id');
+	const router = useRouter();
 
 	const isButtonActive = name && phoneNumber;
 
@@ -19,8 +31,25 @@ const NotDelivery = () => {
 		setPhoneNumber(e.target.value);
 	};
 
-	const handleSubmit = () => {
-		// 구매하기 버튼을 클릭했을 때 실행되는 로직 작성
+	const handleSubmit = async () => {
+		if (isButtonActive) {
+			const buyData: BuyData = {
+				name: name,
+				phoneNumber: phoneNumber,
+				delivery: true,
+				itemId: Number(id),
+			};
+			try {
+				const handleUnload = (e: BeforeUnloadEvent) => {
+					e.preventDefault();
+				};
+				window.removeEventListener('beforeunload', handleUnload);
+				await buyItem(buyData);
+				router.push('/mypage/shop/success');
+			} catch (error) {
+				alert('구매에 실패했습니다.');
+			}
+		}
 	};
 
 	useEffect(() => {
@@ -37,7 +66,7 @@ const NotDelivery = () => {
 
 	return (
 		<>
-			<DeliveryHeader text="배송 정보 입력" />
+			<DeliveryHeader text="구매 정보 입력" />
 			<Wrapper>
 				<InputSection>
 					<Text1>이름</Text1>

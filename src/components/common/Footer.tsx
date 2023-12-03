@@ -70,7 +70,9 @@ const Btn = styled.button`
 	/* margin-left: 1.9rem; */
 	cursor: pointer;
 	&:hover {
-		color: rgba(107, 218, 1, 1);
+		/* color: rgba(107, 218, 1, 1); */
+		background-color: grey;
+		color: white;
 	}
 `;
 
@@ -136,7 +138,7 @@ const Footer: React.FC = () => {
 			</ContentSection>
 			<Btn
 				onClick={() => {
-					route.push('/mypage');
+					route.push('/signup');
 				}}
 			>
 				회원가입 / 로그인
