@@ -26,7 +26,7 @@ const Wadiz = () => {
 						더 자세한 아티 소개가 궁금하신가요? (클릭)
 					</Text>
 					<a href="https://bit.ly/greenbannertomakeclothes" target="_black" rel="noopener noreferrer">
-						<Text>아티와 함꼐 옷을 제작해보고 싶으신가요? (클릭)</Text>
+						<Text>아티와 함께 옷을 제작해보고 싶으신가요? (클릭)</Text>
 					</a>
 					<a href="https://bit.ly/greenbannertorecruit" target="_black" rel="noopener noreferrer">
 						<Text>아티 팀에 합류하고 싶으신가요? (클릭)</Text>
@@ -95,4 +95,5 @@ const Text = styled.div`
 	line-height: 2.375rem;
 	letter-spacing: -0.05613rem;
 	margin-bottom: 1rem;
+	cursor: pointer;
 `;

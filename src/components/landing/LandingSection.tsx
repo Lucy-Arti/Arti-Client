@@ -63,6 +63,12 @@ const LandingSection = () => {
 	// 화면 너비 576px 이상이면 데스크탑 이미지 사용
 	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : windowWidth > 0 ? '/img/mobileBanner' : '';
 
+	const onClickToExternel = (url: string) => {
+		if (typeof window !== 'undefined') {
+			window.open(url, '_blank');
+		}
+	};
+
 	return (
 		<LandingSectionContainer>
 			{windowWidth ? (
@@ -91,16 +97,18 @@ const LandingSection = () => {
 						>
 							<img src={selectedImage + '2.png'} alt="landing2" />
 						</StyledSwiperSlide>
-						<StyledSwiperSlide>
+						<StyledSwiperSlide
+							onClick={() => {
+								router.push('/introduce');
+							}}
+						>
 							<img src={selectedImage + '3.png'} alt="landing3" />
 						</StyledSwiperSlide>
 						<StyledSwiperSlide>
 							<img src={selectedImage + '4.png'} alt="landing4" />
 						</StyledSwiperSlide>
-						<StyledSwiperSlide>
-							<a href="https://bit.ly/designerbannertomakeclothes" target="_blank" rel="noopener noreferrer">
-								<img src={selectedImage + '5.png'} alt="landing5" />
-							</a>
+						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
+							<img src={selectedImage + '5.png'} alt="landing5" />
 						</StyledSwiperSlide>
 					</Swiper>
 				</BannerSection>
@@ -160,6 +168,9 @@ const Text2 = styled.div`
 	align-items: center;
 	margin-bottom: 0.2rem;
 	font-weight: 600;
+	@media screen and (max-width: 768px) {
+		font-family: 'Pretendard Variable' !important;
+	}
 `;
 
 const StyledFiChevronRight = styled(FiChevronRight)`
