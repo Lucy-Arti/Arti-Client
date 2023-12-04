@@ -46,7 +46,7 @@ const Text1 = styled.div`
 	color: var(--black, #383838);
 	font-weight: 600;
 	font-size: 2.7rem;
-	font-style: 'Pretendard Variable';
+	font-style: 'Pretendard';
 	padding-left: 2rem;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
