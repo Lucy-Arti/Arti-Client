@@ -63,9 +63,6 @@ const RewardState = ({ handleModalBtn, rewardData, handleRefresh, dataId }: any)
 
 	return (
 		<ModalSectionWrapper handleModalBtn={handleModalBtn} totalHeight={totalHeight}>
-			<CloseButton onClick={handleModalBtn}>
-				<div className="close">X</div>
-			</CloseButton>
 			<Form>
 				<Row>
 					<Label htmlFor="status">현재상태 :</Label>

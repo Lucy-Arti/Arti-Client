@@ -98,9 +98,6 @@ const ClotheModify = ({ handleModalBtn, designerData, handleRefresh, dataId }: a
 
 	return (
 		<ModalSectionWrapper handleModalBtn={handleModalBtn} totalHeight={totalHeight}>
-			<CloseButton onClick={handleModalBtn}>
-				<div className="close">X</div>
-			</CloseButton>
 			<Form>
 				<Row>
 					<Label htmlFor="type">구분</Label>
