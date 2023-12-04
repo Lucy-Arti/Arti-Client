@@ -68,15 +68,15 @@ const CommentEdit = (
   return (
     <FlexColumn height={totalHeight} onClick={() => props.setEditCompoOpen(false)}>
         <CmtBackgroundColor>
-        <CmtInputWrapper onClick={(e) => e.stopPropagation()}>
-            <div className='profile-img'>
-                <img src={userProfile} width='100%' />
-            </div>
-            <InputBox>
-                <input value={edittedCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)} />
-                <InputBtn className={btnActive} onClick={(e)=>{editCommentWithBtn(e,props.commentId, edittedCmt)}}>수정</InputBtn>
-            </InputBox>
-        </CmtInputWrapper>
+            <CmtInputWrapper onClick={(e) => e.stopPropagation()}>
+                <div className='profile-img'>
+                    <img src={userProfile} width='100%' />
+                </div>
+                <InputBox>
+                    <input value={edittedCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)} />
+                    <InputBtn className={btnActive} onClick={(e)=>{editCommentWithBtn(e,props.commentId, edittedCmt)}}>수정</InputBtn>
+                </InputBox>
+            </CmtInputWrapper>
         </CmtBackgroundColor>
     </FlexColumn>
   )
@@ -121,6 +121,7 @@ const CmtInputWrapper = styled.div`
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    margin-bottom: 4rem;
     & > .profile-img{
         width: 4rem;
         height: 4rem;

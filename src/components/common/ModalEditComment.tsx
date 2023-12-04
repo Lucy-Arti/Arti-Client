@@ -34,7 +34,9 @@ const ModalEditComment = (
 
 	return (
 		<ModalSection height={totalHeight} onClick={() => props.setOpenEditModal(false)}>
-			<ModalStyle onClick={(e) => handleOnClickEdit(e)}>댓글 수정</ModalStyle>
+			<ModalBackGround>
+				<ModalStyle onClick={(e) => handleOnClickEdit(e)}>댓글 수정</ModalStyle>
+			</ModalBackGround>
 		</ModalSection>
 	);
 }
@@ -60,24 +62,27 @@ const ModalSection = styled.div<{ height: number }>`
 		width: 576px;
 	}
 `;
+
+const ModalBackGround = styled.div`
+	display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+`
 const ModalStyle = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: fit-content;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	font-weight: bold;
 	color: rgba(241, 0, 0, 1);
 	background-color: white;
-	opacity: 90%;
 	z-index: 5;
 	padding: 2rem 0 2rem 0;
-	position: absolute;
-	/* margin-bottom: 7rem; */
-	@media (min-width: 576px) {
-		width: 100%;
-	}
+	margin-bottom: 4rem;
     &:hover{
         cursor: pointer;
     }
