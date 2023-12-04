@@ -91,7 +91,7 @@ const SearchCard = (props: CardBoxType) => {
 			</ImgBox>
 			<Flexraw onClick={() => route.push(`${props.designerId}`)}>
 				<ProfileWrapper>
-                    <img width="80%" src="/img/profile-large.png"/>
+					<img src="/img/profile-large.png"/>
                 </ProfileWrapper>
                 <ProfileName>
                     <div className="designer-name">{props.designerName}</div>
@@ -159,7 +159,11 @@ const Box = styled.div`
 
 const ProfileWrapper = styled.div`
     display: flex;
-    width: 10%;
+    width: 8%;
+	& > img{
+		/* width: 50%; */
+		object-fit: cover;
+	}
 `
 const ProfileName = styled.div`
     display: flex;
