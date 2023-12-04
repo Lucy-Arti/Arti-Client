@@ -98,7 +98,6 @@ const Wrapper = styled.div`
 	pointer-events: none;
 	img {
 		width: 100%;
-		height: fit-content;
 	}
 `;
 
@@ -175,6 +174,4 @@ const RouteBtn = styled.div<{ disabled?: boolean }>`
 	z-index: 1;
 `;
 
-const ImageWrapper = styled.div`
-	width: fit-content;
-`;
+const ImageWrapper = styled.div``;

@@ -6,10 +6,8 @@ const baseURL = `https://arti-fashion.shop/`;
 export const getAllDesignerList = async () => {
 	try {
 		const response = await axios.get(`${baseURL}api/v1/designers`);
-		// console.log(response);
 		return response;
 	} catch (error) {
-		// console.log(error);
 		return false;
 	}
 };
