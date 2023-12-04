@@ -178,7 +178,7 @@ const LandingSection2 = () => {
 							<SwiperSlide key={index}>
 								<Card
 									onClick={() => {
-										router.push(`productlist/${product.clothesId}`);
+										router.push(`productlist/product?key=${product.clothesId}`);
 									}}
 								>
 									<CardImg src={`${product.preview}`} />

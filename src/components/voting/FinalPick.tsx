@@ -53,7 +53,7 @@ const FinalPick = () => {
 					</Card>
 					<BtnSection>
 						<Btn1 onClick={() => route.push('/')}>홈</Btn1>
-						<Btn2 onClick={() => route.push(`/productlist/${targetId}`)}>옷 구경하기</Btn2>
+						<Btn2 onClick={() => route.push(`/productlist/product?key=${targetId}`)}>옷 구경하기</Btn2>
 					</BtnSection>
 				</InfoSection>
 			)}

@@ -6,7 +6,7 @@ import { getInviteFreindResult, getMyInviteCode } from '@/apis/getPoint';
 import { InviteResultType } from '@/types/request';
 import useCopyClipBoard from '@/hooks/useCopyClipBoard';
 
-const FreindInviteMission = () => {
+const FriendInviteMission = () => {
 	const [inviteCode, setinviteCode] = useState<string>();
 	const [inviteResult, setinviteResult] = useState<InviteResultType>();
 	const [isCopy, onCopy] = useCopyClipBoard();
@@ -44,7 +44,7 @@ const FreindInviteMission = () => {
 			<Top>
 				<PointHeader text="친구 초대" backTo="/mypage/point" />
 				<ContentSection>
-					<StyledImage src="/img/freindMissionBanner.png" alt="친구초대 미션 배너" fill priority />
+					<StyledImage src="/img/friendMissionBanner.png" alt="친구초대 미션 배너" fill priority />
 					<CodeBox>
 						<div className="text">나의 초대 코드</div>
 						<div className="invite-code">{inviteCode}</div>
@@ -91,7 +91,7 @@ const FreindInviteMission = () => {
 	);
 };
 
-export default FreindInviteMission;
+export default FriendInviteMission;
 
 const MainWrapper = styled.div`
 	width: 100%;

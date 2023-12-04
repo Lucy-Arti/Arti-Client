@@ -145,13 +145,13 @@ const PointMain = () => {
 						{/* 미션 안했고 월요일 아님 */}
 						{missionList?.mission.story && !isMonday ? (
 							<Group onClick={() => router.push(`/mypage/point//mission?type=story`)}>
-								<div className="point-text">500P</div>
+								<div className="point-text">200P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						// 미션 안했고 월요일임
 						) : missionList?.mission.story && isMonday ? (
-							<Group onClick={() => alert('월요일에만 가능한 미션이에요!')}>
-								<div className="point-text">500P</div>
+							<Group onClick={() => alert('월요일에는 불가능한 미션이에요!')}>
+								<div className="point-text">200P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>
 						) : (
@@ -169,7 +169,7 @@ const PointMain = () => {
 							<div className="possible-circle" />
 							<div className="mission-name">친구 초대</div>
 						</Group>
-							<Group onClick={() => router.push(`/mypage/point//mission?type=freind`)}>
+							<Group onClick={() => router.push(`/mypage/point//mission?type=friend`)}>
 								<div className="point-text">1500P</div>
 								<StyledFiChevronRight2 size="26px" />
 							</Group>

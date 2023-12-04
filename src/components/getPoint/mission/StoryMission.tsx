@@ -62,7 +62,7 @@ const StoryMission = () => {
 						<StyledImage src="/img/storyBanner.png" alt="스토리 올리기 미션 배너" fill priority />
 						<Span>
 							<div className="detail">@arti_fashion_design 인스타그램 계정을</div>
-							스토리에 올리면 <span className="bold">250P</span>를 획득할 수 있어요
+							스토리에 올리면 <span className="bold">200P</span>를 획득할 수 있어요
 						</Span>
 						<div className="state">
 							<StyledImage src="/img/missionstate2.png" alt="팔로우 미션 상태" fill priority />

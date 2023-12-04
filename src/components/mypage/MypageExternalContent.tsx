@@ -25,9 +25,9 @@ const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetState
 		if(response === false){
 			console.log("api 연결 실패");
 		} else {
-			console.log('response 받음')
+			// console.log('response 받음')
 			setCanAccess(response.data);
-			console.log(response.data);
+			// console.log(response.data);
 		}
 	}
 

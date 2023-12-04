@@ -5,9 +5,10 @@ import {CmtsType} from '@/types/request'
 import {  PostHeartOnReply, PutHeartOnCmt } from '@/apis/comments'
 import ModalEditComment from '../common/ModalEditComment'
 import { useRecoilValue } from 'recoil'
-import { userNameAtom } from '@/app/recoilContextProvider'
+import { isLoginAtom, userNameAtom } from '@/app/recoilContextProvider'
 import ModalCannotEdit from '../common/ModalCannotEdit'
 import CommentEdit from './CommentEdit'
+import ModalLogin from '../common/ModalLogin'
 
 interface CommentBoxProps {
     allCmts:CmtsType,
@@ -26,8 +27,10 @@ const CommentBox = (props:CommentBoxProps) => {
     const [editIsReply, setEditIsReply] = useState(false);
     const [forEditId, setForEditId] = useState<number>();
     const [forEditContent, setForEditContent] = useState('');
+    const [openLoginModal, setOpenLoginModal] = useState(false);
 
     const userName = useRecoilValue(userNameAtom);
+    const isUser = useRecoilValue(isLoginAtom);
 
     useEffect(()=>{
         setReplyOn(false);
@@ -36,51 +39,53 @@ const CommentBox = (props:CommentBoxProps) => {
     }, [props.rerenderCmts]);
     
     const handleReplyClick = (nickname:string, commentId:number) => {
-        if(replyOn===false){
-            setReplyOn(true);
-            props.setReplyName(nickname);
-            props.setCommentId(commentId);
+        if(isUser){
+            if(replyOn===false){
+                setReplyOn(true);
+                props.setReplyName(nickname);
+                props.setCommentId(commentId);
+            } else {
+                setReplyOn(false);
+                props.setReplyName('');
+                props.setCommentId(undefined);
+            }
         } else {
-            setReplyOn(false);
-            props.setReplyName('');
-            props.setCommentId(undefined);
+            setOpenLoginModal(true);
         }
     }
 
     const handleHeartClick = async(id:number, type:string) => {
-        if(type === 'comment'){
-            const result = await PutHeartOnCmt(id);
-            props.setReRenderCmts(true);
-            // if(result === false){
-            //     console.log('좋아요 업로드 실패');
-            // } else {
-            //     console.log('좋아요 업로드 완료');
-            // }
+        if(isUser){
+            if(type === 'comment'){
+                const result = await PutHeartOnCmt(id);
+                props.setReRenderCmts(true);
+            } else {
+                const result = await PostHeartOnReply(id);
+                props.setReRenderCmts(true);
+            }
         } else {
-            const result = await PostHeartOnReply(id);
-            props.setReRenderCmts(true);
-            // if(result === false){
-            //     console.log('좋아요 업로드 실패');
-            // } else {
-            //     console.log('좋아요 업로드 완료');
-            // }
+            setOpenLoginModal(true);
         }
     }
 
     const checkCanEdit = (name:string, id:number, content:string, isReply:boolean) => {
-        if(name === userName){
-            if(isReply) {
-                setEditIsReply(true);
-            }
-            setForEditId(id);
-            setForEditContent(content);
-            setCanEdit(true);
-            setOpenEditModal(true);
-        } else {
-            setCanEdit(false);
-            setTimeout(() => {
+        if(isUser){
+            if(name === userName){
+                if(isReply) {
+                    setEditIsReply(true);
+                }
+                setForEditId(id);
+                setForEditContent(content);
                 setCanEdit(true);
-            }, 1000);
+                setOpenEditModal(true);
+            } else {
+                setCanEdit(false);
+                setTimeout(() => {
+                    setCanEdit(true);
+                }, 1000);
+            }
+        } else {
+            setOpenLoginModal(true);
         }
     }
 
@@ -104,6 +109,9 @@ const CommentBox = (props:CommentBoxProps) => {
             isReply={editIsReply}
             setEditCompoOpen={setEditCompoOpen}
             setReRenderCmts={props.setReRenderCmts} />
+        }
+        {
+            openLoginModal && <ModalLogin purpose='이용' setLoginModalIsOpen={setOpenLoginModal} />
         }
         <CmtBox>
             <div className='profile-box'>
