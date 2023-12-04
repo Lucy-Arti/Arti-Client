@@ -69,19 +69,23 @@ const CommentBox = (props:CommentBoxProps) => {
     }
 
     const checkCanEdit = (name:string, id:number, content:string, isReply:boolean) => {
-        if(name === userName){
-            if(isReply) {
-                setEditIsReply(true);
-            }
-            setForEditId(id);
-            setForEditContent(content);
-            setCanEdit(true);
-            setOpenEditModal(true);
-        } else {
-            setCanEdit(false);
-            setTimeout(() => {
+        if(isUser){
+            if(name === userName){
+                if(isReply) {
+                    setEditIsReply(true);
+                }
+                setForEditId(id);
+                setForEditContent(content);
                 setCanEdit(true);
-            }, 1000);
+                setOpenEditModal(true);
+            } else {
+                setCanEdit(false);
+                setTimeout(() => {
+                    setCanEdit(true);
+                }, 1000);
+            }
+        } else {
+            setOpenLoginModal(true);
         }
     }
 
