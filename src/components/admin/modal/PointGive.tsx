@@ -60,9 +60,6 @@ const PointGive = ({ handleModalBtn, handleRefresh }: any) => {
 
 	return (
 		<ModalSectionWrapper handleModalBtn={handleModalBtn} totalHeight={totalHeight}>
-			<CloseButton onClick={handleModalBtn}>
-				<div className="close">X</div>
-			</CloseButton>
 			<Form>
 
 					<Label htmlFor="memberId">지급할 유저 id :</Label>

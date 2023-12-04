@@ -24,8 +24,7 @@ const ModalSectionWrapper = ({
 	};
 
 	return (
-		<ModalSection 
-    onClick={handleClick} height={totalHeight}>
+		<ModalSection onClick={handleClick} height={totalHeight}>
 			{children}
 		</ModalSection>
 	);
@@ -60,8 +59,8 @@ const ClotheUpload = ({ handleModalBtn, designerData, handleRefresh }: any) => {
 			try {
 				await postNewProduct(formData);
 				alert('업로드 완료');
-        handleModalBtn();
-        handleRefresh();
+				handleModalBtn();
+				handleRefresh();
 			} catch (error) {
 				console.error('Error update product:', error);
 			}
@@ -72,7 +71,6 @@ const ClotheUpload = ({ handleModalBtn, designerData, handleRefresh }: any) => {
 
 	return (
 		<ModalSectionWrapper handleModalBtn={handleModalBtn} totalHeight={totalHeight}>
-			<CloseButton onClick={handleModalBtn}><div className='close'>X</div></CloseButton>
 			<Form>
 				<Row>
 					<Label htmlFor="type">구분</Label>
@@ -143,7 +141,9 @@ const ClotheUpload = ({ handleModalBtn, designerData, handleRefresh }: any) => {
 					/>
 				</Row>
 
-				<Button type="button" onClick={handleSubmit}>등록하기</Button>
+				<Button type="button" onClick={handleSubmit}>
+					등록하기
+				</Button>
 			</Form>
 		</ModalSectionWrapper>
 	);
@@ -168,19 +168,19 @@ const ModalSection = styled.div<{ height: number }>`
 	z-index: 3;
 `;
 
-const CloseButton = styled.div`
-	width: 45%;
-	display: flex;
-	justify-content: flex-end;
-	font-size: 2.7rem;
-	border: none;
-	position : relative;
-	margin-bottom: -3%;
-	.close{
-		width: 10%;
-		cursor: pointer;
-	}
-`;
+// const CloseButton = styled.div`
+// 	width: 45%;
+// 	display: flex;
+// 	justify-content: flex-end;
+// 	font-size: 2.7rem;
+// 	border: none;
+// 	position: relative;
+// 	margin-bottom: -3%;
+// 	.close {
+// 		width: 10%;
+// 		cursor: pointer;
+// 	}
+// `;
 
 const Form = styled.form`
 	width: 40%;

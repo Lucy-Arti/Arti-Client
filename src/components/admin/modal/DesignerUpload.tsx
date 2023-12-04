@@ -68,9 +68,6 @@ const DesignerUpload = ({ handleModalBtn, handleRefresh }: any) => {
 
 	return (
 		<ModalSectionWrapper handleModalBtn={handleModalBtn} totalHeight={totalHeight}>
-			<CloseButton onClick={handleModalBtn}>
-				<div className="close">X</div>
-			</CloseButton>
 			<Form>
 				<Row>
 					<Label htmlFor="userName">이름 :</Label>
