@@ -104,10 +104,10 @@ const LandingSection = () => {
 						>
 							<img src={selectedImage + '3.png'} alt="landing3" />
 						</StyledSwiperSlide>
-						<StyledSwiperSlide>
+						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
 							<img src={selectedImage + '4.png'} alt="landing4" />
 						</StyledSwiperSlide>
-						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
+						<StyledSwiperSlide>
 							<img src={selectedImage + '5.png'} alt="landing5" />
 						</StyledSwiperSlide>
 					</Swiper>

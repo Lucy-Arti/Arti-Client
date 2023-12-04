@@ -49,10 +49,14 @@ const ShopDetail = () => {
 	}, []);
 
 	const handleSubmit = () => {
-		if (detail?.delivery) {
-			router.push(`/mypage/shop/delivery?id=${id}`);
-		} else if (!detail?.delivery) {
-			router.push(`/mypage/shop/notDelivery?id=${id}`);
+		if (active) {
+			if (detail?.delivery) {
+				router.push(`/mypage/shop/delivery?id=${id}`);
+			} else if (!detail?.delivery) {
+				router.push(`/mypage/shop/notDelivery?id=${id}`);
+			}
+		} else {
+			return false;
 		}
 	};
 
@@ -91,9 +95,9 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 2rem;
+	pointer-events: none;
 	img {
 		width: 100%;
-		height: fit-content;
 	}
 `;
 
@@ -163,12 +167,11 @@ const RouteBtn = styled.div<{ disabled?: boolean }>`
 	font-size: 1.75rem;
 	font-weight: 600;
 	cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+	pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
 	margin-top: 1.5rem;
 	position: fixed;
 	bottom: 3rem;
 	z-index: 1;
 `;
 
-const ImageWrapper = styled.div`
-	width: fit-content;
-`;
+const ImageWrapper = styled.div``;

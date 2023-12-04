@@ -59,6 +59,5 @@ export const getBuyList = async () => {
 
 export const getBuyListDetail = async (id: string) => {
 	const result = await axios.get(`${baseURL}api/v2/buy/${id}`);
-	// console.log(result.data);
 	return result;
 };

@@ -11,7 +11,6 @@ export const getPossibleMissionList = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -28,7 +27,6 @@ export const getPointHistory = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -45,7 +43,6 @@ export const getMyInviteCode = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -62,7 +59,6 @@ export const getInviteFreindResult = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -84,7 +80,6 @@ export const checkAttendance = async () => {
 				},
 			},
 		);
-		// console.log('당일출석: ', response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -101,7 +96,6 @@ export const checkMonthAttendance = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log('이번 달 출석: ', response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -118,7 +112,6 @@ export const checkConsecutiveAttendance = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log('연속 출석: ', response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -139,7 +132,6 @@ export const postIGAccount = async (userInput: string) => {
 				},
 			},
 		);
-		// console.log('인스타그램 아이디 전송 완료', response.data);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -157,7 +149,6 @@ export const postScreenshot = async (formData: FormData) => {
 				'Content-Type': 'multipart/form-data',
 			},
 		});
-		// console.log('스크린샷 업로드 성공:', response.data);
 		return response;
 	} catch (error) {
 		console.error('Error sending POST request:', error);
@@ -174,7 +165,6 @@ export const checkCommentReward = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		// console.log('댓글 보상: ', response);
 		return response;
 	} catch (error) {
 		console.log(error);
