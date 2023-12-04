@@ -1,6 +1,6 @@
 'use client'
 import Header from '../common/Header';
-import { useParams, usePathname, useRouter } from "next/navigation"
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation"
 import { GetProductDetail, GetProductDetailByUser, getMarked, postMarked } from '@/apis/list';
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { ProductType } from './ListView';
@@ -17,8 +17,10 @@ import ModalNotSelling from '../common/ModalNotSelling';
 import ModalLogin from '../common/ModalLogin';
 
 const ProductDetail = () => {
-	const withslashpathname  = usePathname();
-	const pathname = withslashpathname.replace('/productlist/', '');
+	// const withslashpathname  = usePathname();
+	// const pathname = withslashpathname.replace('/productlist/product?key=', '');
+	const params = useSearchParams();
+	const pathname = params.get('key');
 	const [markState, setMarkState] = useState(false);
 	const [like, setLikeNum] = useState<number | null>(null);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -310,7 +312,7 @@ const ProductDetail = () => {
 					<GapDesign />
 				</HeightWrapper>
 				<Comment 
-					pathname={pathname}
+					pathname={pathname!}
 					rerenderCmts={rerenderCmts}
 					setReRenderCmts={setReRenderCmts}
 					setReplyName={setReplyName}
@@ -320,7 +322,7 @@ const ProductDetail = () => {
 				{
 					isUser ?
 					<CommentInput 
-					pathname={pathname}
+					pathname={pathname!}
 					getFixed={getFixed}
 					replyName={replyName}
 					commentId={commentId}

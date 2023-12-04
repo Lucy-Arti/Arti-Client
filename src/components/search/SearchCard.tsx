@@ -80,7 +80,7 @@ const SearchCard = (props: CardBoxType) => {
 	return (
 		<CardBox>
 			<ImgBox $preview={props.preview ?? ''}>
-				<Box onClick={() => route.push(`/productlist/${props.clothesId}`)} />
+				<Box onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)} />
 				<Heart>
 					{markState === true ? (
 						<img onClick={handleMarkClick} width="30rem" src="/img/activeHeart.png" />
@@ -98,7 +98,7 @@ const SearchCard = (props: CardBoxType) => {
                     <div className="designer-noti">디자이너</div>
                 </ProfileName>
 			</Flexraw>
-			<Header onClick={() => route.push(`/productlist/${props.clothesId}`)}>{props.clothesName}</Header>
+			<Header onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>{props.clothesName}</Header>
 		</CardBox>
 	);
 };
