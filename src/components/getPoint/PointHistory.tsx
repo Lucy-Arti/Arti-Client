@@ -164,7 +164,6 @@ const Text = styled.div`
 	}
 	.mission-date {
 		color: #9e9e9e;
-		font-family: Pretendard Variable;
 		font-size: 1.75rem;
 		font-weight: 400;
 	}

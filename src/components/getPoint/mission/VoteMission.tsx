@@ -13,7 +13,7 @@ const VoteMission = () => {
 				<ContentSection>
 					<StyledImage src="/img/voteMissionBanner.png" alt="투표 미션 배너" fill priority />
 					<Span>
-						오늘 <span className="bold">250P</span> 더 획득할 수 있어요
+						오늘 <span className="bold">100P</span> 더 획득할 수 있어요
 					</Span>
 					<div className="text1">실물로 보고싶은 옷에 투표하기</div>
 					<RouteBtn onClick={()=>{router.push('/vote')}} >투표하고 자동으로 적립하기</RouteBtn>

@@ -64,7 +64,7 @@ const FollowMission = () => {
 						<StyledImage src="/img/followBanner.png" alt="팔로우 미션 배너" fill priority />
 						<Span>
 							<div className="detail">@arti_fashion_design 인스타그램 계정을</div>
-							팔로우하면 <span className="bold">250P</span>를 획득할 수 있어요
+							팔로우하면 <span className="bold">500P</span>를 획득할 수 있어요
 						</Span>
 						<div className="state">
 							<StyledImage src="/img/missionstate2.png" alt="팔로우 미션 상태" fill priority />
