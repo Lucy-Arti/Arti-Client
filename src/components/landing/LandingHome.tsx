@@ -23,7 +23,7 @@ const LandingHome = () => {
 					setPhoto(data.customProfile);
 				} else {
 					if(data.profile === "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg") {
-						setPhoto('/img/profile-large.png');
+						setPhoto('/img/myProfile-1.png');
 					} else {
 						setPhoto(data.profile);
 					}
