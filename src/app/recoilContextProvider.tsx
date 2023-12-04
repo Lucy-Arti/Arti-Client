@@ -25,7 +25,7 @@ export const userEmailAtom = atom({
 
 export const userPhotoAtom = atom({
 	key: 'userPhoto',
-	default: '',
+	default: '/img/profile-large.png',
 	effects_UNSTABLE: [persistAtom],
 });
 

@@ -1,5 +1,5 @@
 import { PostBasicCmts, PostReply } from '@/apis/comments';
-import { userPhotoAtom } from '@/app/recoilContextProvider';
+import { isLoginAtom, userPhotoAtom } from '@/app/recoilContextProvider';
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components'
@@ -13,6 +13,8 @@ interface CommentInputProps {
     setReRenderCmts: React.Dispatch<React.SetStateAction<boolean>>,
     setReplyName:React.Dispatch<React.SetStateAction<string>>,
     setCommentId: React.Dispatch<React.SetStateAction<number|undefined>>,
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoginModalPurpose: React.Dispatch<React.SetStateAction<string|undefined>>,
 }
 
 const CommentInput = (props:CommentInputProps) => {
@@ -20,9 +22,10 @@ const CommentInput = (props:CommentInputProps) => {
     const [btnActive, setBtnActive] = useState('');
     const [holderText, setHolderText] = useState('자유롭게 의견을 남겨주세요.');
     const userProfile = useRecoilValue(userPhotoAtom);
+    const isUser = useRecoilValue(isLoginAtom);
 
     useEffect(()=>{
-        console.log('commentinput rerender');
+        // console.log('commentinput rerender');
         props.setReplyName(() => '');
         props.setCommentId(() => undefined);
     }, [props.rerenderCmts]);
@@ -48,11 +51,16 @@ const CommentInput = (props:CommentInputProps) => {
         setInputCmt(e.target.value);
     }
 
-    const resetInput = () => {
-        setInputCmt('');
-        // props.setReplyName('');
-        // props.setCommentId(undefined);
-        // setNewCmtId(() => undefined);
+    // const resetInput = () => {
+    //     setInputCmt('');
+    //     // props.setReplyName('');
+    //     // props.setCommentId(undefined);
+    //     // setNewCmtId(() => undefined);
+    // }
+
+    const postCmtsWithBtn = (e:React.MouseEvent<HTMLDivElement, MouseEvent>, id:string, content:string, commentId:number|undefined) =>{
+        // console.log('post by button');
+        postCmts(id, content,commentId);
     }
 
     const postCmts = async(id:string, content:string, commentId:number|undefined) => {
@@ -64,7 +72,8 @@ const CommentInput = (props:CommentInputProps) => {
             } else {
                 // console.log(result.data);
                 // setInputCmt(null);
-                resetInput();
+                // resetInput();
+                setInputCmt(() => '');
                 props.setReRenderCmts(true);
             }
         } else {
@@ -74,7 +83,8 @@ const CommentInput = (props:CommentInputProps) => {
             } else {
                 // console.log(result.data);
                 // setInputCmt(null);
-                resetInput();
+                // resetInput();
+                setInputCmt(() => '');
                 props.setReRenderCmts(true);
             }
         }
@@ -83,8 +93,18 @@ const CommentInput = (props:CommentInputProps) => {
     const handleKeyBoardEvent = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === 'Enter'){
             if(inputCmt !== ''){
+                // console.log('post by enter');
                 postCmts(props.pathname, inputCmt, props.commentId);
+                e.preventDefault();
             }
+        }
+    }
+
+    const handleOnClickInput = (e:React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+        // console.log('input click');
+        if(!isUser){
+            props.setLoginModalPurpose('입력');
+            props.setLoginModalIsOpen(true);
         }
     }
 
@@ -95,8 +115,8 @@ const CommentInput = (props:CommentInputProps) => {
                 <img src={userProfile} width='100%' />
             </div>
             <InputBox>
-                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)}/>
-                <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>입력</InputBtn>
+                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)} onClick={(e)=>handleOnClickInput(e)}/>
+                <InputBtn className={btnActive} onClick={(e)=>postCmtsWithBtn(e,props.pathname, inputCmt, props.commentId)}>입력</InputBtn>
             </InputBox>
         </CmtInputWrapper>
     </FlexColumn>
@@ -114,6 +134,7 @@ const FlexColumn = styled.div`
         position: fixed;
 		bottom: 0px;
         z-index: 1;
+        background-color: white;
 		@media (min-width: 576px) {
 			width: 576px;
 		}
@@ -129,6 +150,7 @@ const CmtInputWrapper = styled.div`
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    margin-bottom: 4rem;
     & > .profile-img{
         width: 4rem;
         height: 4rem;
@@ -150,8 +172,9 @@ const InputBox = styled.div`
     border: 1px solid rgba(168, 168, 168, 1);
     border-radius: 5px;
     height: 5rem;
+    justify-content: space-between;
     & > input{
-        width: 80%;
+        width: 75%;
         padding-left: 1rem;
         border: none;
         height: fit-content;
@@ -164,7 +187,7 @@ const InputBox = styled.div`
 
 const InputBtn = styled.div`
     display: flex;
-    width: 15%;
+    width: 20%;
     height: 3rem;
     border: none;
     border-radius: 5px;
@@ -172,6 +195,7 @@ const InputBtn = styled.div`
     align-items: center;
     justify-content: center;
     background-color: rgba(240, 240, 240, 1);
+    margin-right: 3%;
     color: rgba(168, 168, 168, 1);
     &.active{
         color: black;
