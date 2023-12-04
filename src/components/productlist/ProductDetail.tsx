@@ -253,7 +253,7 @@ const ProductDetail = () => {
 					<img width="100%" src={`${productDetail.preview}`} />
 					<DesignerBox onClick={() => route.push(`/designer/${productDetail.designerId}`)}>
 						<div className='imgwrapper'>
-							<img width="100%" src="/img/myProfile-1.png" />
+							<img width="100%" src="/img/profile-large.png" />
 						</div>
 						<MakeBold>{productDetail.designerName}</MakeBold>
 						<FontSize> 디자이너</FontSize>

@@ -91,7 +91,7 @@ const SearchCard = (props: CardBoxType) => {
 			</ImgBox>
 			<Flexraw onClick={() => route.push(`${props.designerId}`)}>
 				<ProfileWrapper>
-                    <img width="80%" src="/img/myProfile-1.png"/>
+                    <img width="80%" src="/img/profile-large.png"/>
                 </ProfileWrapper>
                 <ProfileName>
                     <div className="designer-name">{props.designerName}</div>
