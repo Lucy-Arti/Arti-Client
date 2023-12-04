@@ -171,7 +171,4 @@ const RouteBtn = styled.div<{ disabled?: boolean }>`
 
 const ImageWrapper = styled.div`
 	width: fit-content;
-	img {
-		height: fit-content;
-	}
 `;
