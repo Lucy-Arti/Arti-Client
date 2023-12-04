@@ -80,6 +80,14 @@ const CommentInput = (props:CommentInputProps) => {
         }
     }
 
+    const handleKeyBoardEvent = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === 'Enter'){
+            if(inputCmt !== ''){
+                postCmts(props.pathname, inputCmt, props.commentId);
+            }
+        }
+    }
+
   return (
     <FlexColumn className={props.getFixed}>
         <CmtInputWrapper>
@@ -87,10 +95,8 @@ const CommentInput = (props:CommentInputProps) => {
                 <img src={userProfile} width='100%' />
             </div>
             <InputBox>
-                {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
-                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} />
+                <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)}/>
                 <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, props.commentId)}}>입력</InputBtn>
-                {/* <InputBtn className={btnActive} onClick={()=>{postCmts(props.pathname, inputCmt, newCmtId)}}>입력</InputBtn> */}
             </InputBox>
         </CmtInputWrapper>
     </FlexColumn>

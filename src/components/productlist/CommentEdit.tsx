@@ -30,8 +30,7 @@ const CommentEdit = (
         setEdittedCmt(e.target.value);
     }
 
-    const editComment = async(e:React.MouseEvent, id:number, content:string) => {
-        e.stopPropagation();
+    const editComment = async(id:number, content:string) => {
         if(props.isReply){
             const result = await editReply(id, content);
             if(result === false){
@@ -53,6 +52,19 @@ const CommentEdit = (
         }
     }
 
+    const editCommentWithBtn = (e:React.MouseEvent, id:number, content:string) => {
+        e.stopPropagation();
+        editComment(id, content);
+    }
+
+    const handleKeyBoardEvent = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === 'Enter'){
+            if(edittedCmt !== ''){
+                editComment(props.commentId, edittedCmt);
+            }
+        }
+    }
+
   return (
     <FlexColumn height={totalHeight} onClick={() => props.setEditCompoOpen(false)}>
         <CmtBackgroundColor>
@@ -61,9 +73,8 @@ const CommentEdit = (
                 <img src={userProfile} width='100%' />
             </div>
             <InputBox>
-                {/* <input placeholder={holderText} value={inputCmt!} onChange={(e)=>setInputCmt(e.target.value)} /> */}
-                <input value={edittedCmt} onChange={(e)=>onChangeInput(e)} />
-                <InputBtn className={btnActive} onClick={(e)=>{editComment(e,props.commentId, edittedCmt)}}>수정</InputBtn>
+                <input value={edittedCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)} />
+                <InputBtn className={btnActive} onClick={(e)=>{editCommentWithBtn(e,props.commentId, edittedCmt)}}>수정</InputBtn>
             </InputBox>
         </CmtInputWrapper>
         </CmtBackgroundColor>
