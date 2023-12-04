@@ -108,7 +108,7 @@ const ProductTextWrapper = styled.div`
 const ProductArti = styled.div`
 	color: #9e9e9e;
 	font-size: 2rem;
-	font-style: 'Pretendard Variable';
+	font-style: 'Pretendard';
 	font-weight: 400;
 	width: 90%;
 	margin-top: 3rem;
@@ -116,7 +116,7 @@ const ProductArti = styled.div`
 
 const ProductName = styled.div`
 	color: var(--black, #383838);
-	font-family: Pretendard Variable;
+	font-family: Pretendard;
 	font-size: 2.5rem;
 	font-style: normal;
 	font-weight: 600;
@@ -128,7 +128,7 @@ const ProductName = styled.div`
 
 const Point = styled.span`
 	color: var(--lime, #6bda01);
-	font-family: Pretendard Variable;
+	font-family: Pretendard;
 	font-size: 2.5rem;
 	font-style: normal;
 	font-weight: 600;
@@ -170,7 +170,7 @@ const RouteBtn = styled.div<{ disabled?: boolean }>`
 `;
 
 const ImageWrapper = styled.div`
-	width: 100%;
+	width: fit-content;
 	img {
 		height: fit-content;
 	}

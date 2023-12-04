@@ -88,7 +88,7 @@ const Wrapper2 = styled.div`
 const Text = styled.div`
 	color: var(--white, #fff);
 	text-align: center;
-	font-family: 'Pretendard Variable';
+	font-family: 'Pretendard';
 	font-size: 1.75rem;
 	font-style: normal;
 	font-weight: 500;

@@ -125,7 +125,7 @@ const StatusText = styled.div`
 	align-items: center;
 	margin-top: 5rem;
 	margin-bottom: 1rem;
-	font-family: 'Pretendard Variable';
+	font-family: 'Pretendard';
 	font-weight: 600;
 `;
 
@@ -139,7 +139,7 @@ const Name = styled.div`
 const Modify = styled.div`
 	color: #5c5c5c;
 	text-align: center;
-	font-family: 'Pretendard Variable';
+	font-family: 'Pretendard ';
 	font-size: 2rem;
 	font-weight: 500;
 	text-decoration-line: underline;

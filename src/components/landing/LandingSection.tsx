@@ -154,7 +154,7 @@ const Text1 = styled.div`
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;
-	font-family: 'Pretendard Variable';
+	font-family: 'Pretendard';
 	margin-bottom: 0.5rem;
 `;
 
@@ -163,14 +163,11 @@ const Text2 = styled.div`
 	display: flex;
 	color: black;
 	font-size: 2rem;
-	font-family: 'Pretendard Variable' !important;
+	font-family: 'Pretendard';
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 0.2rem;
 	font-weight: 600;
-	@media screen and (max-width: 768px) {
-		font-family: 'Pretendard Variable' !important;
-	}
 `;
 
 const StyledFiChevronRight = styled(FiChevronRight)`

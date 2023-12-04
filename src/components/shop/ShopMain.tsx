@@ -257,7 +257,7 @@ const ProductTextWrapper = styled.div`
 const ProductArti = styled.div`
 	color: #9e9e9e;
 	font-size: 1.5rem;
-	font-style: 'Pretendard Variable';
+	font-style: 'Pretendard';
 	font-weight: 400;
 	padding-left: 2rem;
 	padding-top: 1rem;
