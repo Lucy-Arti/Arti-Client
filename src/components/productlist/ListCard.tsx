@@ -89,7 +89,7 @@ const ListCard = (props:CardBoxType) => {
                     }
                 </div>
             </ImgBox>
-            <FlexRow onClick={() => route.push(`/productlist/${props.clothesId}`)}>
+            <FlexRow onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>
                 <ProfileWrapper>
                     <img width="80%" src="/img/profile-large.png"/>
                 </ProfileWrapper>
