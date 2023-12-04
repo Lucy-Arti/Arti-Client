@@ -112,7 +112,7 @@ const CommentInput = (props:CommentInputProps) => {
     <FlexColumn className={props.getFixed}>
         <CmtInputWrapper>
             <div className='profile-img'>
-                <img src={userProfile} width='100%' />
+                <img src={isUser ? userProfile : '/img/profile-large.png'} width='100%' />
             </div>
             <InputBox>
                 <input placeholder={holderText} value={inputCmt} onChange={(e)=>onChangeInput(e)} onKeyDown={(e) => handleKeyBoardEvent(e)} onClick={(e)=>handleOnClickInput(e)}/>
