@@ -80,7 +80,7 @@ const ListCard = (props:CardBoxType) => {
   return (
         <CardBox>
             <ImgBox $preview={props.preview!}>
-                <GetHeight onClick={() => route.push(`/productlist/${props.clothesId}`)} />
+                <GetHeight onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)} />
                 <div>
                     {
                         markState === true ?
@@ -98,7 +98,7 @@ const ListCard = (props:CardBoxType) => {
                     <div className="designer-noti">디자이너</div>
                 </ProfileName>
             </FlexRow>
-            <Header onClick={() => route.push(`/productlist/${props.clothesId}`)}>{props.clothesName}</Header>
+            <Header onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>{props.clothesName}</Header>
         </CardBox>
   )
 }
