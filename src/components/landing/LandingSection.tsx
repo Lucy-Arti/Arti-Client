@@ -88,7 +88,11 @@ const LandingSection = () => {
 						autoplay={{ delay: 2500, disableOnInteraction: false }}
 					>
 						<StyledSwiperSlide>
-							<img src={selectedImage + '1.png'} alt="landing1" onClick={handleClick(`/vote`)} />
+							<img
+								src={selectedImage + '1.png'}
+								alt="landing1"
+								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
+							/>
 						</StyledSwiperSlide>
 						<StyledSwiperSlide
 							onClick={() => {
