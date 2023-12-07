@@ -138,7 +138,7 @@ const RankingSection = () => {
 							</Text1>
 							<VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn>
 						</div>
-						<FontSize>다음 랭킹 시작일 : 23년 12월 05일</FontSize>
+						<FontSize>다음 랭킹 시작일: 24년 01월 17일</FontSize>
 					</TextSection>
 				</BannerSection>
 				<RankingBtnWrapper>
