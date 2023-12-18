@@ -9,10 +9,11 @@ export default function layout({ children }: { children: React.ReactNode }) {
 	const params = useRouter();
 	console.log(params);
 
-	// useEffect(() => {
-	// 	if (!params.has('/productlist/')) {
-	// 		ChannelTalk();
-	// 	}
-	// }, []);
+	useEffect(() => {
+		// if (!params.has('/productlist/')) {
+		// 	ChannelTalk();
+		// }
+		ChannelTalk();
+	}, []);
 	return <StyledComponentsRegistry>{children}</StyledComponentsRegistry>;
 }
