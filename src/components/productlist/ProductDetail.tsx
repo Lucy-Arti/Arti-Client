@@ -1,6 +1,6 @@
-'use client'
+'use client';
 import Header from '../common/Header';
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { GetProductDetail, GetProductDetailByUser, getMarked, postMarked } from '@/apis/list';
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { ProductType } from './ListView';
@@ -9,12 +9,13 @@ import { useRecoilValue } from 'recoil';
 import ShareButton from '../common/ShareButton';
 import { isLoginAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
-import { BiSolidDiscount } from "react-icons/bi";
+import { BiSolidDiscount } from 'react-icons/bi';
 import Comment from './Comment';
 import CommentInput from './CommentInput';
 import { GetAllCmts } from '@/apis/comments';
 import ModalNotSelling from '../common/ModalNotSelling';
 import ModalLogin from '../common/ModalLogin';
+import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 
 const ProductDetail = () => {
 	// const withslashpathname  = usePathname();
@@ -25,7 +26,7 @@ const ProductDetail = () => {
 	const [like, setLikeNum] = useState<number | null>(null);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-	const [loginModalPurpose, setLoginModalPurpose] = useState<string|undefined>(undefined);
+	const [loginModalPurpose, setLoginModalPurpose] = useState<string | undefined>(undefined);
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -51,43 +52,46 @@ const ProductDetail = () => {
 	// const scrollHeight = ref?.current?.scrollHeight;
 	// const scrollTop = ref?.current?.scrollTop;
 
+	useEffect(() => {
+		ChannelService.hideChannelButton();
+	}, []);
 
 	const handleTabScroll = useCallback((): void => {
-        const scrollOffset = window.scrollY;
+		const scrollOffset = window.scrollY;
 		const divHeight = heightRef?.current?.offsetHeight;
-        if (scrollOffset && divHeight){
-			if(scrollOffset >= divHeight) {
+		if (scrollOffset && divHeight) {
+			if (scrollOffset >= divHeight) {
 				setGetFixed('active');
 			} else {
 				setGetFixed('');
 			}
 		}
-    }, []);
+	}, []);
 
 	useEffect(() => {
-        window.addEventListener('scroll', handleTabScroll, true);
-        return () => {
-            window.removeEventListener('scroll', handleTabScroll, true);
-        };
-    }, [handleTabScroll]);
+		window.addEventListener('scroll', handleTabScroll, true);
+		return () => {
+			window.removeEventListener('scroll', handleTabScroll, true);
+		};
+	}, [handleTabScroll]);
 
 	// const handleTowardCmtScroll = useCallback((): void => {
-    //     const scrollOffset = window.scrollY;
+	//     const scrollOffset = window.scrollY;
 	// 	const divHeight = commentHeightRef?.current?.offsetHeight;
-    //     if (scrollOffset && divHeight){
+	//     if (scrollOffset && divHeight){
 	// 		if(scrollOffset >= divHeight) {
 	// 			setCurrentTab('comment');
 	// 		} else {
 	// 			setCurrentTab('detail');
 	// 		}
 	// 	}
-    // }, []);
+	// }, []);
 
 	const handleTowardCmtScroll = useCallback((): void => {
-        const scrollOffset = window.scrollY;
+		const scrollOffset = window.scrollY;
 		const divHeight = commentHeightRef?.current?.offsetHeight! - 150;
-        if (scrollOffset && divHeight){
-			if(scrollOffset >= divHeight) {
+		if (scrollOffset && divHeight) {
+			if (scrollOffset >= divHeight) {
 				setCurrentTab('comment');
 				setCmtTab('active');
 				setDetailTab('');
@@ -97,14 +101,14 @@ const ProductDetail = () => {
 				setCmtTab('');
 			}
 		}
-    }, []);
+	}, []);
 
 	useEffect(() => {
-        window.addEventListener('scroll', handleTowardCmtScroll, true);
-        return () => {
-            window.removeEventListener('scroll', handleTowardCmtScroll, true);
-        };
-    }, [handleTowardCmtScroll]);
+		window.addEventListener('scroll', handleTowardCmtScroll, true);
+		return () => {
+			window.removeEventListener('scroll', handleTowardCmtScroll, true);
+		};
+	}, [handleTowardCmtScroll]);
 
 	// useEffect(()=>{
 	// 	if(currentTab === 'detail'){
@@ -124,27 +128,27 @@ const ProductDetail = () => {
 	// 	}
 	// }, [currentTab]);
 
-	const handleTabBtn = (tab:string) => {
-		if(tab === 'detail') {
-			if(detailTab === '') {
+	const handleTabBtn = (tab: string) => {
+		if (tab === 'detail') {
+			if (detailTab === '') {
 				setCurrentTab('detail');
 				setDetailTab('active');
 				setCmtTab('');
-				towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
+				towardDetailRef.current?.scrollIntoView({ behavior: 'smooth' });
 			} else {
-				towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
+				towardDetailRef.current?.scrollIntoView({ behavior: 'smooth' });
 			}
 		} else {
-			if(cmtTab === '') {
+			if (cmtTab === '') {
 				setCurrentTab('comment');
 				setCmtTab('active');
 				setDetailTab('');
-				towardCmtRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
+				towardCmtRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			} else {
-				towardCmtRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
+				towardCmtRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			}
 		}
-	}
+	};
 
 	const getProduct = async () => {
 		if (isUser) {
@@ -216,21 +220,21 @@ const ProductDetail = () => {
 	};
 
 	const handlePurchaseBtn = () => {
-		if(productDetail?.purchaseLink === null) {
+		if (productDetail?.purchaseLink === null) {
 			setModalIsOpen(true);
 		} else {
 			window.open(productDetail?.purchaseLink, '_blank');
 		}
-	}
+	};
 
 	const handleDiscountBtn = () => {
-		if(isUser) {
+		if (isUser) {
 			route.push('/mypage/shop/detail?id=1');
 		} else {
 			setLoginModalPurpose('이용');
 			setLoginModalIsOpen(true);
 		}
-	}
+	};
 
 	return (
 		<>
@@ -239,97 +243,94 @@ const ProductDetail = () => {
 					<Header where="detail" />
 				</FlexColumn>
 			</Fixed>
-			{
-				modalIsOpen === true && <ModalNotSelling setModalIsOpen={setModalIsOpen} onClick={()=>handleTabBtn('comment')} />
-			}
-			{
-				loginModalIsOpen === true && <ModalLogin purpose={loginModalPurpose} setLoginModalIsOpen={setLoginModalIsOpen} />
-			}
+			{modalIsOpen === true && (
+				<ModalNotSelling setModalIsOpen={setModalIsOpen} onClick={() => handleTabBtn('comment')} />
+			)}
+			{loginModalIsOpen === true && (
+				<ModalLogin purpose={loginModalPurpose} setLoginModalIsOpen={setLoginModalIsOpen} />
+			)}
 			<ForBlank />
 			{productDetail && (
 				<>
-				<HeightWrapper ref={commentHeightRef}>
-					<GetHeight ref={heightRef}>
-					<img width="100%" src={`${productDetail.preview}`} />
-					<DesignerBox onClick={() => route.push(`/designer/${productDetail.designerId}`)}>
-						<div className='imgwrapper'>
-							<img width="100%" src="/img/profile-large.png" />
-						</div>
-						<MakeBold>{productDetail.designerName}</MakeBold>
-						<FontSize> 디자이너</FontSize>
-					</DesignerBox>
-					<FlexRow>
-						<Title>{productDetail.clothesName}</Title>
-						<FlexRow className="icon-box">
-							<HeartSection>
-								{markState === true ? (
-									<HeartImg
-										width="30rem"
-										src="/img/activeHeart.png"
-										onClick={handleMarkClick}
-									/>
-								) : (
-									<HeartImg
-										width="30rem"
-										src="/img/nonactiveHeart.png"
-										onClick={handleMarkClick}
-									/>
-								)}
-								<div>{like}</div>
-							</HeartSection>
+					<HeightWrapper ref={commentHeightRef}>
+						<GetHeight ref={heightRef}>
+							<img width="100%" src={`${productDetail.preview}`} />
+							<DesignerBox onClick={() => route.push(`/designer/${productDetail.designerId}`)}>
+								<div className="imgwrapper">
+									<img width="100%" src="/img/profile-large.png" />
+								</div>
+								<MakeBold>{productDetail.designerName}</MakeBold>
+								<FontSize> 디자이너</FontSize>
+							</DesignerBox>
+							<FlexRow>
+								<Title>{productDetail.clothesName}</Title>
+								<FlexRow className="icon-box">
+									<HeartSection>
+										{markState === true ? (
+											<HeartImg width="30rem" src="/img/activeHeart.png" onClick={handleMarkClick} />
+										) : (
+											<HeartImg width="30rem" src="/img/nonactiveHeart.png" onClick={handleMarkClick} />
+										)}
+										<div>{like}</div>
+									</HeartSection>
 
-							{/* <BiShareAlt css={css`:hover{cursor: pointer;}`} size="3rem" /> */}
-							<ShareButton where="product" />
-						</FlexRow>
-					</FlexRow>
-					{
-						productDetail.type === 'sketch' ? 
-						<></>
-						:
-						<FlexRow className='purchase-wrapper'>
-							<PurchaseBtn onClick={handlePurchaseBtn}>구매하러 가기</PurchaseBtn>
-							<DiscountBtn onClick={handleDiscountBtn}>
-								<BiSolidDiscount size='1.6rem' color='rgba(107, 218, 1, 1)' />
-								<div>할인쿠폰</div>
-							</DiscountBtn>
-						</FlexRow>
-					}
-					<GapDesign />
-					</GetHeight>
-					<FlexColumn>
-						<SelectTab className={getFixed}>
-							<SelectBtn className={detailTab} onClick={() => handleTabBtn('detail')}>상세 정보</SelectBtn>
-							<SelectBtn className={cmtTab} onClick={() => handleTabBtn('comment')}>댓글</SelectBtn>
-							{/* <SelectBtn className={detailTab} onClick={() => {handleTabBtn('detail')}}>상세 정보</SelectBtn>
+									{/* <BiShareAlt css={css`:hover{cursor: pointer;}`} size="3rem" /> */}
+									<ShareButton where="product" />
+								</FlexRow>
+							</FlexRow>
+							{productDetail.type === 'sketch' ? (
+								<></>
+							) : (
+								<FlexRow className="purchase-wrapper">
+									<PurchaseBtn onClick={handlePurchaseBtn}>구매하러 가기</PurchaseBtn>
+									<DiscountBtn onClick={handleDiscountBtn}>
+										<BiSolidDiscount size="1.6rem" color="rgba(107, 218, 1, 1)" />
+										<div>할인쿠폰</div>
+									</DiscountBtn>
+								</FlexRow>
+							)}
+							<GapDesign />
+						</GetHeight>
+						<FlexColumn>
+							<SelectTab className={getFixed}>
+								<SelectBtn className={detailTab} onClick={() => handleTabBtn('detail')}>
+									상세 정보
+								</SelectBtn>
+								<SelectBtn className={cmtTab} onClick={() => handleTabBtn('comment')}>
+									댓글
+								</SelectBtn>
+								{/* <SelectBtn className={detailTab} onClick={() => {handleTabBtn('detail')}}>상세 정보</SelectBtn>
 							<SelectBtn className={cmtTab} onClick={() => {handleTabBtn('comment')}}>댓글</SelectBtn> */}
-						</SelectTab>
-					</FlexColumn>
-					<div ref={towardDetailRef}>
-						<img width="100%" src={`${productDetail.detailImg}`}/>
-					</div>
-					{/* <Footer /> */}
-					<BlankSpace ref={towardCmtRef} />
-					<GapDesign />
-				</HeightWrapper>
-				<Comment 
-					pathname={pathname!}
-					rerenderCmts={rerenderCmts}
-					setReRenderCmts={setReRenderCmts}
-					setReplyName={setReplyName}
-					setCommentId={setCommentId}
-					setLoginModalIsOpen={setLoginModalIsOpen}
-					setLoginModalPurpose={setLoginModalPurpose} />
-				<CommentInput 
-					pathname={pathname!}
-					getFixed={getFixed}
-					replyName={replyName}
-					commentId={commentId}
-					rerenderCmts={rerenderCmts}
-					setReRenderCmts={setReRenderCmts}
-					setReplyName={setReplyName}
-					setCommentId={setCommentId}
-					setLoginModalIsOpen={setLoginModalIsOpen}
-					setLoginModalPurpose={setLoginModalPurpose} />
+							</SelectTab>
+						</FlexColumn>
+						<div ref={towardDetailRef}>
+							<img width="100%" src={`${productDetail.detailImg}`} />
+						</div>
+						{/* <Footer /> */}
+						<BlankSpace ref={towardCmtRef} />
+						<GapDesign />
+					</HeightWrapper>
+					<Comment
+						pathname={pathname!}
+						rerenderCmts={rerenderCmts}
+						setReRenderCmts={setReRenderCmts}
+						setReplyName={setReplyName}
+						setCommentId={setCommentId}
+						setLoginModalIsOpen={setLoginModalIsOpen}
+						setLoginModalPurpose={setLoginModalPurpose}
+					/>
+					<CommentInput
+						pathname={pathname!}
+						getFixed={getFixed}
+						replyName={replyName}
+						commentId={commentId}
+						rerenderCmts={rerenderCmts}
+						setReRenderCmts={setReRenderCmts}
+						setReplyName={setReplyName}
+						setCommentId={setCommentId}
+						setLoginModalIsOpen={setLoginModalIsOpen}
+						setLoginModalPurpose={setLoginModalPurpose}
+					/>
 				</>
 			)}
 		</>
@@ -347,7 +348,7 @@ const FlexColumn = styled.div`
 const GetHeight = styled.div`
 	display: flex;
 	flex-direction: column;
-`
+`;
 
 const Fixed = styled.div`
 	position: fixed;
@@ -366,7 +367,7 @@ const Fixed = styled.div`
 
 const ForBlank = styled.div`
 	height: 90px;
-`
+`;
 
 const DesignerBox = styled.div`
 	display: flex;
@@ -376,7 +377,7 @@ const DesignerBox = styled.div`
 	border-radius: 10px;
 	background-color: white;
 	filter: drop-shadow(0 0 0.3rem #9e9e9e);
-	& > .imgwrapper{
+	& > .imgwrapper {
 		display: flex;
 		width: 3rem;
 	}
@@ -407,7 +408,7 @@ const FlexRow = styled.div`
 		margin: 0;
 		gap: 1rem;
 	}
-	&.purchase-wrapper{
+	&.purchase-wrapper {
 		width: 90%;
 		margin: 1rem 2rem 1rem 2rem;
 	}
@@ -421,7 +422,7 @@ const GapDesign = styled.div`
 
 const HeightWrapper = styled.div`
 	height: auto;
-`
+`;
 
 const SelectTab = styled.div`
 	display: flex;
@@ -430,7 +431,7 @@ const SelectTab = styled.div`
 	margin-bottom: 1rem;
 	margin-top: 5rem;
 	background-color: white;
-	&.active{
+	&.active {
 		position: fixed;
 		top: 40px;
 		padding-top: 2rem;
@@ -438,7 +439,7 @@ const SelectTab = styled.div`
 			width: 576px;
 		}
 	}
-`
+`;
 const SelectBtn = styled.div`
 	display: flex;
 	width: 50%;
@@ -447,14 +448,14 @@ const SelectBtn = styled.div`
 	border-bottom: 1px solid rgba(198, 198, 198, 1);
 	color: rgba(198, 198, 198, 1);
 	padding-bottom: 1rem;
-	&.active{
+	&.active {
 		color: black;
 		border-color: black;
 	}
-	&:hover{
+	&:hover {
 		cursor: pointer;
 	}
-`
+`;
 
 const HeartSection = styled.div`
 	width: fit-content;
@@ -466,30 +467,30 @@ const HeartSection = styled.div`
 	color: #ff4b8c;
 `;
 const HeartImg = styled.img`
-	&:hover{
+	&:hover {
 		cursor: pointer;
 	}
-`
+`;
 
 const BlankSpace = styled.div`
 	display: flex;
 	height: 120px;
-`
+`;
 
 const PurchaseBtn = styled.div`
 	display: flex;
 	width: 65%;
-	background-color: #A5E865;
+	background-color: #a5e865;
 	border-radius: 0.6rem;
 	font-size: 1.5rem;
 	justify-content: center;
 	align-items: center;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
-	&:hover{
+	&:hover {
 		cursor: pointer;
 	}
-`
+`;
 
 const DiscountBtn = styled.div`
 	display: flex;
@@ -503,7 +504,7 @@ const DiscountBtn = styled.div`
 	padding-bottom: 1rem;
 	justify-content: center;
 	align-items: center;
-	&:hover{
+	&:hover {
 		cursor: pointer;
 	}
-`
+`;
