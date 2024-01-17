@@ -128,21 +128,14 @@ const Footer: React.FC = () => {
 				<span className="insta">
 					<FaInstagram size="1rem" />
 					<a
-						href="https://instagram.com/arti_fashion_design?igshid=NGVhN2U2NjQ0Yg=="
+						href="https://www.instagram.com/arti_fashion_official/"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						arti_fashion_design
+						arti_fashion_official
 					</a>
 				</span>
 			</ContentSection>
-			<Btn
-				onClick={() => {
-					route.push('/signup');
-				}}
-			>
-				회원가입 / 로그인
-			</Btn>
 		</FooterSection>
 	);
 };
