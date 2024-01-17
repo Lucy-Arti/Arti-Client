@@ -40,7 +40,7 @@ const ProductDetail = () => {
 	const [commentId, setCommentId] = useState<number>();
 	const [rerenderCmts, setReRenderCmts] = useState(false);
 
-	// const ref = createRef<HTMLDivElement>();
+	// tab 이동을 위한 ref들
 	const heightRef = useRef<HTMLDivElement>(null);
 	const towardCmtRef = useRef<HTMLDivElement>(null);
 	const towardDetailRef = useRef<HTMLDivElement>(null);
@@ -48,14 +48,13 @@ const ProductDetail = () => {
 
 	const route = useRouter();
 
-	// const innerHeight = ref?.current?.clientHeight;
-	// const scrollHeight = ref?.current?.scrollHeight;
-	// const scrollTop = ref?.current?.scrollTop;
-
+	//channel 버튼 숨기기 effect
 	useEffect(() => {
 		ChannelService.hideChannelButton();
 	}, []);
 
+	//handleTabScroll 콜백 + 콜백 호출 때마다 useEffect
+	//목적 : tab 부분 상단 fix를 위함
 	const handleTabScroll = useCallback((): void => {
 		const scrollOffset = window.scrollY;
 		const divHeight = heightRef?.current?.offsetHeight;
@@ -75,18 +74,8 @@ const ProductDetail = () => {
 		};
 	}, [handleTabScroll]);
 
-	// const handleTowardCmtScroll = useCallback((): void => {
-	//     const scrollOffset = window.scrollY;
-	// 	const divHeight = commentHeightRef?.current?.offsetHeight;
-	//     if (scrollOffset && divHeight){
-	// 		if(scrollOffset >= divHeight) {
-	// 			setCurrentTab('comment');
-	// 		} else {
-	// 			setCurrentTab('detail');
-	// 		}
-	// 	}
-	// }, []);
-
+	//handleTowardCmtScroll 콜백 + 콜백 호출 때마다 useEffect
+	//목적 : comment와 detail간 스크롤로 이동 시, tab 선택 바뀌게
 	const handleTowardCmtScroll = useCallback((): void => {
 		const scrollOffset = window.scrollY;
 		const divHeight = commentHeightRef?.current?.offsetHeight! - 150;
@@ -110,24 +99,7 @@ const ProductDetail = () => {
 		};
 	}, [handleTowardCmtScroll]);
 
-	// useEffect(()=>{
-	// 	if(currentTab === 'detail'){
-	// 		if(detailTab === '') {
-	// 			// setCurrentTab('detail');
-	// 			setDetailTab('active');
-	// 			setCmtTab('');
-	// 			towardDetailRef.current?.scrollIntoView({ behavior: "smooth" });
-	// 		}
-	// 	} else {
-	// 		if(cmtTab === '') {
-	// 			// setCurrentTab('comment');
-	// 			setCmtTab('active');
-	// 			setDetailTab('');
-	// 			towardCmtRef.current?.scrollIntoView({ behavior: "smooth" });
-	// 		}
-	// 	}
-	// }, [currentTab]);
-
+	// 목적 : tab 버튼 클릭시 이동처리
 	const handleTabBtn = (tab: string) => {
 		if (tab === 'detail') {
 			if (detailTab === '') {
@@ -299,8 +271,6 @@ const ProductDetail = () => {
 								<SelectBtn className={cmtTab} onClick={() => handleTabBtn('comment')}>
 									댓글
 								</SelectBtn>
-								{/* <SelectBtn className={detailTab} onClick={() => {handleTabBtn('detail')}}>상세 정보</SelectBtn>
-							<SelectBtn className={cmtTab} onClick={() => {handleTabBtn('comment')}}>댓글</SelectBtn> */}
 							</SelectTab>
 						</FlexColumn>
 						<div ref={towardDetailRef}>
