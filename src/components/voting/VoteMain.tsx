@@ -32,7 +32,8 @@ const VoteMain = () => {
 			<BannerSection>
 				<img src="/img/votemainbanner.png" />
 			</BannerSection>
-			<StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn>
+			{/* <StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn> */}
+			<VoteEndBtn>투표 종료</VoteEndBtn>
 			<ShareSection>
 				<ShareButton where="vote" />
 			</ShareSection>
@@ -78,6 +79,21 @@ const StartBtn = styled.div`
 	font-weight: 500;
 	margin-top: 30px;
 	cursor: pointer;
+`;
+
+// 투표 종료 시 버튼
+const VoteEndBtn = styled.div`
+	width: 90%;
+	height: 5.25rem;
+	border-radius: 5px;
+	background-color: #979797;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	font-weight: 500;
+	margin-top: 30px;
 `;
 
 const ShareSection = styled.div`

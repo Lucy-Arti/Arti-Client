@@ -132,13 +132,16 @@ const RankingSection = () => {
 					<TextSection>
 						<div>
 							<Text1>
-								여러분의 투표로
+								{/* 여러분의 투표로
 								<br />
-								제작될 옷이 결정돼요!
+								제작될 옷이 결정돼요! */}
+								1차 콘테스트
+								<br />
+								투표가 종료되었습니다!
 							</Text1>
-							<VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn>
+							{/* <VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn> */}
 						</div>
-						<FontSize>투표 기간: 01.17 00시 ~ 01.24 24시</FontSize>
+						<FontSize>다음 콘테스트도 많은 참여 부탁드립니다.</FontSize>
 					</TextSection>
 				</BannerSection>
 				<RankingBtnWrapper>
