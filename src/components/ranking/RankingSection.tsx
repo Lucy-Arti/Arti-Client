@@ -150,7 +150,7 @@ const RankingSection = () => {
 						{tabs.label}
 					</RankingBtn>
 				))} */}
-					<RankingBtn>실시간 랭킹</RankingBtn>
+					<RankingBtn>1차 콘테스트 랭킹</RankingBtn>
 				</RankingBtnWrapper>
 				<TotalRank />
 			</RankingSectionWrapper>
