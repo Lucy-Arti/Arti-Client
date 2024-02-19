@@ -116,7 +116,11 @@ const DesignerDetail = () => {
 						<div className='instagram-noti'>인스타그램에서 새로운 옷들을 발견해 보세요!</div>
 					</DesignerProfile>
 					<div className='designer-profile-img'>
-						<img src={designerInfo?.designerProfile === null ? `/img/myProfile-${randomNumFloor}.png` : designerInfo?.designerProfile} />
+						<img src={designerInfo?.designerProfile === null || designerInfo?.designerProfile === "default" ? 
+							// `/img/myProfile-${randomNumFloor}.png` 
+							`/img/profile-large.png` 
+							: 
+							designerInfo?.designerProfile} />
 					</div>
 				</InfoWrapper>
 				<InstaBtn onClick={()=>onClickToExternel(designerInfo?.instagram!)}><FaInstagram size="2rem" />디자이너 인스타그램 구경하기</InstaBtn>

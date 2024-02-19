@@ -31,7 +31,7 @@ const ListView = () => {
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-	const [products, setProducts] = useState<ProductType[]>(productList);
+	const [products, setProducts] = useState<ProductType[]|undefined>();
 	// const [products, setProducts] = useState([]);
 
 	const [sketchTab, setSketchTab] = useState('active');
@@ -74,7 +74,7 @@ const ListView = () => {
 		}
 	};
 	useEffect(() => {
-		// setProducts(productList);
+		setProducts(() => undefined);
 		getProducts(activatedTab);
 	}, [activatedTab]);
 
@@ -115,7 +115,7 @@ const ListView = () => {
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<ForBlank />
 			<GridWrapper>
-				{products.map((product: ProductType, idx: number) => (
+				{products && products.map((product: ProductType, idx: number) => (
 					<ListCard
 						key={idx}
 						clothesId={product.clothesId}
