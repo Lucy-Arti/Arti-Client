@@ -99,6 +99,10 @@ const Row = styled.div`
 `;
 
 const HeartSection = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
 	width: 100%;
 	img{
 		cursor: pointer;
@@ -122,6 +126,7 @@ const ClothesName = styled.div`
 const RankingCard = (props: RankingCardPropsType) => {
 	const [markState, setMarkState] = useState(false);
 	const [isSuccessed, setIsSuccessed] = useState(false);
+	const [like, setLikeNum] = useState<number>(props.data.likeCount);
 	const isUser = useRecoilValue(isLoginAtom);
 	const route = useRouter();
 
@@ -146,8 +151,10 @@ const RankingCard = (props: RankingCardPropsType) => {
 			// console.log('post 성공');
 			if (markState) {
 				setMarkState(false);
+				setLikeNum(cnt => cnt-1);
 			} else {
 				setMarkState(true);
+				setLikeNum(cnt => cnt+1);
 			}
 		}
 	};
@@ -198,6 +205,7 @@ const RankingCard = (props: RankingCardPropsType) => {
 							onClick={handleMarkClick}
 							src={markState ? '/img/activeHeart.png' : '/img/nonactiveHeart.png'}
 						/>
+						<div>{like}</div>
 					</HeartSection>
 				</Right>
 			</Box>
