@@ -61,7 +61,7 @@ const ListView = () => {
 			console.log('불러오기 오류 발생');
 		} else {
 			var newArr: ProductType[] = [];
-			var preData: ProductType[] = result.data;
+			var preData: ProductType[] = result.data.content;
 			var arraySize = preData.length;
 			for (let i = 0; i < arraySize; i++) {
 				let randomNum = Math.floor(Math.random() * (preData.length - i));
