@@ -189,11 +189,11 @@ const RankingCard = (props: RankingCardPropsType) => {
 			</Tag>
 			<Box>
 				<Left onClick={() => route.push(`../../productlist/product?key=${props.data.clothesId}`)}>
-					<ProductImg src={`${props.data.preview}`} />
+					<ProductImg src={`${props.data.preview}`} loading='lazy' />
 				</Left>
 				<Middle onClick={() => route.push(`../../productlist/product?key=${props.data.clothesId}`)}>
 					<Row>
-						<img src="/img/profileLogo.svg"/>
+						<img src="/img/profileLogo.svg" loading='lazy'/>
 						<DesignerName color='black'>&nbsp;{props.data.designerName}&nbsp;</DesignerName>
 						<DesignerName color='#535353'>디자이너</DesignerName>
 					</Row>
