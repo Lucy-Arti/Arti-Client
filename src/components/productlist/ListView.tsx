@@ -38,9 +38,6 @@ const ListView = () => {
 	const [productTab, setProductTab] = useState('');
 	const [activatedTab, setActivatedTab] = useState('sketch');
 
-	const [sketchLen, setSketchLen] = useState<number|undefined>(undefined);
-	const [productLen, setProductLen] = useState<number|undefined>(undefined);
-
 	const handleTabBtn = (tab: string) => {
 		if (tab === 'sketch') {
 			if (sketchTab === '') {
