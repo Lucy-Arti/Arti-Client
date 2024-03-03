@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 import useListQuery from '@/hooks/useListQuery';
 import { useInView } from 'react-intersection-observer';
-import CardSkeleton from './CardSkeleton';
+import ListCardSkeleton from './ListCardSkeleton';
 
 export type ProductType = {
 	clothesId: number;
@@ -37,6 +37,9 @@ const ListView = () => {
 	const [sketchTab, setSketchTab] = useState('active');
 	const [productTab, setProductTab] = useState('');
 	const [activatedTab, setActivatedTab] = useState('sketch');
+
+	const [sketchLen, setSketchLen] = useState<number|undefined>(undefined);
+	const [productLen, setProductLen] = useState<number|undefined>(undefined);
 
 	const handleTabBtn = (tab: string) => {
 		if (tab === 'sketch') {
@@ -110,7 +113,7 @@ const ListView = () => {
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<ForBlank />
 			{isLoading ? 
-				<CardSkeleton />
+				<ListCardSkeleton />
 				: 
 				<GridWrapper>
 					{products && products.map((item, idx: number) => (
@@ -133,7 +136,7 @@ const ListView = () => {
 					))}
 				</GridWrapper>
 			}
-			{isFetchingNextPage ? <CardSkeleton /> : <ForBlank ref={ref} />}
+			{isFetchingNextPage ? <ListCardSkeleton /> : <ForBlank ref={ref} />}
 		</>
 	);
 };

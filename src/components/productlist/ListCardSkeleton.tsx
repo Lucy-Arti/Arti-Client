@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const CardSkeleton = () => {
+const ListCardSkeleton = () => {
   return (
     <GridWrapper>
         {
@@ -22,7 +22,7 @@ const CardSkeleton = () => {
   )
 }
 
-export default CardSkeleton
+export default ListCardSkeleton
 
 const GridWrapper = styled.div`
 	display: grid;

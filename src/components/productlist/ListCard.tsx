@@ -84,7 +84,6 @@ const ListCard = (props:CardBoxType) => {
                 setMarkState(true);
                 postMark();
                 props.setSavedModalIsOpen(true);
-                // setIsSuccessed(false);
                 setTimeout(() => {
                     props.setSavedModalIsOpen(false);
                 }, 1000);
