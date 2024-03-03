@@ -25,6 +25,7 @@ type CardBoxType = {
 
 const ListCard = (props:CardBoxType) => {
     const [markState, setMarkState] = useState(false);
+    const [like, setLikeNum] = useState<number|null>(props.likeCount);
     const [ref, inView] = useInView({threshold: 0.01,}); //lazy-loading background img 구현용
     const [loading, setLoading] = useState("lazy"); //lazy-loading background img 구현용
     const isUser = useRecoilValue(isLoginAtom);
@@ -67,15 +68,20 @@ const ListCard = (props:CardBoxType) => {
     const handleMarkClick = () => {
         if(isUser){
             if (markState) {
-                // setMarkState(false);
+                if (like !== null) {
+					setLikeNum(like - 1);
+				}
+                setMarkState(false);
                 postMark();
                 props.setUnsavedModalIsOpen(true);
-                // setIsSuccessed(false);
                 setTimeout(() => {
                     props.setUnsavedModalIsOpen(false);
                 }, 1000);
             } else {
-                // setMarkState(true);
+                if (like !== null) {
+					setLikeNum(like + 1);
+				}
+                setMarkState(true);
                 postMark();
                 props.setSavedModalIsOpen(true);
                 // setIsSuccessed(false);
@@ -97,13 +103,14 @@ const ListCard = (props:CardBoxType) => {
         <CardBox>
             <ImgBox className={loading} $preview={props.preview!} ref={ref}>
                 <GetHeight onClick={() => handleDetailClick()} />
-                <div>
+                <HeartSection>
                     {
                         markState === true ?
                         <ImgDesign onClick={handleMarkClick} width = "30rem" src="/img/activeHeart.png" />
                         : <ImgDesign onClick={handleMarkClick} width = "30rem" src="/img/nonactiveHeartFill.png" />
                     }
-                </div>
+                    <div>{like}</div>
+                </HeartSection>
             </ImgBox>
             <FlexRow onClick={() => handleDetailClick()}>
                 <ProfileWrapper>
@@ -145,6 +152,17 @@ const GetHeight = styled.div`
     height: 35rem;
     width: 100%;
 `
+
+const HeartSection = styled.div`
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1px;
+	color: #ff4b8c;
+`;
+
 const FlexRow = styled.div`
     display: flex;
     align-items: center;
