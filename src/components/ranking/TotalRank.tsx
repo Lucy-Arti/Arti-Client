@@ -5,6 +5,8 @@ import RankingDataList from './RankingDataList';
 import ModalLogin from '../common/ModalLogin';
 import ModalProductSaved from '../common/ModalProductSaved';
 import ModalProductUnsaved from '../common/ModalProductUnsaved';
+import RankingCardSkeleton from './RankingCardSkeleton';
+import { RankData } from '@/types/request';
 
 
 const Wrapper = styled.div`
@@ -14,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const TotalRank = () => {
-	const [rankData, setRankData] = useState([]);
+	const [rankData, setRankData] = useState<RankData[]|undefined>(undefined);
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
@@ -40,12 +42,17 @@ const TotalRank = () => {
 			(unsavedModalIsOpen === true) && <ModalProductUnsaved/>
 		}
 			<Wrapper>
-				<RankingDataList
-					datas={rankData}
-					setLoginModalIsOpen={setLoginModalIsOpen}
-					setSavedModalIsOpen={setSavedModalIsOpen}
-					setUnsavedModalIsOpen={setUnsavedModalIsOpen}
-				/>
+				{
+					rankData ? 
+					<RankingDataList
+						datas={rankData}
+						setLoginModalIsOpen={setLoginModalIsOpen}
+						setSavedModalIsOpen={setSavedModalIsOpen}
+						setUnsavedModalIsOpen={setUnsavedModalIsOpen}
+					/>
+					:
+					<RankingCardSkeleton />
+				}
 			</Wrapper>
 		</>
 	);
