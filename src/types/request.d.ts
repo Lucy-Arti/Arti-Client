@@ -40,7 +40,8 @@ export type ProductType = {
 	preview: string|null,
 	designerId: number|null,
 	designerName: string|null,
-	score: number|null
+	score: number|null,
+	type: string,
 }
 
 export interface PointPossibleData {

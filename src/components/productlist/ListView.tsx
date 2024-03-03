@@ -12,6 +12,8 @@ import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 import useListQuery from '@/hooks/useListQuery';
 import { useInView } from 'react-intersection-observer';
 import ListCardSkeleton from './ListCardSkeleton';
+import { useRecoilState } from 'recoil';
+import { ListTabAtom } from '@/app/recoilContextProvider';
 
 export type ProductType = {
 	clothesId: number;
@@ -34,25 +36,12 @@ const ListView = () => {
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 
-	const [sketchTab, setSketchTab] = useState('active');
-	const [productTab, setProductTab] = useState('');
-	const [activatedTab, setActivatedTab] = useState('sketch');
+	const [activatedTab, setActivatedTab] = useRecoilState(ListTabAtom);
 
 	const handleTabBtn = (tab: string) => {
-		if (tab === 'sketch') {
-			if (sketchTab === '') {
-				setSketchTab('active');
-				setProductTab('');
-				setActivatedTab(tab);
-				window.scrollTo(0, 0);
-			}
-		} else {
-			if (productTab === '') {
-				setProductTab('active');
-				setSketchTab('');
-				setActivatedTab(tab);
-				window.scrollTo(0, 0);
-			}
+		if (tab !== activatedTab) {
+			setActivatedTab(tab);
+			window.scrollTo(0, 0);
 		}
 	};
 
@@ -69,12 +58,23 @@ const ListView = () => {
 	}, [inView]);
 
 	useEffect(() => {
-		ChannelService.showChannelButton();
-		if (localStorage.getItem("list-scroll") !== "0"){
-			window.scrollTo(0, Number(localStorage.getItem("list-scroll")));
+		if(activatedTab === 'sketch'){
+			if (localStorage.getItem("list-sketch-scroll") !== "0"){
+				window.scrollTo(0, Number(localStorage.getItem("list-scroll")));
+			} else {
+				localStorage.setItem("list-sketch-scroll", "0");
+			}
 		} else {
-			localStorage.setItem("list-scroll", "0");
+			if (localStorage.getItem("list-product-scroll") !== "0"){
+				window.scrollTo(0, Number(localStorage.getItem("list-scroll")));
+			} else {
+				localStorage.setItem("list-product-scroll", "0");
+			}
 		}
+	}, [activatedTab]);
+
+	useEffect(() => {
+		ChannelService.showChannelButton();
 	}, []);
 
 	return (
@@ -87,7 +87,7 @@ const ListView = () => {
 				<FlexColumn>
 					<TabWrapper>
 						<TabBtn
-							className={sketchTab}
+							className={activatedTab === 'sketch' ? 'active' : ''}
 							onClick={() => {
 								handleTabBtn('sketch');
 							}}
@@ -95,7 +95,7 @@ const ListView = () => {
 							일러스트
 						</TabBtn>
 						<TabBtn
-							className={productTab}
+							className={activatedTab === 'product' ? 'active' : ''}
 							onClick={() => {
 								handleTabBtn('product');
 							}}
@@ -126,6 +126,7 @@ const ListView = () => {
 						designerId={item.designerId}
 						designerName={item.designerName}
 						score={item.score}
+						type={item.type}
 						setSavedModalIsOpen={setSavedModalIsOpen}
 						setUnsavedModalIsOpen={setUnsavedModalIsOpen}
 						setLoginModalIsOpen={setLoginModalIsOpen}

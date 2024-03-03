@@ -18,6 +18,7 @@ type CardBoxType = {
 	designerId: number|null,
 	designerName: string|null,
 	score: number|null,
+    type: string,
     setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -94,7 +95,11 @@ const ListCard = (props:CardBoxType) => {
     }
 
     const handleDetailClick = () => {
-        localStorage.setItem("list-scroll", String(window.scrollY));
+        if(props.type === 'sketch'){
+            localStorage.setItem("list-sketch-scroll", String(window.scrollY));
+        } else {
+            localStorage.setItem("list-product-scroll", String(window.scrollY));
+        }
         route.push(`/productlist/product?key=${props.clothesId}`);
     };
 

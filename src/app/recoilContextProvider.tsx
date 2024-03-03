@@ -35,6 +35,11 @@ export const userRoleAtom = atom({
 	effects_UNSTABLE: [persistAtom],
 });
 
+export const ListTabAtom = atom<string>({
+	key: 'current-tab',
+	default: 'sketch',
+});
+
 export default function RecoidContextProvider({ children }: { children: React.ReactNode }) {
 	return <RecoilRoot>{children}</RecoilRoot>;
 }
