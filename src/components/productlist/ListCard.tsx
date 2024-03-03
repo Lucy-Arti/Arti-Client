@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useRecoilValue } from "recoil"
 import styled from "styled-components"
+import { useInView } from "react-intersection-observer"
 
 type CardBoxType = {
     clothesId: number,
@@ -19,12 +20,13 @@ type CardBoxType = {
 	score: number|null,
     setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const ListCard = (props:CardBoxType) => {
     const [markState, setMarkState] = useState(false);
-    // const [isSuccessed, setIsSuccessed] = useState(false);
+    const [ref, inView] = useInView({threshold: 0.01,}); //lazy-loading background img 구현용
+    const [loading, setLoading] = useState("lazy"); //lazy-loading background img 구현용
     const isUser = useRecoilValue(isLoginAtom);
     const route = useRouter();
     
@@ -36,6 +38,7 @@ const ListCard = (props:CardBoxType) => {
             }
         }
     }
+
     const postMark = async() => {
         const result = await postMarked(props.clothesId, localStorage.getItem("access"));
         if (result === false) {
@@ -50,9 +53,17 @@ const ListCard = (props:CardBoxType) => {
             }
         }
     }
+
     useEffect(()=>{
         getMark();
     }, []);
+
+    useEffect(() => {
+        if(inView){
+            setLoading(() => "");
+        }
+    }, [inView]);
+
     const handleMarkClick = () => {
         if(isUser){
             if (markState) {
@@ -77,10 +88,15 @@ const ListCard = (props:CardBoxType) => {
         }
     }
 
+    const handleDetailClick = () => {
+        localStorage.setItem("list-scroll", String(window.scrollY));
+        route.push(`/productlist/product?key=${props.clothesId}`);
+    };
+
   return (
         <CardBox>
-            <ImgBox $preview={props.preview!}>
-                <GetHeight onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)} />
+            <ImgBox className={loading} $preview={props.preview!} ref={ref}>
+                <GetHeight onClick={() => handleDetailClick()} />
                 <div>
                     {
                         markState === true ?
@@ -89,16 +105,16 @@ const ListCard = (props:CardBoxType) => {
                     }
                 </div>
             </ImgBox>
-            <FlexRow onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>
+            <FlexRow onClick={() => handleDetailClick()}>
                 <ProfileWrapper>
-                    <img width="80%" src="/img/profile-large.png"/>
+                    <img width="80%" src="/img/profile-large.png" loading="lazy"/>
                 </ProfileWrapper>
                 <ProfileName>
                     <div className="designer-name">{props.designerName}</div>
                     <div className="designer-noti">디자이너</div>
                 </ProfileName>
             </FlexRow>
-            <Header onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>{props.clothesName}</Header>
+            <Header onClick={() => handleDetailClick()}>{props.clothesName}</Header>
         </CardBox>
   )
 }
@@ -120,6 +136,9 @@ const ImgBox = styled.div<{$preview: string}>`
     height : 35rem;
     justify-content : flex-end;
     align-items : flex-end;
+    &.lazy{
+        background-color: #C9C9C9;
+    }
 `
 
 const GetHeight = styled.div`

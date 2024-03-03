@@ -58,15 +58,14 @@ export const postMarked = async (id: number | string, token: string | null) => {
 	}
 };
 
-export const getAllProductByType = async (type: string) => {
+export const getAllProductByType = async (type: string, page:number) => {
 	const accessToken = localStorage.getItem('access');
 	try {
-		const response = await axios.get(`${baseURL}api/v1/clothes/type/${type}`, {
+		const response = await axios.get(`${baseURL}api/v1/clothes/type/${type}?page=${page}`, {
 			headers: { Authorization: `Bearer ${accessToken}` },
 		});
-		return response;
+		return response.data;
 	} catch (error) {
 		console.log(error);
-		return false;
 	}
 };

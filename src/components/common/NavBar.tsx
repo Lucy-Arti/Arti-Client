@@ -42,6 +42,7 @@ const NavBar = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		setTab(getInitialTab(pathname));
+		localStorage.setItem("list-scroll", "0");
 	}, [pathname]);
 
 	const handleClick = (page: string) => () => {

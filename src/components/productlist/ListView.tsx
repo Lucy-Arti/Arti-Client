@@ -6,9 +6,12 @@ import { useEffect, useState } from 'react';
 import ModalProductSaved from '../common/ModalProductSaved';
 import ModalProductUnsaved from '../common/ModalProductUnsaved';
 import ModalLogin from '../common/ModalLogin';
-import { GetAllProductLists, getAllProductByType } from '@/apis/list';
+import { getAllProductByType } from '@/apis/list';
 import styled from 'styled-components';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
+import useListQuery from '@/hooks/useListQuery';
+import { useInView } from 'react-intersection-observer';
+import CardSkeleton from './CardSkeleton';
 
 export type ProductType = {
 	clothesId: number;
@@ -27,12 +30,9 @@ export type ProductType = {
 };
 
 const ListView = () => {
-	const productList: ProductType[] = [];
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-	const [products, setProducts] = useState<ProductType[]|undefined>();
-	// const [products, setProducts] = useState([]);
 
 	const [sketchTab, setSketchTab] = useState('active');
 	const [productTab, setProductTab] = useState('');
@@ -44,42 +44,37 @@ const ListView = () => {
 				setSketchTab('active');
 				setProductTab('');
 				setActivatedTab(tab);
+				window.scrollTo(0, 0);
 			}
 		} else {
 			if (productTab === '') {
 				setProductTab('active');
 				setSketchTab('');
 				setActivatedTab(tab);
+				window.scrollTo(0, 0);
 			}
 		}
 	};
 
-	const getProducts = async (type: string) => {
-		// const result = await GetAllProductLists();
-		const result = await getAllProductByType(type);
-		if (result === false) {
-			console.log('불러오기 오류 발생');
-		} else {
-			var newArr: ProductType[] = [];
-			var preData: ProductType[] = result.data.content;
-			var arraySize = preData.length;
-			for (let i = 0; i < arraySize; i++) {
-				let randomNum = Math.floor(Math.random() * (preData.length - i));
-				let element = preData.splice(randomNum, 1);
-				newArr = newArr.concat(element);
-			}
-			// setProducts(products.concat(result.data));
-			// console.log(newArr);
-			setProducts(productList.concat(newArr));
-		}
-	};
+	const [ref, inView] = useInView({threshold: 0.01,});
+	const { products, isLoading, isError, fetchNextPage, isFetchingNextPage } = useListQuery({
+		queryKey: ['listquery', activatedTab],
+		queryFn: ({pageParam = 0}) => getAllProductByType(activatedTab, pageParam),
+	  });
+
 	useEffect(() => {
-		setProducts(() => undefined);
-		getProducts(activatedTab);
-	}, [activatedTab]);
+	if (inView) {
+		fetchNextPage();
+	}
+	}, [inView]);
 
 	useEffect(() => {
 		ChannelService.showChannelButton();
+		if (localStorage.getItem("list-scroll") !== "0"){
+			window.scrollTo(0, Number(localStorage.getItem("list-scroll")));
+		} else {
+			localStorage.setItem("list-scroll", "0");
+		}
 	}, []);
 
 	return (
@@ -114,26 +109,31 @@ const ListView = () => {
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<ForBlank />
-			<GridWrapper>
-				{products && products.map((product: ProductType, idx: number) => (
+			{isLoading ? 
+				<CardSkeleton />
+				: 
+				<GridWrapper>
+					{products && products.map((item, idx: number) => (
 					<ListCard
 						key={idx}
-						clothesId={product.clothesId}
-						createdAt={product.createdAt}
-						updatedAt={product.updatedAt}
-						detailImg={product.detailImg}
-						likeCount={product.likeCount}
-						clothesName={product.clothesName}
-						preview={product.preview}
-						designerId={product.designerId}
-						designerName={product.designerName}
-						score={product.score}
+						clothesId={item.clothesId}
+						createdAt={item.createdAt}
+						updatedAt={item.updatedAt}
+						detailImg={item.detailImg}
+						likeCount={item.likeCount}
+						clothesName={item.clothesName}
+						preview={item.preview}
+						designerId={item.designerId}
+						designerName={item.designerName}
+						score={item.score}
 						setSavedModalIsOpen={setSavedModalIsOpen}
 						setUnsavedModalIsOpen={setUnsavedModalIsOpen}
 						setLoginModalIsOpen={setLoginModalIsOpen}
 					/>
-				))}
-			</GridWrapper>
+					))}
+				</GridWrapper>
+			}
+			{isFetchingNextPage ? <CardSkeleton /> : <ForBlank ref={ref} />}
 		</>
 	);
 };
