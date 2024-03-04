@@ -9,6 +9,8 @@ import { isLoginAtom } from '@/app/recoilContextProvider';
 type RankingCardPropsType = {
 	data: RankData;
 	index: number;
+	savedModalIsOpen: boolean;
+	unsavedModalIsOpen: boolean;
 	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -161,20 +163,22 @@ const RankingCard = (props: RankingCardPropsType) => {
 
 	const handleMarkClick = () => {
 		if (isUser) {
-			if (markState) {
-				postMark();
-				props.setUnsavedModalIsOpen(true);
-				setIsSuccessed(false);
-				setTimeout(() => {
-					props.setUnsavedModalIsOpen(false);
-				}, 1000);
-			} else {
-				postMark();
-				props.setSavedModalIsOpen(true);
-				setIsSuccessed(false);
-				setTimeout(() => {
-					props.setSavedModalIsOpen(false);
-				}, 1000);
+			if(props.savedModalIsOpen === false && props.unsavedModalIsOpen === false){
+				if (markState) {
+					postMark();
+					props.setUnsavedModalIsOpen(true);
+					setIsSuccessed(false);
+					setTimeout(() => {
+						props.setUnsavedModalIsOpen(false);
+					}, 1000);
+				} else {
+					postMark();
+					props.setSavedModalIsOpen(true);
+					setIsSuccessed(false);
+					setTimeout(() => {
+						props.setSavedModalIsOpen(false);
+					}, 1000);
+				}
 			}
 		} else {
 			props.setLoginModalIsOpen(true);

@@ -16,6 +16,8 @@ import { GetAllCmts } from '@/apis/comments';
 import ModalNotSelling from '../common/ModalNotSelling';
 import ModalLogin from '../common/ModalLogin';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
+import ModalProductSaved from '../common/ModalProductSaved';
+import ModalProductUnsaved from '../common/ModalProductUnsaved';
 
 const ProductDetail = () => {
 	// const withslashpathname  = usePathname();
@@ -24,9 +26,13 @@ const ProductDetail = () => {
 	const pathname = params.get('key');
 	const [markState, setMarkState] = useState(false);
 	const [like, setLikeNum] = useState<number | null>(null);
+
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	const [loginModalPurpose, setLoginModalPurpose] = useState<string | undefined>(undefined);
+	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
+	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
+
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -156,7 +162,17 @@ const ProductDetail = () => {
 			console.log('불러오기 오류 발생');
 			//나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
 		} else {
-			// console.log('post 성공');
+			if (markState){
+                if (like !== null) {
+                    setLikeNum(like - 1);
+                }
+                setMarkState(false);
+            } else {
+                if (like !== null) {
+                    setLikeNum(like + 1);
+                }
+                setMarkState(true);
+            }
 		}
 	};
 
@@ -173,19 +189,21 @@ const ProductDetail = () => {
 
 	const handleMarkClick = () => {
 		if (isUser) {
-			if (markState) {
-				setMarkState(false);
-				if (like !== null) {
-					setLikeNum(like - 1);
-				}
-				postMark();
-			} else {
-				setMarkState(true);
-				if (like !== null) {
-					setLikeNum(like + 1);
-				}
-				postMark();
-			}
+			if(savedModalIsOpen === false && unsavedModalIsOpen === false){
+                if (markState) {
+                    postMark();
+                    setUnsavedModalIsOpen(true);
+                    setTimeout(() => {
+                        setUnsavedModalIsOpen(false);
+                    }, 1000);
+                } else {
+                    postMark();
+                    setSavedModalIsOpen(true);
+                    setTimeout(() => {
+                        setSavedModalIsOpen(false);
+                    }, 1000);
+                }
+            }
 		} else {
 			setLoginModalIsOpen(true);
 		}
@@ -221,6 +239,8 @@ const ProductDetail = () => {
 			{loginModalIsOpen === true && (
 				<ModalLogin purpose={loginModalPurpose} setLoginModalIsOpen={setLoginModalIsOpen} />
 			)}
+			{savedModalIsOpen === true && <ModalProductSaved />}
+			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<ForBlank />
 			{productDetail && (
 				<>
