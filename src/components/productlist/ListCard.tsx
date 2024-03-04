@@ -160,11 +160,12 @@ const GetHeight = styled.div`
 const HeartSection = styled.div`
 	width: fit-content;
 	display: flex;
+    height: 20%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 1px;
 	color: #ff4b8c;
+    font-weight: 600;
 `;
 
 const FlexRow = styled.div`
