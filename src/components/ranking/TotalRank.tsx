@@ -46,6 +46,8 @@ const TotalRank = () => {
 					rankData ? 
 					<RankingDataList
 						datas={rankData}
+						savedModalIsOpen={savedModalIsOpen}
+						unsavedModalIsOpen={unsavedModalIsOpen}
 						setLoginModalIsOpen={setLoginModalIsOpen}
 						setSavedModalIsOpen={setSavedModalIsOpen}
 						setUnsavedModalIsOpen={setUnsavedModalIsOpen}

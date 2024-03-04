@@ -20,13 +20,20 @@ const LandingSectionContainer = styled.div`
 	overflow-y: hidden;
 `;
 
-const BannerSection = styled.div`
+const BannerSection = styled.div<{$loadingWidth?:number}>`
 	width: 100%;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	&.loading{
+		width: 90%;
+		height: ${props => (props.$loadingWidth && props.$loadingWidth >= 576)? `332.9px`:`490.8px`};
+		background-color: #C9C9C9;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -117,7 +124,7 @@ const LandingSection = () => {
 					</Swiper>
 				</BannerSection>
 			) : (
-				<></>
+				<BannerSection className='loading' $loadingWidth={typeof window !== 'undefined' ? window.innerWidth : 0} />
 			)}
 			<ExplainWrapper
 				onClick={() => {

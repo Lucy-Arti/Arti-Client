@@ -4,6 +4,8 @@ import { RankData } from '@/types/request';
 
 type RankingDataListPropsType = {
 	datas: RankData[];
+	savedModalIsOpen: boolean;
+	unsavedModalIsOpen: boolean;
 	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,6 +28,8 @@ const RankingDataList = (props: RankingDataListPropsType) => {
 						key={index}
 						index={index}
 						data={data}
+						savedModalIsOpen={props.savedModalIsOpen}
+						unsavedModalIsOpen={props.unsavedModalIsOpen}
 						setSavedModalIsOpen={props.setSavedModalIsOpen}
 						setUnsavedModalIsOpen={props.setUnsavedModalIsOpen}
 						setLoginModalIsOpen={props.setLoginModalIsOpen}

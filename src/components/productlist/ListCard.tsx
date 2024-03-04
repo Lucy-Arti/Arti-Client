@@ -19,6 +19,8 @@ type CardBoxType = {
 	designerName: string|null,
 	score: number|null,
     type: string,
+    savedModalIsOpen: boolean;
+	unsavedModalIsOpen: boolean;
     setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -49,8 +51,14 @@ const ListCard = (props:CardBoxType) => {
         } else {
             // console.log('post 성공');
             if (markState){
+                if (like !== null) {
+                    setLikeNum(like - 1);
+                }
                 setMarkState(false);
             } else {
+                if (like !== null) {
+                    setLikeNum(like + 1);
+                }
                 setMarkState(true);
             }
         }
@@ -68,26 +76,20 @@ const ListCard = (props:CardBoxType) => {
 
     const handleMarkClick = () => {
         if(isUser){
-            if (markState) {
-                if (like !== null) {
-					setLikeNum(like - 1);
-				}
-                setMarkState(false);
-                postMark();
-                props.setUnsavedModalIsOpen(true);
-                setTimeout(() => {
-                    props.setUnsavedModalIsOpen(false);
-                }, 1000);
-            } else {
-                if (like !== null) {
-					setLikeNum(like + 1);
-				}
-                setMarkState(true);
-                postMark();
-                props.setSavedModalIsOpen(true);
-                setTimeout(() => {
-                    props.setSavedModalIsOpen(false);
-                }, 1000);
+            if(props.savedModalIsOpen === false && props.unsavedModalIsOpen === false){
+                if (markState) {
+                    postMark();
+                    props.setUnsavedModalIsOpen(true);
+                    setTimeout(() => {
+                        props.setUnsavedModalIsOpen(false);
+                    }, 1000);
+                } else {
+                    postMark();
+                    props.setSavedModalIsOpen(true);
+                    setTimeout(() => {
+                        props.setSavedModalIsOpen(false);
+                    }, 1000);
+                }
             }
         } else {
             props.setLoginModalIsOpen(true);
@@ -160,11 +162,12 @@ const GetHeight = styled.div`
 const HeartSection = styled.div`
 	width: fit-content;
 	display: flex;
+    height: 20%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 1px;
 	color: #ff4b8c;
+    font-weight: 600;
 `;
 
 const FlexRow = styled.div`

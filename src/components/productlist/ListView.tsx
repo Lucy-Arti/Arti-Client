@@ -128,6 +128,8 @@ const ListView = () => {
 						designerName={item.designerName}
 						score={item.score}
 						type={item.type}
+						savedModalIsOpen={savedModalIsOpen}
+						unsavedModalIsOpen={unsavedModalIsOpen}
 						setSavedModalIsOpen={setSavedModalIsOpen}
 						setUnsavedModalIsOpen={setUnsavedModalIsOpen}
 						setLoginModalIsOpen={setLoginModalIsOpen}

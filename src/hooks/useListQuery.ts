@@ -7,9 +7,7 @@ import axios from "axios";
 
 interface useListQueryProps {
     queryKey: any;
-    // fetchFn: (type: string, page: number) => Promise<PagenationQueryType>;
     activatedTab: string;
-    // queryFn: (context?: QueryFunctionContext) => Promise<PagenationQueryType>;
 }
 
 const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
@@ -19,11 +17,6 @@ const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     return response.data;
-    // return {
-    //   result: result.blacklist,
-    //   nextPage: pageParam + 1,
-    //   isLast: result.is_last,
-    // }; 
   };
 
   const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<PagenationQueryType>({
@@ -34,7 +27,7 @@ const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
   });
 
   const products = useMemo(() => {
-    // 상품 컴포넌트(ProductCard.tsx)의 props에 맞춰 데이터 가공처리
+    // 데이터 가공
     const productList:ProductType[] = [];
     data?.pages.map((product) => {
         product.content?.map((item) => {
