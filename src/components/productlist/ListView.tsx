@@ -46,9 +46,10 @@ const ListView = () => {
 	};
 
 	const [ref, inView] = useInView({threshold: 0.01,});
+
 	const { products, isLoading, isError, fetchNextPage, isFetchingNextPage } = useListQuery({
 		queryKey: ['listquery', activatedTab],
-		queryFn: ({pageParam = 0}) => getAllProductByType(activatedTab, pageParam),
+		activatedTab: activatedTab,
 	  });
 
 	useEffect(() => {
