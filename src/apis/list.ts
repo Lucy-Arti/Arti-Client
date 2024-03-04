@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `https://arti-fashion.shop/`;
+export const baseURL = `https://arti-fashion.shop/`;
 
 export const GetAllProductLists = async () => {
 	try {

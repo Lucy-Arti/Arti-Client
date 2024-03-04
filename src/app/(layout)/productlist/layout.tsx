@@ -2,7 +2,7 @@
 import Header from '@/components/common/Header';
 import StyledComponentsRegistry from '../../lib/registry';
 import NavBar from '@/components/common/NavBar';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	const queryClient = new QueryClient()
