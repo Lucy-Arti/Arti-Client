@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { ProductType } from '@/types/request';
 import { GetAllProductLists } from '@/apis/list';
 import { useRouter } from 'next/navigation';
+import DesignerLandingSkeleton from './DesignerLandingSkeleton';
 
 const LandingSectionContainer = styled.div`
 	width: 100%;
@@ -30,6 +31,9 @@ const BannerSection = styled.div`
 const SwipeSection = styled.div`
 	width: 100%;
 	max-height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 const Introduce = styled.div`
@@ -137,7 +141,7 @@ const settings = {
 
 const LandingSection2 = () => {
 	const productList: ProductType[] = [];
-	const [products, setProducts] = useState<ProductType[]>(productList);
+	const [products, setProducts] = useState<ProductType[]|undefined>(undefined);
 	const router = useRouter();
 
 	const getProducts = async () => {
@@ -152,7 +156,7 @@ const LandingSection2 = () => {
 				let element = preData.splice(randomNum, 1);
 				newArr = newArr.concat(element);
 			}
-			setProducts(products.concat(newArr));
+			setProducts(productList.concat(newArr));
 		}
 	};
 	useEffect(() => {
@@ -172,28 +176,32 @@ const LandingSection2 = () => {
 				</More>
 			</BannerSection>
 			<SwipeSection>
-				<Swiper {...settings} className="mySwiper">
-					{products &&
-						products.map((product: ProductType, index) => (
-							<SwiperSlide key={index}>
-								<Card
-									onClick={() => {
-										router.push(`productlist/product?key=${product.clothesId}`);
-									}}
-								>
-									<CardImg src={`${product.preview}`} />
-									<Info>
-										<InfoText>
-											<Row>
-												<img src="/img/profileLogo.svg" />
-												<span className="black">&nbsp;{product.designerName}&nbsp;</span>
-											</Row>
-										</InfoText>
-									</Info>
-								</Card>
-							</SwiperSlide>
-						))}
-				</Swiper>
+			{
+				products ?
+					<Swiper {...settings} className="mySwiper">{
+					products.map((product: ProductType, index) => (
+						<SwiperSlide key={index}>
+							<Card
+								onClick={() => {
+									router.push(`productlist/product?key=${product.clothesId}`);
+								}}
+							>
+								<CardImg src={`${product.preview}`} />
+								<Info>
+									<InfoText>
+										<Row>
+											<img src="/img/profileLogo.svg" />
+											<span className="black">&nbsp;{product.designerName}&nbsp;</span>
+										</Row>
+									</InfoText>
+								</Info>
+							</Card>
+						</SwiperSlide>
+					))
+					}</Swiper>
+					:
+					<DesignerLandingSkeleton />
+			}
 			</SwipeSection>
 		</LandingSectionContainer>
 	);
