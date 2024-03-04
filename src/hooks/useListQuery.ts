@@ -13,7 +13,7 @@ interface useListQueryProps {
 }
 
 const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
-  const fetchProduct = async ({pageParam}) => {
+  const fetchProduct = async (pageParam:unknown|number) => {
     const accessToken = localStorage.getItem('access');
     const response = await axios.get(`${baseURL}api/v1/clothes/type/${activatedTab}?page=${pageParam}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -28,7 +28,7 @@ const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
 
   const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<PagenationQueryType>({
     queryKey : queryKey,
-    queryFn : fetchProduct,
+    queryFn : (context) => fetchProduct(context.pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => pages.length === (lastPage.number - 1) ? undefined : lastPage.number+1
   });
