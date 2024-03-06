@@ -44,7 +44,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const LandingSection = () => {
-	const [windowWidth, setWindowWidth] = useState(0);
+	const [windowWidth, setWindowWidth] = useState<number|undefined>(undefined);
 	const router = useRouter();
 
 	const handleResize = () => {
@@ -78,7 +78,7 @@ const LandingSection = () => {
 
 	return (
 		<LandingSectionContainer>
-			{selectedImage ? (
+			{windowWidth ? (
 				<BannerSection>
 					<Swiper
 						grabCursor={true}
