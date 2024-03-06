@@ -78,7 +78,7 @@ const LandingSection = () => {
 
 	return (
 		<LandingSectionContainer>
-			{windowWidth ? (
+			{selectedImage ? (
 				<BannerSection>
 					<Swiper
 						grabCursor={true}
