@@ -68,7 +68,7 @@ const LandingSection = () => {
 	};
 
 	// 화면 너비 576px 이상이면 데스크탑 이미지 사용
-	const selectedImage = windowWidth >= 576 ? '/img/desktopBanner' : windowWidth > 0 ? '/img/mobileBanner' : '';
+	const selectedImage = windowWidth! >= 576 ? '/img/desktopBanner' : windowWidth! > 0 ? '/img/mobileBanner' : '';
 
 	const onClickToExternel = (url: string) => {
 		if (typeof window !== 'undefined') {
