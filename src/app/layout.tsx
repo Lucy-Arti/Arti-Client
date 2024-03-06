@@ -5,7 +5,7 @@ import RecoidContextProvider from './recoilContextProvider';
 import GoogleTagManager from './GoogleTagManager';
 
 export const metadata: Metadata = {
-	title: '투표해주신 디자인이 실제 옷으로 제작됩니다 | 아티 ARTI',
+	title: '아티 ARTI | 투표해주신 디자인이 실제 옷으로 제작됩니다',
 	description: '투표를 통해 세상에 숨겨져 있던 유니크한 옷들을 만나보세요',
 	icons: {
 		icon: '/img/artiLogo.png',

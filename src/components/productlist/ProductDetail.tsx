@@ -291,7 +291,7 @@ const ProductDetail = () => {
 								</SelectBtn>
 							</SelectTab>
 						</FlexColumn>
-						<div ref={towardDetailRef}>
+						<div className='detail-img' ref={towardDetailRef}>
 							<img width="100%" src={`${productDetail.detailImg}`} />
 						</div>
 						{/* <Footer /> */}
@@ -348,6 +348,7 @@ const Fixed = styled.div`
 	height: fit-content;
 	top: 0%;
 	background-color: white;
+	z-index: 1;
 	@media (min-width: 576px) {
 		width: 576px;
 	}
@@ -410,11 +411,14 @@ const GapDesign = styled.div`
 
 const HeightWrapper = styled.div`
 	height: auto;
+	& > .detail-img{
+		width: 100%;
+	}
 `;
 
 const SelectTab = styled.div`
 	display: flex;
-	width: 90%;
+	width: 100%;
 	flex-direction: row;
 	margin-bottom: 1rem;
 	margin-top: 5rem;
@@ -423,6 +427,7 @@ const SelectTab = styled.div`
 		position: fixed;
 		top: 40px;
 		padding-top: 2rem;
+		z-index: 1;
 		@media (min-width: 576px) {
 			width: 576px;
 		}
