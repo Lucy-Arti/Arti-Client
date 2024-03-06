@@ -107,7 +107,8 @@ const ListCard = (props:CardBoxType) => {
 
   return (
         <CardBox>
-            <ImgBox className={loading} $preview={props.preview!} ref={ref}>
+            <ImgBox className={loading} $preview={props.preview!} ref={ref} 
+            title={`${props.type === 'product' ? '제품' : '일러스트'} 이미지, ${props.designerName} 디자이너의 ${props.clothesName}`}>
                 <GetHeight onClick={() => handleDetailClick()} />
                 <HeartSection>
                     {

@@ -186,7 +186,8 @@ const LandingSection2 = () => {
 									router.push(`productlist/product?key=${product.clothesId}`);
 								}}
 							>
-								<CardImg src={`${product.preview}`} />
+								<CardImg src={`${product.preview}`} 
+								alt={`${product.type === 'product' ? '제품' : '일러스트'} 이미지, ${product.designerName} 디자이너의 ${product.clothesName}`} />
 								<Info>
 									<InfoText>
 										<Row>
