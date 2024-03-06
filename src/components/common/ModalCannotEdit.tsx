@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 
 const ModalCannotEdit = (props:{canEdit:boolean, setCanEdit:React.Dispatch<React.SetStateAction<boolean>>}) => {

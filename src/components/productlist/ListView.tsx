@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import ModalProductSaved from '../common/ModalProductSaved';
 import ModalProductUnsaved from '../common/ModalProductUnsaved';
 import ModalLogin from '../common/ModalLogin';
-import { getAllProductByType } from '@/apis/list';
 import styled from 'styled-components';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 import useListQuery from '@/hooks/useListQuery';

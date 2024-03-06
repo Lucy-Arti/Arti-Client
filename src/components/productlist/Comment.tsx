@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 import {CgInfo} from 'react-icons/cg'
 import { FiChevronRight } from 'react-icons/fi';
-import { VscKebabVertical } from "react-icons/vsc";
 import { GetAllCmts } from '@/apis/comments';
 import {CmtsType} from '@/types/request'
 import CommentBox from './CommentBox';
