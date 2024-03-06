@@ -46,7 +46,7 @@ const ListView = () => {
 
 	const [ref, inView] = useInView({threshold: 0.01,});
 
-	const { products, isLoading, isError, fetchNextPage, isFetchingNextPage } = useListQuery({
+	const { products, isLoading, isError, fetchNextPage, isFetchingNextPage, hasNextPage } = useListQuery({
 		queryKey: ['listquery', activatedTab],
 		activatedTab: activatedTab,
 	  });
@@ -136,7 +136,9 @@ const ListView = () => {
 					))}
 				</GridWrapper>
 			}
-			{isFetchingNextPage ? <ListCardSkeleton /> : <ForBlank ref={ref} />}
+			{hasNextPage ? <ForBlank ref={ref} /> 
+			: isFetchingNextPage ? <ListCardSkeleton /> 
+			: <ForBlank ref={ref} />}
 		</>
 	);
 };

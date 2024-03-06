@@ -19,11 +19,11 @@ const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
     return response.data;
   };
 
-  const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<PagenationQueryType>({
+  const { data, isLoading, isError, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery<PagenationQueryType>({
     queryKey : queryKey,
     queryFn : (context) => fetchProduct(context.pageParam),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, pages) => pages.length === (lastPage.number - 1) ? undefined : lastPage.number+1
+    getNextPageParam: (lastPage) => lastPage.number+1,
   });
 
   const products = useMemo(() => {
@@ -37,7 +37,7 @@ const useListQuery = ({ queryKey, activatedTab }: useListQueryProps) => {
     return productList;
   }, [data]);
 
-  return { products, isLoading, isError, fetchNextPage, isFetchingNextPage };
+  return { products, isLoading, isError, fetchNextPage, isFetchingNextPage, hasNextPage };
 };
 
 export default useListQuery;
