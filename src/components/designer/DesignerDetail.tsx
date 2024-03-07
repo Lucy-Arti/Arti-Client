@@ -120,7 +120,8 @@ const DesignerDetail = () => {
 							// `/img/myProfile-${randomNumFloor}.png` 
 							`/img/profile-large.png` 
 							: 
-							designerInfo?.designerProfile} />
+							designerInfo?.designerProfile} 
+							alt={`${designerInfo?.userName} 디자이너의 프로필 사진`} />
 					</div>
 				</InfoWrapper>
 				<InstaBtn onClick={()=>onClickToExternel(designerInfo?.instagram!)}><FaInstagram size="2rem" />디자이너 인스타그램 구경하기</InstaBtn>
