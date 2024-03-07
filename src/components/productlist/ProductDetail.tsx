@@ -215,14 +215,14 @@ const ProductDetail = () => {
 		}
 	};
 
-	const handleDiscountBtn = () => {
-		if (isUser) {
-			route.push('/mypage/shop/detail?id=1');
-		} else {
-			setLoginModalPurpose('이용');
-			setLoginModalIsOpen(true);
-		}
-	};
+	// const handleDiscountBtn = () => {
+	// 	if (isUser) {
+	// 		route.push('/mypage/shop/detail?id=1');
+	// 	} else {
+	// 		setLoginModalPurpose('이용');
+	// 		setLoginModalIsOpen(true);
+	// 	}
+	// };
 
 	return (
 		<>
@@ -273,10 +273,10 @@ const ProductDetail = () => {
 							) : (
 								<FlexRow className="purchase-wrapper">
 									<PurchaseBtn onClick={handlePurchaseBtn}>구매하러 가기</PurchaseBtn>
-									<DiscountBtn onClick={handleDiscountBtn}>
+									{/* <DiscountBtn onClick={handleDiscountBtn}>
 										<BiSolidDiscount size="1.6rem" color="rgba(107, 218, 1, 1)" />
 										<div>할인쿠폰</div>
-									</DiscountBtn>
+									</DiscountBtn> */}
 								</FlexRow>
 							)}
 							<GapDesign />
@@ -472,7 +472,7 @@ const BlankSpace = styled.div`
 
 const PurchaseBtn = styled.div`
 	display: flex;
-	width: 65%;
+	width: 100%;
 	background-color: #a5e865;
 	border-radius: 0.6rem;
 	font-size: 1.5rem;
