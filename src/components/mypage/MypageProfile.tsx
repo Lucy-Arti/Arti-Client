@@ -34,7 +34,7 @@ export default MypageProfile
 
 const ProfileWrapper = styled.div`
 	display: flex;
-	margin: 2.5rem 0 3rem 1rem;
+	margin: 2.5rem 0 5rem 1rem;
 	align-items: center;
     justify-content: space-between;
     & > .setting-icon{

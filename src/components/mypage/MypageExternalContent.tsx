@@ -57,10 +57,10 @@ const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetState
 				<div className="text">1:1문의</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
-			<MenuList onClick={onClickInviteEvent}>
+			{/* <MenuList onClick={onClickInviteEvent}>
 				<div className="text">초대코드 입력</div>
 				<FiChevronRight size="26px" />
-			</MenuList>
+			</MenuList> */}
 			<MenuList className="last" onClick={() => onClickToExternel('https://arti.channel.io/home')}>
 				<div className="text">디자이너 참여 신청</div>
 				<FiChevronRight size="26px" />
