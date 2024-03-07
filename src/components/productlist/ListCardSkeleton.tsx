@@ -47,7 +47,7 @@ const CardBox = styled.div`
 const ImgBox = styled.div`
     display: flex;
     border-radius: 10px;
-    background-color: #C9C9C9;
+    background-color: #F0F0F0;
     width : 100%;
     height : 35rem;
     justify-content : flex-end;

@@ -110,7 +110,7 @@ const Right = styled.div`
 const ProductImg = styled.img`
 	width: 100%;
 	height: 100%;
-	background-color: #C9C9C9;
+	background-color: #F0F0F0;
 	border-radius: 5px 0px 0px 5px;
 `;
 
@@ -122,12 +122,12 @@ const Row = styled.div`
 const DesignerName = styled.div`
   width: 60%;
   height: 1.5rem;
-  background-color: #C9C9C9;
+  background-color: #F0F0F0;
 `;
 
 const ClothesName = styled.div`
 	margin-top: 0.3rem;
     width: 90%;
     height: 2rem;
-    background-color: #C9C9C9;
+    background-color: #F0F0F0;
 `;

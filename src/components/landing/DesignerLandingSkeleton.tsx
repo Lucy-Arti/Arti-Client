@@ -35,5 +35,5 @@ const Card = styled.div`
 	object-fit: cover;
 	overflow: hidden;
 	border-radius: 11px;
-	background-color: #C9C9C9;
+	background-color: #F0F0F0;
 `;

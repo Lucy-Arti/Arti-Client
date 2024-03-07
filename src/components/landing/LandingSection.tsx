@@ -30,7 +30,7 @@ const BannerSection = styled.div<{$loadingWidth?:number}>`
 	&.loading{
 		width: 90%;
 		height: ${props => (props.$loadingWidth && props.$loadingWidth >= 576)? `332.9px`:`490.8px`};
-		background-color: #C9C9C9;
+		background-color: #F0F0F0;
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
@@ -78,7 +78,7 @@ const LandingSection = () => {
 
 	return (
 		<LandingSectionContainer>
-			{windowWidth ? (
+			{windowWidth!==undefined ? (
 				<BannerSection>
 					<Swiper
 						grabCursor={true}
@@ -124,7 +124,7 @@ const LandingSection = () => {
 					</Swiper>
 				</BannerSection>
 			) : (
-				<BannerSection className='loading' $loadingWidth={typeof window !== 'undefined' ? window.innerWidth : 0} />
+				<BannerSection className='loading' $loadingWidth={0} />
 			)}
 			<ExplainWrapper
 				onClick={() => {
