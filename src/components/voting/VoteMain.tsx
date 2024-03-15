@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react';
 import { getIsVotePossible } from '../../apis/vote';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { CanVoteAtom } from '@/app/recoilContextProvider';
 
 const VoteMain = () => {
 	const [possible, setIsPossible] = useState(false);
+	const canVoteVal = useRecoilValue(CanVoteAtom);
 
 	useEffect(() => {
 		if (localStorage.getItem('access')) {
@@ -32,8 +35,12 @@ const VoteMain = () => {
 			<BannerSection>
 				<img src="/img/votemainbanner.png" />
 			</BannerSection>
-			{/* <StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn> */}
-			<VoteEndBtn>투표 종료</VoteEndBtn>
+			{
+				canVoteVal ? 
+				<StartBtn onClick={() => handleClick('vote/userVote')}>투표 시작하기</StartBtn>
+				:
+				<VoteEndBtn>투표 종료</VoteEndBtn>
+			}
 			<ShareSection>
 				<ShareButton where="vote" />
 			</ShareSection>
