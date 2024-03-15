@@ -65,7 +65,7 @@ const VoteTab = () => {
                       <div>{changedUpperText}</div>
                       }
                     </Text1>
-                    {/* <VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn> */}
+                    {canVote ? <VoteBtn>투표하러 가기</VoteBtn> : <></>}
                   </div>
                   <FontSize>
                     {
@@ -280,3 +280,20 @@ const ChangeBtn = styled.div<{$canChange:boolean}>`
   border-radius: 10px;
   background-color: ${props => props.$canChange ? '#A5E865' : '#666666'};
 `
+
+const VoteBtn = styled.div`
+	z-index: 1;
+	width: fit-content;
+	border-radius: 30px;
+	background: #555;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	font-size: 2rem;
+	padding: 10px 20px;
+	margin-top: 2.2rem;
+	@media (max-width: 420px) {
+		font-size: 1.5rem;
+		padding: 8px 17px;
+	}
+`;
