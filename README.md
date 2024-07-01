@@ -10,6 +10,7 @@ Lucy의 Arti Project Client팀 레포지토리 <br>
 > &nbsp;&nbsp;&nbsp;&nbsp;[2.4 마이페이지](#24-마이페이지) <br>
 > &nbsp;&nbsp;&nbsp;&nbsp;[2.5 백오피스](#25-백오피스) <br>
 > [3. Development](#3-development) <br>
+> [4. 팀원](#4-팀원) <br>
 
 
 ## 1. Introduction
