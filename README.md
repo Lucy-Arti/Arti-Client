@@ -2,14 +2,14 @@
 Lucy의 Arti Project Client팀 레포지토리 <br>
 
 > ### 목차
-> [1. Introduction](#1.-introduction) <br>
-> [2. Screen](#2.-screen) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[2.1 랜딩](#2.1-랜딩) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[2.2 투표 및 랭킹](#2.2-투표-및-랭킹) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[2.3 둘러보기](#2.3-둘러보기) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[2.4 마이페이지](#2.4-마이페이지) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[2.5 백오피스](#2.5-백오피스) <br>
-> [3. Development](#3.-development) <br>
+> [1. Introduction](#1-introduction) <br>
+> [2. Screen](#2-screen) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[2.1 랜딩](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[2.2 투표 및 랭킹](#22-투표-및-랭킹) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[2.3 둘러보기](#23-둘러보기) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[2.4 마이페이지](#24-마이페이지) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[2.5 백오피스](#25-백오피스) <br>
+> [3. Development](#3-development) <br>
 
 
 ## 1. Introduction
