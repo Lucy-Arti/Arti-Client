@@ -6,9 +6,13 @@ import { useEffect, useState } from 'react';
 import ModalProductSaved from '../common/ModalProductSaved';
 import ModalProductUnsaved from '../common/ModalProductUnsaved';
 import ModalLogin from '../common/ModalLogin';
-import { GetAllProductLists, getAllProductByType } from '@/apis/list';
 import styled from 'styled-components';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
+import useListQuery from '@/hooks/useListQuery';
+import { useInView } from 'react-intersection-observer';
+import ListCardSkeleton from './ListCardSkeleton';
+import { useRecoilState } from 'recoil';
+import { ListTabAtom } from '@/app/recoilContextProvider';
 
 export type ProductType = {
 	clothesId: number;
@@ -27,55 +31,46 @@ export type ProductType = {
 };
 
 const ListView = () => {
-	const productList: ProductType[] = [];
 	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
 	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-	const [products, setProducts] = useState<ProductType[]>(productList);
-	// const [products, setProducts] = useState([]);
 
-	const [sketchTab, setSketchTab] = useState('active');
-	const [productTab, setProductTab] = useState('');
-	const [activatedTab, setActivatedTab] = useState('sketch');
+	const [activatedTab, setActivatedTab] = useRecoilState(ListTabAtom);
 
 	const handleTabBtn = (tab: string) => {
-		if (tab === 'sketch') {
-			if (sketchTab === '') {
-				setSketchTab('active');
-				setProductTab('');
-				setActivatedTab(tab);
-			}
-		} else {
-			if (productTab === '') {
-				setProductTab('active');
-				setSketchTab('');
-				setActivatedTab(tab);
-			}
+		if (tab !== activatedTab) {
+			setActivatedTab(tab);
+			window.scrollTo(0, 0);
 		}
 	};
 
-	const getProducts = async (type: string) => {
-		// const result = await GetAllProductLists();
-		const result = await getAllProductByType(type);
-		if (result === false) {
-			console.log('불러오기 오류 발생');
-		} else {
-			var newArr: ProductType[] = [];
-			var preData: ProductType[] = result.data;
-			var arraySize = preData.length;
-			for (let i = 0; i < arraySize; i++) {
-				let randomNum = Math.floor(Math.random() * (preData.length - i));
-				let element = preData.splice(randomNum, 1);
-				newArr = newArr.concat(element);
-			}
-			// setProducts(products.concat(result.data));
-			// console.log(newArr);
-			setProducts(productList.concat(newArr));
-		}
-	};
+	const [ref, inView] = useInView({threshold: 0.01,});
+
+	const { products, isLoading, isError, fetchNextPage, isFetchingNextPage, hasNextPage } = useListQuery({
+		queryKey: ['listquery', activatedTab],
+		activatedTab: activatedTab,
+	  });
+
 	useEffect(() => {
-		// setProducts(productList);
-		getProducts(activatedTab);
+	if (inView) {
+		fetchNextPage();
+	}
+	}, [inView]);
+
+	useEffect(() => {
+		if(activatedTab === 'sketch'){
+			if (localStorage.getItem("list-sketch-scroll") !== "0"){
+				window.scrollTo(0, Number(localStorage.getItem("list-scroll")));
+			} else {
+				localStorage.setItem("list-sketch-scroll", "0");
+			}
+		} else {
+			if (localStorage.getItem("list-product-scroll") !== "0"){
+				window.scrollTo(0, Number(localStorage.getItem("list-scroll")));
+			} else {
+				localStorage.setItem("list-product-scroll", "0");
+			}
+		}
 	}, [activatedTab]);
 
 	useEffect(() => {
@@ -92,7 +87,7 @@ const ListView = () => {
 				<FlexColumn>
 					<TabWrapper>
 						<TabBtn
-							className={sketchTab}
+							className={activatedTab === 'sketch' ? 'active' : ''}
 							onClick={() => {
 								handleTabBtn('sketch');
 							}}
@@ -100,7 +95,7 @@ const ListView = () => {
 							일러스트
 						</TabBtn>
 						<TabBtn
-							className={productTab}
+							className={activatedTab === 'product' ? 'active' : ''}
 							onClick={() => {
 								handleTabBtn('product');
 							}}
@@ -114,26 +109,36 @@ const ListView = () => {
 			{savedModalIsOpen === true && <ModalProductSaved />}
 			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<ForBlank />
-			<GridWrapper>
-				{products.map((product: ProductType, idx: number) => (
+			{isLoading ? 
+				<ListCardSkeleton />
+				: 
+				<GridWrapper>
+					{products && products.map((item, idx: number) => (
 					<ListCard
 						key={idx}
-						clothesId={product.clothesId}
-						createdAt={product.createdAt}
-						updatedAt={product.updatedAt}
-						detailImg={product.detailImg}
-						likeCount={product.likeCount}
-						clothesName={product.clothesName}
-						preview={product.preview}
-						designerId={product.designerId}
-						designerName={product.designerName}
-						score={product.score}
+						clothesId={item.clothesId}
+						createdAt={item.createdAt}
+						updatedAt={item.updatedAt}
+						detailImg={item.detailImg}
+						likeCount={item.likeCount}
+						clothesName={item.clothesName}
+						preview={item.preview}
+						designerId={item.designerId}
+						designerName={item.designerName}
+						score={item.score}
+						type={item.type}
+						savedModalIsOpen={savedModalIsOpen}
+						unsavedModalIsOpen={unsavedModalIsOpen}
 						setSavedModalIsOpen={setSavedModalIsOpen}
 						setUnsavedModalIsOpen={setUnsavedModalIsOpen}
 						setLoginModalIsOpen={setLoginModalIsOpen}
 					/>
-				))}
-			</GridWrapper>
+					))}
+				</GridWrapper>
+			}
+			{hasNextPage ? <ForBlank ref={ref} /> 
+			: isFetchingNextPage ? <ListCardSkeleton /> 
+			: <ForBlank ref={ref} />}
 		</>
 	);
 };

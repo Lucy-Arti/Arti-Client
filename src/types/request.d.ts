@@ -40,7 +40,8 @@ export type ProductType = {
 	preview: string|null,
 	designerId: number|null,
 	designerName: string|null,
-	score: number|null
+	score: number|null,
+	type: string,
 }
 
 export interface PointPossibleData {
@@ -148,3 +149,10 @@ export type CmtsType = {
 	like: boolean,
 }
 
+export type PagenationQueryType = {
+	content: ProductType[], //옷 정보
+	totalPages: number, //전체 페이지 수
+	pageSize: number, //페이지당 개수
+	last: boolean, //마지막 페이지 여부
+	number: number, //현재 페이지 번호
+}

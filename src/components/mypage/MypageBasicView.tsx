@@ -30,7 +30,7 @@ const MypageBasicView = () => {
 				<ArticleWrapper>
 					<ColumnWithWidthSort>
 						<MypageProfile />
-						<MypagePointUtils />
+						{/* <MypagePointUtils /> */}
 						<BtnWrapper>
 							<BtnStyle onClick={() => route.push('/mypage/voted')}>
 								<img width="35rem" src="/img/mypage-checkfile.png" />

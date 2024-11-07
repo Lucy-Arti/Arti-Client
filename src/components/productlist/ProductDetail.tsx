@@ -1,10 +1,9 @@
 'use client';
 import Header from '../common/Header';
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { GetProductDetail, GetProductDetailByUser, getMarked, postMarked } from '@/apis/list';
-import { createRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ProductType } from './ListView';
-import Footer from '../common/Footer';
 import { useRecoilValue } from 'recoil';
 import ShareButton from '../common/ShareButton';
 import { isLoginAtom } from '@/app/recoilContextProvider';
@@ -12,10 +11,11 @@ import styled from 'styled-components';
 import { BiSolidDiscount } from 'react-icons/bi';
 import Comment from './Comment';
 import CommentInput from './CommentInput';
-import { GetAllCmts } from '@/apis/comments';
 import ModalNotSelling from '../common/ModalNotSelling';
 import ModalLogin from '../common/ModalLogin';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
+import ModalProductSaved from '../common/ModalProductSaved';
+import ModalProductUnsaved from '../common/ModalProductUnsaved';
 
 const ProductDetail = () => {
 	// const withslashpathname  = usePathname();
@@ -24,9 +24,13 @@ const ProductDetail = () => {
 	const pathname = params.get('key');
 	const [markState, setMarkState] = useState(false);
 	const [like, setLikeNum] = useState<number | null>(null);
+
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	const [loginModalPurpose, setLoginModalPurpose] = useState<string | undefined>(undefined);
+	const [savedModalIsOpen, setSavedModalIsOpen] = useState(false);
+	const [unsavedModalIsOpen, setUnsavedModalIsOpen] = useState(false);
+
 	const [productDetail, setProductDetail] = useState<ProductType>();
 	const isUser = useRecoilValue(isLoginAtom);
 
@@ -156,7 +160,17 @@ const ProductDetail = () => {
 			console.log('불러오기 오류 발생');
 			//나중에 이 부분 모달창이나 alert창 필요해보임! + error코드 분기처리
 		} else {
-			// console.log('post 성공');
+			if (markState){
+                if (like !== null) {
+                    setLikeNum(like - 1);
+                }
+                setMarkState(false);
+            } else {
+                if (like !== null) {
+                    setLikeNum(like + 1);
+                }
+                setMarkState(true);
+            }
 		}
 	};
 
@@ -173,19 +187,21 @@ const ProductDetail = () => {
 
 	const handleMarkClick = () => {
 		if (isUser) {
-			if (markState) {
-				setMarkState(false);
-				if (like !== null) {
-					setLikeNum(like - 1);
-				}
-				postMark();
-			} else {
-				setMarkState(true);
-				if (like !== null) {
-					setLikeNum(like + 1);
-				}
-				postMark();
-			}
+			if(savedModalIsOpen === false && unsavedModalIsOpen === false){
+                if (markState) {
+                    postMark();
+                    setUnsavedModalIsOpen(true);
+                    setTimeout(() => {
+                        setUnsavedModalIsOpen(false);
+                    }, 1000);
+                } else {
+                    postMark();
+                    setSavedModalIsOpen(true);
+                    setTimeout(() => {
+                        setSavedModalIsOpen(false);
+                    }, 1000);
+                }
+            }
 		} else {
 			setLoginModalIsOpen(true);
 		}
@@ -199,14 +215,14 @@ const ProductDetail = () => {
 		}
 	};
 
-	const handleDiscountBtn = () => {
-		if (isUser) {
-			route.push('/mypage/shop/detail?id=1');
-		} else {
-			setLoginModalPurpose('이용');
-			setLoginModalIsOpen(true);
-		}
-	};
+	// const handleDiscountBtn = () => {
+	// 	if (isUser) {
+	// 		route.push('/mypage/shop/detail?id=1');
+	// 	} else {
+	// 		setLoginModalPurpose('이용');
+	// 		setLoginModalIsOpen(true);
+	// 	}
+	// };
 
 	return (
 		<>
@@ -221,6 +237,8 @@ const ProductDetail = () => {
 			{loginModalIsOpen === true && (
 				<ModalLogin purpose={loginModalPurpose} setLoginModalIsOpen={setLoginModalIsOpen} />
 			)}
+			{savedModalIsOpen === true && <ModalProductSaved />}
+			{unsavedModalIsOpen === true && <ModalProductUnsaved />}
 			<ForBlank />
 			{productDetail && (
 				<>
@@ -255,10 +273,10 @@ const ProductDetail = () => {
 							) : (
 								<FlexRow className="purchase-wrapper">
 									<PurchaseBtn onClick={handlePurchaseBtn}>구매하러 가기</PurchaseBtn>
-									<DiscountBtn onClick={handleDiscountBtn}>
+									{/* <DiscountBtn onClick={handleDiscountBtn}>
 										<BiSolidDiscount size="1.6rem" color="rgba(107, 218, 1, 1)" />
 										<div>할인쿠폰</div>
-									</DiscountBtn>
+									</DiscountBtn> */}
 								</FlexRow>
 							)}
 							<GapDesign />
@@ -273,7 +291,7 @@ const ProductDetail = () => {
 								</SelectBtn>
 							</SelectTab>
 						</FlexColumn>
-						<div ref={towardDetailRef}>
+						<div className='detail-img' ref={towardDetailRef}>
 							<img width="100%" src={`${productDetail.detailImg}`} />
 						</div>
 						{/* <Footer /> */}
@@ -330,6 +348,7 @@ const Fixed = styled.div`
 	height: fit-content;
 	top: 0%;
 	background-color: white;
+	z-index: 1;
 	@media (min-width: 576px) {
 		width: 576px;
 	}
@@ -392,11 +411,14 @@ const GapDesign = styled.div`
 
 const HeightWrapper = styled.div`
 	height: auto;
+	& > .detail-img{
+		width: 100%;
+	}
 `;
 
 const SelectTab = styled.div`
 	display: flex;
-	width: 90%;
+	width: 100%;
 	flex-direction: row;
 	margin-bottom: 1rem;
 	margin-top: 5rem;
@@ -405,6 +427,7 @@ const SelectTab = styled.div`
 		position: fixed;
 		top: 40px;
 		padding-top: 2rem;
+		z-index: 1;
 		@media (min-width: 576px) {
 			width: 576px;
 		}
@@ -449,7 +472,7 @@ const BlankSpace = styled.div`
 
 const PurchaseBtn = styled.div`
 	display: flex;
-	width: 65%;
+	width: 100%;
 	background-color: #a5e865;
 	border-radius: 0.6rem;
 	font-size: 1.5rem;

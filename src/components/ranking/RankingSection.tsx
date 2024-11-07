@@ -2,6 +2,8 @@
 import styled from 'styled-components';
 import { usePathname, useRouter } from 'next/navigation';
 import TotalRank from './TotalRank';
+import { useRecoilValue } from 'recoil';
+import { CanVoteAtom, VoteEditAtom } from '@/app/recoilContextProvider';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -105,6 +107,10 @@ const FontSize = styled.div`
 const RankingSection = () => {
 	const route = useRouter();
 	const pathname = usePathname();
+
+	const canVote = useRecoilValue(CanVoteAtom);
+	const Comment = useRecoilValue(VoteEditAtom);
+
 	// const [tab, setTab] = useState(RANKING_TABS.TOTAL);
 
 	// const rankingLabels = [
@@ -132,13 +138,23 @@ const RankingSection = () => {
 					<TextSection>
 						<div>
 							<Text1>
-								여러분의 투표로
-								<br />
-								제작될 옷이 결정돼요!
+								{Comment.bigger.includes('\n') ? String(Comment.bigger).split('\n').map((line, index) => (
+									<div>{line}</div>
+								))
+								:
+								<div>{Comment.bigger}</div>
+								}
 							</Text1>
-							<VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn>
+							{canVote ? <VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn> : <></>}
 						</div>
-						<FontSize>투표 기간: 01.17 00시 ~ 01.24 24시</FontSize>
+						<FontSize>
+							{Comment.smaller.includes('\n') ? String(Comment.smaller).split('\n').map((line, index) => (
+								<div>{line}</div>
+							))
+							:
+							<div>{Comment.smaller}</div>
+							}
+						</FontSize>
 					</TextSection>
 				</BannerSection>
 				<RankingBtnWrapper>
@@ -147,7 +163,7 @@ const RankingSection = () => {
 						{tabs.label}
 					</RankingBtn>
 				))} */}
-					<RankingBtn>실시간 랭킹</RankingBtn>
+					<RankingBtn>1차 콘테스트 랭킹</RankingBtn>
 				</RankingBtnWrapper>
 				<TotalRank />
 			</RankingSectionWrapper>

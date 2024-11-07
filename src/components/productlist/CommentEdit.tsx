@@ -1,4 +1,4 @@
-import { PostReply, editCmt, editReply } from '@/apis/comments';
+import { editCmt, editReply } from '@/apis/comments';
 import { userPhotoAtom } from '@/app/recoilContextProvider';
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil';

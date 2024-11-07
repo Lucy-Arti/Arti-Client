@@ -9,6 +9,8 @@ import { isLoginAtom } from '@/app/recoilContextProvider';
 type RankingCardPropsType = {
 	data: RankData;
 	index: number;
+	savedModalIsOpen: boolean;
+	unsavedModalIsOpen: boolean;
 	setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -99,6 +101,10 @@ const Row = styled.div`
 `;
 
 const HeartSection = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
 	width: 100%;
 	img{
 		cursor: pointer;
@@ -122,6 +128,7 @@ const ClothesName = styled.div`
 const RankingCard = (props: RankingCardPropsType) => {
 	const [markState, setMarkState] = useState(false);
 	const [isSuccessed, setIsSuccessed] = useState(false);
+	const [like, setLikeNum] = useState<number>(props.data.likeCount);
 	const isUser = useRecoilValue(isLoginAtom);
 	const route = useRouter();
 
@@ -146,28 +153,32 @@ const RankingCard = (props: RankingCardPropsType) => {
 			// console.log('post 성공');
 			if (markState) {
 				setMarkState(false);
+				setLikeNum(cnt => cnt-1);
 			} else {
 				setMarkState(true);
+				setLikeNum(cnt => cnt+1);
 			}
 		}
 	};
 
 	const handleMarkClick = () => {
 		if (isUser) {
-			if (markState) {
-				postMark();
-				props.setUnsavedModalIsOpen(true);
-				setIsSuccessed(false);
-				setTimeout(() => {
-					props.setUnsavedModalIsOpen(false);
-				}, 1000);
-			} else {
-				postMark();
-				props.setSavedModalIsOpen(true);
-				setIsSuccessed(false);
-				setTimeout(() => {
-					props.setSavedModalIsOpen(false);
-				}, 1000);
+			if(props.savedModalIsOpen === false && props.unsavedModalIsOpen === false){
+				if (markState) {
+					postMark();
+					props.setUnsavedModalIsOpen(true);
+					setIsSuccessed(false);
+					setTimeout(() => {
+						props.setUnsavedModalIsOpen(false);
+					}, 1000);
+				} else {
+					postMark();
+					props.setSavedModalIsOpen(true);
+					setIsSuccessed(false);
+					setTimeout(() => {
+						props.setSavedModalIsOpen(false);
+					}, 1000);
+				}
 			}
 		} else {
 			props.setLoginModalIsOpen(true);
@@ -182,11 +193,11 @@ const RankingCard = (props: RankingCardPropsType) => {
 			</Tag>
 			<Box>
 				<Left onClick={() => route.push(`../../productlist/product?key=${props.data.clothesId}`)}>
-					<ProductImg src={`${props.data.preview}`} />
+					<ProductImg src={`${props.data.preview}`} loading='lazy' />
 				</Left>
 				<Middle onClick={() => route.push(`../../productlist/product?key=${props.data.clothesId}`)}>
 					<Row>
-						<img src="/img/profileLogo.svg"/>
+						<img src="/img/profileLogo.svg" loading='lazy'/>
 						<DesignerName color='black'>&nbsp;{props.data.designerName}&nbsp;</DesignerName>
 						<DesignerName color='#535353'>디자이너</DesignerName>
 					</Row>
@@ -198,6 +209,7 @@ const RankingCard = (props: RankingCardPropsType) => {
 							onClick={handleMarkClick}
 							src={markState ? '/img/activeHeart.png' : '/img/nonactiveHeart.png'}
 						/>
+						<div>{like}</div>
 					</HeartSection>
 				</Right>
 			</Box>

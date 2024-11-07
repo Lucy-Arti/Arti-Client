@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useRecoilValue } from "recoil"
 import styled from "styled-components"
+import { useInView } from "react-intersection-observer"
 
 type CardBoxType = {
     clothesId: number,
@@ -17,14 +18,19 @@ type CardBoxType = {
 	designerId: number|null,
 	designerName: string|null,
 	score: number|null,
+    type: string,
+    savedModalIsOpen: boolean;
+	unsavedModalIsOpen: boolean;
     setSavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
     setUnsavedModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const ListCard = (props:CardBoxType) => {
     const [markState, setMarkState] = useState(false);
-    // const [isSuccessed, setIsSuccessed] = useState(false);
+    const [like, setLikeNum] = useState<number|null>(props.likeCount);
+    const [ref, inView] = useInView({threshold: 0.01,}); //lazy-loading background img 구현용
+    const [loading, setLoading] = useState("lazy"); //lazy-loading background img 구현용
     const isUser = useRecoilValue(isLoginAtom);
     const route = useRouter();
     
@@ -36,6 +42,7 @@ const ListCard = (props:CardBoxType) => {
             }
         }
     }
+
     const postMark = async() => {
         const result = await postMarked(props.clothesId, localStorage.getItem("access"));
         if (result === false) {
@@ -44,61 +51,84 @@ const ListCard = (props:CardBoxType) => {
         } else {
             // console.log('post 성공');
             if (markState){
+                if (like !== null) {
+                    setLikeNum(like - 1);
+                }
                 setMarkState(false);
             } else {
+                if (like !== null) {
+                    setLikeNum(like + 1);
+                }
                 setMarkState(true);
             }
         }
     }
+
     useEffect(()=>{
         getMark();
     }, []);
+
+    useEffect(() => {
+        if(inView){
+            setLoading(() => "");
+        }
+    }, [inView]);
+
     const handleMarkClick = () => {
         if(isUser){
-            if (markState) {
-                // setMarkState(false);
-                postMark();
-                props.setUnsavedModalIsOpen(true);
-                // setIsSuccessed(false);
-                setTimeout(() => {
-                    props.setUnsavedModalIsOpen(false);
-                }, 1000);
-            } else {
-                // setMarkState(true);
-                postMark();
-                props.setSavedModalIsOpen(true);
-                // setIsSuccessed(false);
-                setTimeout(() => {
-                    props.setSavedModalIsOpen(false);
-                }, 1000);
+            if(props.savedModalIsOpen === false && props.unsavedModalIsOpen === false){
+                if (markState) {
+                    postMark();
+                    props.setUnsavedModalIsOpen(true);
+                    setTimeout(() => {
+                        props.setUnsavedModalIsOpen(false);
+                    }, 1000);
+                } else {
+                    postMark();
+                    props.setSavedModalIsOpen(true);
+                    setTimeout(() => {
+                        props.setSavedModalIsOpen(false);
+                    }, 1000);
+                }
             }
         } else {
             props.setLoginModalIsOpen(true);
         }
     }
 
+    const handleDetailClick = () => {
+        if(props.type === 'sketch'){
+            localStorage.setItem("list-sketch-scroll", String(window.scrollY));
+        } else {
+            localStorage.setItem("list-product-scroll", String(window.scrollY));
+        }
+        route.push(`/productlist/product?key=${props.clothesId}`);
+    };
+
   return (
         <CardBox>
-            <ImgBox $preview={props.preview!}>
-                <GetHeight onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)} />
-                <div>
+            <ImgBox className={loading} $preview={props.preview!} ref={ref} 
+            title={`${props.type === 'product' ? '제품' : '일러스트'} 이미지, ${props.designerName} 디자이너의 ${props.clothesName}`}>
+                <GetHeight onClick={() => handleDetailClick()} />
+                <HeartSection>
                     {
                         markState === true ?
                         <ImgDesign onClick={handleMarkClick} width = "30rem" src="/img/activeHeart.png" />
                         : <ImgDesign onClick={handleMarkClick} width = "30rem" src="/img/nonactiveHeartFill.png" />
                     }
-                </div>
+                    <div>{like}</div>
+                </HeartSection>
             </ImgBox>
-            <FlexRow onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>
+            <FlexRow onClick={() => handleDetailClick()}>
                 <ProfileWrapper>
-                    <img width="80%" src="/img/profile-large.png"/>
+                    <img width="80%" src="/img/profile-large.png" loading="lazy"/>
                 </ProfileWrapper>
                 <ProfileName>
                     <div className="designer-name">{props.designerName}</div>
                     <div className="designer-noti">디자이너</div>
                 </ProfileName>
             </FlexRow>
-            <Header onClick={() => route.push(`/productlist/product?key=${props.clothesId}`)}>{props.clothesName}</Header>
+            <Header onClick={() => handleDetailClick()}>{props.clothesName}</Header>
         </CardBox>
   )
 }
@@ -120,12 +150,27 @@ const ImgBox = styled.div<{$preview: string}>`
     height : 35rem;
     justify-content : flex-end;
     align-items : flex-end;
+    &.lazy{
+        background-color: #C9C9C9;
+    }
 `
 
 const GetHeight = styled.div`
     height: 35rem;
     width: 100%;
 `
+
+const HeartSection = styled.div`
+	width: fit-content;
+	display: flex;
+    height: 20%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #ff4b8c;
+    font-weight: 600;
+`;
+
 const FlexRow = styled.div`
     display: flex;
     align-items: center;
