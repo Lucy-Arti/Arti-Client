@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-const baseURL = `https://arti-fashion.shop/`;
+const baseURL = `http://arti-fashion.o-r.kr:8080/`;
 
 export const GetAllCmts = async (id: string) => {
 	const accessToken = localStorage.getItem('access');

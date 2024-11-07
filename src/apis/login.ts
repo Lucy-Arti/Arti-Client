@@ -1,7 +1,7 @@
 import { postCodeBody } from '@/types/request';
 import axios from 'axios';
 
-const baseURL = `https://arti-fashion.shop/`;
+const baseURL = `http://arti-fashion.o-r.kr:8080/`;
 
 export const postCode = async (body: postCodeBody) => {
 	try {

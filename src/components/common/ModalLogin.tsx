@@ -3,32 +3,22 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const ModalLogin = (props: {
-	purpose?:string|undefined,
-	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+	purpose?: string | undefined;
+	setLoginModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const route = useRouter();
 	const totalHeight = document.documentElement.scrollHeight;
-	const [info, setInfo] = useState('저장');
-
-	useEffect(()=>{
-		if(props.purpose){
-			setInfo(props.purpose);
-		}
-	}, [])
 
 	return (
 		<ModalSection height={totalHeight}>
 			<ModalStyle>
-				<Content>
-					{`로그인 후 
-					${info}할 수 있어요`}
-				</Content>
+				<Content>종료하시겠어요?</Content>
 				<ButtonWrapper>
 					<ButtonStyle onClick={() => props.setLoginModalIsOpen(false)} isRightButton={false}>
 						취소
 					</ButtonStyle>
 					<ButtonStyle onClick={() => route.push('/mypage')} isRightButton={true}>
-						로그인하기
+						종료하기
 					</ButtonStyle>
 				</ButtonWrapper>
 			</ModalStyle>
@@ -39,20 +29,24 @@ const ModalLogin = (props: {
 export default ModalLogin;
 
 const ModalSection = styled.div<{ height: number }>`
-	position: fixed;
+	width: 100%;
+	height: ${(props) => props.height};
+
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
-	width: 100%;
+	align-items: center;
+
+	position: fixed;
 	top: 0;
 	right: 50%;
 	bottom: 0;
 	left: 50%;
+
 	transform: translate(-50%, 0%);
-	height: ${(props) => props.height};
 	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 3;
+	z-index: 2;
+
 	@media (min-width: 576px) {
 		width: 576px;
 	}

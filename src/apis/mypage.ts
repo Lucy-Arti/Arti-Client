@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponseHeaders } from 'axios';
-const baseURL = `https://arti-fashion.shop/`;
+const baseURL = `http://arti-fashion.o-r.kr:8080/`;
 
 export const GetVotedProductLists = async (token: string | null) => {
 	try {
