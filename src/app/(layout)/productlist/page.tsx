@@ -1,13 +1,13 @@
-import ListView from '@/components/productlist/ListView'
-import React from 'react'
-import '@styles/commonStyle.css';
+// import ListView from '@/components/productlist/ListView'
+// import React from 'react'
+// import '@styles/commonStyle.css';
 
-const page = () => {
-  return (
-    <>
-      <ListView />
-    </>
-  )
-}
+// const page = () => {
+//   return (
+//     <>
+//       <ListView />
+//     </>
+//   )
+// }
 
-export default page
+// export default page
