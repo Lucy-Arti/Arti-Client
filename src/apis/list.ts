@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `http://arti-fashion.o-r.kr:8080/`;
+export const baseURL = `http://arti-fashion.o-r.kr:8080/`;
 
 export const GetAllProductLists = async () => {
 	try {
