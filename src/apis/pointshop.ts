@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `http://arti-fashion.o-r.kr:8080/`;
+const baseURL = `https://arti-fashion.o-r.kr/`;
 
 interface BuyData {
 	name: string;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `http://arti-fashion.o-r.kr:8080/`;
+const baseURL = `https://arti-fashion.o-r.kr/`;
 
 // 가능한 포인트 모으기 리스트 불러오기
 export const getPossibleMissionList = async () => {
