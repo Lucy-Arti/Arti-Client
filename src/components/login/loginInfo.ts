@@ -1,4 +1,4 @@
-export const Redirect_uri = 'https://arti-fashion.site/kakaologin';
+export const Redirect_uri = 'https://lucy-arti.netlify.app/kakaologin';
 
 export const KAKAO_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
