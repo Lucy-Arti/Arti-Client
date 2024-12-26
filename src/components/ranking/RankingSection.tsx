@@ -138,22 +138,24 @@ const RankingSection = () => {
 					<TextSection>
 						<div>
 							<Text1>
-								{Comment.bigger.includes('\n') ? String(Comment.bigger).split('\n').map((line, index) => (
-									<div>{line}</div>
-								))
-								:
-								<div>{Comment.bigger}</div>
-								}
+								{Comment.bigger.includes('\n') ? (
+									String(Comment.bigger)
+										.split('\n')
+										.map((line, index) => <div>{line}</div>)
+								) : (
+									<div>{Comment.bigger}</div>
+								)}
 							</Text1>
-							{canVote ? <VoteBtn onClick={handleClick(`/vote`)}>투표하러 가기</VoteBtn> : <></>}
+							{canVote ? <VoteBtn onClick={handleClick(`/vote`)}>투표 체험하기</VoteBtn> : <></>}
 						</div>
 						<FontSize>
-							{Comment.smaller.includes('\n') ? String(Comment.smaller).split('\n').map((line, index) => (
-								<div>{line}</div>
-							))
-							:
-							<div>{Comment.smaller}</div>
-							}
+							{Comment.smaller.includes('\n') ? (
+								String(Comment.smaller)
+									.split('\n')
+									.map((line, index) => <div>{line}</div>)
+							) : (
+								<div>{Comment.smaller}</div>
+							)}
 						</FontSize>
 					</TextSection>
 				</BannerSection>
