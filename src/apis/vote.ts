@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-const baseURL = 'https://arti-fashion.o-r.kr:8080/';
+const baseURL = 'https://arti-fashion.o-r.kr/';
 
 interface VoteData {
 	fourth: number[];
