@@ -11,7 +11,7 @@ const LandingHome = () => {
 	const setRole = useSetRecoilState(userRoleAtom);
 	const setPhoto = useSetRecoilState(userPhotoAtom);
 	const [userName, setUserName] = useRecoilState(userNameAtom);
-	if (window.location.href.includes('netlify')) {
+	if (typeof window !== 'undefined' && window.location.href.includes('netlify')) {
 		window.location.href = 'https://arti-fashion.shop/';
 	}
 	useEffect(() => {
