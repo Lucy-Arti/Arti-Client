@@ -9,6 +9,7 @@ import { EffectCube, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiChevronRight } from 'react-icons/fi';
+import Image from 'next/image';
 
 const LandingSectionContainer = styled.div`
 	width: 100%;
@@ -20,17 +21,17 @@ const LandingSectionContainer = styled.div`
 	overflow-y: hidden;
 `;
 
-const BannerSection = styled.div<{$loadingWidth?:number}>`
+const BannerSection = styled.div<{ $loadingWidth?: number }>`
 	width: 100%;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	&.loading{
+	&.loading {
 		width: 90%;
-		height: ${props => (props.$loadingWidth && props.$loadingWidth >= 576)? `332.9px`:`490.8px`};
-		background-color: #F0F0F0;
+		height: ${(props) => (props.$loadingWidth && props.$loadingWidth >= 576 ? `332.9px` : `490.8px`)};
+		background-color: #f0f0f0;
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
@@ -44,7 +45,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const LandingSection = () => {
-	const [windowWidth, setWindowWidth] = useState<number|undefined>(undefined);
+	const [windowWidth, setWindowWidth] = useState<number | undefined>(undefined);
 	const router = useRouter();
 
 	const handleResize = () => {
@@ -78,7 +79,7 @@ const LandingSection = () => {
 
 	return (
 		<LandingSectionContainer>
-			{windowWidth!==undefined ? (
+			{windowWidth !== undefined ? (
 				<BannerSection>
 					<Swiper
 						grabCursor={true}
@@ -95,7 +96,7 @@ const LandingSection = () => {
 						autoplay={{ delay: 2500, disableOnInteraction: false }}
 					>
 						<StyledSwiperSlide>
-							<img
+							<Image
 								src={selectedImage + '1.png'}
 								alt="패션 일러스트레이션 콘테스트 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
@@ -124,7 +125,7 @@ const LandingSection = () => {
 					</Swiper>
 				</BannerSection>
 			) : (
-				<BannerSection className='loading' $loadingWidth={0} />
+				<BannerSection className="loading" $loadingWidth={0} />
 			)}
 			<ExplainWrapper
 				onClick={() => {
