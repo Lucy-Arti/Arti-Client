@@ -115,7 +115,7 @@ const LandingSection = () => {
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
-							/>{' '}
+							/>
 						</StyledSwiperSlide>
 						<StyledSwiperSlide
 							onClick={() => {
@@ -128,7 +128,7 @@ const LandingSection = () => {
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
-							/>{' '}
+							/>
 						</StyledSwiperSlide>
 						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
 							<Image
@@ -137,7 +137,7 @@ const LandingSection = () => {
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
-							/>{' '}
+							/>
 						</StyledSwiperSlide>
 						<StyledSwiperSlide>
 							<Image
@@ -146,7 +146,7 @@ const LandingSection = () => {
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
-							/>{' '}
+							/>
 						</StyledSwiperSlide>
 					</Swiper>
 				</BannerSection>
