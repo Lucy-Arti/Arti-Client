@@ -61,7 +61,9 @@ const Card = styled.div`
 `;
 
 const CardImg = styled.img`
-	object-fit: cover;
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover !important;
 	border-radius: 11px;
 	min-height: 230px;
 	z-index: 1;
@@ -190,8 +192,6 @@ const LandingSection2 = () => {
 										alt={`${product.type === 'product' ? '제품' : '일러스트'} 이미지, ${
 											product.designerName
 										} 디자이너의 ${product.clothesName}`}
-										width={300}
-										height={300}
 									/>
 									<Info>
 										<InfoText>

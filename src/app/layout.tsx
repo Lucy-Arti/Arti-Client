@@ -27,20 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-	const images = [
-		'/img/headerLogo.webp',
-		'/img/search.svg',
-		'/img/desktopBanner1.png',
-		'/img/desktopBanner2.png',
-		'/img/desktopBanner3.png',
-		'/img/desktopBanner4.png',
-		'/img/desktopBanner5.png',
-		'/img/mobileBanner1.png',
-		'/img/mobileBanner2.png',
-		'/img/mobileBanner3.png',
-		'/img/mobileBanner4.png',
-		'/img/mobileBanner5.png',
-	];
+	const images = ['/img/headerLogo.webp', '/img/search.svg'];
 
 	return (
 		<html>
