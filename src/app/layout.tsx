@@ -48,6 +48,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				{images.map((src, index) => (
 					<link key={index} rel="preload" href={src} as="image" />
 				))}
+				<link
+					rel="stylesheet"
+					href="global.css"
+					media="print"
+					onLoad={(e) => {
+						const link = e.currentTarget as HTMLLinkElement;
+						link.media = 'all';
+					}}
+				/>
 			</Head>
 			<body>
 				<StyledComponentsRegistry>
