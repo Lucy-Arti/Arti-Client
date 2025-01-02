@@ -38,33 +38,6 @@ const BannerSection = styled.div<{ $loadingWidth?: number }>`
 	}
 `;
 
-const StyledSwiperSlide = styled(SwiperSlide)`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: auto;
-	img {
-		max-width: 100%;
-		width: 100%;
-		height: auto;
-	}
-
-	.mySwiper {
-		width: 100%;
-		max-width: 100%;
-		height: auto;
-	}
-
-	.swiper-slide {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		height: auto;
-	}
-`;
-
 const LandingSection = () => {
 	const [windowWidth, setWindowWidth] = useState<number | undefined>(undefined);
 	const router = useRouter();
@@ -116,18 +89,18 @@ const LandingSection = () => {
 						className="mySwiper"
 						autoplay={{ delay: 2500, disableOnInteraction: false }}
 					>
-						<StyledSwiperSlide>
+						<SwiperSlide>
 							<Image
 								src={`${selectedImage}1.webp`}
 								alt="패션 일러스트레이션 콘테스트 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
-								width={windowWidth >= 576 ? 1200 : 576}
+								width={windowWidth >= 576 ? 800 : 576}
 								height={windowWidth >= 576 ? 600 : 288}
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</StyledSwiperSlide>
-						<StyledSwiperSlide
+						</SwiperSlide>
+						<SwiperSlide
 							onClick={() => {
 								router.push('/wadiz');
 							}}
@@ -135,13 +108,13 @@ const LandingSection = () => {
 							<Image
 								src={`${selectedImage}2.webp`}
 								alt="와디즈 오픈 배너"
-								width={windowWidth >= 576 ? 1200 : 576}
+								width={windowWidth >= 576 ? 800 : 576}
 								height={windowWidth >= 576 ? 600 : 288}
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</StyledSwiperSlide>
-						<StyledSwiperSlide
+						</SwiperSlide>
+						<SwiperSlide
 							onClick={() => {
 								router.push('/introduce');
 							}}
@@ -149,32 +122,32 @@ const LandingSection = () => {
 							<Image
 								src={`${selectedImage}3.webp`}
 								alt="Arti 소개 배너"
-								width={windowWidth >= 576 ? 1200 : 576}
+								width={windowWidth >= 576 ? 800 : 576}
 								height={windowWidth >= 576 ? 600 : 288}
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</StyledSwiperSlide>
-						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
+						</SwiperSlide>
+						<SwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
 							<Image
 								src={`${selectedImage}4.webp`}
 								alt="아티 디자이너 참여 문의의 배너"
-								width={windowWidth! >= 576 ? 1200 : 576}
+								width={windowWidth! >= 576 ? 800 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</StyledSwiperSlide>
-						<StyledSwiperSlide>
+						</SwiperSlide>
+						<SwiperSlide>
 							<Image
 								src={`${selectedImage}5.webp`}
 								alt="랭킹 산출 설명 배너"
-								width={windowWidth! >= 576 ? 1200 : 576}
+								width={windowWidth! >= 576 ? 800 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</StyledSwiperSlide>
+						</SwiperSlide>
 					</Swiper>
 				</BannerSection>
 			) : (
