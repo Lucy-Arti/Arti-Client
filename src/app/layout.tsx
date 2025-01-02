@@ -45,6 +45,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						link.media = 'all';
 					}}
 				/>
+				<link
+					rel="preload"
+					href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff"
+					as="font"
+					type="font/woff"
+				/>
+				<link
+					rel="preload"
+					href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
+					as="font"
+					type="font/woff"
+				/>
+				<link
+					rel="preload"
+					href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff"
+					as="font"
+					type="font/woff"
+				/>
+				<link
+					rel="preload"
+					href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff"
+					as="font"
+					type="font/woff"
+				/>
 			</Head>
 			<body>
 				<StyledComponentsRegistry>

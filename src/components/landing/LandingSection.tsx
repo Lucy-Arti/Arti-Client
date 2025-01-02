@@ -23,6 +23,7 @@ const LandingSectionContainer = styled.div`
 
 const BannerSection = styled.div<{ $loadingWidth?: number }>`
 	width: 100%;
+	height: fit-content;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
@@ -113,7 +114,7 @@ const LandingSection = () => {
 						>
 							<Image
 								src={`${selectedImage}2.webp`}
-								alt="와디즈 오픈픈 배너"
+								alt="와디즈 오픈 배너"
 								width={windowWidth >= 576 ? 1200 : 576}
 								height={windowWidth >= 576 ? 600 : 288}
 								priority={true}
