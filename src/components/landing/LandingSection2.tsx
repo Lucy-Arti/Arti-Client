@@ -141,7 +141,7 @@ const settings = {
 
 const LandingSection2 = () => {
 	const productList: ProductType[] = [];
-	const [products, setProducts] = useState<ProductType[]|undefined>(undefined);
+	const [products, setProducts] = useState<ProductType[] | undefined>(undefined);
 	const router = useRouter();
 
 	const getProducts = async () => {
@@ -176,33 +176,38 @@ const LandingSection2 = () => {
 				</More>
 			</BannerSection>
 			<SwipeSection>
-			{
-				products ?
-					<Swiper {...settings} className="mySwiper">{
-					products.map((product: ProductType, index) => (
-						<SwiperSlide key={index}>
-							<Card
-								onClick={() => {
-									router.push(`productlist/product?key=${product.clothesId}`);
-								}}
-							>
-								<CardImg src={`${product.preview}`} 
-								alt={`${product.type === 'product' ? '제품' : '일러스트'} 이미지, ${product.designerName} 디자이너의 ${product.clothesName}`} />
-								<Info>
-									<InfoText>
-										<Row>
-											<img src="/img/profileLogo.svg" />
-											<span className="black">&nbsp;{product.designerName}&nbsp;</span>
-										</Row>
-									</InfoText>
-								</Info>
-							</Card>
-						</SwiperSlide>
-					))
-					}</Swiper>
-					:
+				{products ? (
+					<Swiper {...settings} className="mySwiper">
+						{products.map((product: ProductType, index) => (
+							<SwiperSlide key={index}>
+								<Card
+									onClick={() => {
+										router.push(`productlist/product?key=${product.clothesId}`);
+									}}
+								>
+									<CardImg
+										src={`${product.preview}`}
+										alt={`${product.type === 'product' ? '제품' : '일러스트'} 이미지, ${
+											product.designerName
+										} 디자이너의 ${product.clothesName}`}
+										width={300}
+										height={300}
+									/>
+									<Info>
+										<InfoText>
+											<Row>
+												<img src="/img/profileLogo.svg" />
+												<span className="black">&nbsp;{product.designerName}&nbsp;</span>
+											</Row>
+										</InfoText>
+									</Info>
+								</Card>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				) : (
 					<DesignerLandingSkeleton />
-			}
+				)}
 			</SwipeSection>
 		</LandingSectionContainer>
 	);

@@ -136,7 +136,7 @@ const LandingSection = () => {
 						</StyledSwiperSlide>
 						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
 							<Image
-								src={`${selectedImage}3.webp`}
+								src={`${selectedImage}4.webp`}
 								alt="아티 디자이너 참여 문의의 배너"
 								width={windowWidth! >= 576 ? 1200 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}
@@ -146,7 +146,7 @@ const LandingSection = () => {
 						</StyledSwiperSlide>
 						<StyledSwiperSlide>
 							<Image
-								src={`${selectedImage}3.webp`}
+								src={`${selectedImage}5.webp`}
 								alt="랭킹 산출 설명 배너"
 								width={windowWidth! >= 576 ? 1200 : 576}
 								height={windowWidth! >= 576 ? 600 : 288}

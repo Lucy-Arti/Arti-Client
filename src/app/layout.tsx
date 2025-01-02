@@ -29,16 +29,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	const images = [
 		'/img/headerLogo.webp',
-		'https://arti-fashion.shop/_ipx/w_1200,q_75/%2Fimg%2FdesktopBanner1.webp?url=%2Fimg%2FdesktopBanner1.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_ipx/w_1200,q_75/%2Fimg%2FdesktopBanner1.webp?url=%2Fimg%2FdesktopBanner2.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_ipx/w_1200,q_75/%2Fimg%2FdesktopBanner1.webp?url=%2Fimg%2FdesktopBanner3.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_ipx/w_1200,q_75/%2Fimg%2FdesktopBanner1.webp?url=%2Fimg%2FdesktopBanner4.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_ipx/w_1200,q_75/%2Fimg%2FdesktopBanner1.webp?url=%2Fimg%2FdesktopBanner5.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_next/image?url=%2Fimg%2FmobileBanner1.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_next/image?url=%2Fimg%2FmobileBanner2.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_next/image?url=%2Fimg%2FmobileBanner3.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_next/image?url=%2Fimg%2FmobileBanner4.webp&w=1200&q=75',
-		'https://arti-fashion.shop/_next/image?url=%2Fimg%2FmobileBanner5.webp&w=1200&q=75',
+		'/img/search.svg',
+		'/img/desktopBanner1.png',
+		'/img/desktopBanner2.png',
+		'/img/desktopBanner3.png',
+		'/img/desktopBanner4.png',
+		'/img/desktopBanner5.png',
+		'/img/mobileBanner1.png',
+		'/img/mobileBanner2.png',
+		'/img/mobileBanner3.png',
+		'/img/mobileBanner4.png',
+		'/img/mobileBanner5.png',
 	];
 
 	return (
