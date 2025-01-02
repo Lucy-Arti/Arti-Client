@@ -100,6 +100,8 @@ const LandingSection = () => {
 								src={selectedImage + '1.png'}
 								alt="패션 일러스트레이션 콘테스트 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
+								width={windowWidth! >= 576 ? 1200 : 576}
+								height={windowWidth! >= 576 ? 600 : 288}
 							/>
 						</StyledSwiperSlide>
 						<StyledSwiperSlide
@@ -107,20 +109,44 @@ const LandingSection = () => {
 								router.push('/wadiz');
 							}}
 						>
-							<img src={selectedImage + '2.png'} alt="그린스티치 블랙 데님 셋업 제작 과정 배너" />
+							<Image
+								src={selectedImage + '2.png'}
+								alt="와디즈 오픈 배너"
+								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
+								width={windowWidth! >= 576 ? 1200 : 576}
+								height={windowWidth! >= 576 ? 600 : 288}
+							/>{' '}
 						</StyledSwiperSlide>
 						<StyledSwiperSlide
 							onClick={() => {
 								router.push('/introduce');
 							}}
 						>
-							<img src={selectedImage + '3.png'} alt="ARTI 소개 배너" />
+							<Image
+								src={selectedImage + '3.png'}
+								alt="아티 소개개 배너"
+								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
+								width={windowWidth! >= 576 ? 1200 : 576}
+								height={windowWidth! >= 576 ? 600 : 288}
+							/>{' '}
 						</StyledSwiperSlide>
 						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
-							<img src={selectedImage + '4.png'} alt="ARTI 디자이너 참여 문의 배너" />
+							<Image
+								src={selectedImage + '4.png'}
+								alt="아티 디자이너 참여 문의의 배너"
+								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
+								width={windowWidth! >= 576 ? 1200 : 576}
+								height={windowWidth! >= 576 ? 600 : 288}
+							/>{' '}
 						</StyledSwiperSlide>
 						<StyledSwiperSlide>
-							<img src={selectedImage + '5.png'} alt="랭킹 산출 원리 배너" />
+							<Image
+								src={selectedImage + '5.png'}
+								alt="랭킹 산출 설명 배너"
+								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
+								width={windowWidth! >= 576 ? 1200 : 576}
+								height={windowWidth! >= 576 ? 600 : 288}
+							/>{' '}
 						</StyledSwiperSlide>
 					</Swiper>
 				</BannerSection>
