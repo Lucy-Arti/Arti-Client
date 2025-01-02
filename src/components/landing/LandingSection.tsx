@@ -97,7 +97,7 @@ const LandingSection = () => {
 					>
 						<StyledSwiperSlide>
 							<Image
-								src={selectedImage + '1.png'}
+								src={selectedImage + '1.webp'}
 								alt="패션 일러스트레이션 콘테스트 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
@@ -110,7 +110,7 @@ const LandingSection = () => {
 							}}
 						>
 							<Image
-								src={selectedImage + '2.png'}
+								src={selectedImage + '2.webp'}
 								alt="와디즈 오픈 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
@@ -123,7 +123,7 @@ const LandingSection = () => {
 							}}
 						>
 							<Image
-								src={selectedImage + '3.png'}
+								src={selectedImage + '3.webp'}
 								alt="아티 소개개 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
@@ -132,7 +132,7 @@ const LandingSection = () => {
 						</StyledSwiperSlide>
 						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
 							<Image
-								src={selectedImage + '4.png'}
+								src={selectedImage + '4.webp'}
 								alt="아티 디자이너 참여 문의의 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}
@@ -141,7 +141,7 @@ const LandingSection = () => {
 						</StyledSwiperSlide>
 						<StyledSwiperSlide>
 							<Image
-								src={selectedImage + '5.png'}
+								src={selectedImage + '5.webp'}
 								alt="랭킹 산출 설명 배너"
 								onClick={() => onClickToExternel('https://bit.ly/web_contest_1')}
 								width={windowWidth! >= 576 ? 1200 : 576}

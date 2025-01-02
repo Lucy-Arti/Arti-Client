@@ -51,7 +51,7 @@ const Header = ({ where }: { where: string }) => {
 		return (
 			<div className="headerLayout">
 				<HeaderComponent className="headerComponent">
-					<LogoImg src="/img/headerLogo.png" onClick={handleClick('/')} />
+					<LogoImg src="/img/headerLogo.webp" onClick={handleClick('/')} />
 					<img src="/img/search.svg" onClick={handleClick('/search')} />
 				</HeaderComponent>
 			</div>
