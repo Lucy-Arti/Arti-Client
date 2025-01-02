@@ -9,6 +9,9 @@ const nextConfig = {
 			},
 		];
 	},
+	images: {
+		domains: ['d2v29gpqtyxxyk.cloudfront.net'], // 여기에 외부 도메인 추가
+	},
 };
 
 module.exports = nextConfig;

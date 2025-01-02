@@ -10,6 +10,7 @@ import { ProductType } from '@/types/request';
 import { GetAllProductLists } from '@/apis/list';
 import { useRouter } from 'next/navigation';
 import DesignerLandingSkeleton from './DesignerLandingSkeleton';
+import Image from 'next/image';
 
 const LandingSectionContainer = styled.div`
 	width: 100%;
@@ -60,9 +61,7 @@ const Card = styled.div`
 	border-radius: 11px;
 `;
 
-const CardImg = styled.img`
-	width: 100% !important;
-	height: 100% !important;
+const CardDiv = styled.div`
 	object-fit: cover !important;
 	border-radius: 11px;
 	min-height: 230px;
@@ -187,12 +186,23 @@ const LandingSection2 = () => {
 										router.push(`productlist/product?key=${product.clothesId}`);
 									}}
 								>
-									<CardImg
+									<Image
 										src={`${product.preview}`}
 										alt={`${product.type === 'product' ? '제품' : '일러스트'} 이미지, ${
 											product.designerName
 										} 디자이너의 ${product.clothesName}`}
+										width={400}
+										height={230}
+										style={{
+											objectFit: 'cover',
+											width: '100%',
+											height: '230px',
+											borderRadius: '11px',
+											minHeight: '230px',
+											zIndex: 1,
+										}}
 									/>
+
 									<Info>
 										<InfoText>
 											<Row>

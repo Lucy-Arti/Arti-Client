@@ -39,8 +39,28 @@ const BannerSection = styled.div<{ $loadingWidth?: number }>`
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: auto;
 	img {
 		max-width: 100%;
+		width: 100%;
+		height: auto;
+	}
+
+	.mySwiper {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.swiper-slide {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
 		height: auto;
 	}
 `;
