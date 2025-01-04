@@ -59,6 +59,9 @@ const Card = styled.div`
 	object-fit: cover;
 	overflow: hidden;
 	border-radius: 11px;
+	@media (max-width: 560px) {
+		height: 190px;
+	}
 `;
 
 const CardDiv = styled.div`
