@@ -23,7 +23,7 @@ const LandingSectionContainer = styled.div`
 
 const BannerSection = styled.div<{ $loadingWidth?: number }>`
 	width: 100%;
-	height: fit-content;
+	/* height: fit-content; */
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
