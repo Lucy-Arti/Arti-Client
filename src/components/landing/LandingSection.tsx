@@ -23,7 +23,7 @@ const LandingSectionContainer = styled.div`
 
 const BannerSection = styled.div<{ $loadingWidth?: number }>`
 	width: 100%;
-	/* height: fit-content; */
+	height: fit-content;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
@@ -35,6 +35,19 @@ const BannerSection = styled.div<{ $loadingWidth?: number }>`
 		background-color: #f0f0f0;
 		margin-top: 2rem;
 		margin-bottom: 2rem;
+	}
+`;
+
+const StyledSwiperSlide = styled(SwiperSlide)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: auto;
+	img {
+		max-width: 100%;
+		width: 100%;
+		height: auto;
 	}
 `;
 
@@ -89,7 +102,7 @@ const LandingSection = () => {
 						className="mySwiper"
 						autoplay={{ delay: 2500, disableOnInteraction: false }}
 					>
-						<SwiperSlide>
+						<StyledSwiperSlide>
 							<Image
 								src={`${selectedImage}1.webp`}
 								alt="패션 일러스트레이션 콘테스트 배너"
@@ -99,8 +112,8 @@ const LandingSection = () => {
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</SwiperSlide>
-						<SwiperSlide
+						</StyledSwiperSlide>
+						<StyledSwiperSlide
 							onClick={() => {
 								router.push('/wadiz');
 							}}
@@ -113,8 +126,8 @@ const LandingSection = () => {
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</SwiperSlide>
-						<SwiperSlide
+						</StyledSwiperSlide>
+						<StyledSwiperSlide
 							onClick={() => {
 								router.push('/introduce');
 							}}
@@ -127,8 +140,8 @@ const LandingSection = () => {
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</SwiperSlide>
-						<SwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
+						</StyledSwiperSlide>
+						<StyledSwiperSlide onClick={() => onClickToExternel('https://bit.ly/designerbannertomakeclothes')}>
 							<Image
 								src={`${selectedImage}4.webp`}
 								alt="아티 디자이너 참여 문의의 배너"
@@ -137,8 +150,8 @@ const LandingSection = () => {
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</SwiperSlide>
-						<SwiperSlide>
+						</StyledSwiperSlide>
+						<StyledSwiperSlide>
 							<Image
 								src={`${selectedImage}5.webp`}
 								alt="랭킹 산출 설명 배너"
@@ -147,7 +160,7 @@ const LandingSection = () => {
 								priority={true}
 								style={{ display: 'block' }}
 							/>
-						</SwiperSlide>
+						</StyledSwiperSlide>
 					</Swiper>
 				</BannerSection>
 			) : (
