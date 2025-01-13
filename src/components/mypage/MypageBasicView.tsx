@@ -1,36 +1,33 @@
-'use client'
-import { useRecoilValue } from "recoil";
-import Header from "../common/Header"
-import NavBar from "../common/NavBar"
-import { isLoginAtom } from "@/app/recoilContextProvider";
-import MypageExternalContent from "./MypageExternalContent";
-import Login from "../login/Login";
-import Footer from "../common/Footer";
-import styled from "styled-components";
-import MypageProfile from "./MypageProfile";
-import MypagePointUtils from "./MypagePointUtils";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import ModalCannotInvite from "../common/ModalCannotInvite";
+'use client';
+import { useRecoilValue } from 'recoil';
+import Header from '../common/Header';
+import NavBar from '../common/NavBar';
+import { isLoginAtom } from '@/app/recoilContextProvider';
+import MypageExternalContent from './MypageExternalContent';
+import Login from '../login/Login';
+import Footer from '../common/Footer';
+import styled from 'styled-components';
+import MypageProfile from './MypageProfile';
+import MypagePointUtils from './MypagePointUtils';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import ModalCannotInvite from '../common/ModalCannotInvite';
 
 const MypageBasicView = () => {
-    const isLogin = useRecoilValue(isLoginAtom);
+	const isLogin = useRecoilValue(isLoginAtom);
 	const [modalOpen, setModalOpen] = useState(false);
 	const route = useRouter();
 
-  return (
-    <>
+	return (
+		<>
 			<Header where="main" />
 			<NavBar />
-			{
-				modalOpen && <ModalCannotInvite />
-			}
-			{
-				(isLogin) ? 
+			{modalOpen && <ModalCannotInvite />}
+			{isLogin ? (
 				<ArticleWrapper>
 					<ColumnWithWidthSort>
 						<MypageProfile />
-						{/* <MypagePointUtils /> */}
+						<MypagePointUtils />
 						<BtnWrapper>
 							<BtnStyle onClick={() => route.push('/mypage/voted')}>
 								<img width="35rem" src="/img/mypage-checkfile.png" />
@@ -49,25 +46,24 @@ const MypageBasicView = () => {
 					<div className="mypage-gap" />
 					<MypageExternalContent setModalOpen={setModalOpen} />
 				</ArticleWrapper>
-				:
+			) : (
 				<div>
 					<LoginBlank />
-					<Login where='mypage' />
+					<Login where="mypage" />
 				</div>
-
-			}
+			)}
 		</>
-  )
-}
+	);
+};
 
-export default MypageBasicView
+export default MypageBasicView;
 
 const ArticleWrapper = styled.div`
 	display: flex;
 	width: 100%;
 	flex-direction: column;
 	align-items: center;
-	& > .mypage-gap{
+	& > .mypage-gap {
 		background-color: #f5f5f5;
 		height: 1rem;
 		width: 100%;
@@ -78,11 +74,11 @@ const ArticleWrapper = styled.div`
 const Blank = styled.div`
 	height: 10rem;
 	width: 100%;
-`
+`;
 const LoginBlank = styled.div`
-	height:2rem;
+	height: 2rem;
 	width: 100%;
-`
+`;
 
 const ColumnWithWidthSort = styled.div`
 	display: flex;
@@ -111,4 +107,4 @@ const BtnStyle = styled.div`
 	&:hover {
 		cursor: pointer;
 	}
-`
+`;

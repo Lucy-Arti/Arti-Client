@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { CanInvite } from '@/apis/mypage';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -6,13 +6,13 @@ import { FiChevronRight } from 'react-icons/fi';
 import styled from 'styled-components';
 import ModalCannotInvite from '../common/ModalCannotInvite';
 
-const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetStateAction<boolean>>}) => {
+const MypageExternalContent = (props: { setModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const route = useRouter();
 	const [canAccess, setCanAccess] = useState<boolean>(false);
 
 	useEffect(() => {
 		canInvite();
-	}, [])
+	}, []);
 
 	const onClickToExternel = (url: string) => {
 		if (typeof window !== 'undefined') {
@@ -20,32 +20,34 @@ const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetState
 		}
 	};
 
-	const canInvite = async() => {
+	const canInvite = async () => {
 		const response = await CanInvite();
-		if(response === false){
-			console.log("api 연결 실패");
+		if (response === false) {
+			console.log('api 연결 실패');
 		} else {
 			// console.log('response 받음')
 			setCanAccess(response.data);
 			// console.log(response.data);
 		}
-	}
+	};
 
 	const onClickInviteEvent = () => {
 		console.log(canAccess);
-		if(canAccess === false){
+		if (canAccess === false) {
 			route.push('/mypage/invitedby');
 		} else {
 			props.setModalOpen(true);
 			setTimeout(() => {
-                props.setModalOpen(false);
-            }, 1000);
+				props.setModalOpen(false);
+			}, 1000);
 		}
-	}
+	};
 
 	return (
 		<ColumnSort>
-			<MenuList onClick={() => onClickToExternel('https://lucy-team.notion.site/EVENT-b3be6ffb61b847e1a418e4bb9d6cb121')}>
+			<MenuList
+				onClick={() => onClickToExternel('https://lucy-team.notion.site/EVENT-b3be6ffb61b847e1a418e4bb9d6cb121')}
+			>
 				<div className="text">이벤트</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
@@ -57,10 +59,10 @@ const MypageExternalContent = (props:{setModalOpen:React.Dispatch<React.SetState
 				<div className="text">1:1문의</div>
 				<FiChevronRight size="26px" />
 			</MenuList>
-			{/* <MenuList onClick={onClickInviteEvent}>
+			<MenuList onClick={onClickInviteEvent}>
 				<div className="text">초대코드 입력</div>
 				<FiChevronRight size="26px" />
-			</MenuList> */}
+			</MenuList>
 			<MenuList className="last" onClick={() => onClickToExternel('https://arti.channel.io/home')}>
 				<div className="text">디자이너 참여 신청</div>
 				<FiChevronRight size="26px" />
